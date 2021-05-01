@@ -1,3 +1,4 @@
+package com.example.mishlavim;
 
 import java.util.*;
 
@@ -9,12 +10,18 @@ public class User {
     protected String userEmail;
     protected String userPassword;
 
+
     /**
-     * @param name      The user full name - first and last.
-     * @param id        The user firebase id.
-     * @param type      The user type - admin, manager or volunteer.
-     * @param email     The user email - used for login.
-     * @param password  The user password - used for login.
+     * Default constructor
+     */
+    public User() {
+    }
+
+    /**
+     * @param name  The user full name - first and last.
+     * @param id    The user firebase id.
+     * @param type  The user type - admin, manager or volunteer.
+     * @param email The user email - used for login.
      */
     public User(String name, String id, String type, String email, String password) {
         userName = name;
@@ -29,7 +36,7 @@ public class User {
     }
 
     public void setUserPassword(String newPassword) {
-       userPassword = newPassword;
+        userPassword = newPassword;
     }
 
     public void setUserEmail(String userEmail) {
