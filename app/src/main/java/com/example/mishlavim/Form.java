@@ -1,7 +1,10 @@
 package com.example.mishlavim;
 
-import java.util.*;
+import java.util.ArrayList;
 
+/**
+ *
+ */
 public class Form {
 
     private ArrayList<Question> questionArr;
@@ -9,11 +12,15 @@ public class Form {
     private String formID;
     private int permission;
 
-    // Default constructor
+    /**
+     * Default constructor
+     */
     public Form() {
     }
 
-    //Constructor
+    /**
+     * Parameterized constructor
+     */
     public Form(ArrayList<Question> questionArr, String formName, String formID, int permission) {
         this.questionArr = questionArr;
         this.formName = formName;
@@ -21,8 +28,10 @@ public class Form {
         this.permission = permission;
     }
 
-    // Copy constructor
-    public void Form(Form other) {
+    /**
+     * Copy constructor
+     */
+    public Form(Form other) {
         // TODO implement here
     }
 
@@ -57,19 +66,34 @@ public class Form {
         // TODO implement here
     }
 
-    public void setQuestionArr(ArrayList<Question> questionArr) {
-        this.questionArr = questionArr;
+    public ArrayList<Question> getQuestionArr() {
+        return questionArr;
     }
 
     public void setFormName(String formName) {
         this.formName = formName;
     }
 
-    public void setFormID(String formID) {
-        this.formID = formID;
-    }
-
     public void setPermission(int permission) {
         this.permission = permission;
+    }
+
+    /**
+     *
+     */
+    public void setQuestionArr(ArrayList<Question> questionArr) {
+        this.questionArr = questionArr;
+    }
+
+    public String getFormName() {
+        return formName;
+    }
+
+    public String getFormID() {
+        return formID;
+    }
+
+    public int getPermission() {
+        return permission;
     }
 }

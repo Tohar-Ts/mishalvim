@@ -1,7 +1,10 @@
 package com.example.mishlavim;
 
-import java.util.*;
-
+/**
+ * User is the base class for all users of the app.
+ * The class handles the general user data:
+ * full name, firebase ID, type (Admin, Guide, Volunteer), email address and password.
+ */
 public class User {
 
     protected String userName;
@@ -10,6 +13,9 @@ public class User {
     protected String userEmail;
     protected String userPassword;
 
+    private final String ADMIN = "Admin";
+    private final String GUIDE = "Guide";
+    private final String VOLUNTEER = "Volunteer";
 
     /**
      * Default constructor
@@ -18,6 +24,8 @@ public class User {
     }
 
     /**
+     * Parameterized constructor
+     *
      * @param name  The user full name - first and last.
      * @param id    The user firebase id.
      * @param type  The user type - admin, manager or volunteer.
@@ -31,16 +39,20 @@ public class User {
         userPassword = password;
     }
 
+    /**
+     *
+     */
     public void setUserName(String newName) {
         userName = newName;
     }
 
+    /**  */
     public void setUserPassword(String newPassword) {
         userPassword = newPassword;
     }
 
+    /**  */
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
     }
-
 }
