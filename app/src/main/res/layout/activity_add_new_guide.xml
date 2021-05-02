@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdminGuidesListActivity">
+    tools:context=".AddNewGuideActivity">
 
 
     <Button
-        android:id="@+id/addNewUser"
+        android:id="@+id/addNewGuide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="80dp"
@@ -39,7 +39,7 @@
         android:ems="10"
         android:hint="Field5"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/addNewUser"
+        app:layout_constraintBottom_toTopOf="@+id/addNewGuide"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
         app:layout_constraintTop_toBottomOf="@+id/editField4" />
 
@@ -149,7 +149,7 @@
         android:textColor="#000000"
         android:textSize="18sp"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/addNewUser"
+        app:layout_constraintBottom_toTopOf="@+id/addNewGuide"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/editField5" />
