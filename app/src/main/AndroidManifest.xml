@@ -9,7 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Mishlavim">
-        <activity android:name=".MainActivity">
+        <activity android:name=".AddNewGuideActivity"></activity>
+        <activity android:name=".AddNewUserActivity" />
+        <activity android:name=".EditFormActivity" />
+        <activity android:name=".CreateFormActivity" />
+        <activity android:name=".AdminGuidesListActivity" />
+        <activity android:name=".AdminFormListActivity" />
+        <activity android:name=".AdminMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
