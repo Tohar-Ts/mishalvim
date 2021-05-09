@@ -23,13 +23,12 @@
     <string name="buttonSave">שמור</string>
     <string name="buttonSend">שלח טופס</string>
     <string name="title_activity_login">LoginActivity</string>
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
+    <string name="prompt_email">אימייל</string>
+    <string name="prompt_password">סיסמה</string>
+    <string name="action_sign_in">כניסה</string>
+    <string name="prompt_mishlavim">תכנית משלבים</string>
+    <string name="invalid_username">שם משתמש אינו קיים</string>
+    <string name="invalid_password">סיסמה קצרה מדי</string>
+    <string name="login_failed">"כניסה נכשלה"</string>
 
 </resources>

@@ -1,8 +1,10 @@
-package com.example.mishlavim;
+package com.example.mishlavim.activities.volunteerActivities;
+
+import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
+import com.example.mishlavim.R;
 
 public class fillOutFormActivity extends AppCompatActivity {
 

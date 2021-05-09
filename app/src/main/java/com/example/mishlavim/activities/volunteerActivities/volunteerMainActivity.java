@@ -1,10 +1,12 @@
-package com.example.mishlavim;
+package com.example.mishlavim.activities.volunteerActivities;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import com.example.mishlavim.databinding.ActivityMainBinding;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.mishlavim.R;
 
 
 public class volunteerMainActivity extends AppCompatActivity {
