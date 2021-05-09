@@ -1,8 +1,10 @@
-package com.example.mishlavim;
+package com.example.mishlavim.activities.adminActivities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.mishlavim.R;
 
 public class CreateFormActivity extends AppCompatActivity {
 

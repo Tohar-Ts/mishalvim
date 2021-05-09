@@ -1,4 +1,4 @@
-package com.example.mishlavim;
+package com.example.mishlavim.data.entity;
 
 /**
  * User is the base class for all users of the app.

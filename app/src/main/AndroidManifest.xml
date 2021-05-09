@@ -9,10 +9,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Mishlavim">
+
         <activity android:name=".volunteerMainActivity" />
         <activity android:name=".viewOldFormActivity" />
         <activity android:name=".fillOutFormActivity" />
         <activity android:name=".MainActivity">
+
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:label="@string/title_activity_login"></activity>
+          
+        <activity android:name=".activities.adminActivities.AddNewGuideActivity" />
+        <activity android:name=".activities.adminActivities.AddNewUserActivity" />
+        <activity android:name=".activities.adminActivities.EditFormActivity" />
+        <activity android:name=".activities.adminActivities.CreateFormActivity" />
+        <activity android:name=".activities.adminActivities.AdminGuidesListActivity" />
+        <activity android:name=".activities.adminActivities.AdminFormListActivity" />
+        <activity android:name=".activities.adminActivities.AdminMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

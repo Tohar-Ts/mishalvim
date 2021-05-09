@@ -1,4 +1,4 @@
-package com.example.mishlavim;
+package com.example.mishlavim.data.entity;
 
 import java.util.ArrayList;
 
