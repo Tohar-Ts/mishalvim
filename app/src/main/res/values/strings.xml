@@ -1,5 +1,27 @@
 <resources>
     <string name="app_name">Mishlavim</string>
+    <string name="hint">סיסמא</string>
+    <string name="buttonName">טופס 1</string>
+    <string name="button3">טופס 3</string>
+    <string name="fillform"> מלא טופס נוכחי</string>
+    <string name="button2">טופס 2</string>
+    <string name="button4">טופס 4</string>
+    <string name="button5">טופס 5</string>
+    <string name="button6">טופס 6</string>
+    <string name="button7">טופס 7</string>
+    <string name="button8">טופס 8</string>
+    <string name="nametext">ברוך הבא [USERNAME]!</string>
+    <string name="currentForm"> טופס **</string>
+    <string name="question1">מלל שאלה 1</string>
+    <string name="question2">מלל שאלה 2</string>
+    <string name="question3">מלל שאלה 3</string>
+    <string name="answer">הכנס תשובתך פה</string>
+    <string name="buttonFive">הרבה מאוד</string>
+    <string name="buttonFour">הרבה</string>
+    <string name="buttonThree">בינוני</string>
+    <string name="buttonTwo">מעט</string>
+    <string name="buttonSave">שמור</string>
+    <string name="buttonSend">שלח טופס</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -9,4 +31,5 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+
 </resources>
