@@ -1,7 +1,6 @@
 package com.example.mishlavim.ui.login;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -22,12 +21,13 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.mishlavim.R;
-import com.example.mishlavim.activities.volunteerActivities.viewOldFormActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -47,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         final Button loginButton = findViewById(R.id.login);
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
         mAuth = FirebaseAuth.getInstance();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
@@ -118,16 +119,37 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadingProgressBar.setVisibility(View.VISIBLE);
-                loginViewModel.login(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
+//                loadingProgressBar.setVisibility(View.VISIBLE);
+//                loginViewModel.login(usernameEditText.getText().toString(),
+//                        passwordEditText.getText().toString());
 
+//                mAuth.signInWithEmailAndPassword(usernameEditText.toString(), passwordEditText.toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 mAuth.signInWithEmailAndPassword("admin@gmail.com", "123456").addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             FirebaseUser user = task.getResult().getUser();
-                            startActivity(new Intent(LoginActivity.this, viewOldFormActivity.class));
+                            FirebaseUser currentUser = mAuth.getCurrentUser();
+
+                            Toast.makeText(LoginActivity.this, user.getUid().toString(), Toast.LENGTH_LONG).show();
+
+
+                            // Create a reference to the cities collection
+                            db.collection("users").document(user.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> doc) {
+                                    if (doc.isSuccessful()) {
+                                        String name = doc.getResult().getData().get("name").toString();
+                                        Toast.makeText(LoginActivity.this, doc.getResult().getData().get("name").toString(), Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            });
+
+                            // Create a query against the collection.
+//                            Query query = adminRef.whereEqualTo("id", user.getUid());
+//                            Toast.makeText(LoginActivity.this, query.toString(), Toast.LENGTH_SHORT).show();
+
+                            //startActivity(new Intent(LoginActivity.this, viewOldFormActivity.class));
 
                         }
 
