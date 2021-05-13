@@ -10,7 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Mishlavim">
 
-        <activity android:name=".activities.volunteerActivities.volunteerMainActivity" />
+        <activity
+            android:name=".activities.volunteerActivities.volunteerMainActivity"
+            android:label="volunteerMainActivity" />
         <activity android:name=".activities.volunteerActivities.viewOldFormActivity" />
         <activity android:name=".activities.volunteerActivities.fillOutFormActivity" />
         <activity android:name=".MainActivity" />

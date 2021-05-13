@@ -1,17 +1,18 @@
 package com.example.mishlavim.ui.login;
 
+import android.util.Patterns;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import android.util.Patterns;
-
+import com.example.mishlavim.R;
 import com.example.mishlavim.data.LoginRepository;
 import com.example.mishlavim.data.Result;
 import com.example.mishlavim.data.model.LoggedInUser;
-import com.example.mishlavim.R;
 
 public class LoginViewModel extends ViewModel {
+
 
     private MutableLiveData<LoginFormState> loginFormState = new MutableLiveData<>();
     private MutableLiveData<LoginResult> loginResult = new MutableLiveData<>();
