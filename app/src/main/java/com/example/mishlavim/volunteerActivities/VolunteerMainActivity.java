@@ -1,4 +1,4 @@
-package com.example.mishlavim.activities.volunteerActivities;
+package com.example.mishlavim.volunteerActivities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.mishlavim.R;
 
 
-public class volunteerMainActivity extends AppCompatActivity {
+public class VolunteerMainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +17,7 @@ public class volunteerMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_volunteer_main);
     }
 
-    public void fillOutFormActivity(View v){
+    public void fillOutFormActivity(View v) {
         Intent i = new Intent(this, fillOutFormActivity.class);
         startActivity(i);
     }

@@ -1,4 +1,4 @@
-package com.example.mishlavim.activities.volunteerActivities;
+package com.example.mishlavim.volunteerActivities;
 
 import android.os.Bundle;
 

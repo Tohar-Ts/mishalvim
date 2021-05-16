@@ -1,10 +1,8 @@
-package com.example.mishlavim.activities.adminActivities;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.mishlavim;
 
 import android.os.Bundle;
 
-import com.example.mishlavim.R;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class AddNewUserActivity extends AppCompatActivity {
 

@@ -1,8 +1,8 @@
-package com.example.mishlavim.activities.adminActivities;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.mishlavim.adminActivities;
 
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mishlavim.R;
 

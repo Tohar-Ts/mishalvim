@@ -1,4 +1,4 @@
-package com.example.mishlavim.data.entity;
+package com.example.mishlavim.model;
 
 /**
  *
