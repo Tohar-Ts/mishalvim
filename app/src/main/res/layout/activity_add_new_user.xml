@@ -4,170 +4,164 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingLeft="60dp"
+    android:paddingTop="70dp"
+    android:paddingRight="60dp"
+    android:paddingBottom="70dp"
+
     tools:context=".AddNewUserActivity">
 
 
     <Button
         android:id="@+id/addNewUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="168dp"
-        android:text="הוסף חניך"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="64dp"
+        android:background="@drawable/custom_button"
+        android:text="@string/action_register"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintHorizontal_bias="0.477"
-        app:layout_constraintStart_toStartOf="@+id/guideline4" />
+        app:layout_constraintEnd_toEndOf="@+id/newPassword"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/newPassword"
+        app:layout_constraintTop_toBottomOf="@+id/newPassword"
+        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
-        android:id="@+id/editField4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:ems="10"
-        android:hint="Field4"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/editField5"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toBottomOf="@+id/editField3" />
-
-    <EditText
-        android:id="@+id/editField5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="50dp"
-        android:ems="10"
-        android:hint="Field5"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/addNewGuide"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toBottomOf="@+id/editField4" />
-
-    <EditText
-        android:id="@+id/editField3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:ems="10"
-        android:hint="Field3"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/editField4"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toBottomOf="@+id/editField2" />
-
-    <EditText
-        android:id="@+id/editField1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Field1"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toTopOf="@+id/guideline5" />
-
-    <EditText
-        android:id="@+id/editField2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:ems="10"
-        android:hint="Field2"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/editField3"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toBottomOf="@+id/editField1" />
-
-    <TextView
-        android:id="@+id/field3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="44dp"
-        android:text="שדה 3:"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/field4"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        android:id="@+id/newEmail"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="52dp"
+        android:autofillHints="@string/title_email"
+        android:background="@drawable/custom_input"
+        android:drawableEnd="@drawable/ic_email"
+        android:drawablePadding="12dp"
+        android:gravity="center|start"
+        android:hint="@string/title_email"
+        android:inputType="textEmailAddress"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:selectAllOnFocus="true"
+        app:layout_constraintEnd_toEndOf="@+id/welcome"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/editField3" />
+        app:layout_constraintStart_toStartOf="@+id/welcome"
+        app:layout_constraintTop_toBottomOf="@+id/welcome" />
 
-    <TextView
-        android:id="@+id/field2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="44dp"
-        android:text="שדה 2:"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/field3"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+    <EditText
+        android:id="@+id/newUserName"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="36dp"
+        android:autofillHints="@string/title_user_name"
+        android:background="@drawable/custom_input"
+        android:drawableEnd="@drawable/ic_person"
+        android:drawablePadding="12dp"
+        android:gravity="center|start"
+        android:hint="@string/title_user_name"
+        android:inputType="textPersonName"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:selectAllOnFocus="true"
+        app:layout_constraintEnd_toEndOf="@+id/newEmail"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/newEmail"
+        app:layout_constraintTop_toBottomOf="@+id/newEmail" />
+
+    <EditText
+        android:id="@+id/newPassword"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="36dp"
+        android:autofillHints="@string/title_user_password"
+        android:background="@drawable/custom_input"
+        android:drawableEnd="@drawable/ic_lock"
+        android:drawablePadding="12dp"
+        android:gravity="center|start"
+        android:hint="@string/title_user_password"
+        android:inputType="textPassword"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:selectAllOnFocus="true"
+        app:layout_constraintEnd_toEndOf="@+id/newUserName"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/editField2" />
+        app:layout_constraintStart_toStartOf="@+id/newUserName"
+        app:layout_constraintTop_toBottomOf="@+id/newUserName" />
 
-    <TextView
-        android:id="@+id/field1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="44dp"
-        android:text="שדה 1:"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/field2"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/editField1"
-        app:layout_constraintTop_toTopOf="@+id/guideline5"
-        app:layout_constraintVertical_bias="0.0" />
+    <ProgressBar
+        android:id="@+id/registerLoading"
+        android:layout_width="120dp"
+        android:layout_height="112dp"
+        android:layout_gravity="center"
+        android:theme="@style/GreenProgressBarTheme"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.546"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.494" />
 
-    <TextView
-        android:id="@+id/field4"
+    <RadioGroup
+        android:id="@+id/typesRg"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="44dp"
-        android:text="שדה 4:"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/field5"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3" />
-
-    <TextView
-        android:id="@+id/field5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="124dp"
-        android:text="שדה 5:"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/addNewUser"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintHorizontal_bias="0.969"
-        app:layout_constraintStart_toEndOf="@+id/addNewUser" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="366dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="38dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
+        android:layoutDirection="rtl"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="91dp" />
+        app:layout_constraintBottom_toTopOf="@+id/addNewUser"
+        app:layout_constraintEnd_toEndOf="@+id/newPassword"
+        app:layout_constraintHorizontal_bias="0.344"
+        app:layout_constraintStart_toStartOf="@+id/newPassword"
+        app:layout_constraintTop_toBottomOf="@+id/newPassword"
+        app:layout_constraintVertical_bias="0.557">
+
+        <RadioButton
+            android:id="@+id/guideRb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginEnd="10dp"
+            android:layoutDirection="rtl"
+            android:onClick="checkUserType"
+            android:text="@string/prompt_guide"
+            android:textAlignment="textStart" />
+
+        <RadioButton
+            android:id="@+id/adminRb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginEnd="10dp"
+            android:layoutDirection="rtl"
+            android:onClick="checkUserType"
+            android:text="@string/prompt_admin"
+            android:textAlignment="textStart" />
+
+        <RadioButton
+            android:id="@+id/volunteerRb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginEnd="10dp"
+            android:checked="true"
+            android:layoutDirection="rtl"
+            android:onClick="checkUserType"
+            android:text="@string/prompt_volunteer"
+            android:textAlignment="textStart" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/alef"
+        android:text="@string/prompt_add_user"
+        android:textColor="@color/dark_gray"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.461"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

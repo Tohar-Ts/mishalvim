@@ -8,16 +8,18 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Mishlavim">
+        android:theme="@style/Theme.MishlavimPink">
         <activity android:name=".guideActivities.GuideMainActivity"></activity>
         <activity
             android:name=".volunteerActivities.VolunteerMainActivity"
             android:label="volunteerMainActivity" />
         <activity android:name=".volunteerActivities.viewOldFormActivity" />
         <activity android:name=".volunteerActivities.fillOutFormActivity" />
-        <activity android:name=".MainActivity" />
         <activity android:name=".adminActivities.AddNewGuideActivity" />
-        <activity android:name=".AddNewUserActivity" />
+        <activity
+            android:name=".AddNewUserActivity"
+            android:label="@string/title_add_new_user_activity"
+            android:theme="@style/Theme.MishlavimGreen" />
         <activity android:name=".adminActivities.EditFormActivity" />
         <activity android:name=".adminActivities.CreateFormActivity" />
         <activity android:name=".adminActivities.AdminGuidesListActivity" />
@@ -28,7 +30,6 @@
             android:label="@string/title_activity_login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

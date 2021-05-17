@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="main_pink">#b0006e</color>
+    <color name="dark_pink">#3a0024</color>
+    <color name="light_pink">#ff62c4</color>
+    <color name="most_light_pink">#ffc4e9</color>
+
     <color name="main_green">#307672</color>
+    <color name="dark_green">#14302f</color>
+    <color name="light_green">#a4dad7</color>
+    <color name="most_light_green">#dcf1f0</color>
+
+
     <color name="dark_gray">#A9A9A9</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>

@@ -7,52 +7,40 @@ package com.example.mishlavim.model;
  */
 public class User {
 
-    protected String userName;
-    protected String userID;
-    protected String userType;
-    protected String userEmail;
-    protected String userPassword;
+    protected String name;
+    protected String type;
+    protected String email;
 
-    private final String ADMIN = "Admin";
-    private final String GUIDE = "Guide";
-    private final String VOLUNTEER = "Volunteer";
-
-    /**
-     * Default constructor
-     */
     public User() {
     }
 
-    /**
-     * Parameterized constructor
-     *
-     * @param name  The user full name - first and last.
-     * @param id    The user firebase id.
-     * @param type  The user type - admin, manager or volunteer.
-     * @param email The user email - used for login.
-     */
-    public User(String name, String id, String type, String email, String password) {
-        userName = name;
-        userID = id;
-        userType = type;
-        userEmail = email;
-        userPassword = password;
+    public User(String userName, String userType, String userEmail) {
+        this.name = userName;
+        this.type = userType;
+        this.email = userEmail;
     }
 
-    /**
-     *
-     */
-    public void setUserName(String newName) {
-        userName = newName;
+    public String getName() {
+        return name;
     }
 
-    /**  */
-    public void setUserPassword(String newPassword) {
-        userPassword = newPassword;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    /**  */
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

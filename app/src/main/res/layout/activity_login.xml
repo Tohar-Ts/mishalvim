@@ -33,9 +33,9 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/custom_input"
-        android:drawableRight="@drawable/custom_lock_icon"
+        android:autofillHints="@string/prompt_password"
         android:drawablePadding="12dp"
-        android:gravity="center|right"
+        android:drawableEnd="@drawable/ic_lock"
         android:hint="@string/prompt_password"
         android:imeOptions="actionDone"
         android:inputType="textPassword"
@@ -45,6 +45,7 @@
         app:layout_constraintEnd_toEndOf="@+id/email"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/email"
+        android:gravity="center|end"
         app:layout_constraintTop_toBottomOf="@+id/email" />
 
     <EditText
@@ -54,16 +55,18 @@
         android:layout_marginTop="52dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/custom_input"
-        android:drawableRight="@drawable/custom_email_icon"
+        android:autofillHints="@string/prompt_email"
         android:drawablePadding="12dp"
-        android:gravity="center|right"
+        android:drawableEnd="@drawable/ic_email"
         android:hint="@string/prompt_email"
         android:inputType="textEmailAddress"
         android:paddingEnd="12dp"
+        android:gravity="center|start"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="@+id/welcome"
         app:layout_constraintHorizontal_bias="0.076"
         app:layout_constraintStart_toStartOf="@+id/welcome"
+        android:paddingStart="12dp"
         app:layout_constraintTop_toBottomOf="@+id/welcome" />
 
     <ImageView
@@ -74,6 +77,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/logo"
         app:srcCompat="@drawable/bat_ami_logo" />
 
     <ProgressBar
@@ -82,7 +86,7 @@
         android:layout_height="112dp"
         android:layout_gravity="center"
         android:visibility="gone"
-        android:theme="@style/ProgressBarTheme"
+        android:theme="@style/PinkProgressBarTheme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.546"
@@ -98,7 +102,7 @@
         android:fontFamily="@font/alef"
         android:text="@string/prompt_mishlavim"
         android:textColor="@color/black"
-        android:textSize="40dp"
+        android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.468"
         app:layout_constraintStart_toStartOf="parent"
