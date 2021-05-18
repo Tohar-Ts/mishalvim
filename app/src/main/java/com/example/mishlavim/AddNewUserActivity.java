@@ -11,15 +11,18 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.mishlavim.model.Admin;
+import com.example.mishlavim.model.Guide;
 import com.example.mishlavim.model.User;
 import com.example.mishlavim.model.UserTypes;
+import com.example.mishlavim.model.Volunteer;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class AddNewUserActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private EditText emailEditText, userNameEditText, passwordEditText;
+    private EditText emailEditText, userNameEditText, passwordEditText, verifyPasswordEditText;
     private ProgressBar loadingProgressBar;
     private RadioGroup typesRadioGroup;
     private FirebaseAuth mAuth;
@@ -36,7 +39,7 @@ public class AddNewUserActivity extends AppCompatActivity implements View.OnClic
         emailEditText = findViewById(R.id.newEmail);
         userNameEditText = findViewById(R.id.newUserName);
         passwordEditText = findViewById(R.id.newPassword);
-
+        verifyPasswordEditText = findViewById(R.id.verifyPassword);
         Button addButton = findViewById(R.id.addNewUser);
         loadingProgressBar = findViewById(R.id.registerLoading);
         typesRadioGroup = findViewById(R.id.typesRg);
@@ -44,8 +47,8 @@ public class AddNewUserActivity extends AppCompatActivity implements View.OnClic
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        validation = new Validation(emailEditText, passwordEditText, userNameEditText,
-                loadingProgressBar, getResources());
+        validation = new Validation(emailEditText,userNameEditText, passwordEditText,verifyPasswordEditText
+                , loadingProgressBar, getResources());
         userTypes = new UserTypes();
         newUserType = userTypes.getVOLUNTEER(); //default
 
@@ -75,9 +78,9 @@ public class AddNewUserActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void registerUser() {
+
         if (validation.validateInput())
             return;
-
         String email = emailEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
         String userName = userNameEditText.getText().toString().trim();
@@ -91,7 +94,7 @@ public class AddNewUserActivity extends AppCompatActivity implements View.OnClic
         Toast.makeText(getApplicationContext(), R.string.register_failed, Toast.LENGTH_SHORT).show();
     }
 
-    private void registerToFirebase(String userName, String email, String password) {
+    private void registerToFirebase(String userName, String email, String password){
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -105,22 +108,52 @@ public class AddNewUserActivity extends AppCompatActivity implements View.OnClic
     private void addUserToDb(FirebaseUser fbUser, String userName, String email) {
         String usersCollection = userTypes.getUSER_COLLECTION();
         String userId = fbUser.getUid();
+        if(newUserType.equals(userTypes.getADMIN())){
+            Admin user = new Admin(userName, newUserType, email);
+            db.collection(usersCollection)
+                    .document(userId)
+                    .set(user)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(AddNewUserActivity.this, newUserType + " was added successfully", Toast.LENGTH_SHORT).show();
+                            loadingProgressBar.setVisibility(View.GONE);
+                        } else {
+                            showRegisterFailed();
+                        }
 
-        User user = new User(userName, newUserType, email);
+                    });
+        }
+        else if(newUserType.equals(userTypes.getGUIDE())){
 
-        db.collection(usersCollection)
-                .document(userId)
-                .set(user)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(AddNewUserActivity.this, newUserType + " was added successfully", Toast.LENGTH_SHORT).show();
-                        loadingProgressBar.setVisibility(View.GONE);
-                    } else {
-                        showRegisterFailed();
-                    }
+            Guide user= new Guide(userName, newUserType, email);
+            db.collection(usersCollection)
+                    .document(userId)
+                    .set(user)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(AddNewUserActivity.this, newUserType + " was added successfully", Toast.LENGTH_SHORT).show();
+                            loadingProgressBar.setVisibility(View.GONE);
+                        } else {
+                            showRegisterFailed();
+                        }
 
-                });
-    }
+                    });
+        }
+        else{
+            Volunteer user = new Volunteer(userName, newUserType, email, "noa");
+            db.collection(usersCollection)
+                    .document(userId)
+                    .set(user)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(AddNewUserActivity.this, newUserType + " was added successfully", Toast.LENGTH_SHORT).show();
+                            loadingProgressBar.setVisibility(View.GONE);
+                        } else {
+                            showRegisterFailed();
+                        }
 
+                    });
+        }
 
+}
 }

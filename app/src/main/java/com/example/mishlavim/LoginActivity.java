@@ -33,15 +33,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         emailEditText = findViewById(R.id.email);
         passwordEditText = findViewById(R.id.password);
-
         Button loginButton = findViewById(R.id.login);
         loadingProgressBar = findViewById(R.id.loading);
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        validation = new Validation(emailEditText, passwordEditText, null,
-                loadingProgressBar, getResources());
+        validation = new Validation(emailEditText,   null,passwordEditText,null,
+             loadingProgressBar, getResources());
         userTypes = new UserTypes();
 
         loginButton.setOnClickListener(this);

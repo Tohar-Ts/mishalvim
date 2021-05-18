@@ -44,6 +44,7 @@
     <string name="prompt_mishlavim">תכנית משלבים</string>
     <string name="invalid_email">אימייל אינו תקין</string>
     <string name="invalid_password">סיסמה קצרה מדי</string>
+    <string name="invalid_verifyPassword">סיסמה לא מאומתת</string>
     <string name="login_failed">"כניסה נכשלה"</string>
 
 
