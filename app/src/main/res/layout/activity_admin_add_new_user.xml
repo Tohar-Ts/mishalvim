@@ -10,120 +10,6 @@
     android:paddingBottom="60dp"
     tools:context=".AdminAddNewUserActivity">
 
-    <EditText
-        android:id="@+id/guideName"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:autofillHints="@string/title_my_guide"
-        android:background="@drawable/custom_input"
-        android:drawableEnd="@drawable/ic_person"
-        android:drawablePadding="12dp"
-        android:gravity="center|start"
-        android:hint="@string/title_my_guide"
-        android:inputType="textPersonName"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:selectAllOnFocus="true"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/addNewUser"
-        app:layout_constraintEnd_toEndOf="@+id/typesRg"
-        app:layout_constraintHorizontal_bias="0.526"
-        app:layout_constraintStart_toStartOf="@+id/typesRg"
-        app:layout_constraintTop_toBottomOf="@+id/typesRg"
-        app:layout_constraintVertical_bias="0.275" />
-
-    <Button
-        android:id="@+id/addNewUser"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="4dp"
-        android:background="@drawable/custom_button"
-        android:text="@string/action_register"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/verifyPassword"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/verifyPassword" />
-
-    <EditText
-        android:id="@+id/newEmail"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="24dp"
-        android:autofillHints="@string/title_email"
-        android:background="@drawable/custom_input"
-        android:drawableEnd="@drawable/ic_email"
-        android:drawablePadding="12dp"
-        android:gravity="center|start"
-        android:hint="@string/title_email"
-        android:inputType="textEmailAddress"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:selectAllOnFocus="true"
-        app:layout_constraintEnd_toEndOf="@+id/welcome"
-        app:layout_constraintStart_toStartOf="@+id/welcome"
-        app:layout_constraintTop_toBottomOf="@+id/welcome" />
-
-    <EditText
-        android:id="@+id/newUserName"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="24dp"
-        android:autofillHints="@string/title_user_name"
-        android:background="@drawable/custom_input"
-        android:drawableEnd="@drawable/ic_person"
-        android:drawablePadding="12dp"
-        android:gravity="center|start"
-        android:hint="@string/title_user_name"
-        android:inputType="textPersonName"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:selectAllOnFocus="true"
-        app:layout_constraintEnd_toEndOf="@+id/newEmail"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/newEmail"
-        app:layout_constraintTop_toBottomOf="@+id/newEmail" />
-
-    <EditText
-        android:id="@+id/newPassword"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="24dp"
-        android:autofillHints="@string/title_user_password"
-        android:background="@drawable/custom_input"
-        android:drawableEnd="@drawable/ic_lock"
-        android:drawablePadding="12dp"
-        android:gravity="center|end"
-        android:hint="@string/title_user_password"
-        android:inputType="textPassword"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:selectAllOnFocus="true"
-        app:layout_constraintEnd_toEndOf="@+id/newUserName"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/newUserName"
-        app:layout_constraintTop_toBottomOf="@+id/newUserName" />
-
-    <EditText
-        android:id="@+id/verifyPassword"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="24dp"
-        android:autofillHints="@string/title_verify_password"
-        android:background="@drawable/custom_input"
-        android:drawableEnd="@drawable/ic_lock"
-        android:drawablePadding="12dp"
-        android:gravity="center|end"
-        android:hint="@string/title_verify_password"
-        android:inputType="textPassword"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:selectAllOnFocus="true"
-        app:layout_constraintEnd_toEndOf="@+id/newPassword"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/newPassword"
-        app:layout_constraintTop_toBottomOf="@+id/newPassword" />
-
     <ProgressBar
         android:id="@+id/registerLoading"
         android:layout_width="120dp"
@@ -138,65 +24,159 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.494" />
 
-    <RadioGroup
-        android:id="@+id/typesRg"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_marginTop="24dp"
-        android:layoutDirection="rtl"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="@+id/verifyPassword"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="@+id/verifyPassword"
-        app:layout_constraintTop_toBottomOf="@+id/verifyPassword">
-
-        <RadioButton
-            android:id="@+id/guideRb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginEnd="10dp"
-            android:checked="true"
-            android:layoutDirection="rtl"
-            android:onClick="checkUserType"
-            android:text="@string/prompt_guide"
-            android:textAlignment="textStart" />
-
-        <RadioButton
-            android:id="@+id/adminRb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginEnd="10dp"
-            android:layoutDirection="rtl"
-            android:onClick="checkUserType"
-            android:text="@string/prompt_admin"
-            android:textAlignment="textStart" />
-
-        <RadioButton
-            android:id="@+id/volunteerRb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginEnd="10dp"
-            android:layoutDirection="rtl"
-            android:onClick="checkUserType"
-            android:text="@string/prompt_volunteer"
-            android:textAlignment="textStart" />
-
-    </RadioGroup>
-
-    <TextView
-        android:id="@+id/welcome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/alef"
-        android:text="@string/prompt_add_user"
-        android:textColor="@color/dark_gray"
-        android:textSize="25sp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/welcome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/alef"
+            android:text="@string/prompt_add_user"
+            android:textColor="@color/dark_gray"
+            android:textSize="25sp" />
+
+        <EditText
+            android:id="@+id/newEmail"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="24dp"
+            android:autofillHints="@string/title_email"
+            android:background="@drawable/custom_input"
+            android:drawableEnd="@drawable/ic_email"
+            android:drawablePadding="12dp"
+            android:gravity="center|start"
+            android:hint="@string/title_email"
+            android:inputType="textEmailAddress"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:selectAllOnFocus="true" />
+
+
+        <EditText
+            android:id="@+id/newPassword"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="24dp"
+            android:autofillHints="@string/title_user_password"
+            android:background="@drawable/custom_input"
+            android:drawableEnd="@drawable/ic_lock"
+            android:drawablePadding="12dp"
+            android:gravity="center|end"
+            android:hint="@string/title_user_password"
+            android:inputType="textPassword"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:selectAllOnFocus="true" />
+
+        <EditText
+            android:id="@+id/verifyPassword"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="24dp"
+            android:autofillHints="@string/title_verify_password"
+            android:background="@drawable/custom_input"
+            android:drawableEnd="@drawable/ic_lock"
+            android:drawablePadding="12dp"
+            android:gravity="center|end"
+            android:hint="@string/title_verify_password"
+            android:inputType="textPassword"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:selectAllOnFocus="true" />
+
+        <EditText
+            android:id="@+id/newUserName"
+            android:layout_width="match_parent"
+            android:layout_height="53dp"
+            android:layout_marginTop="24dp"
+            android:autofillHints="@string/title_user_name"
+            android:background="@drawable/custom_input"
+            android:drawableEnd="@drawable/ic_person"
+            android:drawablePadding="12dp"
+            android:gravity="center|start"
+            android:hint="@string/title_user_name"
+            android:inputType="textPersonName"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:selectAllOnFocus="true" />
+
+        <RadioGroup
+            android:id="@+id/typesRg"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginTop="24dp"
+            android:layoutDirection="rtl"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/guideRb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginEnd="10dp"
+                android:checked="true"
+                android:layoutDirection="rtl"
+                android:onClick="checkUserType"
+                android:text="@string/prompt_guide"
+                android:textAlignment="textStart" />
+
+            <RadioButton
+                android:id="@+id/adminRb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginEnd="10dp"
+                android:layoutDirection="rtl"
+                android:onClick="checkUserType"
+                android:text="@string/prompt_admin"
+                android:textAlignment="textStart" />
+
+            <RadioButton
+                android:id="@+id/volunteerRb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginEnd="10dp"
+                android:layoutDirection="rtl"
+                android:onClick="checkUserType"
+                android:text="@string/prompt_volunteer"
+                android:textAlignment="textStart" />
+
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/guideName"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:autofillHints="@string/title_my_guide"
+            android:background="@drawable/custom_input"
+            android:drawableEnd="@drawable/ic_person"
+            android:drawablePadding="12dp"
+            android:gravity="center|start"
+            android:hint="@string/title_my_guide"
+            android:inputType="textPersonName"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:selectAllOnFocus="true"
+            android:layout_marginBottom="24dp"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/addNewUser"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/custom_button"
+            android:text="@string/action_register" />
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
