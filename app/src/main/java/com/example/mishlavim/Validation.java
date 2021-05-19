@@ -46,8 +46,12 @@ public class Validation {
         }
         if (verifyPasswordEditText != null) {
             String verifyPassword = verifyPasswordEditText.getText().toString().trim();
-            if (!isVerifyPasswordValid(password, verifyPassword)) {
+            if(verifyPassword.isEmpty()){
                 setError(verifyPasswordEditText, R.string.invalid_verifyPassword);
+                return true;
+            }
+            if (!isVerifyPasswordValid(password, verifyPassword)) {
+                setError(verifyPasswordEditText, R.string.invalid_verifyPasswordSame);
                 return true;
             }
         }

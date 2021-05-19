@@ -16,11 +16,11 @@
         android:layout_height="40dp"
         android:autofillHints="@string/title_my_guide"
         android:background="@drawable/custom_input"
-        android:drawableEnd="@drawable/ic_lock"
+        android:drawableEnd="@drawable/ic_person"
         android:drawablePadding="12dp"
-        android:gravity="center|end"
+        android:gravity="center|start"
         android:hint="@string/title_my_guide"
-        android:inputType="textPassword"
+        android:inputType="textPersonName"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
         android:selectAllOnFocus="true"
@@ -49,7 +49,7 @@
         android:id="@+id/newEmail"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="24dp"
         android:autofillHints="@string/title_email"
         android:background="@drawable/custom_input"
         android:drawableEnd="@drawable/ic_email"
@@ -68,7 +68,7 @@
         android:id="@+id/newUserName"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="24dp"
         android:autofillHints="@string/title_user_name"
         android:background="@drawable/custom_input"
         android:drawableEnd="@drawable/ic_person"
@@ -88,7 +88,7 @@
         android:id="@+id/newPassword"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="24dp"
         android:autofillHints="@string/title_user_password"
         android:background="@drawable/custom_input"
         android:drawableEnd="@drawable/ic_lock"
@@ -108,7 +108,7 @@
         android:id="@+id/verifyPassword"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="24dp"
         android:autofillHints="@string/title_verify_password"
         android:background="@drawable/custom_input"
         android:drawableEnd="@drawable/ic_lock"
@@ -148,8 +148,7 @@
         app:layout_constraintEnd_toEndOf="@+id/verifyPassword"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="@+id/verifyPassword"
-        app:layout_constraintTop_toBottomOf="@+id/verifyPassword"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/verifyPassword">
 
         <RadioButton
             android:id="@+id/guideRb"
@@ -157,10 +156,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:layout_marginEnd="10dp"
+            android:checked="true"
             android:layoutDirection="rtl"
             android:onClick="checkUserType"
             android:text="@string/prompt_guide"
-            android:checked="true"
             android:textAlignment="textStart" />
 
         <RadioButton
@@ -191,13 +190,11 @@
         android:id="@+id/welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:fontFamily="@font/alef"
         android:text="@string/prompt_add_user"
         android:textColor="@color/dark_gray"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
