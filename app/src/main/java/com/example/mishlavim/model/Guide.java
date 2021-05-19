@@ -3,33 +3,13 @@ package com.example.mishlavim.model;
 /**
  * Guide class represents an guide user.
  */
-public class Guide {
-    private String userName;
-    private String newUserType;
-    private String email;
-    public Guide(String userName, String newUserType, String email) {
-        this.userName = userName;
-        this.newUserType = newUserType;
-        this.email = email;
-    }
-    public String getUserName(){return userName;}
-    public String getNewUserType(){return newUserType;}
-    public String getEmail(){return email;}
-//    public String getMyGuide(){return myGuide;}
+public class Guide extends User {
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public Guide(String userName, String userType, String userEmail) {
+        super(userName, userType, userEmail);
     }
 
-    public void setNewUserType(String newUserType) {
-        this.newUserType = newUserType;
-    }
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-
-//    public Guide(String userName, String newUserType, String email) {
+    //    public Guide(String userName, String newUserType, String email) {
 //    }
 ////
 //    private ArrayList<Volunteer> myVolunteers;

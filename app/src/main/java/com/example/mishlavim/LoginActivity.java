@@ -39,8 +39,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        validation = new Validation(emailEditText,   null,passwordEditText,null,
-             loadingProgressBar, getResources());
+        validation = new Validation(emailEditText, null, passwordEditText, null,
+                loadingProgressBar, getResources());
         userTypes = new UserTypes();
 
         loginButton.setOnClickListener(this);
@@ -97,7 +97,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         if (type.equals(userTypes.getADMIN())) {
             Toast.makeText(this, "admin", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(LoginActivity.this, AddNewUserActivity.class));
+            startActivity(new Intent(LoginActivity.this, AdminAddNewUserActivity.class));
         } else if (type.equals(userTypes.getGUIDE())) {
             Toast.makeText(this, "guide", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(LoginActivity.this, GuideMainActivity.class));

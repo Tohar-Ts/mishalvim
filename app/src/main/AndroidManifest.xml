@@ -17,7 +17,7 @@
         <activity android:name=".volunteerActivities.fillOutFormActivity" />
         <activity android:name=".adminActivities.AddNewGuideActivity" />
         <activity
-            android:name=".AddNewUserActivity"
+            android:name=".AdminAddNewUserActivity"
             android:label="@string/title_add_new_user_activity"
             android:theme="@style/Theme.MishlavimGreen" />
         <activity android:name=".adminActivities.EditFormActivity" />

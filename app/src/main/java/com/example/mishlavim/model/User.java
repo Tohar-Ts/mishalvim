@@ -11,13 +11,10 @@ public class User {
     protected String type;
     protected String email;
 
-    public User() {
-    }
-
-    public User(String userName, String userType, String userEmail) {
-        this.name = userName;
-        this.type = userType;
-        this.email = userEmail;
+    public User(String name, String type, String email) {
+        this.name = name;
+        this.type = type;
+        this.email = email;
     }
 
     public String getName() {

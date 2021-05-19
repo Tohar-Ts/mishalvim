@@ -33,6 +33,7 @@
     <string name="prompt_admin">מנהל</string>
     <string name="prompt_guide">מדריך</string>
     <string name="prompt_volunteer">מתנדב</string>
+    <string name="title_my_guide">המדריך שלי</string>
     <string name="invalid_userName">שם מלא אינו תקין</string>
     <string name="register_failed">"הרשמה נכשלה"</string>
 

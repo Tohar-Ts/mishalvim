@@ -28,26 +28,26 @@ public class Validation {
 
         String email = emailEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
+
+        if (!isEmailValid(email)) {
+            setError(emailEditText, R.string.invalid_email);
+            return true;
+        }
+        if (userNameEditText != null) {
+            String userName = userNameEditText.getText().toString();
+            if (!isUserNameValid(userName)) {
+                setError(userNameEditText, R.string.invalid_userName);
+                return true;
+            }
+        }
         if (!isPasswordValid(password)) {
             setError(passwordEditText, R.string.invalid_password);
             return true;
         }
         if (verifyPasswordEditText != null) {
             String verifyPassword = verifyPasswordEditText.getText().toString().trim();
-            if (!isVerifyPasswordValid(password,verifyPassword)) {
+            if (!isVerifyPasswordValid(password, verifyPassword)) {
                 setError(verifyPasswordEditText, R.string.invalid_verifyPassword);
-                return true;
-            }
-        }
-        if (!isEmailValid(email)) {
-            setError(emailEditText, R.string.invalid_email);
-            return true;
-        }
-
-        if (userNameEditText != null) {
-            String userName = userNameEditText.getText().toString();
-            if (!isUserNameValid(userName)) {
-                setError(userNameEditText, R.string.invalid_userName);
                 return true;
             }
         }
@@ -78,9 +78,7 @@ public class Validation {
     }
 
 
-
     private boolean isVerifyPasswordValid(String password,String verifyPassword) {
-
         return (password.equals(verifyPassword));
     }
 

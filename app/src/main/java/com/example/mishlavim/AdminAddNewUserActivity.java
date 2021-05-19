@@ -20,9 +20,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class AddNewUserActivity extends AppCompatActivity implements View.OnClickListener {
+public class AdminAddNewUserActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private EditText emailEditText, userNameEditText, passwordEditText, verifyPasswordEditText;
+    private EditText emailEditText, userNameEditText, passwordEditText, verifyPasswordEditText, guideName;
     private ProgressBar loadingProgressBar;
     private RadioGroup typesRadioGroup;
     private FirebaseAuth mAuth;
@@ -34,12 +34,13 @@ public class AddNewUserActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_new_user);
+        setContentView(R.layout.activity_admin_add_new_user);
 
         emailEditText = findViewById(R.id.newEmail);
         userNameEditText = findViewById(R.id.newUserName);
         passwordEditText = findViewById(R.id.newPassword);
         verifyPasswordEditText = findViewById(R.id.verifyPassword);
+        guideName = findViewById(R.id.guideName);
         Button addButton = findViewById(R.id.addNewUser);
         loadingProgressBar = findViewById(R.id.registerLoading);
         typesRadioGroup = findViewById(R.id.typesRg);
@@ -50,7 +51,7 @@ public class AddNewUserActivity extends AppCompatActivity implements View.OnClic
         validation = new Validation(emailEditText,userNameEditText, passwordEditText,verifyPasswordEditText
                 , loadingProgressBar, getResources());
         userTypes = new UserTypes();
-        newUserType = userTypes.getVOLUNTEER(); //default
+        newUserType = userTypes.getGUIDE(); //default
 
         addButton.setOnClickListener(this);
     }
@@ -64,15 +65,19 @@ public class AddNewUserActivity extends AppCompatActivity implements View.OnClic
         int radioId = typesRadioGroup.getCheckedRadioButtonId();
         RadioButton checkedRadioButton = findViewById(radioId);
         String wantedType = (String) checkedRadioButton.getText();
+
         switch (wantedType) {
             case "מנהל":
+                guideName.setVisibility(View.GONE);
                 newUserType = userTypes.getADMIN();
                 break;
             case "מדריך":
+                guideName.setVisibility(View.GONE);
                 newUserType = userTypes.getGUIDE();
                 break;
             default:
                 newUserType = userTypes.getVOLUNTEER();
+                guideName.setVisibility(View.VISIBLE);
                 break;
         }
     }
@@ -99,61 +104,43 @@ public class AddNewUserActivity extends AppCompatActivity implements View.OnClic
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         FirebaseUser fbUser = mAuth.getCurrentUser();
-                        addUserToDb(fbUser, userName, email);
+                        createNewUser(fbUser, userName, email);
                     } else
                         showRegisterFailed();
                 });
     }
 
-    private void addUserToDb(FirebaseUser fbUser, String userName, String email) {
+    private void createNewUser(FirebaseUser fbUser, String userName, String email) {
+        User user;
+
+        if (newUserType.equals(userTypes.getADMIN()))
+            user = new Admin(userName, newUserType, email);
+
+        else if (newUserType.equals(userTypes.getGUIDE()))
+            user = new Guide(userName, newUserType, email);
+
+        else { //volunteer
+            String myGuide = guideName.getText().toString().trim();
+            user = new Volunteer(userName, newUserType, email, myGuide);
+        }
+
+        addUserToDb(fbUser, user);
+    }
+
+    private void addUserToDb(FirebaseUser fbUser, User user) {
         String usersCollection = userTypes.getUSER_COLLECTION();
         String userId = fbUser.getUid();
-        if(newUserType.equals(userTypes.getADMIN())){
-            Admin user = new Admin(userName, newUserType, email);
-            db.collection(usersCollection)
-                    .document(userId)
-                    .set(user)
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(AddNewUserActivity.this, newUserType + " was added successfully", Toast.LENGTH_SHORT).show();
-                            loadingProgressBar.setVisibility(View.GONE);
-                        } else {
-                            showRegisterFailed();
-                        }
 
-                    });
-        }
-        else if(newUserType.equals(userTypes.getGUIDE())){
-
-            Guide user= new Guide(userName, newUserType, email);
-            db.collection(usersCollection)
-                    .document(userId)
-                    .set(user)
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(AddNewUserActivity.this, newUserType + " was added successfully", Toast.LENGTH_SHORT).show();
-                            loadingProgressBar.setVisibility(View.GONE);
-                        } else {
-                            showRegisterFailed();
-                        }
-
-                    });
-        }
-        else{
-            Volunteer user = new Volunteer(userName, newUserType, email, "noa");
-            db.collection(usersCollection)
-                    .document(userId)
-                    .set(user)
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(AddNewUserActivity.this, newUserType + " was added successfully", Toast.LENGTH_SHORT).show();
-                            loadingProgressBar.setVisibility(View.GONE);
-                        } else {
-                            showRegisterFailed();
-                        }
-
-                    });
-        }
-
-}
+        db.collection(usersCollection)
+                .document(userId)
+                .set(user)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(AdminAddNewUserActivity.this, newUserType + " was added successfully", Toast.LENGTH_SHORT).show();
+                        loadingProgressBar.setVisibility(View.GONE);
+                    } else {
+                        showRegisterFailed();
+                    }
+                });
+    }
 }
