@@ -14,16 +14,15 @@
 
         <TextView
             android:id="@+id/WelcomeUser"
-            android:layout_width="200dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:layout_marginTop="32dp"
-            android:background="#CCE4F6"
             android:fontFamily="sans-serif-black"
-            android:text="@string/nametext"
+            android:text="ברוך הבא!"
             android:textAlignment="center"
-            android:textColor="#4E3131"
-            android:textSize="20sp" />
+            android:textColor="@color/darker_other_blue"
+            android:textSize="30sp" />
 
         <Space
             android:id="@+id/userfilloutspace"
@@ -31,17 +30,19 @@
             android:layout_height="50dp" />
 
         <Button
+
             android:id="@+id/buttonFillNewForm"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
+            android:layout_width="230dp"
+            android:layout_height="90dp"
             android:layout_margin="15dp"
             android:layout_marginTop="108dp"
             android:backgroundTint="#CCE4F6"
+            android:background="@drawable/custom_button"
+            android:textColor="@color/white"
             android:onClick="fillOutFormActivity"
             android:text="@string/fillform"
             android:textAlignment="center"
-            android:textColor="#4E3131"
-            android:textSize="18sp"
+            android:textSize="23sp"
             android:textStyle="bold" />
 
         <Space
@@ -68,7 +69,8 @@
                     android:onClick="viewOldFormActivity"
                     android:text="@string/buttonName"
                     android:textAlignment="center"
-                    android:textColor="#4E3131"
+                    android:background="@drawable/custom_button"
+                    android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -82,8 +84,9 @@
                     android:backgroundTint="#CCE4F6"
                     android:onClick="viewOldFormActivity"
                     android:text="@string/button2"
+                    android:background="@drawable/custom_button"
+                    android:textColor="@color/white"
                     android:textAlignment="center"
-                    android:textColor="#4E3131"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -99,11 +102,10 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="15dp"
                     android:layout_marginTop="72dp"
-                    android:backgroundTint="#CCE4F6"
                     android:onClick="viewOldFormActivity"
                     android:text="@string/button3"
+                    android:background="@drawable/custom_button"
                     android:textAlignment="center"
-                    android:textColor="#4E3131"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -116,8 +118,9 @@
                     android:layout_marginTop="72dp"
                     android:backgroundTint="#CCE4F6"
                     android:text="@string/button4"
+                    android:background="@drawable/custom_button"
+                    android:textColor="@color/white"
                     android:textAlignment="center"
-                    android:textColor="#4E3131"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -136,8 +139,9 @@
                     android:backgroundTint="#CCE4F6"
                     android:onClick="viewOldFormActivity"
                     android:text="@string/button5"
+                    android:background="@drawable/custom_button"
+                    android:textColor="@color/white"
                     android:textAlignment="center"
-                    android:textColor="#4E3131"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -150,8 +154,9 @@
                     android:layout_marginTop="72dp"
                     android:backgroundTint="#CCE4F6"
                     android:text="@string/button6"
+                    android:background="@drawable/custom_button"
+                    android:textColor="@color/white"
                     android:textAlignment="center"
-                    android:textColor="#4E3131"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -170,8 +175,9 @@
                     android:backgroundTint="#CCE4F6"
                     android:onClick="viewOldFormActivity"
                     android:text="@string/button7"
+                    android:background="@drawable/custom_button"
+                    android:textColor="@color/white"
                     android:textAlignment="center"
-                    android:textColor="#4E3131"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -184,8 +190,9 @@
                     android:layout_marginTop="72dp"
                     android:backgroundTint="#CCE4F6"
                     android:text="@string/button8"
+                    android:background="@drawable/custom_button"
+                    android:textColor="@color/white"
                     android:textAlignment="center"
-                    android:textColor="#4E3131"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 

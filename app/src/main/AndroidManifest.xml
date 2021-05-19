@@ -12,7 +12,8 @@
         <activity android:name=".guideActivities.GuideMainActivity"></activity>
         <activity
             android:name=".volunteerActivities.VolunteerMainActivity"
-            android:label="volunteerMainActivity" />
+            android:label="volunteerMainActivity"
+            android:theme="@style/Theme.MishlavimBlue"/>
         <activity android:name=".volunteerActivities.viewOldFormActivity" />
         <activity android:name=".volunteerActivities.fillOutFormActivity" />
         <activity android:name=".adminActivities.AddNewGuideActivity" />

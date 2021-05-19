@@ -4,13 +4,28 @@
     <color name="dark_pink">#3a0024</color>
     <color name="light_pink">#ff62c4</color>
     <color name="most_light_pink">#ffc4e9</color>
-
     <color name="main_green">#307672</color>
     <color name="dark_green">#14302f</color>
     <color name="light_green">#a4dad7</color>
     <color name="most_light_green">#dcf1f0</color>
-
-
+    <color name="pretty_blue">#2589AA</color>
+    <color name="light_pretty_blue">#6EC1E4</color>
+    <color name="orange">#E19139</color>
+    <color name="lighter_grey">#7A7A7A</color>
+    <color name="light_grey">#54595F</color>
+    <color name="darker_other_blue">#014C71</color>
+    <color name="other_blue">#007cba</color>
+    <color name="blue">#006ba1</color>
+    <color name="ugly_yellow">#C1CD23</color>
+    <color name="ugly_green">#61CE70</color>
+    <color name="grey">#414042</color>
+    <color name="oh_no_my_eyes">#E0EC45</color>
+    <color name="light_orange">#F3BC10</color>
+    <color name="pinkest">#F6C735E0</color>
+    <color name="greeny_yellow">#D0DE18</color>
+    <color name="very_light_blue">#7BC4DD</color>
+    <color name="lighter_pink">#ED88C7</color>
+    <color name="pink">#E74CAD</color>
     <color name="dark_gray">#A9A9A9</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
