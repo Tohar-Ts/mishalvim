@@ -7,35 +7,18 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingLeft="60dp"
-    android:paddingTop="60dp"
-    android:paddingRight="60dp"
-    android:paddingBottom="60dp"
-    tools:context=".AdminAddNewUserActivity"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
-
-
-    <ProgressBar
-        android:id="@+id/registerLoading"
-        android:layout_width="120dp"
-        android:layout_height="112dp"
-        android:layout_gravity="center"
-        android:theme="@style/GreenProgressBarTheme"
-        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="60dp"
+        android:paddingTop="60dp"
+        android:paddingRight="60dp"
+        android:paddingBottom="60dp"
+        tools:context=".AdminAddNewUserActivity"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.546"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.494" />
-
-
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/welcome"
@@ -45,6 +28,7 @@
             android:text="@string/prompt_add_user"
             android:textColor="@color/dark_gray"
             android:textSize="25sp" />
+
 
         <EditText
             android:id="@+id/newEmail"
@@ -62,6 +46,21 @@
             android:paddingEnd="12dp"
             android:selectAllOnFocus="true" />
 
+        <EditText
+            android:id="@+id/newUserName"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="24dp"
+            android:autofillHints="@string/title_user_name"
+            android:background="@drawable/custom_input"
+            android:drawableEnd="@drawable/ic_person"
+            android:drawablePadding="12dp"
+            android:gravity="center|start"
+            android:hint="@string/title_user_name"
+            android:inputType="textPersonName"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:selectAllOnFocus="true" />
 
 
         <EditText
@@ -96,21 +95,6 @@
             android:paddingEnd="12dp"
             android:selectAllOnFocus="true" />
 
-        <EditText
-            android:id="@+id/newUserName"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="24dp"
-            android:autofillHints="@string/title_user_name"
-            android:background="@drawable/custom_input"
-            android:drawableEnd="@drawable/ic_person"
-            android:drawablePadding="12dp"
-            android:gravity="center|start"
-            android:hint="@string/title_user_name"
-            android:inputType="textPersonName"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
-            android:selectAllOnFocus="true" />
 
         <RadioGroup
             android:id="@+id/typesRg"
@@ -173,6 +157,20 @@
             android:selectAllOnFocus="true"
             android:visibility="gone" />
 
+        <ProgressBar
+            android:id="@+id/registerLoading"
+            android:layout_width="120dp"
+            android:layout_height="112dp"
+            android:layout_gravity="center"
+            android:theme="@style/GreenProgressBarTheme"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.546"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.494" />
+
         <Button
             android:id="@+id/addNewUser"
             android:layout_width="match_parent"
@@ -183,6 +181,3 @@
             android:text="@string/action_register" />
     </LinearLayout>
 </ScrollView>
-
-
-
