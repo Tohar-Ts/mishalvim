@@ -73,8 +73,8 @@
                                 android:id="@+id/editTextInput1"
                                 android:layout_width="383dp"
                                 android:layout_height="63dp"
-                                android:autofillHints=""
                                 android:hint="@string/answer"
+                                android:autofillHints="@string/answer"
                                 android:inputType="text"
                                 android:visibility="visible" />
                         </TableRow>
@@ -114,8 +114,8 @@
                                 android:id="@+id/editTextInput2"
                                 android:layout_width="383dp"
                                 android:layout_height="match_parent"
-                                android:autofillHints=""
                                 android:hint="@string/answer"
+                                android:autofillHints="@string/answer"
                                 android:inputType="text"
                                 android:visibility="visible" />
                         </TableRow>
@@ -200,7 +200,7 @@
                     android:id="@+id/buttonSave"
                     android:layout_width="172dp"
                     android:layout_height="match_parent"
-                    android:paddingLeft="16dp"
+                    android:paddingStart="16dp"
                     android:text="@string/buttonSave" />
 
                 <Space

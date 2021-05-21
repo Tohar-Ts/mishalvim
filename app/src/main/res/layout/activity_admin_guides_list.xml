@@ -1,177 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".adminActivities.AdminGuidesListActivity">
+    tools:context=".adminActivities.AdminGuidesListActivity"
+    android:id="@+id/adminOptions"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="false"
+    android:orientation="vertical"
+    android:padding="10dp">
 
-
-    <Button
-        android:id="@+id/addNewGuide"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="80dp"
-        android:text="הוסף מדריך"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintStart_toStartOf="@+id/guideline4" />
+        android:gravity="center"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/editField4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:ems="10"
-        android:hint="Field4"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/editField5"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toBottomOf="@+id/editField3" />
+        <TextView
+            android:id="@+id/WelcomeUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="sans-serif-black"
+            android:text="@string/welcome_admin"
+            android:textAlignment="center"
+            android:textColor="@color/darker_other_blue"
+            android:textSize="30sp" />
 
-    <EditText
-        android:id="@+id/editField5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="50dp"
-        android:ems="10"
-        android:hint="Field5"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/addNewGuide"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toBottomOf="@+id/editField4" />
+        <Space
+            android:id="@+id/userfilloutspace"
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
 
-    <EditText
-        android:id="@+id/editField3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:ems="10"
-        android:hint="Field3"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/editField4"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toBottomOf="@+id/editField2" />
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/guideSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="AdminMainActivity"
+            android:textOff="@string/forms"
+            android:textOn="@string/guides"
+            android:thumb="@drawable/thumb"
+            app:showText="true"
+            android:checked="true"
+            app:track="@drawable/track" />
 
-    <TextView
-        android:id="@+id/field3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="80dp"
-        android:text="שדה 3:"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/field4"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintHorizontal_bias="0.969"
-        app:layout_constraintStart_toEndOf="@+id/editField3" />
+        <Space
+            android:id="@+id/newformspace2"
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
 
-    <EditText
-        android:id="@+id/editField1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Field1"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toTopOf="@+id/guideline5" />
+        <Button
 
-    <EditText
-        android:id="@+id/editField2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:ems="10"
-        android:hint="Field2"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/editField3"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toBottomOf="@+id/editField1" />
+            android:id="@+id/buttonFillNewForm"
+            android:layout_width="230dp"
+            android:layout_height="90dp"
+            android:layout_margin="15dp"
+            android:layout_marginTop="108dp"
+            android:background="@drawable/custom_button"
+            android:backgroundTint="#CCE4F6"
+            android:onClick="AdminAddNewUserActivity"
+            android:text="@string/add_new_guide"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="23sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/field2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="80dp"
-        android:text="שדה 2:"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/field3"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/editField2" />
 
-    <TextView
-        android:id="@+id/field1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="80dp"
-        android:text="שדה 1:"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/field2"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintHorizontal_bias="0.984"
-        app:layout_constraintStart_toEndOf="@+id/editField1"
-        app:layout_constraintTop_toTopOf="@+id/guideline5"
-        app:layout_constraintVertical_bias="0.0" />
+        <TextView
+            android:id="@+id/existing_guides"
+            android:layout_width="244dp"
+            android:layout_height="wrap_content"
 
-    <TextView
-        android:id="@+id/field4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginBottom="80dp"
-        android:text="שדה 4:"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/field5"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintHorizontal_bias="0.972"
-        app:layout_constraintStart_toEndOf="@+id/editField4" />
+            android:fontFamily="sans-serif-black"
+            android:text="@string/existing_guides"
+            android:textAlignment="center"
+            android:textColor="@color/darker_other_blue"
+            android:textSize="30sp" />
 
-    <TextView
-        android:id="@+id/field5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="65dp"
-        android:layout_marginBottom="96dp"
-        android:text="שדה 5:"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/addNewGuide"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/editField5" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="366dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="38dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="90dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="wrap_content"
+            android:layout_height="250dp"/>
+    </LinearLayout>
+</ScrollView>
