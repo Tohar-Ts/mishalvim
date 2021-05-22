@@ -5,19 +5,19 @@ public class UserTypes {
     public UserTypes() {
     }
 
-    public final String getADMIN() {
+    public static String getADMIN() {
         return "admin";
     }
 
-    public final String getGUIDE() {
+    public static String getGUIDE() {
         return "guide";
     }
 
-    public final String getVOLUNTEER() {
+    public static String getVOLUNTEER() {
         return "volunteer";
     }
 
-    public final String getUSER_COLLECTION() {
+    public static String getUSER_COLLECTION() {
         return "users";
     }
 }

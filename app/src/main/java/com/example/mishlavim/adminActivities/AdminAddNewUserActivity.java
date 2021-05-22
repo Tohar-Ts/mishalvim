@@ -1,4 +1,4 @@
-package com.example.mishlavim;
+package com.example.mishlavim.adminActivities;
 
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.mishlavim.R;
+import com.example.mishlavim.Validation;
 import com.example.mishlavim.model.Admin;
 import com.example.mishlavim.model.Guide;
 import com.example.mishlavim.model.User;
@@ -20,15 +22,19 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+
 public class AdminAddNewUserActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private EditText emailEditText, userNameEditText, passwordEditText, verifyPasswordEditText, guideName;
+    private EditText emailEditText;
+    private EditText userNameEditText;
+    private EditText passwordEditText;
+    private EditText guideName;
     private ProgressBar loadingProgressBar;
     private RadioGroup typesRadioGroup;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private Validation validation;
-    private UserTypes userTypes;
     private String newUserType;
 
     @Override
@@ -39,7 +45,7 @@ public class AdminAddNewUserActivity extends AppCompatActivity implements View.O
         emailEditText = findViewById(R.id.newEmail);
         userNameEditText = findViewById(R.id.newUserName);
         passwordEditText = findViewById(R.id.newPassword);
-        verifyPasswordEditText = findViewById(R.id.verifyPassword);
+        EditText verifyPasswordEditText = findViewById(R.id.verifyPassword);
         guideName = findViewById(R.id.guideName);
         Button addButton = findViewById(R.id.addNewUser);
         loadingProgressBar = findViewById(R.id.registerLoading);
@@ -48,10 +54,10 @@ public class AdminAddNewUserActivity extends AppCompatActivity implements View.O
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        validation = new Validation(emailEditText,userNameEditText, passwordEditText,verifyPasswordEditText
+        validation = new Validation(emailEditText, userNameEditText, passwordEditText, verifyPasswordEditText
                 , loadingProgressBar, getResources());
-        userTypes = new UserTypes();
-        newUserType = userTypes.getGUIDE(); //default
+
+        newUserType = UserTypes.getGUIDE(); //default
 
         addButton.setOnClickListener(this);
     }
@@ -69,14 +75,14 @@ public class AdminAddNewUserActivity extends AppCompatActivity implements View.O
         switch (wantedType) {
             case "מנהל":
                 guideName.setVisibility(View.GONE);
-                newUserType = userTypes.getADMIN();
+                newUserType = UserTypes.getADMIN();
                 break;
             case "מדריך":
                 guideName.setVisibility(View.GONE);
-                newUserType = userTypes.getGUIDE();
+                newUserType = UserTypes.getGUIDE();
                 break;
             default:
-                newUserType = userTypes.getVOLUNTEER();
+                newUserType = UserTypes.getVOLUNTEER();
                 guideName.setVisibility(View.VISIBLE);
                 break;
         }
@@ -113,22 +119,23 @@ public class AdminAddNewUserActivity extends AppCompatActivity implements View.O
     private void createNewUser(FirebaseUser fbUser, String userName, String email) {
         User user;
 
-        if (newUserType.equals(userTypes.getADMIN()))
+        if (newUserType.equals(UserTypes.getADMIN()))
             user = new Admin(userName, newUserType, email);
 
-        else if (newUserType.equals(userTypes.getGUIDE()))
-            user = new Guide(userName, newUserType, email);
+        else if (newUserType.equals(UserTypes.getGUIDE()))
+            user = new Guide(userName, newUserType, email, new HashMap<>());
 
         else { //volunteer
             String myGuide = guideName.getText().toString().trim();
             user = new Volunteer(userName, newUserType, email, myGuide);
+            Guide.addVolunteerByGuideName(fbUser.getUid(), (Volunteer) user);
         }
 
         addUserToDb(fbUser, user);
     }
 
     private void addUserToDb(FirebaseUser fbUser, User user) {
-        String usersCollection = userTypes.getUSER_COLLECTION();
+        String usersCollection = UserTypes.getUSER_COLLECTION();
         String userId = fbUser.getUid();
 
         db.collection(usersCollection)

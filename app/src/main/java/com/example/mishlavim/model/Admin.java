@@ -8,6 +8,9 @@ package com.example.mishlavim.model;
  */
 public class Admin extends User {
 
+    public Admin() {
+    }
+
     public Admin(String userName, String userType, String userEmail) {
         super(userName, userType, userEmail);
     }
