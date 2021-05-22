@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.mishlavim.adminActivities.AdminMainActivity;
 import com.example.mishlavim.guideActivities.GuideMainActivity;
 import com.example.mishlavim.model.UserTypes;
 import com.example.mishlavim.volunteerActivities.VolunteerMainActivity;
@@ -97,17 +98,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         if (type.equals(userTypes.getADMIN())) {
             Toast.makeText(this, "admin", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(LoginActivity.this, AdminAddNewUserActivity.class));
+            loadingProgressBar.setVisibility(View.GONE);
+            startActivity(new Intent(LoginActivity.this, AdminMainActivity.class));
         } else if (type.equals(userTypes.getGUIDE())) {
             Toast.makeText(this, "guide", Toast.LENGTH_SHORT).show();
+            loadingProgressBar.setVisibility(View.GONE);
             startActivity(new Intent(LoginActivity.this, GuideMainActivity.class));
         } else if (type.equals(userTypes.getVOLUNTEER())) {
             Toast.makeText(this, "volunteer", Toast.LENGTH_SHORT).show();
+            loadingProgressBar.setVisibility(View.GONE);
             startActivity(new Intent(LoginActivity.this, VolunteerMainActivity.class));
         } else {
             showLoginFailed();
         }
-        finish();
+        //finish();
 
     }
 }

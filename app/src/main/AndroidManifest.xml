@@ -25,14 +25,15 @@
         <activity android:name=".adminActivities.CreateFormActivity" />
         <activity android:name=".adminActivities.AdminGuidesListActivity" />
         <activity android:name=".adminActivities.AdminFormListActivity" />
-<!--        <activity android:name=".adminActivities.AdminMainActivity" />-->
+        <activity android:name=".adminActivities.AdminMainActivity" />
+
         <activity
-            android:name=".adminActivities.AdminMainActivity"
-            android:label="admin">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:name=".LoginActivity"
+                android:label="@string/title_activity_login">
+                <intent-filter>
+                    <action android:name="android.intent.action.MAIN" />
+                    <category android:name="android.intent.category.LAUNCHER" />
+                </intent-filter>
 
         </activity>
     </application>
