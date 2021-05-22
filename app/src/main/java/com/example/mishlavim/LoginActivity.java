@@ -9,7 +9,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+import com.example.mishlavim.adminActivities.AdminMainActivity;
 import com.example.mishlavim.adminActivities.AdminAddNewUserActivity;
 import com.example.mishlavim.guideActivities.GuideMainActivity;
 import com.example.mishlavim.model.Admin;
@@ -104,7 +104,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         GlobalUserDetails globalInstance = com.example.mishlavim.model.GlobalUserDetails.getGlobalInstance();
 
         if (type.equals(userTypes.getADMIN())) {
-
             Admin admin = document.toObject(Admin.class);
             globalInstance.setAdminInstance(admin);
             startActivity(new Intent(LoginActivity.this, AdminAddNewUserActivity.class));
@@ -116,7 +115,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             startActivity(new Intent(LoginActivity.this, GuideMainActivity.class));
 
         } else if (type.equals(userTypes.getVOLUNTEER())) {
-
             Volunteer volu = document.toObject(Volunteer.class);
             globalInstance.setVoluInstance(volu);
             startActivity(new Intent(LoginActivity.this, VolunteerMainActivity.class));
@@ -124,7 +122,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         } else {
             showLoginFailed();
         }
-        finish();
+        //finish();
 
     }
 }
