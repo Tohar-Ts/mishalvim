@@ -9,7 +9,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.mishlavim.adminActivities.AdminMainActivity;
+
 import com.example.mishlavim.adminActivities.AdminAddNewUserActivity;
 import com.example.mishlavim.guideActivities.GuideMainActivity;
 import com.example.mishlavim.model.Admin;
@@ -105,6 +105,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         if (type.equals(userTypes.getADMIN())) {
             Admin admin = document.toObject(Admin.class);
+            globalInstance.getAdminInstance().getName();
             globalInstance.setAdminInstance(admin);
             startActivity(new Intent(LoginActivity.this, AdminAddNewUserActivity.class));
 
