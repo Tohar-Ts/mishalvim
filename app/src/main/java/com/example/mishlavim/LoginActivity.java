@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mishlavim.adminActivities.AdminAddNewUserActivity;
+import com.example.mishlavim.guideActivities.GuideAddVolunteerActivity;
 import com.example.mishlavim.guideActivities.GuideMainActivity;
 import com.example.mishlavim.model.Admin;
 import com.example.mishlavim.model.GlobalUserDetails;
@@ -113,7 +114,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             Guide guide = document.toObject(Guide.class);
             globalInstance.setGuideInstance(guide);
-            startActivity(new Intent(LoginActivity.this, GuideMainActivity.class));
+            startActivity(new Intent(LoginActivity.this, GuideAddVolunteerActivity.class));
 
         } else if (type.equals(userTypes.getVOLUNTEER())) {
             Volunteer volu = document.toObject(Volunteer.class);
