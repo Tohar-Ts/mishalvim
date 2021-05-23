@@ -57,7 +57,7 @@ public class AdminGuidesListActivity extends Fragment {
         startActivity(i);
     }
     public void AdminAddNewUserActivity(View v){
-        Intent i = new Intent(getActivity(), com.example.mishlavim.AdminAddNewUserActivity.class);
+        Intent i = new Intent(getActivity(), AdminAddNewUserActivity.class);
         startActivity(i);
     }
 
