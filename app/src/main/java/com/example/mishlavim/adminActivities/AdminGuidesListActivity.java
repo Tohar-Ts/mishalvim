@@ -2,28 +2,27 @@ package com.example.mishlavim.adminActivities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.fragment.app.Fragment;
 import com.example.mishlavim.R;
-
 import java.util.ArrayList;
 
-public class AdminGuidesListActivity extends AppCompatActivity {
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_guides_list);
-        //Switch simpleSwitch = (Switch) findViewById(R.id.guideSwitch);
-        //simpleSwitch.toggle();
+public class AdminGuidesListActivity extends Fragment {
+    View view;
 
-        //create object of listview
-        ListView listView=(ListView)findViewById(R.id.listview);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        view = inflater.inflate(R.layout.activity_admin_guides_list, container, false);
+
+        ListView listView=(ListView)view.findViewById(R.id.listview);
 
         //create ArrayList of String
         final ArrayList<String> arrayList=new ArrayList<>();
@@ -37,7 +36,7 @@ public class AdminGuidesListActivity extends AppCompatActivity {
         arrayList.add("ADI");
         arrayList.add("ELCHANAN");
         //Create Adapter
-        ArrayAdapter arrayAdapter=new ArrayAdapter(this,android.R.layout.simple_list_item_1,arrayList);
+        ArrayAdapter arrayAdapter=new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,arrayList);
 
         //assign adapter to listview
         listView.setAdapter(arrayAdapter);
@@ -46,20 +45,21 @@ public class AdminGuidesListActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(AdminGuidesListActivity.this,"clicked item:"+i+" "+arrayList.get(i).toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),"clicked item:"+i+" "+arrayList.get(i).toString(), Toast.LENGTH_SHORT).show();
             }
         });
 
-
+        return view;
     }
 
     public void AdminMainActivity(View v){
-        Intent i = new Intent(this, AdminMainActivity.class);
+        Intent i = new Intent(getActivity(), AdminMainActivity.class);
         startActivity(i);
     }
     public void AdminAddNewUserActivity(View v){
-        Intent i = new Intent(this, com.example.mishlavim.adminActivities.AdminAddNewUserActivity.class);
+        Intent i = new Intent(getActivity(), com.example.mishlavim.AdminAddNewUserActivity.class);
         startActivity(i);
     }
+
 
 }

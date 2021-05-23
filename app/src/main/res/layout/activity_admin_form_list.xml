@@ -1,116 +1,203 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".adminActivities.AdminFormListActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".adminActivities.AdminMainActivity">
-
-    <Button
-        android:id="@+id/file1"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:text="טופס 1"
-        app:layout_constraintBottom_toTopOf="@+id/file2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline2" />
-
-    <TextView
-        android:id="@+id/chooseFile"
-        android:layout_width="114dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="84dp"
-        android:text="בחר טופס:"
-        android:textColor="#000000"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/file1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline6"
-        android:layout_width="wrap_content"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="623dp" />
+        android:gravity="center"
+        android:orientation="vertical">
+        <Space
+            android:id="@+id/newformspace1"
+            android:layout_width="match_parent"
+            android:layout_height="100dp" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="164dp" />
+        <Button
 
-    <Button
-        android:id="@+id/file2"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:text="טופס 2"
-        app:layout_constraintBottom_toTopOf="@+id/file3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/file1" />
+            android:id="@+id/buttonFillNewForm"
+            android:layout_width="230dp"
+            android:layout_height="90dp"
+            android:layout_margin="15dp"
+            android:layout_marginTop="108dp"
+            android:background="@drawable/custom_button"
+            android:backgroundTint="#CCE4F6"
+            android:onClick="fillOutFormActivity"
+            android:text="@string/add_new_form"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="23sp"
+            android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/file3"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:text="טופס 3"
-        app:layout_constraintBottom_toTopOf="@+id/file4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/file2" />
+        <Space
+            android:id="@+id/newformspace0"
+            android:layout_width="match_parent"
+            android:layout_height="25dp" />
+        <TextView
+            android:id="@+id/existing_forms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="sans-serif-black"
+            android:text="@string/existing_forms"
+            android:textAlignment="center"
+            android:textColor="@color/darker_other_blue"
+            android:textSize="30sp" />
 
-    <Button
-        android:id="@+id/file4"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:text="טופס 4"
-        app:layout_constraintBottom_toTopOf="@+id/file5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/file3" />
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/file5"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:text="טופס 5"
-        app:layout_constraintBottom_toTopOf="@+id/file6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/file4" />
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/file6"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:text="טופס 6"
-        app:layout_constraintBottom_toTopOf="@+id/file7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/file5" />
+                <Button
+                    android:id="@+id/buttonFillForm1"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
 
-    <Button
-        android:id="@+id/file7"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:text="טופס 7"
-        app:layout_constraintBottom_toTopOf="@+id/guideline6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/file6" />
+                    android:layout_margin="15dp"
+                    android:layout_marginTop="72dp"
+                    android:background="@drawable/custom_button"
+                    android:backgroundTint="#CCE4F6"
+                    android:onClick="viewOldFormActivity"
+                    android:text="@string/buttonName"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <Button
+                    android:id="@+id/buttonFillForm2"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_margin="15dp"
+                    android:layout_marginTop="72dp"
+                    android:background="@drawable/custom_button"
+                    android:backgroundTint="#CCE4F6"
+                    android:onClick="viewOldFormActivity"
+                    android:text="@string/button2"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/buttonFillForm3"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:layout_marginTop="72dp"
+                    android:background="@drawable/custom_button"
+                    android:onClick="viewOldFormActivity"
+                    android:text="@string/button3"
+                    android:textAlignment="center"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/buttonFillForm4"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_margin="15dp"
+                    android:layout_marginTop="72dp"
+                    android:background="@drawable/custom_button"
+                    android:backgroundTint="#CCE4F6"
+                    android:text="@string/button4"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/buttonFillForm5"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:layout_marginTop="72dp"
+                    android:background="@drawable/custom_button"
+                    android:backgroundTint="#CCE4F6"
+                    android:onClick="viewOldFormActivity"
+                    android:text="@string/button5"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/buttonFillForm6"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_margin="15dp"
+                    android:layout_marginTop="72dp"
+                    android:background="@drawable/custom_button"
+                    android:backgroundTint="#CCE4F6"
+                    android:text="@string/button6"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/buttonFillForm7"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:layout_marginTop="72dp"
+                    android:background="@drawable/custom_button"
+                    android:backgroundTint="#CCE4F6"
+                    android:onClick="viewOldFormActivity"
+                    android:text="@string/button7"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/buttonFillForm8"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_margin="15dp"
+                    android:layout_marginTop="72dp"
+                    android:background="@drawable/custom_button"
+                    android:backgroundTint="#CCE4F6"
+                    android:text="@string/button8"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </TableRow>
+        </TableLayout>
+        <Space
+            android:id="@+id/newformspace2"
+            android:layout_width="match_parent"
+            android:layout_height="100dp" />
+    </LinearLayout>
+</ScrollView>
