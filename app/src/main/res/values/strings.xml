@@ -28,6 +28,7 @@
     <string name="buttonTwo">מעט</string>
     <string name="buttonSave">שמור</string>
     <string name="buttonSend">שלח טופס</string>
+    <string name="userHasAdd">המשתמש נוסף בהצלחה!</string>
 
     <string name="title_add_new_user_activity">הוספת משתמש</string>
     <string name="action_register">רשום משתמש</string>
@@ -149,6 +150,8 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="action_settings">Settings</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

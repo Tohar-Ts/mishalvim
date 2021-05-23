@@ -6,6 +6,15 @@ public class GlobalUserDetails {
     private Guide guideInstance;
     private Admin adminInstance;
     private Volunteer voluInstance;
+    private String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     private GlobalUserDetails() {
     }

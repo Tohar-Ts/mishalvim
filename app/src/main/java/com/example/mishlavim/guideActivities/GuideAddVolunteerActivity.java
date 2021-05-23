@@ -7,16 +7,15 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
-import com.example.mishlavim.LoginActivity;
 import com.example.mishlavim.R;
 import com.example.mishlavim.Validation;
+import com.example.mishlavim.addUserDialog;
 import com.example.mishlavim.model.GlobalUserDetails;
 import com.example.mishlavim.model.Guide;
-import com.example.mishlavim.model.User;
 import com.example.mishlavim.model.UserTypes;
 import com.example.mishlavim.model.Volunteer;
-import com.example.mishlavim.volunteerActivities.VolunteerMainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -106,13 +105,20 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Toast.makeText(GuideAddVolunteerActivity.this, "Volunteer was added successfully", Toast.LENGTH_SHORT).show();
+
+                        userHasAdd();
                         loadingProgressBar.setVisibility(View.GONE);
-//                        startActivity(new Intent(LoginActivity.this, VolunteerMainActivity.class));
                         finish();
+                        startActivity(new Intent(GuideAddVolunteerActivity.this, GuideAddVolunteerActivity.class));
                     } else {
                         showRegisterFailed();
                     }
                 });
     }
+    private void userHasAdd() {
+        DialogFragment newFragment = new addUserDialog();
+        newFragment.show(getSupportFragmentManager(), "addUser");
+    }
+
 }
 //TODO
