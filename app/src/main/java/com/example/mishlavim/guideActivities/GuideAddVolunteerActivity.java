@@ -1,6 +1,7 @@
 package com.example.mishlavim.guideActivities;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,7 +23,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 
 
-public class GuideAddVolunteerActivity extends AppCompatActivity implements View.OnClickListener {
+public class GuideAddVolunteerActivity extends AppCompatActivity implements View.OnClickListener, addUserDialog.addUserDialogListener {
     private EditText emailEditText;
     private EditText userNameEditText;
     private EditText passwordEditText;
@@ -108,8 +109,7 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
 
                         userHasAdd();
                         loadingProgressBar.setVisibility(View.GONE);
-                        finish();
-                        startActivity(new Intent(GuideAddVolunteerActivity.this, GuideAddVolunteerActivity.class));
+
                     } else {
                         showRegisterFailed();
                     }
@@ -119,6 +119,25 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
         DialogFragment newFragment = new addUserDialog();
         newFragment.show(getSupportFragmentManager(), "addUser");
     }
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+        Log.d("guide", "onDialogPositiveClick: after dialog closed");
+        finish();
+        startActivity(new Intent(GuideAddVolunteerActivity.this, GuideAddVolunteerActivity.class));
+    }
 
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+        Log.d("guide", "onDialogNegativeClick: after dialog closed");
+        finish();
+        // TODO: 5/23/2021 undo operations and delete the user from FB.
+    }
+    @Override
+    public void onDialogNeutralClick(DialogFragment dialog) {
+        // User touched the dialog's Neutral button
+        Log.d("guide", "onDialogNeutralClick:  after dialog closed");
+        finish();
+        startActivity(new Intent(GuideAddVolunteerActivity.this, GuideMainActivity.class));
+
+    }
 }
-//TODO
