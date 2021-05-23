@@ -6,6 +6,9 @@ package com.example.mishlavim.model;
 public class Volunteer extends User {
     private String myGuide;
 
+    public Volunteer() {
+    }
+
     public Volunteer(String userName, String userType, String userEmail, String myGuide) {
         super(userName, userType, userEmail);
         this.myGuide = myGuide;

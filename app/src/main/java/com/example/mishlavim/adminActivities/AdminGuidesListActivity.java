@@ -7,7 +7,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.widget.Switch;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -59,7 +58,7 @@ public class AdminGuidesListActivity extends AppCompatActivity {
         startActivity(i);
     }
     public void AdminAddNewUserActivity(View v){
-        Intent i = new Intent(this, com.example.mishlavim.AdminAddNewUserActivity.class);
+        Intent i = new Intent(this, com.example.mishlavim.adminActivities.AdminAddNewUserActivity.class);
         startActivity(i);
     }
 

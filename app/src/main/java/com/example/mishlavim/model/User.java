@@ -7,9 +7,13 @@ package com.example.mishlavim.model;
  */
 public class User {
 
+
     protected String name;
     protected String type;
     protected String email;
+
+    public User() {
+    }
 
     public User(String name, String type, String email) {
         this.name = name;

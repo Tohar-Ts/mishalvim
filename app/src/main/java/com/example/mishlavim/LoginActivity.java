@@ -10,12 +10,17 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.mishlavim.adminActivities.AdminMainActivity;
+import com.example.mishlavim.adminActivities.AdminAddNewUserActivity;
 import com.example.mishlavim.guideActivities.GuideMainActivity;
+import com.example.mishlavim.model.Admin;
+import com.example.mishlavim.model.GlobalUserDetails;
+import com.example.mishlavim.model.Guide;
 import com.example.mishlavim.model.UserTypes;
+import com.example.mishlavim.model.Volunteer;
 import com.example.mishlavim.volunteerActivities.VolunteerMainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -72,42 +77,49 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(LoginActivity.this, task -> {
                     if (task.isSuccessful()) {
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        getUserType(user);
+                        FirebaseUser fbUser = mAuth.getCurrentUser();
+                        getUserType(fbUser);
                     } else
                         showLoginFailed();
                 });
     }
 
-    private void getUserType(FirebaseUser user) {
-        String usersCollection = userTypes.getUSER_COLLECTION();
-        String userId = user.getUid();
+    private void getUserType(FirebaseUser fbUser) {
+        String userId = fbUser.getUid();
 
-        db.collection(usersCollection)
+        db.collection(UserTypes.getUSER_COLLECTION())
                 .document(userId)
                 .get()
-                .addOnCompleteListener(LoginActivity.this, doc -> {
-                    if (doc.isSuccessful())
-                        redirectUserByType(doc.getResult().getData().get("type").toString());
-                    else
+                .addOnCompleteListener(LoginActivity.this, task -> {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        redirectUserByType(document);
+                    } else
                         showLoginFailed();
                 });
     }
 
-    private void redirectUserByType(String type) {
+    private void redirectUserByType(DocumentSnapshot document) {
+        String type = document.get("type").toString();
+        GlobalUserDetails globalInstance = com.example.mishlavim.model.GlobalUserDetails.getGlobalInstance();
 
         if (type.equals(userTypes.getADMIN())) {
-            Toast.makeText(this, "admin", Toast.LENGTH_SHORT).show();
-            loadingProgressBar.setVisibility(View.GONE);
-            startActivity(new Intent(LoginActivity.this, AdminMainActivity.class));
+            Admin admin = document.toObject(Admin.class);
+            globalInstance.getAdminInstance().getName();
+            globalInstance.setAdminInstance(admin);
+            startActivity(new Intent(LoginActivity.this, AdminAddNewUserActivity.class));
+
         } else if (type.equals(userTypes.getGUIDE())) {
-            Toast.makeText(this, "guide", Toast.LENGTH_SHORT).show();
-            loadingProgressBar.setVisibility(View.GONE);
+
+            Guide guide = document.toObject(Guide.class);
+            globalInstance.setGuideInstance(guide);
             startActivity(new Intent(LoginActivity.this, GuideMainActivity.class));
+
         } else if (type.equals(userTypes.getVOLUNTEER())) {
-            Toast.makeText(this, "volunteer", Toast.LENGTH_SHORT).show();
-            loadingProgressBar.setVisibility(View.GONE);
+            Volunteer volu = document.toObject(Volunteer.class);
+            globalInstance.setVoluInstance(volu);
             startActivity(new Intent(LoginActivity.this, VolunteerMainActivity.class));
+
         } else {
             showLoginFailed();
         }
