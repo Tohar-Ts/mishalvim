@@ -102,7 +102,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void redirectUserByType(DocumentSnapshot document) {
         String type = document.get("type").toString();
+
         GlobalUserDetails globalInstance = com.example.mishlavim.model.GlobalUserDetails.getGlobalInstance();
+        globalInstance.setType(type);
 
         if (type.equals(userTypes.getADMIN())) {
             Admin admin = document.toObject(Admin.class);

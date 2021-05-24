@@ -8,6 +8,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.MishlavimPink">
+        <activity android:name=".dialogs.addUserDialog"></activity>
         <activity android:name=".guideActivities.GuideMainActivity" />
         <activity
             android:name=".volunteerActivities.VolunteerMainActivity"
@@ -21,17 +22,15 @@
         <activity android:name=".adminActivities.AdminGuidesListActivity" />
         <activity android:name=".adminActivities.AdminFormListActivity" />
         <activity android:name=".adminActivities.AdminMainActivity" />
-        <activity android:name=".guideActivities.GuideAddVolunteerActivity"/>
-
+        <activity android:name=".guideActivities.GuideAddVolunteerActivity" />
         <activity
             android:name=".LoginActivity"
-                android:label="@string/title_activity_login">
-                <intent-filter>
-                    <action android:name="android.intent.action.MAIN" />
-                    <category android:name="android.intent.category.LAUNCHER" />
-                </intent-filter>
+            android:label="@string/title_activity_login">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

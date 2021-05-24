@@ -1,7 +1,9 @@
 package com.example.mishlavim.model;
 
 import android.util.Log;
+import android.widget.Toast;
 
+import com.example.mishlavim.guideActivities.GuideAddVolunteerActivity;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -100,9 +102,16 @@ public class Guide extends User {
 //     * @param name
 //     * @return
 //     */
-//    public void deleteVolunteer(String name) {
-//        // TODO implement here
-//    }
+    public void deleteVolunteer(String name) {
+        Log.d("delete", "deleteVolunteer: "+name+ "was remove");
+//     fbUser.delete().addOnCompleteListener(task -> {
+//        if (task.isSuccessful()) {
+//            Toast.makeText(GuideAddVolunteerActivity.this, "User was delete successfully", Toast.LENGTH_SHORT).show();
+//        } else {
+//            Log.d("delete", "onDeletePositiveClick: delete user was failed!");;
+//        }
+        // TODO implement here
+    }
 //
 //    /**
 //     * @param volunteerName

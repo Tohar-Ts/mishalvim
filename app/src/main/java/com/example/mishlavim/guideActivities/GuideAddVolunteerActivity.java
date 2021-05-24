@@ -1,29 +1,29 @@
 package com.example.mishlavim.guideActivities;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
-import com.example.mishlavim.LoginActivity;
 import com.example.mishlavim.R;
 import com.example.mishlavim.Validation;
+import com.example.mishlavim.dialogs.*;
 import com.example.mishlavim.model.GlobalUserDetails;
 import com.example.mishlavim.model.Guide;
-import com.example.mishlavim.model.User;
 import com.example.mishlavim.model.UserTypes;
 import com.example.mishlavim.model.Volunteer;
-import com.example.mishlavim.volunteerActivities.VolunteerMainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 
 
-public class GuideAddVolunteerActivity extends AppCompatActivity implements View.OnClickListener {
+public class GuideAddVolunteerActivity extends AppCompatActivity implements View.OnClickListener, addUserDialog.addUserDialogListener, deleteUser.deleteUserListener  {
     private EditText emailEditText;
     private EditText userNameEditText;
     private EditText passwordEditText;
@@ -31,6 +31,10 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private Validation validation;
+    private FirebaseUser fbUser;
+
+    private GlobalUserDetails globalInstance = GlobalUserDetails.getGlobalInstance();
+    private Guide guide = globalInstance.getGuideInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,14 +80,12 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
     }
 
     private void registerToFirebase(String userName, String email, String password){
-        GlobalUserDetails globalInstance = GlobalUserDetails.getGlobalInstance();
-        Guide guide = globalInstance.getGuideInstance();
         String myGuide =  guide.getName();;
 
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        FirebaseUser fbUser = mAuth.getCurrentUser();
+                        fbUser = mAuth.getCurrentUser(); // this is the new user we just added.
                         Volunteer volunteer = new Volunteer(userName, UserTypes.getVOLUNTEER(), email, myGuide);
                         createNewUser(fbUser, volunteer);
                     } else
@@ -106,13 +108,57 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Toast.makeText(GuideAddVolunteerActivity.this, "Volunteer was added successfully", Toast.LENGTH_SHORT).show();
+                        userHasAdd();
                         loadingProgressBar.setVisibility(View.GONE);
-//                        startActivity(new Intent(LoginActivity.this, VolunteerMainActivity.class));
-                        finish();
+
                     } else {
                         showRegisterFailed();
                     }
                 });
     }
+    private void userHasAdd() {
+        DialogFragment newFragment = new addUserDialog();
+        newFragment.show(getSupportFragmentManager(), "addUser");
+    }
+    @Override
+    public void onAddPositiveClick(DialogFragment dialog) {
+        Log.d("guide", "onDialogPositiveClick: after dialog closed");
+        finish();
+        startActivity(new Intent(GuideAddVolunteerActivity.this, GuideAddVolunteerActivity.class));
+    }
+
+    @Override
+    public void onAddNegativeClick(DialogFragment dialog) {
+        Log.d("guide", "onDialogNegativeClick: after dialog closed");
+        //Show dialog to confirm delete user.
+        DialogFragment newFragment = new deleteUser();
+        newFragment.show(getSupportFragmentManager(), "deleteUser");
+//        finish();
+        // TODO: 5/23/2021 undo operations and delete the user from FB.
+    }
+    @Override
+    public void onAddNeutralClick(DialogFragment dialog) {
+        // User touched the dialog's Neutral button
+        Log.d("guide", "onDialogNeutralClick:  after dialog closed");
+        finish();
+        startActivity(new Intent(GuideAddVolunteerActivity.this, GuideMainActivity.class));
+
+    }
+
+    @Override
+    public void onDeletePositiveClick(DialogFragment dialog) {
+        loadingProgressBar.setVisibility(View.VISIBLE);
+        guide.deleteVolunteer(fbUser.getDisplayName());
+        loadingProgressBar.setVisibility(View.GONE);
+        finish();
+        startActivity(new Intent(GuideAddVolunteerActivity.this, GuideMainActivity.class));
+
+    }
+
+
+    @Override
+    public void onDeleteNegativeClick(DialogFragment dialog) {
+        DialogFragment newFragment = new addUserDialog();
+        newFragment.show(getSupportFragmentManager(), "addUser");
+    }
 }
-//TODO
