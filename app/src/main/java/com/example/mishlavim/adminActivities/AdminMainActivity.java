@@ -60,7 +60,7 @@ public class AdminMainActivity extends AppCompatActivity {
         startActivity(i);
     }
     public void AdminAddNewUserActivity(View v){
-        Intent i = new Intent(this, com.example.mishlavim.AdminAddNewUserActivity.class);
+        Intent i = new Intent(this, AdminAddNewUserActivity.class);
         startActivity(i);
     }
 }
