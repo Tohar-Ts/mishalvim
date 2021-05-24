@@ -32,6 +32,7 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
     private FirebaseFirestore db;
     private Validation validation;
     private FirebaseUser fbUser;
+    private   Volunteer volunteer;
 
     private GlobalUserDetails globalInstance = GlobalUserDetails.getGlobalInstance();
     private Guide guide = globalInstance.getGuideInstance();
@@ -86,7 +87,7 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         fbUser = mAuth.getCurrentUser(); // this is the new user we just added.
-                        Volunteer volunteer = new Volunteer(userName, UserTypes.getVOLUNTEER(), email, myGuide);
+                        volunteer = new Volunteer(userName, UserTypes.getVOLUNTEER(), email, myGuide);
                         createNewUser(fbUser, volunteer);
                     } else
                         showRegisterFailed();
@@ -148,7 +149,7 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
     @Override
     public void onDeletePositiveClick(DialogFragment dialog) {
         loadingProgressBar.setVisibility(View.VISIBLE);
-        guide.deleteVolunteer(fbUser.getDisplayName());
+        guide.deleteVolunteer(fbUser,db, volunteer);
         loadingProgressBar.setVisibility(View.GONE);
         finish();
         startActivity(new Intent(GuideAddVolunteerActivity.this, GuideMainActivity.class));
