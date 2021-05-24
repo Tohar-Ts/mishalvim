@@ -11,7 +11,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mishlavim.adminActivities.AdminAddNewUserActivity;
-import com.example.mishlavim.adminActivities.AdminMainActivity;
 import com.example.mishlavim.guideActivities.GuideAddVolunteerActivity;
 import com.example.mishlavim.guideActivities.GuideMainActivity;
 import com.example.mishlavim.model.Admin;
@@ -103,20 +102,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void redirectUserByType(DocumentSnapshot document) {
         String type = document.get("type").toString();
+
         GlobalUserDetails globalInstance = com.example.mishlavim.model.GlobalUserDetails.getGlobalInstance();
         globalInstance.setType(type);
 
         if (type.equals(userTypes.getADMIN())) {
             Admin admin = document.toObject(Admin.class);
-//          globalInstance.getAdminInstance().getName();
             globalInstance.setAdminInstance(admin);
-            startActivity(new Intent(LoginActivity.this, AdminMainActivity.class));//AdminAddNewUserActivity
+            startActivity(new Intent(LoginActivity.this, AdminAddNewUserActivity.class));
 
         } else if (type.equals(userTypes.getGUIDE())) {
 
             Guide guide = document.toObject(Guide.class);
             globalInstance.setGuideInstance(guide);
-            startActivity(new Intent(LoginActivity.this, GuideMainActivity.class));//GuideAddVolunteerActivity
+            startActivity(new Intent(LoginActivity.this, GuideAddVolunteerActivity.class));
 
         } else if (type.equals(userTypes.getVOLUNTEER())) {
             Volunteer volu = document.toObject(Volunteer.class);
