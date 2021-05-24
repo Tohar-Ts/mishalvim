@@ -12,7 +12,7 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.mishlavim.R;
 import com.example.mishlavim.Validation;
-import com.example.mishlavim.addUserDialog;
+import com.example.mishlavim.dialogs.addUserDialog;
 import com.example.mishlavim.model.GlobalUserDetails;
 import com.example.mishlavim.model.Guide;
 import com.example.mishlavim.model.UserTypes;
@@ -31,7 +31,7 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private Validation validation;
-
+    private FirebaseUser fbUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,7 +83,7 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        FirebaseUser fbUser = mAuth.getCurrentUser();
+                        fbUser = mAuth.getCurrentUser(); // this is the new user we just added.
                         Volunteer volunteer = new Volunteer(userName, UserTypes.getVOLUNTEER(), email, myGuide);
                         createNewUser(fbUser, volunteer);
                     } else

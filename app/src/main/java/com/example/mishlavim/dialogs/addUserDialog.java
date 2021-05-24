@@ -1,4 +1,4 @@
-package com.example.mishlavim;
+package com.example.mishlavim.dialogs;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -7,9 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 
 import androidx.fragment.app.DialogFragment;
-import com.example.mishlavim.model.GlobalUserDetails;
-
-import java.io.Console;
 
 
 public class addUserDialog extends DialogFragment {
