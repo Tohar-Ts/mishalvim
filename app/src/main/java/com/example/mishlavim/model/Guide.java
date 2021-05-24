@@ -4,10 +4,11 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.mishlavim.guideActivities.GuideAddVolunteerActivity;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-
+import com.example.mishlavim.*;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -79,6 +80,7 @@ public class Guide extends User {
 
     public void setMyVolunteers(HashMap<String, String> myVolunteers) {
         this.myVolunteers = myVolunteers;
+        // TODO: 5/24/2021 check if this update the firebase DB.
     }
 //
 //    /**
@@ -102,14 +104,11 @@ public class Guide extends User {
 //     * @param name
 //     * @return
 //     */
-    public void deleteVolunteer(String name) {
+    public void deleteVolunteer(FirebaseUser fbUser, FirebaseFirestore db, User user ) {
         Log.d("delete", "deleteVolunteer: "+name+ "was remove");
-//     fbUser.delete().addOnCompleteListener(task -> {
-//        if (task.isSuccessful()) {
-//            Toast.makeText(GuideAddVolunteerActivity.this, "User was delete successfully", Toast.LENGTH_SHORT).show();
-//        } else {
-//            Log.d("delete", "onDeletePositiveClick: delete user was failed!");;
-//        }
+        deleteUser toDelete = new deleteUser();
+        toDelete.deleteUser(fbUser, db, user);
+
         // TODO implement here
     }
 //
