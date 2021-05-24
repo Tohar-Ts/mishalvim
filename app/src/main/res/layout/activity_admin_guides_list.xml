@@ -30,7 +30,7 @@
             android:background="@drawable/custom_button"
             android:backgroundTint="#CCE4F6"
             android:onClick="AdminAddNewUserActivity"
-            android:text="@string/add_new_guide"
+
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="23sp"

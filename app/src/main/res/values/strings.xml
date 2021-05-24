@@ -11,13 +11,13 @@
     <string name="button7">טופס 7</string>
     <string name="button8">טופס 8</string>
     <string name="add_new_form">הוסף טופס חדש</string>
-    <string name="add_new_guide">הוסף מדריך חדש</string>
+    <string name="add_new_user">הוסף משתמש חדש</string>
     <string name="nametext">ברוך הבא [USERNAME]!</string>
     <string name="currentForm"> טופס **</string>
     <string name="existing_forms">טפסים קיימים:</string>
     <string name="existing_guides">מדריכים קיימים:</string>
-    <string name="forms">טפסים:</string>
-    <string name="guides">מדריכים:</string>
+    <string name="forms">טפסים</string>
+    <string name="guides">מדריכים</string>
     <string name="question1">מלל שאלה 1</string>
     <string name="question2">מלל שאלה 2</string>
     <string name="question3">מלל שאלה 3</string>

@@ -15,37 +15,13 @@
             android:layout_width="match_parent"
             android:layout_height="100dp" />
 
-        <Button
 
-            android:id="@+id/buttonFillNewForm"
-            android:layout_width="230dp"
-            android:layout_height="90dp"
-            android:layout_margin="15dp"
-            android:layout_marginTop="108dp"
-            android:background="@drawable/custom_button"
-            android:backgroundTint="#CCE4F6"
-            android:onClick="fillOutFormActivity"
-            android:text="@string/add_new_form"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="23sp"
-            android:textStyle="bold" />
 
         <Space
             android:id="@+id/newformspace0"
             android:layout_width="match_parent"
             android:layout_height="25dp" />
-        <TextView
-            android:id="@+id/existing_forms"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:layout_marginTop="32dp"
-            android:fontFamily="sans-serif-black"
-            android:text="@string/existing_forms"
-            android:textAlignment="center"
-            android:textColor="@color/darker_other_blue"
-            android:textSize="30sp" />
+
 
         <TableLayout
             android:layout_width="match_parent"
