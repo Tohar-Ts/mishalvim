@@ -12,7 +12,7 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.mishlavim.R;
 import com.example.mishlavim.Validation;
-import com.example.mishlavim.dialogs.addUserDialog;
+import com.example.mishlavim.dialogs.*;
 import com.example.mishlavim.model.GlobalUserDetails;
 import com.example.mishlavim.model.Guide;
 import com.example.mishlavim.model.UserTypes;
@@ -23,7 +23,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 
 
-public class GuideAddVolunteerActivity extends AppCompatActivity implements View.OnClickListener, addUserDialog.addUserDialogListener {
+public class GuideAddVolunteerActivity extends AppCompatActivity implements View.OnClickListener, addUserDialog.addUserDialogListener, deleteUser.deleteUserListener  {
     private EditText emailEditText;
     private EditText userNameEditText;
     private EditText passwordEditText;
@@ -32,6 +32,10 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
     private FirebaseFirestore db;
     private Validation validation;
     private FirebaseUser fbUser;
+
+    private GlobalUserDetails globalInstance = GlobalUserDetails.getGlobalInstance();
+    private Guide guide = globalInstance.getGuideInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,8 +80,6 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
     }
 
     private void registerToFirebase(String userName, String email, String password){
-        GlobalUserDetails globalInstance = GlobalUserDetails.getGlobalInstance();
-        Guide guide = globalInstance.getGuideInstance();
         String myGuide =  guide.getName();;
 
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -106,7 +108,6 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Toast.makeText(GuideAddVolunteerActivity.this, "Volunteer was added successfully", Toast.LENGTH_SHORT).show();
-
                         userHasAdd();
                         loadingProgressBar.setVisibility(View.GONE);
 
@@ -120,24 +121,44 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
         newFragment.show(getSupportFragmentManager(), "addUser");
     }
     @Override
-    public void onDialogPositiveClick(DialogFragment dialog) {
+    public void onAddPositiveClick(DialogFragment dialog) {
         Log.d("guide", "onDialogPositiveClick: after dialog closed");
         finish();
         startActivity(new Intent(GuideAddVolunteerActivity.this, GuideAddVolunteerActivity.class));
     }
 
     @Override
-    public void onDialogNegativeClick(DialogFragment dialog) {
+    public void onAddNegativeClick(DialogFragment dialog) {
         Log.d("guide", "onDialogNegativeClick: after dialog closed");
-        finish();
+        //Show dialog to confirm delete user.
+        DialogFragment newFragment = new deleteUser();
+        newFragment.show(getSupportFragmentManager(), "deleteUser");
+//        finish();
         // TODO: 5/23/2021 undo operations and delete the user from FB.
     }
     @Override
-    public void onDialogNeutralClick(DialogFragment dialog) {
+    public void onAddNeutralClick(DialogFragment dialog) {
         // User touched the dialog's Neutral button
         Log.d("guide", "onDialogNeutralClick:  after dialog closed");
         finish();
         startActivity(new Intent(GuideAddVolunteerActivity.this, GuideMainActivity.class));
 
+    }
+
+    @Override
+    public void onDeletePositiveClick(DialogFragment dialog) {
+        loadingProgressBar.setVisibility(View.VISIBLE);
+        guide.deleteVolunteer(fbUser.getDisplayName());
+        loadingProgressBar.setVisibility(View.GONE);
+        finish();
+        startActivity(new Intent(GuideAddVolunteerActivity.this, GuideMainActivity.class));
+
+    }
+
+
+    @Override
+    public void onDeleteNegativeClick(DialogFragment dialog) {
+        DialogFragment newFragment = new addUserDialog();
+        newFragment.show(getSupportFragmentManager(), "addUser");
     }
 }

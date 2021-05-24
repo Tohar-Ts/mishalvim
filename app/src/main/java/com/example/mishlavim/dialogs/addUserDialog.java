@@ -12,9 +12,9 @@ import androidx.fragment.app.DialogFragment;
 public class addUserDialog extends DialogFragment {
 
     public interface addUserDialogListener {
-        public void onDialogPositiveClick(DialogFragment dialog);
-        public void onDialogNegativeClick(DialogFragment dialog);
-        public void onDialogNeutralClick(DialogFragment dialog);
+        public void onAddPositiveClick(DialogFragment dialog);
+        public void onAddNegativeClick(DialogFragment dialog);
+        public void onAddNeutralClick(DialogFragment dialog);
     }
 
     // Use this instance of the interface to deliver action events
@@ -45,13 +45,13 @@ public class addUserDialog extends DialogFragment {
                 .setPositiveButton("הוסף משתמש חדש", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         Log.d("positive","positive button had pressed.");
-                        listener.onDialogPositiveClick(addUserDialog.this);
+                        listener.onAddPositiveClick(addUserDialog.this);
                     }
                 })
                 .setNeutralButton("חזרה לרשימה", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 Log.d("neutral","neutral button had pressed.");
-                listener.onDialogNeutralClick(addUserDialog.this);
+                listener.onAddNeutralClick(addUserDialog.this);
 
             }
         })
@@ -59,7 +59,7 @@ public class addUserDialog extends DialogFragment {
                     public void onClick(DialogInterface dialog, int id) {
                         // User cancelled the dialog
                         Log.d("negative","negative button had pressed.");
-                        listener.onDialogNegativeClick(addUserDialog.this);
+                        listener.onAddNegativeClick(addUserDialog.this);
                     }
                 });
 
