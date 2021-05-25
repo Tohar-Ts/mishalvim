@@ -3,15 +3,12 @@ package com.example.mishlavim.volunteerActivities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.mishlavim.LoginActivity;
 import com.example.mishlavim.R;
-import com.example.mishlavim.model.UserTypes;
+import com.example.mishlavim.model.FirebaseStrings;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -20,7 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class VolunteerMainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
-    private UserTypes userTypes;
+    private FirebaseStrings firebaseDefinitions;
     private String UserName;
     TextView welcomeText;
 
@@ -33,13 +30,13 @@ public class VolunteerMainActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
-        userTypes = new UserTypes();
+        firebaseDefinitions = new FirebaseStrings();
         welcome_userName();
 
     }
     public void welcome_userName(){
         FirebaseUser user = mAuth.getCurrentUser();
-        String usersCollection = userTypes.getUSER_COLLECTION();
+        String usersCollection = firebaseDefinitions.usersStr();
         String userId = user.getUid();
         welcomeText = (TextView) findViewById(R.id.WelcomeUser);
         db.collection(usersCollection)

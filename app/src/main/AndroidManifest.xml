@@ -24,6 +24,7 @@
         <activity android:name=".adminActivities.AdminFormListActivity" />
         <activity android:name=".adminActivities.AdminMainActivity" />
         <activity android:name=".guideActivities.GuideAddVolunteerActivity" />
+        <activity android:name=".adminActivities.AdminAddNewUserActivity" />
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login">

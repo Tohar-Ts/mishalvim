@@ -14,9 +14,9 @@ import com.example.mishlavim.adminActivities.AdminAddNewUserActivity;
 import com.example.mishlavim.guideActivities.GuideAddVolunteerActivity;
 import com.example.mishlavim.guideActivities.GuideMainActivity;
 import com.example.mishlavim.model.Admin;
-import com.example.mishlavim.model.GlobalUserDetails;
+import com.example.mishlavim.model.FirebaseStrings;
+import com.example.mishlavim.model.Global;
 import com.example.mishlavim.model.Guide;
-import com.example.mishlavim.model.UserTypes;
 import com.example.mishlavim.model.Volunteer;
 import com.example.mishlavim.volunteerActivities.VolunteerMainActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,9 +24,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Objects;
+
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private UserTypes userTypes;
     private EditText emailEditText, passwordEditText;
     private ProgressBar loadingProgressBar;
     private FirebaseAuth mAuth;
@@ -48,7 +49,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         validation = new Validation(emailEditText, null, passwordEditText, null,
                 loadingProgressBar, getResources());
-        userTypes = new UserTypes();
 
         loginButton.setOnClickListener(this);
     }
@@ -79,6 +79,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 .addOnCompleteListener(LoginActivity.this, task -> {
                     if (task.isSuccessful()) {
                         FirebaseUser fbUser = mAuth.getCurrentUser();
+                        assert fbUser != null;
                         getUserType(fbUser);
                     } else
                         showLoginFailed();
@@ -88,12 +89,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void getUserType(FirebaseUser fbUser) {
         String userId = fbUser.getUid();
 
-        db.collection(UserTypes.getUSER_COLLECTION())
+        db.collection(FirebaseStrings.usersStr())
                 .document(userId)
                 .get()
                 .addOnCompleteListener(LoginActivity.this, task -> {
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
+                        assert document != null;
                         redirectUserByType(document);
                     } else
                         showLoginFailed();
@@ -101,23 +103,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void redirectUserByType(DocumentSnapshot document) {
-        String type = document.get("type").toString();
-
-        GlobalUserDetails globalInstance = com.example.mishlavim.model.GlobalUserDetails.getGlobalInstance();
+        String type = Objects.requireNonNull(document.get(FirebaseStrings.typeStr())).toString();
+        Global globalInstance = Global.getGlobalInstance();
         globalInstance.setType(type);
 
-        if (type.equals(userTypes.getADMIN())) {
+        if (type.equals(FirebaseStrings.adminStr())) {
+
             Admin admin = document.toObject(Admin.class);
             globalInstance.setAdminInstance(admin);
             startActivity(new Intent(LoginActivity.this, AdminAddNewUserActivity.class));
 
-        } else if (type.equals(userTypes.getGUIDE())) {
+        } else if (type.equals(FirebaseStrings.guideStr())) {
 
             Guide guide = document.toObject(Guide.class);
             globalInstance.setGuideInstance(guide);
             startActivity(new Intent(LoginActivity.this, GuideAddVolunteerActivity.class));
 
-        } else if (type.equals(userTypes.getVOLUNTEER())) {
+        } else if (type.equals(FirebaseStrings.volunteerStr())) {
             Volunteer volu = document.toObject(Volunteer.class);
             globalInstance.setVoluInstance(volu);
             startActivity(new Intent(LoginActivity.this, VolunteerMainActivity.class));
@@ -125,9 +127,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         } else {
             showLoginFailed();
         }
-        //finish();
 
     }
 }
-
-//TODO - print logs

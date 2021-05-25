@@ -14,9 +14,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.mishlavim.R;
 import com.example.mishlavim.Validation;
 import com.example.mishlavim.model.Admin;
+import com.example.mishlavim.model.FirebaseStrings;
 import com.example.mishlavim.model.Guide;
 import com.example.mishlavim.model.User;
-import com.example.mishlavim.model.UserTypes;
 import com.example.mishlavim.model.Volunteer;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -57,7 +57,7 @@ public class AdminAddNewUserActivity extends AppCompatActivity implements View.O
         validation = new Validation(emailEditText, userNameEditText, passwordEditText, verifyPasswordEditText
                 , loadingProgressBar, getResources());
 
-        newUserType = UserTypes.getGUIDE(); //default
+        newUserType = FirebaseStrings.guideStr(); //default
 
         addButton.setOnClickListener(this);
     }
@@ -75,14 +75,14 @@ public class AdminAddNewUserActivity extends AppCompatActivity implements View.O
         switch (wantedType) {
             case "מנהל":
                 guideName.setVisibility(View.GONE);
-                newUserType = UserTypes.getADMIN();
+                newUserType = FirebaseStrings.adminStr();
                 break;
             case "מדריך":
                 guideName.setVisibility(View.GONE);
-                newUserType = UserTypes.getGUIDE();
+                newUserType = FirebaseStrings.guideStr();
                 break;
             default:
-                newUserType = UserTypes.getVOLUNTEER();
+                newUserType = FirebaseStrings.volunteerStr();
                 guideName.setVisibility(View.VISIBLE);
                 break;
         }
@@ -119,15 +119,15 @@ public class AdminAddNewUserActivity extends AppCompatActivity implements View.O
     private void createNewUser(FirebaseUser fbUser, String userName, String email) {
         User user;
 
-        if (newUserType.equals(UserTypes.getADMIN()))
-            user = new Admin(userName, newUserType, email);
+        if (newUserType.equals(FirebaseStrings.adminStr()))
+            user = new Admin(userName, newUserType, email, new HashMap<>(), new HashMap<>());
 
-        else if (newUserType.equals(UserTypes.getGUIDE()))
-            user = new Guide(userName, newUserType, email, new HashMap<>());
+        else if (newUserType.equals(FirebaseStrings.guideStr()))
+            user = new Guide(userName, newUserType, email, new HashMap<>(), new HashMap<>());
 
         else { //volunteer
             String myGuide = guideName.getText().toString().trim();
-            user = new Volunteer(userName, newUserType, email, myGuide);
+            user = new Volunteer(userName, newUserType, email, myGuide, new HashMap<>(), new HashMap<>());
             Guide.addVolunteerByGuideName(fbUser.getUid(), (Volunteer) user);
         }
 
@@ -135,10 +135,10 @@ public class AdminAddNewUserActivity extends AppCompatActivity implements View.O
     }
 
     private void addUserToDb(FirebaseUser fbUser, User user) {
-        String usersCollection = UserTypes.getUSER_COLLECTION();
+        String usersCollection = FirebaseStrings.usersStr();
         String userId = fbUser.getUid();
 
-        db.collection(usersCollection)
+        db.collection("users")
                 .document(userId)
                 .set(user)
                 .addOnCompleteListener(task -> {

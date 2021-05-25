@@ -1,74 +1,35 @@
 package com.example.mishlavim.model;
 
 /**
- *
+ * Question class represents one question data - prompt and type.
+ * It has two children - 'openQuestion' class and 'radioQuestion' class.
  */
 public class Question {
 
     private String prompt;
-    private String answer;
-    private int type;
-    private String[] options;
+    private String type;
 
-    /**
-     * Default constructor
-     */
     public Question() {
     }
 
-    /**
-     *
-     */
+    public Question(String prompt, String type) {
+        this.prompt = prompt;
+        this.type = type;
+    }
+
     public String getPrompt() {
         return prompt;
     }
 
-    /**
-     *
-     */
     public void setPrompt(String prompt) {
         this.prompt = prompt;
     }
 
-    /**
-     *
-     */
-    public String getAnswer() {
-        return answer;
-    }
-
-    /**
-     *
-     */
-    public void setAnswer(String answer) {
-        this.answer = answer;
-    }
-
-    /**
-     *
-     */
-    public int getType() {
+    public String getType() {
         return type;
     }
 
-    /**
-     *
-     */
-    public void setType(int type) {
+    public void setType(String type) {
         this.type = type;
-    }
-
-    /**
-     *
-     */
-    public String[] getOptions() {
-        return options;
-    }
-
-    /**
-     *
-     */
-    public void setOptions(String[] options) {
-        this.options = options;
     }
 }
