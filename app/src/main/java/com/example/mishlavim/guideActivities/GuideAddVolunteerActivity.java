@@ -146,7 +146,7 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
         // User touched the dialog's Neutral button
         Log.d("guide", "onDialogNeutralClick:  after dialog closed");
         finish();
-        startActivity(new Intent(GuideAddVolunteerActivity.this, GuideMainActivity.class));
+//        startActivity(new Intent(GuideAddVolunteerActivity.this, GuideMainActivity.class));
 
     }
 
@@ -156,7 +156,7 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
 //        guide.deleteVolunteer(fbUser,db, volunteer);
         loadingProgressBar.setVisibility(View.GONE);
         finish();
-        startActivity(new Intent(GuideAddVolunteerActivity.this, GuideMainActivity.class));
+//        startActivity(new Intent(GuideAddVolunteerActivity.this, GuideMainActivity.class));
 
     }
 

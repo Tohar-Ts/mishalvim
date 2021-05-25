@@ -4,23 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/calmBackground"
+    android:background="@drawable/calm_background"
     tools:context=".volunteerActivities.VolunteerMainActivity">
-
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="200dp"
-        android:layout_height="80dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="70dp"
-        android:layout_marginBottom="70dp"
-        android:background="@drawable/bgpurple"
-        android:clickable="false"
-        android:focusable="false"
-        android:gravity="center"
-        android:padding="10dp"
-        android:textColor="#332FA2"
-        android:textSize="32sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,6 +14,15 @@
         android:gravity="right"
         android:paddingRight="15dp"
         android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/openFormsPrompt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="שאלונים פתוחים"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
 
         <Button
             android:id="@+id/openForm"
@@ -42,37 +36,7 @@
             android:textColor="@color/black"
             android:textSize="32sp" />
 
-        <TextView
-            android:id="@+id/openFormsPrompt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="שאלונים פתוחים"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="30sp" />
-
     </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layoutParent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
-        android:orientation="horizontal">
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/textTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="28dp"
-        android:layout_marginRight="28dp"
-        android:layout_marginBottom="16dp"
-        android:text="Ammo"
-        android:textColor="#FFF"
-        android:textSize="24sp" />
 
 
     <TextView
@@ -82,7 +46,9 @@
         android:layout_gravity="center"
         android:layout_marginTop="60dp"
         android:background="@color/white"
-        android:fontFamily="@font/varelaRound"
+        android:fontFamily="@font/varela_round"
         android:text="צהריים טובים אילת"
         android:textColor="@color/black"
         android:textSize="40sp" />
+
+</LinearLayout>

@@ -9,7 +9,7 @@
     android:paddingTop="70dp"
     android:paddingRight="50dp"
     android:paddingBottom="70dp"
-    tools:context=".LoginActivity">
+    tools:context=".login.LoginActivity">
 
     <Button
         android:id="@+id/login"
