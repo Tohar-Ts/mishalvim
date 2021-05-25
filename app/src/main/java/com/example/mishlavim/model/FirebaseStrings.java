@@ -2,7 +2,7 @@ package com.example.mishlavim.model;
 
 /**
  * FirebaseStrings class represents firebase collection names, user types, user fields..
- * Common strings the used to get and identify data from the firebase.
+ * Common strings that are used to get and identify data from the firebase.
  */
 public class FirebaseStrings {
 

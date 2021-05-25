@@ -1,4 +1,4 @@
-package com.example.mishlavim;
+package com.example.mishlavim.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,13 +10,14 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.mishlavim.R;
 import com.example.mishlavim.adminActivities.AdminAddNewUserActivity;
 import com.example.mishlavim.guideActivities.GuideAddVolunteerActivity;
-import com.example.mishlavim.guideActivities.GuideMainActivity;
 import com.example.mishlavim.model.Admin;
 import com.example.mishlavim.model.FirebaseStrings;
 import com.example.mishlavim.model.Global;
 import com.example.mishlavim.model.Guide;
+import com.example.mishlavim.model.Validation;
 import com.example.mishlavim.model.Volunteer;
 import com.example.mishlavim.volunteerActivities.VolunteerMainActivity;
 import com.google.firebase.auth.FirebaseAuth;

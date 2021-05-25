@@ -1,10 +1,12 @@
-package com.example.mishlavim;
+package com.example.mishlavim.model;
 
 import android.content.res.Resources;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+
+import com.example.mishlavim.R;
 
 public class Validation {
     private final EditText emailEditText;

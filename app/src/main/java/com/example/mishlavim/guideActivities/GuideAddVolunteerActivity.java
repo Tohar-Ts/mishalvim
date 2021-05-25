@@ -1,4 +1,5 @@
 package com.example.mishlavim.guideActivities;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,20 +8,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.mishlavim.R;
-import com.example.mishlavim.Validation;
-import com.example.mishlavim.dialogs.*;
-import com.example.mishlavim.model.GlobalUserDetails;
+import com.example.mishlavim.dialogs.addUserDialog;
+import com.example.mishlavim.dialogs.deleteUser;
+import com.example.mishlavim.model.FirebaseStrings;
+import com.example.mishlavim.model.Global;
 import com.example.mishlavim.model.Guide;
-import com.example.mishlavim.model.UserTypes;
+import com.example.mishlavim.model.Validation;
 import com.example.mishlavim.model.Volunteer;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
 
 
 public class GuideAddVolunteerActivity extends AppCompatActivity implements View.OnClickListener, addUserDialog.addUserDialogListener, deleteUser.deleteUserListener  {
@@ -34,7 +38,7 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
     private FirebaseUser fbUser;
     private   Volunteer volunteer;
 
-    private GlobalUserDetails globalInstance = GlobalUserDetails.getGlobalInstance();
+    private Global globalInstance = Global.getGlobalInstance();
     private Guide guide = globalInstance.getGuideInstance();
 
     @Override
@@ -81,13 +85,13 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
     }
 
     private void registerToFirebase(String userName, String email, String password){
-        String myGuide =  guide.getName();;
+        String myGuide = guide.getName();
 
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         fbUser = mAuth.getCurrentUser(); // this is the new user we just added.
-                        volunteer = new Volunteer(userName, UserTypes.getVOLUNTEER(), email, myGuide);
+                        volunteer = new Volunteer(userName, FirebaseStrings.volunteerStr(), email, myGuide, new HashMap<>(), new HashMap<>());
                         createNewUser(fbUser, volunteer);
                     } else
                         showRegisterFailed();
@@ -100,7 +104,7 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
     }
 
     private void addUserToDb(FirebaseUser fbUser, Volunteer volunteer) {
-        String usersCollection = UserTypes.getUSER_COLLECTION();
+        String usersCollection = FirebaseStrings.usersStr();
         String userId = fbUser.getUid();
 
         db.collection(usersCollection)
@@ -149,7 +153,7 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
     @Override
     public void onDeletePositiveClick(DialogFragment dialog) {
         loadingProgressBar.setVisibility(View.VISIBLE);
-        guide.deleteVolunteer(fbUser,db, volunteer);
+//        guide.deleteVolunteer(fbUser,db, volunteer);
         loadingProgressBar.setVisibility(View.GONE);
         finish();
         startActivity(new Intent(GuideAddVolunteerActivity.this, GuideMainActivity.class));

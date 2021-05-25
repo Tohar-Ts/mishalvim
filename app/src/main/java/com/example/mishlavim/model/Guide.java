@@ -1,14 +1,11 @@
 package com.example.mishlavim.model;
 
 import android.util.Log;
-import android.widget.Toast;
 
-import com.example.mishlavim.guideActivities.GuideAddVolunteerActivity;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.example.mishlavim.*;
+
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
@@ -129,9 +126,9 @@ public class Guide extends User {
      */
     public static void deleteVolunteer(String guideId, String voluName) {
         /* TODO implement here */
-        Log.d("delete", "deleteVolunteer: "+name+ "was remove");
-        deleteUser toDelete = new deleteUser();
-        toDelete.deleteUser(fbUser, db, user);
+//        Log.d("delete", "deleteVolunteer: " + name + "was remove");
+//        deleteUser toDelete = new deleteUser();
+//        toDelete.deleteUser(fbUser, db, user);
     }
 
     public HashMap<String, Volunteer> getMyVolunteers() {
@@ -142,3 +139,4 @@ public class Guide extends User {
         this.myVolunteers = myVolunteers;
         // TODO: 5/24/2021 check if this update the firebase DB.
     }
+}
