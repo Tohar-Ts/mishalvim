@@ -2,8 +2,8 @@ package com.example.mishlavim.model;
 
 /**
  * User is the base class for all users of the app.
- * The class handles the general user data:
- * full name, firebase ID, type (Admin, Guide, Volunteer), email address and password.
+ * The class represent the general user data:
+ * full name, type ("admin", "guide", "volunteer"), and email address.
  */
 public class User {
 

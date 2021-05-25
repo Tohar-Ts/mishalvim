@@ -1,4 +1,4 @@
-package com.example.mishlavim.model;
+package com.example.mishlavim.test;
 
 public class CustomList {
 

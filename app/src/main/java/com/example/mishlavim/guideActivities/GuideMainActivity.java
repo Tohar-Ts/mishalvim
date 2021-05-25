@@ -6,10 +6,10 @@ import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mishlavim.R;
-import com.example.mishlavim.model.CustomList;
-import com.example.mishlavim.model.CustomeArrayAdupter;
-import com.example.mishlavim.model.GlobalUserDetails;
+import com.example.mishlavim.model.Global;
 import com.example.mishlavim.model.Guide;
+import com.example.mishlavim.test.CustomList;
+import com.example.mishlavim.test.CustomeArrayAdupter;
 
 import java.util.ArrayList;
 
@@ -20,7 +20,7 @@ public class GuideMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide_main);
 
-        GlobalUserDetails globalInstance = GlobalUserDetails.getGlobalInstance();
+        Global globalInstance = Global.getGlobalInstance();
         Guide guide = globalInstance.getGuideInstance();
         guide.getMyVolunteers();
         guide.getName();
