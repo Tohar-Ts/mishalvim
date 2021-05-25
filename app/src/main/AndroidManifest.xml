@@ -1,36 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.mishlavim">
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/bat_ami_logo"
         android:label="@string/app_name"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.MishlavimPink">
+        android:supportsRtl="true">
+
         <activity android:name=".dialogs.addUserDialog"></activity>
         <activity android:name=".guideActivities.GuideMainActivity" />
         <activity
             android:name=".volunteerActivities.VolunteerMainActivity"
-            android:label="volunteerMainActivity"
-            android:theme="@style/Theme.MishlavimBlue" />
+            android:label="volunteerMainActivity" />
         <activity android:name=".volunteerActivities.viewOldFormActivity" />
         <activity android:name=".volunteerActivities.fillOutFormActivity" />
-        <activity android:name=".adminActivities.AddNewGuideActivity" />
         <activity android:name=".adminActivities.EditFormActivity" />
-        <activity android:name=".adminActivities.CreateFormActivity" />
         <activity android:name=".adminActivities.AdminGuidesListActivity" />
         <activity android:name=".adminActivities.AdminFormListActivity" />
         <activity android:name=".adminActivities.AdminMainActivity" />
         <activity android:name=".guideActivities.GuideAddVolunteerActivity" />
         <activity android:name=".adminActivities.AdminAddNewUserActivity" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".login.LoginActivity"
             android:label="@string/title_activity_login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
