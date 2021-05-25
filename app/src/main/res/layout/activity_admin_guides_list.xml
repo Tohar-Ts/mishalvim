@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".adminActivities.AdminGuidesListActivity"
     android:id="@+id/adminOptions"
@@ -27,7 +26,7 @@
             android:layout_height="90dp"
             android:layout_margin="15dp"
             android:layout_marginTop="108dp"
-            android:background="@drawable/custom_button"
+            android:background="@drawable/custom_pink_button"
             android:backgroundTint="#CCE4F6"
             android:onClick="AdminAddNewUserActivity"
             android:text="@string/add_new_guide"

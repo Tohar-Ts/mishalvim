@@ -10,9 +10,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="10dp"
         android:gravity="right"
-        android:paddingRight="15dp"
+        android:paddingRight="20dp"
         android:orientation="vertical">
 
         <TextView
@@ -38,15 +38,76 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:gravity="right"
+        android:orientation="vertical"
+        android:paddingRight="15dp">
+
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:columnCount="2">
+
+            <Button
+                android:id="@+id/oo3"
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                android:alpha="0.5"
+                android:background="@drawable/custome_dark_blue_button"
+                android:gravity="center"
+                android:text="שלב 1"
+                android:textColor="@color/black"
+                android:textSize="32sp" />
+
+            <Button
+                android:id="@+id/opp2"
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                android:alpha="0.5"
+                android:background="@drawable/custome_form_button"
+                android:gravity="center"
+                android:text="שלב 1"
+                android:textColor="@color/black"
+                android:textSize="32sp" />
+
+            <Button
+                android:id="@+id/oop1"
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                android:alpha="0.5"
+                android:background="@drawable/custome_form_button"
+                android:gravity="center"
+                android:text="שלב 1"
+                android:textColor="@color/black"
+                android:textSize="32sp" />
+        </GridLayout>
+
+        <TextView
+            android:id="@+id/openFormsPrompt2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="שאלונים שמולאו"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/HelloUser"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="60dp"
-        android:background="@color/white"
         android:fontFamily="@font/varela_round"
+        android:gravity="center"
+        android:paddingTop="60dp"
+        android:paddingBottom="50dp"
         android:text="צהריים טובים אילת"
         android:textColor="@color/black"
         android:textSize="40sp" />
