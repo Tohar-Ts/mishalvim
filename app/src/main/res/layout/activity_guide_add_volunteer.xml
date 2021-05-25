@@ -117,7 +117,7 @@ android:layout_height="match_parent">
         android:layout_marginTop="50dp"
         android:layout_gravity="center"
         android:layout_marginBottom="4dp"
-        android:background="@drawable/custom_button"
+        android:background="@drawable/custom_pink_button"
         android:text="@string/action_register" />
 </LinearLayout>
 </ScrollView>

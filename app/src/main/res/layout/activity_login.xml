@@ -9,6 +9,8 @@
     android:paddingTop="70dp"
     android:paddingRight="50dp"
     android:paddingBottom="70dp"
+    android:alpha="0.9"
+    android:background="@drawable/rainbow_background"
     tools:context=".login.LoginActivity">
 
     <Button
@@ -18,15 +20,15 @@
         android:layout_gravity="center"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/custom_button"
+        android:background="@drawable/custom_pink_button"
         android:text="@string/action_sign_in"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/password"
-        app:layout_constraintHorizontal_bias="0.562"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/password"
         app:layout_constraintTop_toBottomOf="@+id/password"
-        app:layout_constraintVertical_bias="0.185" />
+        app:layout_constraintVertical_bias="0.492" />
 
     <EditText
         android:id="@+id/email"
@@ -76,7 +78,7 @@
         android:id="@+id/logo"
         android:layout_width="141dp"
         android:layout_height="107dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="36dp"
         android:contentDescription="@string/logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

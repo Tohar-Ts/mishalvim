@@ -178,7 +178,7 @@
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:layout_marginBottom="4dp"
-            android:background="@drawable/custom_button"
+            android:background="@drawable/custom_pink_button"
             android:text="@string/action_register" />
     </LinearLayout>
 </ScrollView>
