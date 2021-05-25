@@ -7,6 +7,7 @@ package com.example.mishlavim.model;
 public class Question {
 
     private String prompt;
+    private int index;
     private String type;
 
     public Question() {

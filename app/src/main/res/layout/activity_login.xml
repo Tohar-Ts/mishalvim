@@ -9,6 +9,8 @@
     android:paddingTop="70dp"
     android:paddingRight="50dp"
     android:paddingBottom="70dp"
+    android:alpha="0.9"
+    android:background="@drawable/rainbow_background"
     tools:context=".login.LoginActivity">
 
     <Button
