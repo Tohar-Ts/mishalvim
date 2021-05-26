@@ -32,6 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="שאלונים פתוחים"
+            android:background="@color/white"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="30sp" />
