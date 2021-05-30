@@ -20,6 +20,7 @@ package com.example.mishlavim.model;
 public class Global {
 
     private static final Global globalInstance = new Global();
+
     private Guide guideInstance;
     private Admin adminInstance;
     private Volunteer voluInstance;
