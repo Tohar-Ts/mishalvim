@@ -12,6 +12,7 @@
             android:name=".volunteerActivities.VolunteerMainActivity"
             android:label="volunteerMainActivity" />
         <activity android:name=".volunteerActivities.viewOldFormActivity" />
+        <activity android:name=".login.LoginActivity" />
         <activity android:name=".adminActivities.EditFormActivity" />
         <activity android:name=".adminActivities.AdminMainActivity" />
         <activity android:name=".guideActivities.GuideAddVolunteerActivity" />
@@ -21,7 +22,6 @@
             android:label="@string/title_activity_login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
