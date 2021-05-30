@@ -21,6 +21,7 @@ public class FillOutFormActivity extends AppCompatActivity {
     public int max = intArray.length;
 
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fill_out_form);
