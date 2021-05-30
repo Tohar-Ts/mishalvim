@@ -25,33 +25,33 @@
         android:id="@+id/splashText1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginRight="30dp"
         android:fontFamily="@font/alef"
-        android:textStyle="bold"
         android:text="תוכנית"
         android:textSize="50sp"
-        android:layout_marginRight="30dp"
+        android:textStyle="bold"
         android:transitionName="logoTxt1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.818"
+        app:layout_constraintHorizontal_bias="0.541"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo"
-        app:layout_constraintVertical_bias="0.452" />
+        app:layout_constraintVertical_bias="0.349" />
 
     <TextView
         android:id="@+id/splashText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
         android:fontFamily="@font/alef"
         android:text="משלבים"
-        android:textStyle="bold"
         android:textSize="50sp"
-        android:layout_marginLeft="30dp"
+        android:textStyle="bold"
         android:transitionName="logoTxt2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.241"
+        app:layout_constraintHorizontal_bias="0.42"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo"
-        app:layout_constraintVertical_bias="0.599" />
+        app:layout_constraintVertical_bias="0.605" />
 </androidx.constraintlayout.widget.ConstraintLayout>

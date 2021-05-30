@@ -2,7 +2,9 @@ package com.example.mishlavim.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -12,6 +14,7 @@ import com.example.mishlavim.R;
 
 public class SplashScreenActivity extends AppCompatActivity {
     //variables:
+    private static int SPLASH_SCREEN = 3000;
     Animation topAnimation, bottomRightAnimation,bottomLeftAnimation;
     ImageView image;
     TextView leftText, rightText;
@@ -33,6 +36,15 @@ public class SplashScreenActivity extends AppCompatActivity {
         image.setAnimation(topAnimation);
         leftText.setAnimation(bottomLeftAnimation);
         rightText.setAnimation(bottomRightAnimation);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(SplashScreenActivity.this,LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        }, SPLASH_SCREEN);
     }
 
 
