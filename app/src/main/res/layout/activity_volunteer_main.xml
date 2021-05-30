@@ -15,6 +15,22 @@
         android:orientation="vertical"
         android:paddingTop="20dp">
 
+        <Space
+            android:layout_width="50dp"
+            android:layout_height="50dp"></Space>
+        <TextView
+            android:id="@+id/HelloUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/varela_round"
+            android:gravity="center"
+            android:text="שלום, אילת"
+            android:textColor="@color/main_pink"
+            android:textSize="40sp" />
+        <Space
+            android:layout_width="50dp"
+            android:layout_height="52dp"></Space>
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -37,9 +53,23 @@
                 android:backgroundTint="@color/orange"
                 android:gravity="center"
                 android:theme="@style/FloatingActionButtonStyle" />
+
         </FrameLayout>
 
+        <TextView
+            android:id="@+id/openFormsPrompt2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:text="שאלונים שמורים:"
+            android:textAlignment="center"
+            android:textColor="@color/main_pink"
+            android:textSize="40sp" />
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
         <GridLayout
+            android:id="@+id/prev_forms"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -87,34 +117,8 @@
 
         </GridLayout>
 
-        <Space
-            android:layout_width="50dp"
-            android:layout_height="50dp"></Space>
 
-        <Space
-            android:layout_width="50dp"
-            android:layout_height="50dp"></Space>
-
-        <TextView
-            android:id="@+id/openFormsPrompt2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="15dp"
-            android:text="שאלונים שמורים:"
-            android:textAlignment="center"
-            android:textColor="@color/main_pink"
-            android:textSize="40sp" />
-
-        <TextView
-            android:id="@+id/HelloUser"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/varela_round"
-            android:gravity="center"
-            android:text="שלום, אילת"
-            android:textColor="@color/main_pink"
-            android:textSize="40sp" />
+       </ScrollView>
 
 
     </LinearLayout>
