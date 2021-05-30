@@ -8,6 +8,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".volunteerActivities.finishedFormActivity"></activity>
         <activity
             android:name=".volunteerActivities.VolunteerMainActivity"
             android:label="volunteerMainActivity" />
@@ -16,7 +17,6 @@
         <activity android:name=".adminActivities.AdminMainActivity" />
         <activity android:name=".guideActivities.GuideAddVolunteerActivity" />
         <activity android:name=".login.LoginActivity" />
-
         <activity android:name=".adminActivities.AdminAddNewUserActivity" />
         <activity
             android:name=".login.SplashScreenActivity"

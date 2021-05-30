@@ -52,7 +52,7 @@
     <string name="action_sign_in">כניסה</string>
     <string name="prompt_mishlavim">תכנית משלבים</string>
 
-<!--    <string name="invalid_password">סיסמה קצרה מדי</string>-->
+    <!--    <string name="invalid_password">סיסמה קצרה מדי</string>-->
     <string name="forget_password">שכחת סיסמה?</string>
     <string name="login_failed">"כניסה נכשלה"</string>
     <string name="invalid_email">אימייל אינו תקין</string>
