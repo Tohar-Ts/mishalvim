@@ -14,6 +14,7 @@ import java.util.HashMap;
  */
 public class Volunteer extends User {
     private String myGuide;
+    private String myGuideId;
     private HashMap<String, AnsweredForm> finishedForms;
     private HashMap<String, AnsweredForm> openForms;
 
@@ -26,12 +27,14 @@ public class Volunteer extends User {
     /**
      * Parameterized constructor.
      */
-    public Volunteer(String name, String type, String email, String myGuide, HashMap<String, AnsweredForm> answeredForms, HashMap<String, AnsweredForm> openForms) {
+    public Volunteer(String name, String type, String email, String myGuide, String myGuideId, HashMap<String, AnsweredForm> finishedForms, HashMap<String, AnsweredForm> openForms) {
         super(name, type, email);
         this.myGuide = myGuide;
-        this.finishedForms = answeredForms;
+        this.myGuideId = myGuideId;
+        this.finishedForms = finishedForms;
         this.openForms = openForms;
     }
+
 
     /**
      * Adding a open form to the 'openForms' map of a volunteer.
@@ -128,4 +131,13 @@ public class Volunteer extends User {
     public void setOpenForms(HashMap<String, AnsweredForm> openForms) {
         this.openForms = openForms;
     }
+
+    public String getMyGuideId() {
+        return myGuideId;
+    }
+
+    public void setMyGuideId(String myGuideId) {
+        this.myGuideId = myGuideId;
+    }
+
 }
