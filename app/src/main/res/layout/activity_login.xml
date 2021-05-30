@@ -76,11 +76,13 @@
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="141dp"
-        android:layout_height="107dp"
-        android:layout_marginTop="36dp"
+        android:transitionName="logoImg"
+        android:layout_width="118dp"
+        android:layout_height="88dp"
+        android:layout_marginTop="28dp"
         android:contentDescription="@string/logo"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/bat_ami_logo" />
