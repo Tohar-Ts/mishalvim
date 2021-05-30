@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mishlavim.R;
 
-public class viewOldFormActivity extends AppCompatActivity {
+public class ViewOldFormActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

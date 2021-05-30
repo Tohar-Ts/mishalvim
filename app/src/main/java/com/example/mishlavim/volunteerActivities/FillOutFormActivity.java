@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mishlavim.R;
 
-public class fillOutFormActivity extends AppCompatActivity {
+public class FillOutFormActivity extends AppCompatActivity {
     private ProgressBar progressBarAnimation;
     private ObjectAnimator progressAnimator;
     public int progress = 1;

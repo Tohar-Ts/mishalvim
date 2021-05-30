@@ -9,7 +9,7 @@ import android.util.Log;
 import androidx.fragment.app.DialogFragment;
 
 
-public class addUserDialog extends DialogFragment {
+public class AddUserDialog extends DialogFragment {
 
     public interface addUserDialogListener {
         public void onAddPositiveClick(DialogFragment dialog);
@@ -45,13 +45,13 @@ public class addUserDialog extends DialogFragment {
                 .setPositiveButton("הוסף משתמש חדש", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         Log.d("positive","positive button had pressed.");
-                        listener.onAddPositiveClick(addUserDialog.this);
+                        listener.onAddPositiveClick(AddUserDialog.this);
                     }
                 })
                 .setNeutralButton("חזרה לרשימה", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 Log.d("neutral","neutral button had pressed.");
-                listener.onAddNeutralClick(addUserDialog.this);
+                listener.onAddNeutralClick(AddUserDialog.this);
 
             }
         })
@@ -59,7 +59,7 @@ public class addUserDialog extends DialogFragment {
                     public void onClick(DialogInterface dialog, int id) {
                         // User cancelled the dialog
                         Log.d("negative","negative button had pressed.");
-                        listener.onAddNegativeClick(addUserDialog.this);
+                        listener.onAddNegativeClick(AddUserDialog.this);
                     }
                 });
 
