@@ -8,25 +8,22 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-
-        <activity android:name=".dialogs.addUserDialog"></activity>
         <activity
             android:name=".volunteerActivities.VolunteerMainActivity"
             android:label="volunteerMainActivity" />
         <activity android:name=".volunteerActivities.viewOldFormActivity" />
-        <activity android:name=".volunteerActivities.fillOutFormActivity" />
         <activity android:name=".adminActivities.EditFormActivity" />
-        <activity android:name=".adminActivities.AdminGuidesListActivity" />
-        <activity android:name=".adminActivities.AdminFormListActivity" />
         <activity android:name=".adminActivities.AdminMainActivity" />
         <activity android:name=".guideActivities.GuideAddVolunteerActivity" />
         <activity android:name=".login.LoginActivity" />
+
         <activity android:name=".adminActivities.AdminAddNewUserActivity" />
         <activity
-            android:name=".login.LoginActivity"
+            android:name=".login.SplashScreenActivity"
             android:label="@string/title_activity_login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

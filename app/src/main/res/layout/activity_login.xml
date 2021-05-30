@@ -10,14 +10,8 @@
     android:paddingRight="50dp"
     android:paddingBottom="70dp"
     android:alpha="0.9"
-    android:background="@drawable/colorful_background"
+    android:background="@drawable/rainbow_background"
     tools:context=".login.LoginActivity">
-
-
-    <!--        app:layout_constraintEnd_toEndOf="@+id/password"-->
-    <!--        app:layout_constraintHorizontal_bias="0.0"-->
-    <!--        app:layout_constraintStart_toStartOf="@+id/password"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/password"-->
 
 
     <Button
@@ -25,12 +19,18 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="56dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/custom_pink_button"
         android:text="@string/action_sign_in"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="74dp" />
+        app:layout_constraintVertical_bias="0.492" />
+<!--        app:layout_constraintEnd_toEndOf="@+id/password"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/password"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/password"-->
+
 
     <EditText
         android:id="@+id/email"
@@ -54,40 +54,49 @@
         app:layout_constraintStart_toStartOf="@+id/welcome"
         app:layout_constraintTop_toBottomOf="@+id/welcome" />
 
-    <EditText
-        android:id="@+id/password"
+    <com.google.android.material.textfield.TextInputLayout
+
+        app:layout_constraintEnd_toEndOf="@+id/email"
+        app:layout_constraintStart_toStartOf="@+id/email"
+        app:layout_constraintTop_toBottomOf="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
         android:layout_marginEnd="8dp"
-        android:autofillHints="@string/prompt_password"
-        android:background="@drawable/custom_input"
-        android:drawableEnd="@drawable/ic_lock"
-        android:drawablePadding="12dp"
-        android:gravity="center|end"
-        android:hint="@string/prompt_password"
-        android:imeOptions="actionDone"
-        android:inputType="textPassword"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:selectAllOnFocus="true"
-        app:layout_constraintEnd_toEndOf="@+id/email"
-        app:layout_constraintStart_toStartOf="@+id/email"
-        app:layout_constraintTop_toBottomOf="@+id/email" />
+        android:layout_marginTop="10dp"
+        app:hintEnabled="false"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleDrawable = "@drawable/icon_selector">
 
-    <!--    <ImageView-->
-    <!--        android:id="@+id/logo"-->
-    <!--        android:transitionName="logoImg"-->
-    <!--        android:layout_width="118dp"-->
-    <!--        android:layout_height="88dp"-->
-    <!--        android:layout_marginTop="28dp"-->
-    <!--        android:contentDescription="@string/logo"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="0.498"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        app:srcCompat="@drawable/bat_ami_logo" />-->
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:autofillHints="@string/prompt_password"
+            android:background="@drawable/custom_input"
+            android:drawableEnd="@drawable/ic_lock"
+            android:gravity="center|end"
+            android:hint="@string/prompt_password"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:selectAllOnFocus="true" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <ImageView
+        android:id="@+id/logo"
+        android:transitionName="logoImg"
+        android:layout_width="118dp"
+        android:layout_height="88dp"
+        android:layout_marginTop="28dp"
+        android:contentDescription="@string/logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bat_ami_logo" />
 
     <ProgressBar
         android:id="@+id/loading"
@@ -116,6 +125,8 @@
         app:layout_constraintHorizontal_bias="0.468"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
