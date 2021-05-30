@@ -10,24 +10,13 @@
     android:paddingRight="50dp"
     android:paddingBottom="70dp"
     android:alpha="0.9"
-    android:background="@drawable/colorful_background"
+    android:background="@drawable/rainbow_background"
     tools:context=".login.LoginActivity">
-
-    <!--    <ImageView-->
-    <!--        android:id="@+id/logo"-->
-    <!--        android:layout_width="141dp"-->
-    <!--        android:layout_height="107dp"-->
-    <!--        android:layout_marginTop="36dp"-->
-    <!--        android:contentDescription="@string/logo"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        app:srcCompat="@drawable/bat_ami_logo" />-->
 
     <Button
         android:id="@+id/login"
-        android:layout_width="313dp"
-        android:layout_height="63dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
         android:layout_gravity="center"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
@@ -36,16 +25,17 @@
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/password"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/password"
         app:layout_constraintTop_toBottomOf="@+id/password"
-        app:layout_constraintVertical_bias="0.216" />
+        app:layout_constraintVertical_bias="0.492" />
 
     <EditText
         android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="68dp"
         android:layout_marginEnd="8dp"
         android:autofillHints="@string/prompt_email"
         android:background="@drawable/custom_input"
@@ -58,6 +48,7 @@
         android:paddingEnd="12dp"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="@+id/welcome"
+        app:layout_constraintHorizontal_bias="0.358"
         app:layout_constraintStart_toStartOf="@+id/welcome"
         app:layout_constraintTop_toBottomOf="@+id/welcome" />
 
@@ -66,7 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="8dp"
         android:autofillHints="@string/prompt_password"
         android:background="@drawable/custom_input"
@@ -82,6 +73,17 @@
         app:layout_constraintEnd_toEndOf="@+id/email"
         app:layout_constraintStart_toStartOf="@+id/email"
         app:layout_constraintTop_toBottomOf="@+id/email" />
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="141dp"
+        android:layout_height="107dp"
+        android:layout_marginTop="36dp"
+        android:contentDescription="@string/logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bat_ami_logo" />
 
     <ProgressBar
         android:id="@+id/loading"
@@ -101,29 +103,15 @@
         android:id="@+id/welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="104dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/alef"
         android:text="@string/prompt_mishlavim"
         android:textColor="@color/black"
-        android:textSize="45sp"
+        android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.468"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/logo" />
 
-    <TextView
-        android:id="@+id/forgot_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/alef"
-        android:text="@string/forget_password"
-        android:textColor="@color/dark_gray"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/login"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="@+id/login"
-        app:layout_constraintTop_toBottomOf="@+id/login"
-        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

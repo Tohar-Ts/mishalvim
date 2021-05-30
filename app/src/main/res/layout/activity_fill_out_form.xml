@@ -42,61 +42,48 @@
 
                 </androidx.appcompat.widget.Toolbar>
 
-                <Button
-                    android:id="@+id/back_btn"
-                    android:layout_width="120dp"
-                    android:layout_height="90dp"
-                    android:layout_marginStart="16dp"
-                    android:background="@drawable/custome_light_green"
-                    android:backgroundTint="@color/pretty_blue"
-                    android:drawableLeft="@drawable/ic_arrowback"
-                    android:drawablePadding="1dp"
-                    android:text="שאלה קודמת"
-                    android:textColor="@android:color/white"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/options_containers"
-                    app:layout_constraintVertical_bias="1.0" />
+                    app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-                <Button
-                    android:id="@+id/next_btn"
-                    android:layout_width="120dp"
-                    android:layout_height="90dp"
-                    android:layout_marginEnd="4dp"
-                    android:background="@drawable/custome_light_green"
-                    android:backgroundTint="@color/pretty_blue"
-                    android:drawableRight="@drawable/ic_arrowforward"
-                    android:drawablePadding="1dp"
-                    android:text="שאלה הבאה"
-                    android:textColor="@android:color/white"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/options_containers"
-                    app:layout_constraintVertical_bias="0.0" />
+                    <ProgressBar
+                        android:id="@+id/questionProgressBar"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="12dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:progressDrawable="@drawable/pb_form_drawable"
+                        />
 
-                <Button
-                    android:id="@+id/save_btn"
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
-                    android:layout_marginEnd="168dp"
-                    android:background="@drawable/custome_form_button"
-                    android:backgroundTint="#fa7074"
-                    android:text="שמור תשובה"
-                    android:textColor="@android:color/white"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/options_containers"
-                    app:layout_constraintVertical_bias="1.0" />
+                    <TextView
+                        android:id="@+id/question"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16sp"
+                        android:background="@color/pretty_blue"
+                        android:padding="16sp"
+                        android:text="שאלה מהפיירבייס"
+                        android:textColor="@android:color/black" />
+
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/options_containers"
-                    android:layout_width="363dp"
-                    android:layout_height="415dp"
-                    android:layout_marginTop="52dp"
+                    android:layout_width="405dp"
+                    android:layout_height="96dp"
+                    android:layout_marginTop="16dp"
                     android:orientation="vertical"
                     android:padding="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.666"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
@@ -105,15 +92,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:ems="10"
-                        android:hint="ענה פה:"
                         android:inputType="text"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:hint="ענה פה:"
+                        />
 
                     <RadioGroup
                         android:id="@+id/multipleAns"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:visibility="gone">
+                        android:visibility="gone"
+                        >
 
                         <RadioButton
                             android:id="@+id/radioButton"
@@ -133,38 +122,54 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/linearLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
+                <Button
+                    android:id="@+id/back_btn"
+                    android:layout_width="120dp"
+                    android:layout_height="90dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/custome_light_green"
+                    android:backgroundTint="@color/pretty_blue"
+                    android:text="שאלה קודמת"
+                    android:textColor="@android:color/white"
+                    android:drawableLeft="@drawable/ic_arrowback"
+                    android:drawablePadding="1dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/toolbar">
+                    app:layout_constraintTop_toBottomOf="@+id/options_containers"
+                    app:layout_constraintVertical_bias="0.701" />
 
-                    <ProgressBar
-                        android:id="@+id/questionProgressBar"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginBottom="12dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:progressDrawable="@drawable/pb_form_drawable" />
+                <Button
+                    android:id="@+id/next_btn"
+                    android:layout_width="120dp"
+                    android:layout_height="90dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/custome_light_green"
+                    android:backgroundTint="@color/pretty_blue"
+                    android:text="שאלה הבאה"
+                    android:drawableRight="@drawable/ic_arrowforward"
+                    android:drawablePadding="1dp"
+                    android:textColor="@android:color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/options_containers"
+                    app:layout_constraintVertical_bias="0.702" />
 
-                    <TextView
-                        android:id="@+id/question"
-                        android:layout_width="444dp"
-                        android:layout_height="133dp"
-                        android:layout_margin="16sp"
-                        android:background="@color/pretty_blue"
-                        android:padding="16sp"
-                        android:text="שאלה מהפיירבייס"
-                        android:textColor="@android:color/black" />
-
-
-                </LinearLayout>
+                <Button
+                    android:id="@+id/save_btn"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_marginEnd="160dp"
+                    android:background="@drawable/custome_form_button"
+                    android:backgroundTint="#fa7074"
+                    android:text="שמור תשובה"
+                    android:textColor="@android:color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.157"
+                    app:layout_constraintTop_toBottomOf="@+id/options_containers"
+                    app:layout_constraintVertical_bias="0.702" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
