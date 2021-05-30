@@ -34,7 +34,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         leftText.setAnimation(bottomLeftAnimation);
         rightText.setAnimation(bottomRightAnimation);
     }
-    //add here
+
 
 
 
