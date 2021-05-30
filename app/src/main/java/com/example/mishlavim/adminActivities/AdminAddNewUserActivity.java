@@ -127,7 +127,7 @@ public class AdminAddNewUserActivity extends AppCompatActivity implements View.O
 
         else { //volunteer
             String myGuide = guideName.getText().toString().trim();
-            user = new Volunteer(userName, newUserType, email, myGuide, new HashMap<>(), new HashMap<>());
+            user = new Volunteer(userName, newUserType, email, myGuide, "", new HashMap<>(), new HashMap<>());
             Guide.addVolunteerByGuideName(fbUser.getUid(), (Volunteer) user);
         }
 
