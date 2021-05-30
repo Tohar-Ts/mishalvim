@@ -51,14 +51,14 @@ public class fillOutFormActivity extends AppCompatActivity {
             }
         });
 
-//        progressAnimator.addListener(new AnimatorListenerAdapter() {
-//            @Override
-//            public void onAnimationEnd(Animator animation) {
-//                super.onAnimationEnd(animation);
-//                Toast.makeText(getBaseContext(), "סיימת את הטופס בהצלחה!", Toast.LENGTH_LONG).show();
-//                progressBarAnimation.setVisibility(View.GONE);
-//            }
-//        });
+        progressAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                Toast.makeText(getBaseContext(), "סיימת את הטופס בהצלחה!", Toast.LENGTH_LONG).show();
+                progressBarAnimation.setVisibility(View.GONE);
+            }
+        });
 
     }
 
@@ -78,3 +78,7 @@ public class fillOutFormActivity extends AppCompatActivity {
     }
 
 }
+//    You can update the percentage of progress displayed by using the setProgress(int) method,
+//    or by calling incrementProgressBy(int) to increase the current progress completed by a specified amount.
+//        By default, the progress bar is full when the progress value reaches 100.
+//        You can adjust this default by setting the android:max attribute.
