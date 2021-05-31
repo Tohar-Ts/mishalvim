@@ -41,5 +41,9 @@ public class FirebaseStrings {
         return "forms_templates";
     }
 
+    public static String guideListStr() { return "guideList";}
+
+    public static String allVolunteersListStr() {  return "allVolunteers";}
+
 
 }

@@ -122,13 +122,17 @@ public class AdminAddNewUserActivity extends AppCompatActivity implements View.O
         if (newUserType.equals(FirebaseStrings.adminStr()))
             user = new Admin(userName, newUserType, email, new HashMap<>(), new HashMap<>());
 
-        else if (newUserType.equals(FirebaseStrings.guideStr()))
+        else if (newUserType.equals(FirebaseStrings.guideStr())) {//guide
             user = new Guide(userName, newUserType, email, new HashMap<>(), new HashMap<>());
+            Admin.addGuide(fbUser.getUid(), userName);
+        }
 
         else { //volunteer
             String myGuide = guideName.getText().toString().trim();
             user = new Volunteer(userName, newUserType, email, myGuide, "", new HashMap<>(), new HashMap<>());
             Guide.addVolunteerByGuideName(fbUser.getUid(), (Volunteer) user);
+            Admin.addVolunteer(fbUser.getUid(), userName);
+
         }
 
         addUserToDb(fbUser, user);
