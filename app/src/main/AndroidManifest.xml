@@ -10,7 +10,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".volunteerActivities.FinishedFormActivity"></activity>
+        <activity android:name=".volunteerActivities.FinishedFormActivity">
+
+        </activity>
         <activity
             android:name=".volunteerActivities.VolunteerMainActivity"
             android:label="volunteerMainActivity" />
