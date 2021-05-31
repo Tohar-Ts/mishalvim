@@ -41,9 +41,8 @@ public class AdminMainActivity extends AppCompatActivity {
             }
         });
     }
-    //this cylces between the fragments once the button is clicked
+    //this cycles between the fragments once the button is clicked
     private void replaceFragment(Fragment fragment) {
-
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frameLayout,fragment);

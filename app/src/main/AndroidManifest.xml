@@ -8,11 +8,12 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".volunteerActivities.finishedFormActivity"></activity>
+        <activity android:name=".volunteerActivities.FinishedFormActivity"></activity>
         <activity
             android:name=".volunteerActivities.VolunteerMainActivity"
             android:label="volunteerMainActivity" />
-        <activity android:name=".volunteerActivities.viewOldFormActivity" />
+        <activity android:name=".volunteerActivities.ViewOldFormActivity" />
+        <activity android:name=".volunteerActivities.FillOutFormActivity" />
         <activity android:name=".adminActivities.EditFormActivity" />
         <activity android:name=".adminActivities.AdminMainActivity" />
         <activity android:name=".guideActivities.GuideAddVolunteerActivity" />

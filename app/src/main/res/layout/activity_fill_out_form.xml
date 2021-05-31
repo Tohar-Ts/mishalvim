@@ -4,6 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:orientation="vertical"
+    android:background="@drawable/backgroung_green"
         android:layout_height="match_parent"
         tools:context=".volunteerActivities.FillOutFormActivity">
 
@@ -16,74 +17,64 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/calm_background"
                 >
 
-
-
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="@color/other_blue"
-                    android:theme="@style/ThemeOverlay.AppCompat.Dark"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="שאלון 1"
-                        android:textColor="@color/pretty_blue"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                </androidx.appcompat.widget.Toolbar>
 
                 <LinearLayout
                     android:id="@+id/linearLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/toolbar">
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <ProgressBar
                         android:id="@+id/questionProgressBar"
                         style="?android:attr/progressBarStyleHorizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="0dp"
                         android:layout_marginBottom="12dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:progressDrawable="@drawable/pb_form_drawable"
-                        />
+                        android:progressDrawable="@drawable/pb_form_drawable" />
+
+                    <TextView
+                        android:id="@+id/question_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="60dp"
+                        android:fontFamily="@font/alef"
+                        android:gravity="center"
+                        android:text="שאלה 1"
+                        android:textColor="@android:color/black"
+                        android:textSize="35dp" />
 
                     <TextView
                         android:id="@+id/question"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="16sp"
-                        android:background="@color/pretty_blue"
+                        android:background="@drawable/orange_textview"
                         android:padding="16sp"
-                        android:text="שאלה מהפיירבייס"
-                        android:textColor="@android:color/black" />
+                        android:text="אני מלל של שאלה \nמה השאלה בעצם? \nאני השאלה"
+                        android:textColor="@android:color/black"
+                        android:textSize="25dp" />
 
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/options_containers"
-                    android:layout_width="405dp"
-                    android:layout_height="96dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
                     android:orientation="vertical"
                     android:padding="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
@@ -92,17 +83,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:ems="10"
-                        android:inputType="text"
-                        android:textColor="@color/black"
                         android:hint="ענה תשובה פה:"
-                        />
+                        android:inputType="textMultiLine"
+                        android:lines="7"
+                        android:gravity="top|right"
+                        android:textColor="@color/black" />
 
                     <RadioGroup
                         android:id="@+id/multipleAns"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:visibility="gone"
-                        >
+                        android:visibility="gone">
 
                         <RadioButton
                             android:id="@+id/radioButton"
@@ -123,16 +114,16 @@
                 </LinearLayout>
 
                 <Button
-                    android:id="@+id/back_btn"
+                    android:id="@+id/next_btn"
                     android:layout_width="120dp"
                     android:layout_height="90dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
-                    android:background="@drawable/custome_light_green"
-                    android:backgroundTint="@color/pretty_blue"
-                    android:text="שאלה קודמת"
-                    android:textColor="@android:color/white"
-                    android:drawableLeft="@drawable/ic_arrowback"
+                    android:background="@drawable/green_button"
+                    android:text="שאלה הבאה"
+                    android:textSize="16dp"
+                    android:textColor="@android:color/black"
+                    android:drawableLeft="@drawable/ic_arrowforward"
                     android:drawablePadding="1dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -140,17 +131,17 @@
                     app:layout_constraintVertical_bias="0.701" />
 
                 <Button
-                    android:id="@+id/next_btn"
+                    android:id="@+id/back_btn"
                     android:layout_width="120dp"
                     android:layout_height="90dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
-                    android:background="@drawable/custome_light_green"
-                    android:backgroundTint="@color/pretty_blue"
-                    android:text="שאלה הבאה"
-                    android:drawableRight="@drawable/ic_arrowforward"
+                    android:background="@drawable/green_button"
+                    android:text="שאלה קודמת"
+                    android:drawableRight="@drawable/ic_arrowback"
                     android:drawablePadding="1dp"
-                    android:textColor="@android:color/white"
+                    android:textColor="@android:color/black"
+                    android:textSize="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/options_containers"
@@ -161,10 +152,10 @@
                     android:layout_width="90dp"
                     android:layout_height="90dp"
                     android:layout_marginEnd="160dp"
-                    android:background="@drawable/custome_form_button"
-                    android:backgroundTint="#fa7074"
+                    android:background="@drawable/custom_pink_button"
                     android:text="שמור טופס"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.157"
