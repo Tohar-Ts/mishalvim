@@ -1,12 +1,18 @@
 package com.example.mishlavim.adminActivities;
-
+import java.util.*;
+import java.util.stream.*;
+import java.util.Map.*;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.mishlavim.R;
 import com.example.mishlavim.model.Admin;
 import com.example.mishlavim.model.FirebaseStrings;
+import com.example.mishlavim.model.Global;
 import com.example.mishlavim.model.Guide;
 import com.example.mishlavim.model.User;
 import com.example.mishlavim.model.Validation;
@@ -24,32 +31,56 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 
-public class AdminAddNewUserActivity extends AppCompatActivity implements View.OnClickListener {
+public class AdminAddNewUserActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private EditText emailEditText;
     private EditText userNameEditText;
     private EditText passwordEditText;
-    private EditText guideName;
+    private String guideName, guideID;
     private ProgressBar loadingProgressBar;
     private RadioGroup typesRadioGroup;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private Validation validation;
     private String newUserType;
+    private Spinner spinner;
+    private HashMap<String,String> guidesList = new HashMap<>();
+    private ArrayList<String> listOfGuidesName = new ArrayList<>();
+    private ArrayList<String> listOfGuidesID = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_add_new_user);
-
+        spinner = findViewById(R.id.spinner);
         emailEditText = findViewById(R.id.newEmail);
         userNameEditText = findViewById(R.id.newUserName);
         passwordEditText = findViewById(R.id.newPassword);
         EditText verifyPasswordEditText = findViewById(R.id.verifyPassword);
-        guideName = findViewById(R.id.guideName);
         Button addButton = findViewById(R.id.addNewUser);
         loadingProgressBar = findViewById(R.id.registerLoading);
         typesRadioGroup = findViewById(R.id.typesRg);
+
+        //SPINNER SETUP
+        //get the guides list.
+        Global globalInstance = Global.getGlobalInstance();
+        Admin admin = globalInstance.getAdminInstance();
+        guidesList = admin.getGuideList();
+        spinner.setOnItemSelectedListener(this);
+
+        for(Map.Entry<String, String> entry : guidesList.entrySet()) {
+            String name = entry.getKey();
+            String id = entry.getValue();
+
+            listOfGuidesName.add(name);
+            listOfGuidesID.add(id);
+        }
+
+        ArrayAdapter ad = new ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line,listOfGuidesName);
+        ad.setDropDownViewResource(android.R.layout
+                .simple_spinner_dropdown_item);
+        spinner.setAdapter(ad);
+
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -74,16 +105,16 @@ public class AdminAddNewUserActivity extends AppCompatActivity implements View.O
 
         switch (wantedType) {
             case "מנהל":
-                guideName.setVisibility(View.GONE);
+                spinner.setVisibility(View.GONE);
                 newUserType = FirebaseStrings.adminStr();
                 break;
             case "מדריך":
-                guideName.setVisibility(View.GONE);
+                spinner.setVisibility(View.GONE);
                 newUserType = FirebaseStrings.guideStr();
                 break;
             default:
                 newUserType = FirebaseStrings.volunteerStr();
-                guideName.setVisibility(View.VISIBLE);
+                spinner.setVisibility(View.VISIBLE);
                 break;
         }
     }
@@ -126,8 +157,7 @@ public class AdminAddNewUserActivity extends AppCompatActivity implements View.O
             user = new Guide(userName, newUserType, email, new HashMap<>(), new HashMap<>());
 
         else { //volunteer
-            String myGuide = guideName.getText().toString().trim();
-            user = new Volunteer(userName, newUserType, email, myGuide, "", new HashMap<>(), new HashMap<>());
+            user = new Volunteer(userName, newUserType, email, guideName, guideID, new HashMap<>(), new HashMap<>());
             Guide.addVolunteerByGuideName(fbUser.getUid(), (Volunteer) user);
         }
 
@@ -149,5 +179,19 @@ public class AdminAddNewUserActivity extends AppCompatActivity implements View.O
                         showRegisterFailed();
                     }
                 });
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String key = listOfGuidesName.get(position);
+        String value = listOfGuidesID.get(position);
+        Log.d("guideID", "onItemSelected: guide name is " + key+" guide id is "+value);
+        guideName = key;
+        guideID = value;
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }
