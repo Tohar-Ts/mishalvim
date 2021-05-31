@@ -6,7 +6,9 @@ import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,6 +33,11 @@ public class FillOutFormActivity extends AppCompatActivity {
         Button btNext = (Button)findViewById(R.id.next_btn);
         Button btBack = (Button)findViewById(R.id.back_btn);
         Button btSave = (Button)findViewById(R.id.save_btn);
+        TextView fireBaseQuestion = (TextView)findViewById(R.id.question);
+        EditText volunteerAnswer = (EditText)findViewById(R.id.singleAns);
+
+        //the next question button is pressed - now we update the question from firebase, save the
+        //answer and refresh the answer box
         btNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,6 +48,8 @@ public class FillOutFormActivity extends AppCompatActivity {
 
             }
         });
+        //the previous question button is pressed - now we update the question from firebase, save the
+        //answer and refresh the answer box
         btBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,16 +60,6 @@ public class FillOutFormActivity extends AppCompatActivity {
 
             }
         });
-
-//        progressAnimator.addListener(new AnimatorListenerAdapter() {
-//            @Override
-//            public void onAnimationEnd(Animator animation) {
-//                super.onAnimationEnd(animation);
-//                Toast.makeText(getBaseContext(), "סיימת את הטופס בהצלחה!", Toast.LENGTH_LONG).show();
-//                progressBarAnimation.setVisibility(View.GONE);
-//            }
-//        });
-
     }
 
     private void init() {
