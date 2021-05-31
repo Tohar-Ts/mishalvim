@@ -3,20 +3,25 @@
     package="com.example.mishlavim">
 
     <application
+        android:largeHeap="true"
+        android:hardwareAccelerated="false"
         android:allowBackup="true"
         android:icon="@drawable/bat_ami_logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".volunteerActivities.VolunteerMainActivity"/>
-        <activity android:name=".volunteerActivities.ViewOldFormActivity" />
-        <activity android:name=".adminActivities.EditFormActivity" />
-        <activity android:name=".adminActivities.AdminMainActivity" />
-        <activity android:name=".guideActivities.GuideAddVolunteerActivity" />
+
         <activity android:name=".login.LoginActivity" />
+
+        <activity android:name=".volunteerActivities.VolunteerMainActivity"/>
+
+        <activity android:name=".guideActivities.GuideAddVolunteerActivity" />
+
+        <activity android:name=".adminActivities.AdminMainActivity" />
         <activity android:name=".adminActivities.AdminAddNewUserActivity" />
+        <activity android:name=".adminActivities.AdminCreateFormActivity" />
         <activity
-            android:name=".volunteerActivities.FinishedFormActivity"
+            android:name=".login.SplashScreenActivity"
             android:label="@string/title_activity_login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
