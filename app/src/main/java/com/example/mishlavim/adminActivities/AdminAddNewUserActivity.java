@@ -44,9 +44,8 @@ public class AdminAddNewUserActivity extends AppCompatActivity implements View.O
     private Validation validation;
     private String newUserType;
     private Spinner spinner;
-    private HashMap<String,String> guidesList = new HashMap<>();
-    private ArrayList<String> listOfGuidesName = new ArrayList<>();
-    private ArrayList<String> listOfGuidesID = new ArrayList<>();
+    private ArrayList<String> listOfGuidesName;
+    private ArrayList<String> listOfGuidesID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,15 +59,16 @@ public class AdminAddNewUserActivity extends AppCompatActivity implements View.O
         Button addButton = findViewById(R.id.addNewUser);
         loadingProgressBar = findViewById(R.id.registerLoading);
         typesRadioGroup = findViewById(R.id.typesRg);
+        listOfGuidesName = new ArrayList<>();
+        listOfGuidesID = new ArrayList<>();
 
         //SPINNER SETUP
         //get the guides list.
         Global globalInstance = Global.getGlobalInstance();
         Admin admin = globalInstance.getAdminInstance();
-        guidesList = admin.getGuideList();
         spinner.setOnItemSelectedListener(this);
 
-        for(Map.Entry<String, String> entry : guidesList.entrySet()) {
+        for(Map.Entry<String, String> entry : admin.getGuideList().entrySet()) {
             String name = entry.getKey();
             String id = entry.getValue();
 
