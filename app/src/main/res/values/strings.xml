@@ -28,7 +28,12 @@
     <string name="buttonTwo">מעט</string>
     <string name="buttonSave">שמור</string>
     <string name="buttonSend">שלח טופס</string>
+<<<<<<< Updated upstream
     <string name="userHasAdd">המשתמש נוסף בהצלחה!</string>
+=======
+    <string name="textOff">מדריכים</string>
+    <string name="textOn">טפסים</string>
+>>>>>>> Stashed changes
 
     <string name="title_add_new_user_activity">הוספת משתמש</string>
     <string name="action_register">רשום משתמש</string>
@@ -42,7 +47,12 @@
     <string name="prompt_volunteer">מתנדב</string>
     <string name="title_my_guide">:המדריך שלי</string>
     <string name="invalid_userName">שם מלא אינו תקין</string>
+<<<<<<< Updated upstream
     <string name="update_failed">"העדכון נכשל"</string>
+=======
+
+    <string name="creat_new_form">טופס חדש</string>
+>>>>>>> Stashed changes
 
     <string name="register_failed">"הרשמה נכשלה"</string>
     <string name="welcome_admin">ברוך הבא ADMIN</string>
