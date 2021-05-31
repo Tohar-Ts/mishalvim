@@ -18,9 +18,6 @@
     <string name="existing_guides">מדריכים קיימים:</string>
     <string name="forms">טפסים:</string>
     <string name="guides">מדריכים:</string>
-    <string name="question1">מלל שאלה 1</string>
-    <string name="question2">מלל שאלה 2</string>
-    <string name="question3">מלל שאלה 3</string>
     <string name="answer">הכנס תשובתך פה</string>
     <string name="buttonFive">הרבה מאוד</string>
     <string name="buttonFour">הרבה</string>
@@ -53,7 +50,13 @@
     <string name="prompt_password">סיסמה</string>
     <string name="action_sign_in">כניסה</string>
     <string name="prompt_mishlavim">תכנית משלבים</string>
-
+    <string name="create_new_form">יצירת שאלון חדש</string>
+    <string name="name_form">שם השאלון:</string>
+    <string name="question1">שאלה 1:</string>
+    <string name="question2">שאלה 2:</string>
+    <string name="question3">שאלה 3:</string>
+    <string name="add_new_question">הוסף שאלה</string>
+    <string name="save_form">שמור שאלון</string>
     <!--    <string name="invalid_password">סיסמה קצרה מדי</string>-->
     <string name="forget_password">שכחת סיסמה?</string>
     <string name="login_failed">"כניסה נכשלה"</string>

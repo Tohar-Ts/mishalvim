@@ -66,6 +66,7 @@
         app:layout_constraintEnd_toEndOf="@+id/email"
         app:layout_constraintStart_toStartOf="@+id/email"
         app:layout_constraintTop_toBottomOf="@+id/email"
+
         app:passwordToggleDrawable="@drawable/icon_selector"
         app:passwordToggleEnabled="true">
 
@@ -75,8 +76,8 @@
             android:layout_height="60dp"
             android:autofillHints="@string/prompt_password"
             android:background="@drawable/custom_input"
-            android:drawableEnd="@drawable/ic_lock"
             android:gravity="center|end"
+            android:textAlignment="viewEnd"
             android:hint="@string/prompt_password"
             android:imeOptions="actionDone"
             android:inputType="textPassword"
