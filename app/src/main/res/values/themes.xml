@@ -25,7 +25,6 @@
         <item name="colorAccent">@color/green</item>
     </style>
 
-
     <style name="Theme.MishlavimPink.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

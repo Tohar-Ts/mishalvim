@@ -2,6 +2,7 @@ package com.example.mishlavim.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * FormTemplate class represents only the questions of a form.
@@ -11,9 +12,9 @@ import java.util.HashMap;
  */
 public class FormTemplate {
 
-    private ArrayList<Question> questionArr;
+    private HashMap<String, String> questionArr; //<question, index>
     private String formName;
-    private HashMap<String, String> answers;
+    private HashMap<String, String> answers; // <answeresUid, VoluName>
 
     /**
      * Default constructor
@@ -24,17 +25,17 @@ public class FormTemplate {
     /**
      * Parameterized constructor
      */
-    public FormTemplate(ArrayList<Question> questionArr, String formName, HashMap<String, String> answers) {
+    public FormTemplate(HashMap<String, String> questionArr, String formName, HashMap<String, String> answers) {
         this.questionArr = questionArr;
         this.formName = formName;
         this.answers = answers;
     }
 
-    public ArrayList<Question> getQuestionArr() {
+    public HashMap<String, String> getQuestionArr() {
         return questionArr;
     }
 
-    public void setQuestionArr(ArrayList<Question> questionArr) {
+    public void setQuestionArr(HashMap<String, String> questionArr) {
         this.questionArr = questionArr;
     }
 
