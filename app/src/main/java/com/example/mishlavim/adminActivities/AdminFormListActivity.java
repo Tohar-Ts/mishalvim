@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import com.example.mishlavim.R;
-import com.example.mishlavim.volunteerActivities.ViewOldFormActivity;
 
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
@@ -63,10 +62,7 @@ public class AdminFormListActivity extends Fragment {
         Intent i = new Intent(getActivity(), AdminGuidesListActivity.class);
         startActivity(i);
     }
-    public void viewOldFormActivity(View v){
-        Intent i = new Intent(getActivity(), ViewOldFormActivity.class);
-        startActivity(i);
-    }
+
     public void AdminMainActivity(View v){
         Intent i = new Intent(getActivity(), AdminMainActivity.class);
         startActivity(i);
