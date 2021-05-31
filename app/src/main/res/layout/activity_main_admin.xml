@@ -58,7 +58,7 @@
                     android:layout_marginTop="108dp"
                     android:background="@drawable/green_button"
                     android:backgroundTint="#CCE4F6"
-                    android:onClick="fillOutFormActivity"
+                    android:onClick="AdminCreateFormActivity"
                     android:text="@string/creat_new_form"
                     android:textAlignment="center"
                     android:textColor="@color/white"
