@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mishlavim.R;
 
-public class fillOutFormActivity extends AppCompatActivity {
+public class FillOutFormActivity extends AppCompatActivity {
     private ProgressBar progressBarAnimation;
     private ObjectAnimator progressAnimator;
     public int progress = 1;
@@ -21,6 +21,7 @@ public class fillOutFormActivity extends AppCompatActivity {
     public int max = intArray.length;
 
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fill_out_form);

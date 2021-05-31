@@ -9,7 +9,7 @@ import android.util.Log;
 import androidx.fragment.app.DialogFragment;
 
 
-public class deleteUser extends DialogFragment {
+public class DeleteUser extends DialogFragment {
 
     public interface deleteUserListener {
         public void onDeletePositiveClick(DialogFragment dialog);
@@ -43,7 +43,7 @@ public class deleteUser extends DialogFragment {
                 .setPositiveButton("yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         Log.d("positive","positive delete button had pressed.");
-                        listener.onDeletePositiveClick(deleteUser.this);
+                        listener.onDeletePositiveClick(DeleteUser.this);
                     }
                 })
 
@@ -51,7 +51,7 @@ public class deleteUser extends DialogFragment {
                     public void onClick(DialogInterface dialog, int id) {
                         // User cancelled the dialog
                         Log.d("negative","negative delete button had pressed.");
-                        listener.onDeleteNegativeClick(deleteUser.this);
+                        listener.onDeleteNegativeClick(DeleteUser.this);
                     }
                 });
 
