@@ -54,10 +54,7 @@ public class AdminMainActivity extends AppCompatActivity {
         Intent i = new Intent(this, FillOutFormActivity.class);
         startActivity(i);
     }
-    public void viewOldFormActivity(View v){
-        Intent i = new Intent(this, ViewOldFormActivity.class);
-        startActivity(i);
-    }
+
     public void AdminAddNewUserActivity(View v){
         Intent i = new Intent(this, AdminAddNewUserActivity.class);
         startActivity(i);
