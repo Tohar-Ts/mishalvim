@@ -3,58 +3,26 @@
     <style name="Theme.MishlavimPink" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <!--   color for the app bar and other primary UI elements -->
-        <item name="colorPrimary">@color/main_pink</item>
-        <item name="colorPrimaryVariant">@color/dark_pink</item>
+        <item name="colorPrimary">@color/pink</item>
+        <item name="colorPrimaryVariant">@color/pink</item>
         <item name="colorOnPrimary">@color/white</item>
         <!--   a secondary color for controls like checkboxes and text fields -->
-        <item name="colorAccent">@color/light_pink</item>
+        <item name="colorAccent">@color/orange</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/light_pink</item>
-        <item name="colorSecondaryVariant">@color/most_light_pink</item>
+        <item name="colorSecondary">@color/orange</item>
+        <item name="colorSecondaryVariant">@color/green</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/dark_pink</item>
-        <!-- Customize your theme here. -->
-    </style>
-
-    <style name="Theme.MishlavimGreen" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/main_green</item>
-        <item name="colorPrimaryVariant">@color/dark_green</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <!--   a secondary color for controls like checkboxes and text fields -->
-        <item name="colorAccent">@color/light_green</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/light_green</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/light_green</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/pink</item>
         <!-- Customize your theme here. -->
     </style>
 
     <style name="PinkProgressBarTheme" parent="ThemeOverlay.AppCompat.Light">
-        <item name="colorAccent">@color/main_pink</item>
+        <item name="colorAccent">@color/pink</item>
     </style>
 
     <style name="GreenProgressBarTheme" parent="ThemeOverlay.AppCompat.Light">
-        <item name="colorAccent">@color/main_green</item>
-    </style>
-
-    <style name="Theme.MishlavimBlue" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/pretty_blue</item>
-        <item name="colorPrimaryVariant">@color/darker_other_blue</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <!--   a secondary color for controls like checkboxes and text fields -->
-        <item name="colorAccent">@color/light_pretty_blue</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/light_pretty_blue</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/light_green</item>
-        <!-- Customize your theme here. -->
+        <item name="colorAccent">@color/green</item>
     </style>
 
     <style name="Theme.MishlavimPink.NoActionBar">

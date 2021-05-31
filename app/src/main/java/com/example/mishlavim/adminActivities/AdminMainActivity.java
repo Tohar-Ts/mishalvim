@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.mishlavim.R;
-import com.example.mishlavim.volunteerActivities.fillOutFormActivity;
-import com.example.mishlavim.volunteerActivities.viewOldFormActivity;
+import com.example.mishlavim.volunteerActivities.FillOutFormActivity;
+import com.example.mishlavim.volunteerActivities.ViewOldFormActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -41,9 +41,8 @@ public class AdminMainActivity extends AppCompatActivity {
             }
         });
     }
-    //this cylces between the fragments once the button is clicked
+    //this cycles between the fragments once the button is clicked
     private void replaceFragment(Fragment fragment) {
-
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frameLayout,fragment);
@@ -52,11 +51,11 @@ public class AdminMainActivity extends AppCompatActivity {
     }
     //these are the other activities that are used within the fragments
     public void fillOutFormActivity(View v){
-        Intent i = new Intent(this, fillOutFormActivity.class);
+        Intent i = new Intent(this, FillOutFormActivity.class);
         startActivity(i);
     }
     public void viewOldFormActivity(View v){
-        Intent i = new Intent(this, viewOldFormActivity.class);
+        Intent i = new Intent(this, ViewOldFormActivity.class);
         startActivity(i);
     }
     public void AdminAddNewUserActivity(View v){

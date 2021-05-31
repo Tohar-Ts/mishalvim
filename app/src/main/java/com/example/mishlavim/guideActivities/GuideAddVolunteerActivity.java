@@ -13,8 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.mishlavim.R;
-import com.example.mishlavim.dialogs.addUserDialog;
-import com.example.mishlavim.dialogs.deleteUser;
+import com.example.mishlavim.dialogs.AddUserDialog;
+import com.example.mishlavim.dialogs.DeleteUser;
 import com.example.mishlavim.model.FirebaseStrings;
 import com.example.mishlavim.model.Global;
 import com.example.mishlavim.model.Guide;
@@ -27,7 +27,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 
 
-public class GuideAddVolunteerActivity extends AppCompatActivity implements View.OnClickListener, addUserDialog.addUserDialogListener, deleteUser.deleteUserListener  {
+public class GuideAddVolunteerActivity extends AppCompatActivity implements View.OnClickListener, AddUserDialog.addUserDialogListener, DeleteUser.deleteUserListener  {
     private EditText emailEditText;
     private EditText userNameEditText;
     private EditText passwordEditText;
@@ -122,7 +122,7 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
                 });
     }
     private void userHasAdd() {
-        DialogFragment newFragment = new addUserDialog();
+        DialogFragment newFragment = new AddUserDialog();
         newFragment.show(getSupportFragmentManager(), "addUser");
     }
     @Override
@@ -136,7 +136,7 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
     public void onAddNegativeClick(DialogFragment dialog) {
         Log.d("guide", "onDialogNegativeClick: after dialog closed");
         //Show dialog to confirm delete user.
-        DialogFragment newFragment = new deleteUser();
+        DialogFragment newFragment = new DeleteUser();
         newFragment.show(getSupportFragmentManager(), "deleteUser");
 //        finish();
         // TODO: 5/23/2021 undo operations and delete the user from FB.
@@ -163,7 +163,7 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
 
     @Override
     public void onDeleteNegativeClick(DialogFragment dialog) {
-        DialogFragment newFragment = new addUserDialog();
+        DialogFragment newFragment = new AddUserDialog();
         newFragment.show(getSupportFragmentManager(), "addUser");
     }
 }

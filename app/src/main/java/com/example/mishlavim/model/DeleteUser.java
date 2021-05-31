@@ -9,7 +9,7 @@ import com.google.firebase.firestore.Query;
 import java.util.HashMap;
 import java.util.Map;
 
-public class deleteUser {
+public class DeleteUser {
 
 
     public void deleteUser(FirebaseUser fbUser, FirebaseFirestore db, User user){

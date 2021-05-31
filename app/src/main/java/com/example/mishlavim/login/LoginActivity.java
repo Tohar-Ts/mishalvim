@@ -7,11 +7,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.mishlavim.R;
 import com.example.mishlavim.adminActivities.AdminAddNewUserActivity;
+import com.example.mishlavim.adminActivities.AdminMainActivity;
 import com.example.mishlavim.guideActivities.GuideAddVolunteerActivity;
 import com.example.mishlavim.model.Admin;
 import com.example.mishlavim.model.FirebaseStrings;
@@ -112,7 +111,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             Admin admin = document.toObject(Admin.class);
             globalInstance.setAdminInstance(admin);
-            startActivity(new Intent(LoginActivity.this, AdminAddNewUserActivity.class));
+            startActivity(new Intent(LoginActivity.this, AdminMainActivity.class));
 
         } else if (type.equals(FirebaseStrings.guideStr())) {
 

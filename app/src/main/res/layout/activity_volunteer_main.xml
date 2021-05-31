@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/colorful_background2"
+    android:background="@drawable/backgroung_green"
     tools:context=".volunteerActivities.VolunteerMainActivity">
 
     <LinearLayout
@@ -14,6 +14,20 @@
         android:gravity="center"
         android:orientation="vertical"
         android:paddingTop="20dp">
+
+
+        <TextView
+            android:id="@+id/HelloUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/alef"
+            android:gravity="center"
+            android:text="שלום, אילת"
+            android:textColor="@color/black"
+            android:textSize="25sp" />
 
         <FrameLayout
             android:layout_width="wrap_content"
@@ -27,98 +41,114 @@
                 android:elevation="16dp"
                 android:text="מלא/י אותי!"
                 android:textColor="@color/white"
-                android:textSize="50sp" />
+                android:textSize="30sp" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/openForm"
-                android:layout_width="237dp"
-                android:layout_height="245dp"
+                android:layout_width="346dp"
+                android:layout_height="180dp"
                 android:layout_marginTop="10dp"
                 android:backgroundTint="@color/orange"
                 android:gravity="center"
+                android:outlineSpotShadowColor="@color/black"
                 android:theme="@style/FloatingActionButtonStyle" />
+
         </FrameLayout>
-
-        <GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginVertical="10dp"
-            android:columnCount="1">
-
-
-            <Button
-                android:id="@+id/op1"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/custome_form_button"
-                android:gravity="center"
-                android:text="שלב 1"
-                android:textColor="@color/black"
-                android:textSize="32sp" />
-
-            <Button
-                android:id="@+id/op2"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/custome_form_button"
-                android:gravity="center"
-                android:text="שלב 2"
-                android:textColor="@color/black"
-                android:textSize="32sp" />
-
-            <Button
-                android:id="@+id/op3"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/custome_form_button"
-                android:gravity="center"
-                android:text="שלב 3"
-                android:textColor="@color/black"
-                android:textSize="32sp" />
-
-
-        </GridLayout>
-
-        <Space
-            android:layout_width="50dp"
-            android:layout_height="50dp"></Space>
-
-        <Space
-            android:layout_width="50dp"
-            android:layout_height="50dp"></Space>
 
         <TextView
             android:id="@+id/openFormsPrompt2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/alef"
             android:padding="15dp"
             android:text="שאלונים שמורים:"
             android:textAlignment="center"
-            android:textColor="@color/main_pink"
+            android:textColor="@color/green"
             android:textSize="40sp" />
 
-        <TextView
-            android:id="@+id/HelloUser"
-            android:layout_width="wrap_content"
+        <ScrollView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/varela_round"
-            android:gravity="center"
-            android:text="שלום, אילת"
-            android:textColor="@color/main_pink"
-            android:textSize="40sp" />
+            android:scrollIndicators="right">
+
+            <GridLayout
+                android:id="@+id/prev_forms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="10dp"
+                android:columnCount="1">
+
+
+                <Button
+                    android:id="@+id/op1"
+                    android:layout_width="300dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="25dp"
+                    android:background="@drawable/custome_form_button"
+                    android:fontFamily="@font/alef"
+                    android:gravity="center"
+                    android:text="שלב 1"
+                    android:textColor="@color/white"
+                    android:textSize="32sp" />
+
+
+                <Button
+                    android:id="@+id/op2"
+                    android:layout_width="300dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="25dp"
+                    android:background="@drawable/custome_form_button"
+                    android:fontFamily="@font/alef"
+                    android:gravity="center"
+                    android:text="שלב 2"
+                    android:textColor="@color/white"
+                    android:textSize="32sp" />
+
+                <Button
+                    android:id="@+id/op3"
+                    android:layout_width="300dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="25dp"
+                    android:background="@drawable/custome_form_button"
+                    android:fontFamily="@font/alef"
+                    android:gravity="center"
+                    android:text="שלב 3"
+                    android:textColor="@color/white"
+                    android:textSize="32sp" />
+                <Button
+                    android:id="@+id/op4"
+                    android:layout_width="300dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="25dp"
+                    android:background="@drawable/custome_form_button"
+                    android:fontFamily="@font/alef"
+                    android:gravity="center"
+                    android:text="שלב 4"
+                    android:textColor="@color/white"
+                    android:textSize="32sp" />
+
+
+            </GridLayout>
+
+
+        </ScrollView>
 
 
     </LinearLayout>
-
 
 
 </LinearLayout>
