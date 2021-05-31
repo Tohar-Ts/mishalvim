@@ -13,6 +13,7 @@ import com.example.mishlavim.adminActivities.AdminAddNewUserActivity;
 import com.example.mishlavim.adminActivities.AdminMainActivity;
 import com.example.mishlavim.guideActivities.GuideAddVolunteerActivity;
 import com.example.mishlavim.guideActivities.GuideMainActivity;
+import com.example.mishlavim.guideActivities.GuideVolunteerListActivity;
 import com.example.mishlavim.model.Admin;
 import com.example.mishlavim.model.FirebaseStrings;
 import com.example.mishlavim.model.Global;
@@ -118,7 +119,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             Guide guide = document.toObject(Guide.class);
             globalInstance.setGuideInstance(guide);
-            startActivity(new Intent(LoginActivity.this, GuideMainActivity.class));
+            startActivity(new Intent(LoginActivity.this, GuideVolunteerListActivity.class));
 
         } else if (type.equals(FirebaseStrings.volunteerStr())) {
             Volunteer volu = document.toObject(Volunteer.class);
