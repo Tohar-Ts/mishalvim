@@ -89,29 +89,6 @@
                     android:layout_marginTop="16dp"
                     android:orientation="vertical"
                     android:padding="16sp">
-
-                    <RadioGroup
-                        android:id="@+id/multipleAns"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:visibility="gone">
-
-                        <RadioButton
-                            android:id="@+id/radioButton"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="320dp"
-                            android:text="כן" />
-
-                        <RadioButton
-                            android:id="@+id/radioButton5"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="320dp"
-                            android:text="לא" />
-                    </RadioGroup>
-
-
                 </LinearLayout>
 
                 <TextView
@@ -146,7 +123,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/linearLayout"
                     app:layout_constraintVertical_bias="0.0" />
-
             </GridLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

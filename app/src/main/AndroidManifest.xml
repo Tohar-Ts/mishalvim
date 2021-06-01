@@ -10,7 +10,6 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".guideActivities.GuideVolunteerListActivity"></activity>
         <activity android:name=".guideActivities.GuideMainActivity" />
         <activity android:name=".volunteerActivities.FinishedFormActivity" />
         <activity

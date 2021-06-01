@@ -15,10 +15,13 @@ public class VolunteerMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_volunteer_main);
     }
-//    public void fillForm(View view) {
-//        Intent intent = new Intent(VolunteerMainActivity.this, FillOutFormActivity.class);
-//        startActivity(intent);
-//    }
 
-
+    public void fillOutFormActivity(View view) {
+        Intent intent = new Intent(VolunteerMainActivity.this, FillOutFormActivity.class);
+        startActivity(intent);
+    }
+    public void viewOldFormActivity(View view) {
+        Intent intent = new Intent(VolunteerMainActivity.this, ViewOldFormActivity.class);
+        startActivity(intent);
+    }
 }
