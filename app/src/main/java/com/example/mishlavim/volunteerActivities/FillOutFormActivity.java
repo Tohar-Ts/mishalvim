@@ -16,12 +16,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.mishlavim.R;
 
 public class FillOutFormActivity extends AppCompatActivity {
+
     private ProgressBar progressBarAnimation;
     private ObjectAnimator progressAnimator;
     public int progress = 1;
     public  int[] intArray = new int[]{ 1,2,3,4,5,6,7,8,9,10 };
     public int max = intArray.length;
-
+    Button btNext;
+    Button btBack;
+    Button btSave;
+    TextView fireBaseQuestion;
+    EditText volunteerAnswer;
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +35,11 @@ public class FillOutFormActivity extends AppCompatActivity {
 
         init();
 
-        Button btNext = (Button)findViewById(R.id.next_btn);
-        Button btBack = (Button)findViewById(R.id.back_btn);
-        Button btSave = (Button)findViewById(R.id.save_btn);
-        TextView fireBaseQuestion = (TextView)findViewById(R.id.question);
-        EditText volunteerAnswer = (EditText)findViewById(R.id.singleAns);
-
+        btNext = (Button)findViewById(R.id.next_btn);
+        btBack = (Button)findViewById(R.id.back_btn);
+        btSave = (Button)findViewById(R.id.save_btn);
+        fireBaseQuestion = (TextView)findViewById(R.id.question);
+        volunteerAnswer = (EditText)findViewById(R.id.singleAns);
         //the next question button is pressed - now we update the question from firebase, save the
         //answer and refresh the answer box
         btNext.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +64,7 @@ public class FillOutFormActivity extends AppCompatActivity {
 
             }
         });
+        appendAnswears();
     }
 
     private void init() {
@@ -76,5 +81,8 @@ public class FillOutFormActivity extends AppCompatActivity {
     private int getMax(int max){
         return max;
     }
-
+    // this function set the editText with the answear from the firebase
+    private void appendAnswears (){
+        volunteerAnswer.setText("hello");
+    }
 }
