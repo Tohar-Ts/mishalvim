@@ -1,7 +1,5 @@
 package com.example.mishlavim.adminActivities;
 import java.util.*;
-import java.util.stream.*;
-import java.util.Map.*;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -51,6 +49,7 @@ public class AdminAddNewUserActivity extends AppCompatActivity implements View.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_add_new_user);
+
         spinner = findViewById(R.id.spinner);
         emailEditText = findViewById(R.id.newEmail);
         userNameEditText = findViewById(R.id.newUserName);
@@ -59,29 +58,8 @@ public class AdminAddNewUserActivity extends AppCompatActivity implements View.O
         Button addButton = findViewById(R.id.addNewUser);
         loadingProgressBar = findViewById(R.id.registerLoading);
         typesRadioGroup = findViewById(R.id.typesRg);
-        listOfGuidesName = new ArrayList<>();
-        listOfGuidesID = new ArrayList<>();
 
-        //SPINNER SETUP
-        //get the guides list.
-        Global globalInstance = Global.getGlobalInstance();
-        Admin admin = globalInstance.getAdminInstance();
-        spinner.setOnItemSelectedListener(this);
-
-
-        for(Map.Entry<String, String> entry : admin.getGuideList().entrySet()) {
-            Log.d("guide", entry.toString());
-            String name = entry.getKey();
-            String id = entry.getValue();
-            listOfGuidesName.add(name);
-            listOfGuidesID.add(id);
-        }
-
-        ArrayAdapter ad = new ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line,listOfGuidesName);
-        ad.setDropDownViewResource(android.R.layout
-                .simple_spinner_dropdown_item);
-        spinner.setAdapter(ad);
-
+        setSpinner();
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -91,12 +69,31 @@ public class AdminAddNewUserActivity extends AppCompatActivity implements View.O
 
         newUserType = FirebaseStrings.guideStr(); //default
 
+        loadingProgressBar.setVisibility(View.GONE);
+
         addButton.setOnClickListener(this);
+        spinner.setOnItemSelectedListener(this);
     }
 
     @Override
     public void onClick(View v) {
         registerUser();
+    }
+
+    public void setSpinner(){
+        //SPINNER SETUP
+        //get the guides list.
+        Global globalInstance = Global.getGlobalInstance();
+        Admin admin = globalInstance.getAdminInstance();
+        HashMap<String,String> guideList = admin.getGuideList();
+
+        listOfGuidesName = new ArrayList<>(guideList.keySet());
+        listOfGuidesID = new ArrayList<>(guideList.values());
+
+        ArrayAdapter ad = new ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line,listOfGuidesName);
+        ad.setDropDownViewResource(android.R.layout
+                .simple_spinner_dropdown_item);
+        spinner.setAdapter(ad);
     }
 
     public void checkUserType(View v) {
@@ -121,7 +118,6 @@ public class AdminAddNewUserActivity extends AppCompatActivity implements View.O
     }
 
     private void registerUser() {
-
         if (validation.validateInput())
             return;
         String email = emailEditText.getText().toString().trim();
@@ -161,20 +157,16 @@ public class AdminAddNewUserActivity extends AppCompatActivity implements View.O
 
         else { //volunteer
             user = new Volunteer(userName, newUserType, email, guideName, guideID, new HashMap<>(), new HashMap<>());
-            Guide.addVolunteerByGuideId(guideID, fbUser.getUid(), (Volunteer) user);
+            Guide.addVolunteerByGuideName(fbUser.getUid(), (Volunteer) user);
             Admin.addVolunteer(fbUser.getUid(), userName);
-
         }
 
         addUserToDb(fbUser, user);
     }
 
     private void addUserToDb(FirebaseUser fbUser, User user) {
-        String usersCollection = FirebaseStrings.usersStr();
-        String userId = fbUser.getUid();
-
-        db.collection("users")
-                .document(userId)
+        db.collection(FirebaseStrings.usersStr())
+                .document(fbUser.getUid())
                 .set(user)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {

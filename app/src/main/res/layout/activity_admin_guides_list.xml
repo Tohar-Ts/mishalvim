@@ -4,21 +4,12 @@
     tools:context=".adminActivities.AdminGuidesListActivity"
     android:id="@+id/adminOptions"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="50dp"
-    android:paddingTop="70dp"
-    android:paddingRight="50dp"
-    android:paddingBottom="70dp">
+    android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical">
-        <Space
-            android:id="@+id/newformspace2"
-            android:layout_width="match_parent"
-            android:layout_height="100dp" />
-
         <Button
 
             android:id="@+id/buttonFillNewForm"
@@ -27,7 +18,6 @@
             android:layout_margin="15dp"
             android:layout_marginTop="108dp"
             android:background="@drawable/custom_pink_button"
-            android:backgroundTint="#CCE4F6"
             android:onClick="AdminAddNewUserActivity"
             android:text="@string/add_new_guide"
             android:textAlignment="center"
@@ -49,22 +39,10 @@
 
         <ListView
             android:id="@+id/listview"
+            android:layout_margin="20dp"
             android:layout_width="wrap_content"
             android:layout_height="400dp"/>
     </LinearLayout>
 </ScrollView>
-
-
-<!--        <androidx.appcompat.widget.SwitchCompat-->
-<!--            android:id="@+id/guideSwitch"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:onClick="AdminMainActivity"-->
-<!--            android:textOff="@string/forms"-->
-<!--            android:textOn="@string/guides"-->
-<!--            android:thumb="@drawable/thumb"-->
-<!--            app:showText="true"-->
-<!--            android:checked="true"-->
-<!--            app:track="@drawable/track" />-->
 
 

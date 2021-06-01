@@ -3,15 +3,15 @@
     package="com.example.mishlavim">
 
     <application
-        android:largeHeap="true"
-        android:hardwareAccelerated="false"
         android:allowBackup="true"
+        android:hardwareAccelerated="false"
         android:icon="@drawable/bat_ami_logo"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".volunteerActivities.FinishedFormActivity"/>
-
+        <activity android:name=".guideActivities.GuideMainActivity" />
+        <activity android:name=".volunteerActivities.FinishedFormActivity" />
         <activity
             android:name=".volunteerActivities.VolunteerMainActivity"
             android:label="volunteerMainActivity" />

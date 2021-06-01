@@ -27,7 +27,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/alef"
-            android:text="יצירת שאלון חדש"
+            android:text="@string/create_new_form"
+            android:gravity="center"
             android:textColor="@color/dark_gray"
             android:layout_marginBottom="10dp"
             android:textSize="25sp" />
@@ -38,7 +39,7 @@
             android:layout_marginTop="24dp"
             android:background="@drawable/custom_input"
             android:gravity="center|start"
-            android:hint="שם השאלון:"
+            android:hint="@string/name_form"
             android:inputType="text"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
@@ -48,53 +49,53 @@
             android:id="@+id/questionsScroll"
             android:layout_width="match_parent"
             android:layout_height="250dp">
-        <LinearLayout
-            android:id="@+id/questionsLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-
-            <EditText
-                android:id="@+id/question1"
+            <LinearLayout
+                android:id="@+id/questionsLayout"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="24dp"
-                android:background="@drawable/custom_input"
-                android:gravity="center|start"
-                android:hint="שאלה 1:"
-                android:inputType="text"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:selectAllOnFocus="true" />
-
-            <EditText
-                android:id="@+id/question2"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="24dp"
-                android:background="@drawable/custom_input"
-                android:gravity="center|start"
-                android:hint="שאלה 2:"
-                android:inputType="text"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:selectAllOnFocus="true" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
 
-            <EditText
-                android:id="@+id/question3"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="24dp"
-                android:background="@drawable/custom_input"
-                android:gravity="center|start"
-                android:hint="שאלה 3:"
-                android:inputType="text"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:selectAllOnFocus="true" />
-        </LinearLayout>
+                <EditText
+                    android:id="@+id/question1"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/custom_input"
+                    android:gravity="center|start"
+                    android:hint="@string/question1"
+                    android:inputType="text"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:selectAllOnFocus="true" />
+
+                <EditText
+                    android:id="@+id/question2"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/custom_input"
+                    android:gravity="center|start"
+                    android:hint="@string/question2"
+                    android:inputType="text"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:selectAllOnFocus="true" />
+
+
+                <EditText
+                    android:id="@+id/question3"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/custom_input"
+                    android:gravity="center|start"
+                    android:hint="@string/question3"
+                    android:inputType="text"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:selectAllOnFocus="true" />
+            </LinearLayout>
         </ScrollView>
 
 
@@ -104,8 +105,11 @@
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
             android:background="@drawable/custom_pink_button"
-            android:text="הוסף שאלה" />
+            android:text="@string/add_new_question" />
 
         <ProgressBar
             android:id="@+id/createFormLoading"
@@ -120,17 +124,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.494" />
+        <Button
+            android:id="@+id/addNewForm"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
 
+            android:background="@drawable/custom_pink_button"
+            android:text="@string/save_form"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
+            tools:layout_editor_absoluteX="0dp" />
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/addNewForm"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:background="@drawable/custom_pink_button"
-        android:text="שמור שאלון"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
-        tools:layout_editor_absoluteX="0dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

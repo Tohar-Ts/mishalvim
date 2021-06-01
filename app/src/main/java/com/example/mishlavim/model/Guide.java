@@ -23,7 +23,7 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 public class Guide extends User {
 
-    private HashMap<String, Volunteer> myVolunteers;
+    private HashMap<String, String> myVolunteers;
     private HashMap<String, String> formsTemplates;
 
     /**
@@ -35,7 +35,7 @@ public class Guide extends User {
     /**
      * Parameterized constructor.
      */
-    public Guide(String name, String type, String email, HashMap<String, Volunteer> myVolunteers, HashMap<String, String> formsTemplates) {
+    public Guide(String name, String type, String email, HashMap<String, String> myVolunteers, HashMap<String, String> formsTemplates) {
         super(name, type, email);
         this.myVolunteers = myVolunteers;
         this.formsTemplates = formsTemplates;
@@ -150,11 +150,11 @@ public class Guide extends User {
         });
     }
 
-    public HashMap<String, Volunteer> getMyVolunteers() {
+    public HashMap<String, String> getMyVolunteers() {
         return myVolunteers;
     }
 
-    public void setMyVolunteers(HashMap<String, Volunteer> myVolunteers) {
+    public void setMyVolunteers(HashMap<String, String> myVolunteers) {
         this.myVolunteers = myVolunteers;
         // TODO: 5/24/2021 check if this update the firebase DB.
     }
