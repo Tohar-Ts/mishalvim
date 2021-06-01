@@ -68,10 +68,11 @@ public class AdminAddNewUserActivity extends AppCompatActivity implements View.O
         Admin admin = globalInstance.getAdminInstance();
         spinner.setOnItemSelectedListener(this);
 
+
         for(Map.Entry<String, String> entry : admin.getGuideList().entrySet()) {
+            Log.d("guide", entry.toString());
             String name = entry.getKey();
             String id = entry.getValue();
-
             listOfGuidesName.add(name);
             listOfGuidesID.add(id);
         }
@@ -160,7 +161,7 @@ public class AdminAddNewUserActivity extends AppCompatActivity implements View.O
 
         else { //volunteer
             user = new Volunteer(userName, newUserType, email, guideName, guideID, new HashMap<>(), new HashMap<>());
-            Guide.addVolunteerByGuideName(fbUser.getUid(), (Volunteer) user);
+            Guide.addVolunteerByGuideId(guideID, fbUser.getUid(), (Volunteer) user);
             Admin.addVolunteer(fbUser.getUid(), userName);
 
         }
