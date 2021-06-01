@@ -18,6 +18,7 @@ import com.example.mishlavim.adminActivities.AdminCreateFormActivity;
 import com.example.mishlavim.model.Admin;
 import com.example.mishlavim.model.AnsweredForm;
 import com.example.mishlavim.model.FirebaseStrings;
+import com.example.mishlavim.model.FormTemplate;
 import com.example.mishlavim.model.Global;
 import com.example.mishlavim.model.Volunteer;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -26,13 +27,16 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 
 public class FillOutFormActivity extends AppCompatActivity {
-
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ProgressBar progressBarAnimation;
     private ObjectAnimator progressAnimator;
     public int progress = 1;
     public  int[] intArray = new int[]{ 1,2,3,4,5,6,7,8,9,10 };
     HashMap<String, String> answers;
     public int max = intArray.length;
+    public int numOfQuestion;
+    private HashMap<String, String> questionArr;
+    //xml elements:
     Button btNext;
     Button btBack;
     Button btSave;
@@ -76,7 +80,10 @@ public class FillOutFormActivity extends AppCompatActivity {
 
             }
         });
-        getFormFromFireBaSe(formName);
+        getForm();
+    }
+    private void getNumOfQuestion(){
+
     }
 
     private void init() {
@@ -93,16 +100,15 @@ public class FillOutFormActivity extends AppCompatActivity {
     private int getMax(int max){
         return max;
     }
-   private void getAnswersFromDataBase(){
+   private void getForm(){
        Global globalInstance = Global.getGlobalInstance();
        Volunteer volu = globalInstance.getVoluInstance();
-       HashMap<String, String> answersId = volu.getOpenForms(); //key - form name, values - id in firebase
-       String formId = answersId.get(formName);
-       getFormFromFireBaSe(formId);
+       HashMap<String, String> openForms = volu.getOpenForms(); //key - form name, values - id in firebase
+       String formId = openForms.get(formName); //get the id for the current form
+       getFormFromFireBase(formId);
    }
 
-    private void getFormFromFireBaSe(String formId) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private void getFormFromFireBase(String formId) {
         db.collection(FirebaseStrings.answeredFormsStr())
                 .document(formId)
                 .get()
@@ -121,15 +127,16 @@ public class FillOutFormActivity extends AppCompatActivity {
     }
 
     private void getQuestions(String templateId) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection(FirebaseStrings.answeredFormsStr())
+        db.collection(FirebaseStrings.formsTemplatesStr())
                 .document(templateId)
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
                         assert document != null;
-//                        AnsweredForm answersObj  = document.toObject(AnsweredForm.class);
+                        FormTemplate templateObj  = document.toObject(FormTemplate.class);
+                        questionArr = templateObj.getQuestionArr();
+                        numOfQuestion = questionArr.size();
 //                        appendAnswears(answersObj);
 //                        getQuestions(answersObj.getTemplateId());
                     } else {
