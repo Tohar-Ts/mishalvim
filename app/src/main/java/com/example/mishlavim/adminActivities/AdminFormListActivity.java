@@ -30,13 +30,13 @@ public class AdminFormListActivity extends Fragment {
         final ArrayList<String> arrayList=new ArrayList<>();
 
         //Add elements to arraylist
-        arrayList.add("OLAF");
-        arrayList.add("DANNY");
-        arrayList.add("DAVID");
-        arrayList.add("AYELET");
-        arrayList.add("TOHAR");
-        arrayList.add("ADI");
-        arrayList.add("ELCHANAN");
+        arrayList.add("Form 1");
+        arrayList.add("Form 2");
+        arrayList.add("Form 3");
+        arrayList.add("Form 4");
+        arrayList.add("Form 5");
+        arrayList.add("Form 6");
+        arrayList.add("Form 7");
         //Create Adapter
         ArrayAdapter arrayAdapter=new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,arrayList);
 
@@ -48,6 +48,8 @@ public class AdminFormListActivity extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(getActivity(),"clicked item:"+i+" "+arrayList.get(i).toString(), Toast.LENGTH_SHORT).show();
+
+
             }
         });
         return view;
