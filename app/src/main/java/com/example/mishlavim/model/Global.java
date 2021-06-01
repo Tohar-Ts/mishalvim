@@ -25,6 +25,7 @@ public class Global {
     private Admin adminInstance;
     private Volunteer voluInstance;
     private String type;
+    private final static String aid = "jEjKgznMtrXAbl9SuAmlIIhU3a52"; // this is the admin id for some operations like delete.
 
     private Global() {
     }
@@ -64,4 +65,6 @@ public class Global {
     public void setType(String type) {
         this.type = type;
     }
+
+    public  String getAid(){return aid;}
 }

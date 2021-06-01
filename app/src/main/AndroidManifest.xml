@@ -11,6 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".guideActivities.GuideMainActivity" />
+        <activity android:name=".guideActivities.GuideAddVolunteerActivity" />
         <activity android:name=".volunteerActivities.FinishedFormActivity" />
         <activity
             android:name=".volunteerActivities.VolunteerMainActivity"

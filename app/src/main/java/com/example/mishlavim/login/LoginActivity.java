@@ -119,7 +119,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             Guide guide = document.toObject(Guide.class);
             globalInstance.setGuideInstance(guide);
-            startActivity(new Intent(LoginActivity.this, GuideMainActivity.class));
+            startActivity(new Intent(LoginActivity.this, GuideAddVolunteerActivity.class));
+//            startActivity(new Intent(LoginActivity.this, GuideMainActivity.class));
 
         } else if (type.equals(FirebaseStrings.volunteerStr())) {
             Volunteer volu = document.toObject(Volunteer.class);

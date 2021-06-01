@@ -139,15 +139,25 @@ public class Guide extends User {
                 Log.d("Guide", "Error - Volunteer delete failed.", task2.getException());
         });
 
-        // TODO: 6/1/2021 find the user in the list, remove it and update the volunteer list
+       
         db.collection(FirebaseStrings.usersStr())
-                .document(guideID).update(FirebaseStrings.myVolunteerStr(), FieldValue.arrayRemove(voluID))
+                .document(guideID).update(FirebaseStrings.allVolunteersListStr(), FieldValue.arrayRemove(voluID))
                 .addOnCompleteListener(task2 -> {
                     if (task2.isSuccessful())
                         Log.d("Guide", "Volu item successfully deleted!");
                         else
                         Log.d("Guide", "Error - Volu item delete failed.", task2.getException());
         });
+
+        // TODO: 6/1/2021 change the  
+        db.collection(FirebaseStrings.usersStr())
+                .document(Global.getGlobalInstance().getAid()).update(FirebaseStrings.myVolunteerStr(), FieldValue.arrayRemove(voluID))
+                .addOnCompleteListener(task2 -> {
+                    if (task2.isSuccessful())
+                        Log.d("Guide", "Volu item successfully deleted!");
+                    else
+                        Log.d("Guide", "Error - Volu item delete failed.", task2.getException());
+                });
     }
 
     public HashMap<String, String> getMyVolunteers() {
