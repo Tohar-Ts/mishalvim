@@ -50,6 +50,7 @@
                 android:layout_marginTop="10dp"
                 android:backgroundTint="@color/orange"
                 android:gravity="center"
+                android:onClick="FillOutFormActivity"
                 android:outlineSpotShadowColor="@color/black"
                 android:theme="@style/FloatingActionButtonStyle" />
 
