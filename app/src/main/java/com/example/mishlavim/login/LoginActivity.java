@@ -128,6 +128,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         } else {
             showLoginFailed();
         }
-
+        loadingProgressBar.setVisibility(View.GONE);
     }
 }
