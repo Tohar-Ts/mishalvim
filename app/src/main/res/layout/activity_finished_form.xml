@@ -4,83 +4,64 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/welldone_background"
     tools:context=".volunteerActivities.FinishedFormActivity">
 
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="413dp"
-        android:layout_height="282dp"
-        android:background="@color/pink"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
-
-
-    </LinearLayout>
-
     <TextView
-        android:id="@+id/toda"
-        android:layout_width="286dp"
-        android:layout_height="114dp"
-        android:fontFamily="@font/alef"
-        android:text="תודה רבה!"
-        android:textAlignment="center"
-        android:textSize="50sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.053" />
-
-    <TextView
-        android:id="@+id/tshuva"
+        android:id="@+id/weldone"
         android:layout_width="310dp"
-        android:layout_height="164dp"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="168dp"
         android:fontFamily="@font/alef"
-        android:text="תשובותיך נשלחו לרכזת"
+        android:text="כל הכבוד!\nענית על כל השאלות"
         android:textAlignment="center"
+        android:textColor="@color/orange"
         android:textSize="50sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.376"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.539" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/sent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="44dp"
+        android:fontFamily="@font/alef"
+        android:gravity="center"
+        android:text="השאלון נשלח לרכז/ת"
+        android:textColor="@color/dark_gray"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.421"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weldone" />
 
     <Button
-        android:id = "@+id/returnHome"
+        android:id="@+id/returnHome"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="40dp"
         android:background="@drawable/custome_light_green"
         android:fontFamily="@font/alef"
-        android:text="חזור למסך הבית"
         android:onClick="VolunteerMainActivity"
+        android:text="חזור למסך הבית"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="25sp"
         android:textStyle="bold"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.157"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tshuva" />
+        app:layout_constraintTop_toBottomOf="@+id/sent"
+        app:layout_constraintVertical_bias="0.788" />
 
-    <ImageView
-        android:id="@+id/checkmark"
-        android:layout_width="390dp"
-        android:layout_height="364dp"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout2"
-        app:srcCompat="@drawable/ic_baseline_check_24" />
 </androidx.constraintlayout.widget.ConstraintLayout>

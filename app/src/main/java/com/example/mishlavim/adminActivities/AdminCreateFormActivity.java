@@ -81,7 +81,11 @@ public class AdminCreateFormActivity extends AppCompatActivity implements View.O
         question.setHint("שאלה "+ numOfQuestions+ ":");
         question.setInputType(InputType.TYPE_CLASS_TEXT);
         question.setPadding(paddingStart,0,paddingEnd,0);
+
+        //adding the new edit text to the linearlayout
         questionsLayout.addView(question);
+
+        //scroll view focus on the new question
         questionsScroll.post(new Runnable() {
             public void run() {
                 questionsScroll.scrollTo(0, questionsScroll.getBottom());

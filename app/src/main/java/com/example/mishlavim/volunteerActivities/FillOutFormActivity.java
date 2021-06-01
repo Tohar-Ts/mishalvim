@@ -14,6 +14,16 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mishlavim.R;
+import com.example.mishlavim.adminActivities.AdminCreateFormActivity;
+import com.example.mishlavim.model.Admin;
+import com.example.mishlavim.model.AnsweredForm;
+import com.example.mishlavim.model.FirebaseStrings;
+import com.example.mishlavim.model.Global;
+import com.example.mishlavim.model.Volunteer;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
 
 public class FillOutFormActivity extends AppCompatActivity {
 
@@ -21,12 +31,14 @@ public class FillOutFormActivity extends AppCompatActivity {
     private ObjectAnimator progressAnimator;
     public int progress = 1;
     public  int[] intArray = new int[]{ 1,2,3,4,5,6,7,8,9,10 };
+    HashMap<String, String> answers;
     public int max = intArray.length;
     Button btNext;
     Button btBack;
     Button btSave;
     TextView fireBaseQuestion;
     EditText volunteerAnswer;
+    String formName;
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +76,7 @@ public class FillOutFormActivity extends AppCompatActivity {
 
             }
         });
-        appendAnswears();
+        getFormFromFireBaSe(formName);
     }
 
     private void init() {
@@ -81,8 +93,54 @@ public class FillOutFormActivity extends AppCompatActivity {
     private int getMax(int max){
         return max;
     }
+   private void getAnswersFromDataBase(){
+       Global globalInstance = Global.getGlobalInstance();
+       Volunteer volu = globalInstance.getVoluInstance();
+       HashMap<String, String> answersId = volu.getOpenForms(); //key - form name, values - id in firebase
+       String formId = answersId.get(formName);
+       getFormFromFireBaSe(formId);
+   }
+
+    private void getFormFromFireBaSe(String formId) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection(FirebaseStrings.answeredFormsStr())
+                .document(formId)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        assert document != null;
+                        AnsweredForm answersObj  = document.toObject(AnsweredForm.class);
+                        appendAnswears(answersObj);
+                        getQuestions(answersObj.getTemplateId());
+                    } else {
+//                        showAddingFailed();
+                    }
+//                    loadingProgressBar.setVisibility(View.GONE);
+                });
+    }
+
+    private void getQuestions(String templateId) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection(FirebaseStrings.answeredFormsStr())
+                .document(templateId)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        assert document != null;
+//                        AnsweredForm answersObj  = document.toObject(AnsweredForm.class);
+//                        appendAnswears(answersObj);
+//                        getQuestions(answersObj.getTemplateId());
+                    } else {
+//                        showAddingFailed();
+                    }
+//                    loadingProgressBar.setVisibility(View.GONE);
+                });
+    }
     // this function set the editText with the answear from the firebase
-    private void appendAnswears (){
+
+    private void appendAnswears (AnsweredForm answersObj ){
         volunteerAnswer.setText("hello");
     }
 }
