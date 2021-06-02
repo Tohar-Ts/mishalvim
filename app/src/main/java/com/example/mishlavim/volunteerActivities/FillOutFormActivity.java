@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -29,7 +30,7 @@ public class FillOutFormActivity extends AppCompatActivity implements View.OnCli
     private ObjectAnimator progressAnimator;
     public int numOfCurrentQuestion = 1;
     //public  int[] questionNumArr;
-    HashMap<String, String> answers;
+    //HashMap<String, String> answers;
     public FormTemplate form;
     public int numOfQuestion = 10;
     private HashMap<String, String> questionArr;
@@ -137,14 +138,14 @@ public class FillOutFormActivity extends AppCompatActivity implements View.OnCli
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        Log.d("template", "template ID " + task.getResult().get("templateId"));
                         DocumentSnapshot document = task.getResult();
                         assert document != null;
+                        Log.d("template", "template ID " + task.getResult().get("templateId"));
                         AnsweredForm answersObj = document.toObject(AnsweredForm.class);
                         if (answersObj == null)
                             Log.d("ERR", "answersObj is null");
-                        //appendAnswers(answersObj);
                         savedAnswers = answersObj.getAnswers();
+                        currentAnswers = savedAnswers;//???
                         getQuestions(answersObj.getTemplateId());
                     } else {
 //                        showAddingFailed();
@@ -187,11 +188,28 @@ public class FillOutFormActivity extends AppCompatActivity implements View.OnCli
 //        for (int i = 0; i < numOfQuestion; i++) {
 //            currentAnswears.put(i + "", "");
 //        }
+        if (savedAnswers.get(numOfCurrentQuestion + "") != null)
+            volunteerAnswer.setText(savedAnswers.get(numOfCurrentQuestion + ""));
         nextBtn.setOnClickListener(this);
         backBtn.setOnClickListener(this);
+        saveBtn.setOnClickListener(this);
     }
 
     private void sendAnswersToDataBase() {
-
+        db.collection( FirebaseStrings.answeredFormsStr())
+                .document("VoQPBSgwVj2gDhgnIQWs")
+                .update(FirebaseStrings.answersStr(), currentAnswers)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Log.d("view old form", "new answers updated successfully!");
+                        Toast.makeText(getApplicationContext(), R.string.firebase_success, Toast.LENGTH_SHORT).show();
+                        finish();
+                        startActivity(getIntent());
+                    }
+                    else {
+                        Log.d("view old form", "Error - new answers update failed.", task.getException());
+                        //showError();
+                    }
+                });
     }
 }
