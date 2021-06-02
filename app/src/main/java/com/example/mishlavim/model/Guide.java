@@ -140,17 +140,27 @@ public class Guide extends User {
                 Log.d("Guide", "Error - Volunteer delete failed.", task2.getException());
         });
 
+        HashMap<String, Object> deleteVolunteer = new HashMap<>();
+        deleteVolunteer.put(FirebaseStrings.myVolunteerStr()+"."+voluID, FieldValue.delete());
 
+        //delete volunteer from guide's list.
         db.collection(FirebaseStrings.usersStr())
-                .document(guideID).update(FirebaseStrings.allVolunteersListStr(), FieldValue.arrayRemove(voluID))
+                .document(guideID)
+                .update(deleteVolunteer)
                 .addOnCompleteListener(task2 -> {
                     if (task2.isSuccessful())
-                        Log.d("Guide", "Volu item successfully deleted!");
+                        Log.d("Guide", "Volu item successfully deleted from guide's list!");
                     else
                         Log.d("Guide", "Error - Volu item delete failed.", task2.getException());
                 });
 
-        // TODO: 6/1/2021 change the
+
+        //delete volunteer from admin's list.
+        //find the admin ID.
+
+        deleteVolunteer.clear();
+        deleteVolunteer.put(FirebaseStrings.allVolunteersListStr()+"."+voluID, FieldValue.delete());
+
         db.collection(FirebaseStrings.usersStr()).
                 whereEqualTo(FirebaseStrings.typeStr(), FirebaseStrings.adminStr())
                 .get().addOnCompleteListener(task -> {
@@ -162,13 +172,13 @@ public class Guide extends User {
                     AtomicReference<String> adminId = new AtomicReference<>();
                     for (QueryDocumentSnapshot document : task.getResult())
                         adminId.set(document.getId());
-
+                    //update the Admin list.
                     db.collection(FirebaseStrings.usersStr())
                             .document(adminId.get())
-                            .update(FirebaseStrings.allVolunteersListStr(), FieldValue.arrayRemove(voluID))
+                            .update(deleteVolunteer)
                             .addOnCompleteListener(task2 -> {
                                 if (task2.isSuccessful())
-                                    Log.d("Guide", "Volu item successfully deleted!");
+                                    Log.d("Guide", "Volu item successfully deleted from admin's list!");
                                 else
                                     Log.d("Guide", "Error - Volu item delete failed.", task2.getException());
                             });

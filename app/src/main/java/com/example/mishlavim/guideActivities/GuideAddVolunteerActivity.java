@@ -95,7 +95,7 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
                     if (task.isSuccessful()) {
                         fbUser = mAuth.getCurrentUser(); // this is the new user we just added.
                         volunteerID = fbUser.getUid();
-                        volunteer = new Volunteer(userName, FirebaseStrings.volunteerStr(), email, myGuide, "", new HashMap<>(), new HashMap<>());
+                        volunteer = new Volunteer(userName, FirebaseStrings.volunteerStr(), email, myGuide, guideID, new HashMap<>(), new HashMap<>());
                         createNewUser(fbUser, volunteer, guideID);
                     } else
                         showRegisterFailed();
