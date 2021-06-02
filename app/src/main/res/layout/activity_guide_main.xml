@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:theme="@style/Theme.MishlavimPink"
     tools:context=".guideActivities.GuideMainActivity">
-        <TextView
+    <TextView
             android:id="@+id/guideName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
