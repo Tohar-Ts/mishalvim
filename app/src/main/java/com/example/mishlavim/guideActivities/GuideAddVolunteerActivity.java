@@ -124,7 +124,7 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         fbUser = mAuth.getCurrentUser(); // this is the new user we just added.
-                        volunteer = new Volunteer(userName, FirebaseStrings.volunteerStr(), email, myGuide, "", new HashMap<>(), new HashMap<>());
+                        volunteer = new Volunteer(userName, FirebaseStrings.volunteerStr(), email, myGuide, "", new HashMap<>(), "");
                         createNewUser(fbUser, volunteer);
                     } else
                         showRegisterFailed();

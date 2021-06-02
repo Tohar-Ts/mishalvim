@@ -59,7 +59,7 @@
                         android:layout_margin="16sp"
                         android:background="@drawable/orange_textview"
                         android:padding="16sp"
-                        android:text="אני מלל של שאלה \nמה השאלה בעצם? \nאני השאלה"
+                        android:text=""
                         android:textColor="@android:color/black"
                         android:textSize="25dp" />
 
