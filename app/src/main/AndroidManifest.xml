@@ -15,7 +15,8 @@
         <activity
             android:name=".volunteerActivities.VolunteerMainActivity"
             android:label="volunteerMainActivity" />
-        <activity android:name=".volunteerActivities.ViewOldFormActivity" />
+        <activity android:name=".guideActivities.GuideAddVolunteerActivity"/>
+        <activity android:name=".volunteerActivities.VolunteerViewOldFormActivity" />
         <activity android:name=".volunteerActivities.FillOutFormActivity" />
         <activity android:name=".adminActivities.EditFormActivity" />
         <activity android:name=".adminActivities.AdminMainActivity" />

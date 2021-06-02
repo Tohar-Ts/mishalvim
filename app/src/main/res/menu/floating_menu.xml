@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item
+    android:id="@+id/remove_volunteer"
+    android:title="מחק מדריך" />
+    <item
+        android:id="@+id/edit_volunteer"
+        android:title="ערוך מדריך" />
+    <item
+        android:id="@+id/view_volunteer"
+        android:title="צפייה במדריך" />
+</menu>

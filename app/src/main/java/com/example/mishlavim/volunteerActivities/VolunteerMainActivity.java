@@ -20,7 +20,8 @@ public class VolunteerMainActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void viewOldFormActivity(View view) {
-        Intent intent = new Intent(VolunteerMainActivity.this, ViewOldFormActivity.class);
+        Intent intent = new Intent(VolunteerMainActivity.this, VolunteerViewOldFormActivity.class);
         startActivity(intent);
     }
+
 }

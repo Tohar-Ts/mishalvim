@@ -49,5 +49,7 @@ public class FirebaseStrings {
 
     public static String allVolunteersListStr() {  return "allVolunteers";}
 
+    public static String answersStr() {  return "answers";}
+
 
 }
