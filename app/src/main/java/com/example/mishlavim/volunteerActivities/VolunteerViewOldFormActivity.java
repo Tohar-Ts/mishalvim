@@ -14,9 +14,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mishlavim.R;
-import com.example.mishlavim.adminActivities.AdminCreateFormActivity;
 import com.example.mishlavim.model.AnsweredForm;
 import com.example.mishlavim.model.FirebaseStrings;
+import com.example.mishlavim.model.FirestoreMethods;
 import com.example.mishlavim.model.FormTemplate;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -24,6 +24,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
 public class VolunteerViewOldFormActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView formName;
@@ -58,7 +59,7 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
 
         displayFormName();
         updateEditMode();
-        getDataFromFirebase();
+        getAnswersFromFirebase();
     }
 
     @Override
@@ -88,46 +89,45 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
         saveButton.setVisibility(View.GONE);
     }
 
-    private void getDataFromFirebase() {
-        db.collection(FirebaseStrings.answeredFormsStr())
-                .document(clickedFormId)
-                .get()
-                .addOnCompleteListener(VolunteerViewOldFormActivity.this, task -> {
-                    if (task.isSuccessful()) {
-                        Log.d("view old form", "got answers successfully!");
-                        DocumentSnapshot document = task.getResult();
-                        assert document != null;
-                        AnsweredForm answersObj = document.toObject(AnsweredForm.class);
-                        assert answersObj != null;
-                        answers = answersObj.getAnswers();
-                        getTemplateFromFirebase(answersObj.getTemplateId());
-                    } else {
-                        Log.d("view old form", "Error - getting answers failed.", task.getException());
-                        showError();
-                    }
-                });
+    private void getAnswersFromFirebase() {
+        Function<DocumentSnapshot,Void> onSuccess = this::parseDocToAnsweredFormObj;
+        Function<Void,Void> onFailure = this::showError;
+
+        FirestoreMethods.getDocument(FirebaseStrings.answeredFormsStr(), clickedFormId,
+                onSuccess, onFailure );
     }
 
-    private void getTemplateFromFirebase(String templateId) {
-        db.collection(FirebaseStrings.formsTemplatesStr())
-                .document("Cfxrc4aUw5lnTOsNFk5B")
-                .get()
-                .addOnCompleteListener(VolunteerViewOldFormActivity.this, task -> {
-                    if (task.isSuccessful()) {
-                        Log.d("view old form", "got questions successfully!");
-                        DocumentSnapshot document = task.getResult();
-                        assert document != null;
-                        FormTemplate questionsObj = document.toObject(FormTemplate.class);
-                        assert questionsObj != null;
-                        questions = questionsObj.getQuestionArr();
-                        Log.d("view old form", "questions are: " + questions);
-                        displayFormOnScreen();
-                    } else {
-                        Log.d("view old form", "Error - getting questions failed.", task.getException());
-                        showError();
-                    }
-                });
+    private Void parseDocToAnsweredFormObj(DocumentSnapshot document){
+        assert document != null;
+        AnsweredForm answersObj = document.toObject(AnsweredForm.class);
+
+        assert answersObj != null;
+        answers = answersObj.getAnswers();
+
+        getTemplateFromFirebase(answersObj.getTemplateId());
+        return null;
     }
+
+
+    private void getTemplateFromFirebase(String templateId) {
+        Function<DocumentSnapshot,Void> onSuccess = this::parseDocToFormTemplateObj;
+        Function<Void,Void> onFailure = this::showError;
+
+        FirestoreMethods.getDocument(FirebaseStrings.formsTemplatesStr(), "Cfxrc4aUw5lnTOsNFk5B",
+                                        onSuccess, onFailure );
+    }
+
+    private Void parseDocToFormTemplateObj(DocumentSnapshot document) {
+        assert document != null;
+        FormTemplate questionsObj = document.toObject(FormTemplate.class);
+
+        assert questionsObj != null;
+        questions = questionsObj.getQuestionArr();
+
+        displayFormOnScreen();
+        return null;
+    }
+
 
     private void displayFormOnScreen() {
 
@@ -217,6 +217,7 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
 
     private void changeScreenToEditMode() {
         savedAnswersLayout.removeAllViews();
+
         for (Map.Entry<String, String> qEntry : questions.entrySet()) {
             String questionNum = qEntry.getKey();
             String question = qEntry.getValue();
@@ -231,6 +232,7 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
     private void saveEditedAnswers() {
 //        loadingProgressBar.setVisibility(View.VISIBLE);
         ViewGroup group = findViewById(R.id.SavedAnswersLayout);
+
         for (int i = 0, qNum = 1, count = group.getChildCount(); i < count; ++i) {
             View view = group.getChildAt(i);
             if (view instanceof EditText) {
@@ -240,29 +242,28 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
                 Log.d("view old form", "adding answer number: " + qNum);
             }
         }
+
        updateAnswersInFirebase();
     }
 
     private void updateAnswersInFirebase() {
-        db.collection( FirebaseStrings.answeredFormsStr())
-                .document(clickedFormId)
-                .update(FirebaseStrings.answersStr(), answers)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        Log.d("view old form", "new answers updated successfully!");
-                        Toast.makeText(getApplicationContext(), R.string.firebase_success, Toast.LENGTH_SHORT).show();
-                        finish();
-                        startActivity(getIntent());
-                    }
-                    else {
-                        Log.d("view old form", "Error - new answers update failed.", task.getException());
-                        showError();
-                    }
-                });
+        Function<Void,Void> onSuccess = this::reloadScreen;
+        Function<Void,Void> onFailure = this::showError;
+
+        FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), clickedFormId, FirebaseStrings.answersStr(), answers,
+                                                onSuccess, onFailure);
     }
 
-    private void showError() {
+    private Void reloadScreen(Void unused) {
+        Toast.makeText(getApplicationContext(), R.string.firebase_success, Toast.LENGTH_SHORT).show();
+        finish();
+        startActivity(getIntent());
+        return null;
+    }
+
+    private Void showError(Void v) {
         Toast.makeText(getApplicationContext(), R.string.firebase_failed, Toast.LENGTH_SHORT).show();
+        return null;
     }
 
     private int convertFromDpToPixels(int toConvert){

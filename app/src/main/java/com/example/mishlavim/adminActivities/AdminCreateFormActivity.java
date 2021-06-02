@@ -23,6 +23,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 
 public class AdminCreateFormActivity extends AppCompatActivity implements View.OnClickListener {
+
     private EditText formNameEditText, question1EditText, question2EditText, question3EditText;
     private Button addQuestionButton, saveButton;
     private ProgressBar loadingProgressBar;
@@ -95,8 +96,11 @@ public class AdminCreateFormActivity extends AppCompatActivity implements View.O
     }
 
     private void processNewForm() {
+
         loadingProgressBar.setVisibility(View.VISIBLE);
+
         HashMap<String, String> questionsMap = new HashMap<>();
+
         ViewGroup group = findViewById(R.id.questionsLayout);
         for (int i = 0, count = group.getChildCount(); i < count; ++i) {
             View view = group.getChildAt(i);
@@ -105,7 +109,9 @@ public class AdminCreateFormActivity extends AppCompatActivity implements View.O
                 questionsMap.put(i+"", question);
             }
         }
+
         String formName = formNameEditText.getText().toString().trim();
+
         addFormToDataBase(formName, questionsMap);
     }
 
