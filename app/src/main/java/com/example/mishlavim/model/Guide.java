@@ -104,6 +104,7 @@ public class Guide extends User {
                     else
                         Log.d("Guide", "Error - Guide update failed.", task2.getException());
                 });
+        // TODO: 6/2/2021 also add to admin's all volunteers list
     }
 
     /**
@@ -127,7 +128,7 @@ public class Guide extends User {
      * @param voluID - volunteer ID to be delete
      */
     public static void deleteVolunteer(String guideID, String voluID) {
-      
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         //Delete Volunteer document.
@@ -139,26 +140,44 @@ public class Guide extends User {
                 Log.d("Guide", "Error - Volunteer delete failed.", task2.getException());
         });
 
-       
+
         db.collection(FirebaseStrings.usersStr())
                 .document(guideID).update(FirebaseStrings.allVolunteersListStr(), FieldValue.arrayRemove(voluID))
-                .addOnCompleteListener(task2 -> {
-                    if (task2.isSuccessful())
-                        Log.d("Guide", "Volu item successfully deleted!");
-                        else
-                        Log.d("Guide", "Error - Volu item delete failed.", task2.getException());
-        });
-
-        // TODO: 6/1/2021 change the  
-        db.collection(FirebaseStrings.usersStr())
-                .document(Global.getGlobalInstance().getAid()).update(FirebaseStrings.myVolunteerStr(), FieldValue.arrayRemove(voluID))
                 .addOnCompleteListener(task2 -> {
                     if (task2.isSuccessful())
                         Log.d("Guide", "Volu item successfully deleted!");
                     else
                         Log.d("Guide", "Error - Volu item delete failed.", task2.getException());
                 });
+
+        // TODO: 6/1/2021 change the
+        db.collection(FirebaseStrings.usersStr()).
+                whereEqualTo(FirebaseStrings.typeStr(), FirebaseStrings.adminStr())
+                .get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                if (Objects.requireNonNull(task.getResult()).isEmpty())
+                    Log.d("Admin class", "No admin documents found.");
+                else {
+                    //succeed at getting the admin id
+                    AtomicReference<String> adminId = new AtomicReference<>();
+                    for (QueryDocumentSnapshot document : task.getResult())
+                        adminId.set(document.getId());
+
+                    db.collection(FirebaseStrings.usersStr())
+                            .document(adminId.get())
+                            .update(FirebaseStrings.allVolunteersListStr(), FieldValue.arrayRemove(voluID))
+                            .addOnCompleteListener(task2 -> {
+                                if (task2.isSuccessful())
+                                    Log.d("Guide", "Volu item successfully deleted!");
+                                else
+                                    Log.d("Guide", "Error - Volu item delete failed.", task2.getException());
+                            });
+
+                }
+            }
+        });
     }
+
 
     public HashMap<String, String> getMyVolunteers() {
         return myVolunteers;
