@@ -42,6 +42,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         emailEditText = findViewById(R.id.email);
         passwordEditText = findViewById(R.id.password);
+//        passwordEditText.setTextDirection(View.TEXT_DIRECTION_LTR);
         Button loginButton = findViewById(R.id.login);
         loadingProgressBar = findViewById(R.id.loading);
 

@@ -34,6 +34,8 @@
 
     <EditText
         android:id="@+id/email"
+        android:focusable="true"
+        android:cursorVisible="true"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
@@ -66,7 +68,6 @@
         app:layout_constraintEnd_toEndOf="@+id/email"
         app:layout_constraintStart_toStartOf="@+id/email"
         app:layout_constraintTop_toBottomOf="@+id/email"
-
         app:passwordToggleDrawable="@drawable/icon_selector"
         app:passwordToggleEnabled="true">
 
@@ -76,9 +77,9 @@
             android:layout_height="60dp"
             android:autofillHints="@string/prompt_password"
             android:background="@drawable/custom_input"
+            android:hint="@string/prompt_password"
             android:gravity="center|end"
             android:textAlignment="viewEnd"
-            android:hint="@string/prompt_password"
             android:imeOptions="actionDone"
             android:inputType="textPassword"
             android:paddingStart="12dp"

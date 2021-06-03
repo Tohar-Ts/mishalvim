@@ -2,41 +2,132 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/adminOptions"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/Theme.MishlavimPink"
-    tools:context=".adminActivities.AdminMainActivity"
-    android:id="@+id/adminOptions">
+    tools:context=".adminActivities.AdminMainActivity">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/menu_admin"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layoutDirection="rtl"
-        app:layout_constraintVertical_bias="1.0"
-        app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/menu_admin"
+    <!--    <com.google.android.material.appbar.MaterialToolbar-->
+    <!--        android:id="@+id/menu_admin"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:layoutDirection="rtl"-->
+    <!--        app:layout_constraintVertical_bias="1.0"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        app:menu="@menu/menu_admin"-->
 
-       />
-<!--    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--    app:layout_constraintTop_toTopOf="parent"-->
-<!--//tools:layout_editor_absoluteX="0dp"-->
-    <TextView
-        android:id="@+id/WelcomeAdmin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:fontFamily="@font/alef"
-        android:gravity="right"
-        android:paddingStart="40dp"
-        android:paddingEnd="60dp"
-        android:text="@string/welcome_admin"
-        android:textColor="@color/dark_gray"
-        android:textSize="30sp"
+    <!--       />-->
+    <!--    app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--    app:layout_constraintTop_toTopOf="parent"-->
+    <!--//tools:layout_editor_absoluteX="0dp"-->
+    <ScrollView
+        android:id="@+id/questionsScroll"
+        android:layout_width="0dp"
+        android:layout_height="531dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/guideListPrompt"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TableLayout
+            android:id="@+id/root"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:stretchColumns="1">
+
+            <TableRow
+                android:id="@+id/first_row"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/borders"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/addForm"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/ic_round_more_horiz"
+                    android:gravity="center" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="40dp"
+                    android:gravity="start"
+                    android:text="השם שלי"
+                    android:textColor="@color/black"
+                    android:textSize="25sp" />
+
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/second_row"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/borders"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/more"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/ic_round_more_horiz"
+                    android:gravity="center" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="40dp"
+                    android:gravity="start"
+                    android:text="אני חניך נחמד"
+                    android:textColor="@color/black"
+                    android:textSize="25sp" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/third_row"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/borders"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/more2"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/ic_round_more_horiz"
+                    android:gravity="center" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="40dp"
+                    android:gravity="start"
+                    android:text="אני חניך טוב"
+                    android:textColor="@color/black"
+                    android:textSize="25sp" />
+
+
+            </TableRow>
+        </TableLayout>
+
+    </ScrollView>
 
     <TextView
         android:id="@+id/guideListPrompt"
@@ -48,126 +139,51 @@
         android:paddingStart="40dp"
         android:paddingEnd="60dp"
         android:text="רשימת המדריכים שלך"
-        android:textColor="@color/dark_gray"
+        android:textColor="@color/black"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/WelcomeAdmin" />
 
-    <ScrollView
-        android:id="@+id/questionsScroll"
+    <TextView
+        android:id="@+id/WelcomeAdmin"
         android:layout_width="match_parent"
-        android:layout_height="531dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
-        app:layout_constraintTop_toBottomOf="@+id/guideListPrompt"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="0dp">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/alef"
+        android:gravity="right"
+        android:paddingStart="40dp"
+        android:paddingEnd="60dp"
+        android:text="@string/welcome_admin"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TableLayout
-            android:id="@+id/root"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_marginStart="10dp"
-            android:stretchColumns="1">
-
-            <TableRow
-                android:id="@+id/first_row"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:padding="10dp"
-                android:layout_marginBottom="15dp"
-                android:background="@drawable/borders">
-
-                <ImageView
-                    android:id="@+id/addForm"
-                    android:layout_width="40dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/ic_round_more_horiz"
-                    android:gravity="center" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="start"
-                    android:text="השם שלי"
-                    android:layout_marginEnd="40dp"
-                    android:textSize="25sp" />
-
-
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/second_row"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:padding="10dp"
-                android:layout_marginBottom="15dp"
-                android:background="@drawable/borders">
-
-                <ImageView
-                    android:id="@+id/more"
-                    android:layout_width="40dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/ic_round_more_horiz"
-                    android:gravity="center" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="start"
-                    android:text="אני חניך נחמד"
-                    android:layout_marginEnd="40dp"
-                    android:textSize="25sp" />
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/third_row"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:padding="10dp"
-                android:layout_marginBottom="15dp"
-                android:background="@drawable/borders">
-
-                <ImageView
-                    android:id="@+id/more2"
-                    android:layout_width="40dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/ic_round_more_horiz"
-                    android:gravity="center" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="start"
-                    android:text="אני חניך טוב"
-                    android:layout_marginEnd="40dp"
-                    android:textSize="25sp" />
-
-
-            </TableRow>
-        </TableLayout>
-
-    </ScrollView>
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layoutDirection="rtl"
+        app:theme="@style/MyTabTextStyle"
+        app:menu="@menu/menu_admin"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:menu="@menu/admin_buttom_navigation_menu"
-        tools:layout_editor_absoluteX="0dp" />
+        app:menu="@menu/admin_buttom_navigation_menu" />
 
     <!--    -->
     <!--    <ImageButton-->
