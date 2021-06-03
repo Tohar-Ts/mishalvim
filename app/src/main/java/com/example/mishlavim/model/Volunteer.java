@@ -15,8 +15,8 @@ import java.util.HashMap;
 public class Volunteer extends User {
     private String myGuide;
     private String myGuideId;
-    private HashMap<String, AnsweredForm> finishedForms;
-    private HashMap<String, AnsweredForm> openForms;
+    private HashMap<String, String> finishedForms;
+    private String openForm;
 
     /**
      * Empty constructor.
@@ -27,12 +27,12 @@ public class Volunteer extends User {
     /**
      * Parameterized constructor.
      */
-    public Volunteer(String name, String type, String email, String myGuide, String myGuideId, HashMap<String, AnsweredForm> finishedForms, HashMap<String, AnsweredForm> openForms) {
+    public Volunteer(String name, String type, String email, String myGuide, String myGuideId, HashMap<String, String> finishedForms, String openForm) {
         super(name, type, email);
         this.myGuide = myGuide;
         this.myGuideId = myGuideId;
         this.finishedForms = finishedForms;
-        this.openForms = openForms;
+        this.openForm = openForm;
     }
 
 
@@ -116,20 +116,20 @@ public class Volunteer extends User {
         this.myGuide = myGuide;
     }
 
-    public HashMap<String, AnsweredForm> getFinishedForms() {
+    public HashMap<String, String> getFinishedForms() {
         return finishedForms;
     }
 
-    public void setFinishedForms(HashMap<String, AnsweredForm> finishedForms) {
+    public void setFinishedForms(HashMap<String, String> finishedForms) {
         this.finishedForms = finishedForms;
     }
 
-    public HashMap<String, AnsweredForm> getOpenForms() {
-        return openForms;
+    public String getOpenForm() {
+        return openForm;
     }
 
-    public void setOpenForms(HashMap<String, AnsweredForm> openForms) {
-        this.openForms = openForms;
+    public void setOpenForm(String openForm) {
+        this.openForm = openForm;
     }
 
     public String getMyGuideId() {

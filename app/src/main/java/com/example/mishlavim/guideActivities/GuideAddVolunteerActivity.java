@@ -3,27 +3,32 @@ package com.example.mishlavim.guideActivities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.mishlavim.R;
 import com.example.mishlavim.dialogs.AddUserDialog;
 import com.example.mishlavim.dialogs.DeleteUser;
-import com.example.mishlavim.model.Admin;
 import com.example.mishlavim.model.FirebaseStrings;
 import com.example.mishlavim.model.Global;
 import com.example.mishlavim.model.Guide;
 import com.example.mishlavim.model.Validation;
 import com.example.mishlavim.model.Volunteer;
+import com.example.mishlavim.volunteerActivities.FinishedFormActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 
@@ -37,8 +42,7 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
     private FirebaseFirestore db;
     private Validation validation;
     private FirebaseUser fbUser;
-    private Volunteer volunteer;
-    private String guideID, volunteerID;
+    private   Volunteer volunteer;
 
     private Global globalInstance = Global.getGlobalInstance();
     private Guide guide = globalInstance.getGuideInstance();
@@ -47,6 +51,33 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide_add_volunteer);
+
+        //init a the navbar selector variable
+        BottomNavigationView navBarButtons=(BottomNavigationView) findViewById(R.id.bottom_navigation);
+        //set the current placement of the cursor on "home"
+        navBarButtons.setSelectedItemId(R.id.add_user);
+
+        //activate a on click listener for the other buttons:
+        navBarButtons.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
+
+                switch(item.getItemId()){
+                    case R.id.add_user:
+                        return true;
+                    case R.id.go_home:
+                        startActivity(new Intent(getApplicationContext(),GuideMainActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.forms:
+                        startActivity(new Intent(getApplicationContext(), FinishedFormActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                }
+                return false;
+            }
+        });
+
 
         emailEditText = findViewById(R.id.newEmail);
         userNameEditText = findViewById(R.id.newUserName);
@@ -88,24 +119,21 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
 
     private void registerToFirebase(String userName, String email, String password){
         String myGuide = guide.getName();
-        guideID = mAuth.getUid();
 
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         fbUser = mAuth.getCurrentUser(); // this is the new user we just added.
-                        volunteerID = fbUser.getUid();
-                        volunteer = new Volunteer(userName, FirebaseStrings.volunteerStr(), email, myGuide, guideID, new HashMap<>(), new HashMap<>());
-                        createNewUser(fbUser, volunteer, guideID);
+                        volunteer = new Volunteer(userName, FirebaseStrings.volunteerStr(), email, myGuide, "", new HashMap<>(), "");
+                        createNewUser(fbUser, volunteer);
                     } else
                         showRegisterFailed();
                 });
     }
 
-    private void createNewUser(FirebaseUser fbUser, Volunteer volunteer, String guideID) {
-        Guide.addVolunteerByGuideId(guideID,fbUser.getUid(), volunteer);
+    private void createNewUser(FirebaseUser fbUser, Volunteer volunteer) {
+        Guide.addVolunteerByGuideName(fbUser.getUid(), volunteer);
         addUserToDb(fbUser, volunteer);
-        Admin.addVolunteer(fbUser.getUid(), volunteer.getName());
     }
 
     private void addUserToDb(FirebaseUser fbUser, Volunteer volunteer) {
@@ -158,7 +186,7 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
     @Override
     public void onDeletePositiveClick(DialogFragment dialog) {
         loadingProgressBar.setVisibility(View.VISIBLE);
-        guide.deleteVolunteer(guideID, volunteerID);
+//        guide.deleteVolunteer(fbUser,db, volunteer);
         loadingProgressBar.setVisibility(View.GONE);
         finish();
 //        startActivity(new Intent(GuideAddVolunteerActivity.this, GuideMainActivity.class));

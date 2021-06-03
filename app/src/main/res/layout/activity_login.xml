@@ -66,7 +66,6 @@
         app:layout_constraintEnd_toEndOf="@+id/email"
         app:layout_constraintStart_toStartOf="@+id/email"
         app:layout_constraintTop_toBottomOf="@+id/email"
-
         app:passwordToggleDrawable="@drawable/icon_selector"
         app:passwordToggleEnabled="true">
 

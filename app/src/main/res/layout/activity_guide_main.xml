@@ -74,7 +74,9 @@
                         android:layout_marginStart="20dp"
                         android:layout_height="match_parent"
                         android:background="@drawable/ic_round_more_horiz"
-                        android:gravity="center" />
+                        android:gravity="center"/>
+                    <!-- android:onClick="onButtonClickEvent"-->
+
 
                     <TextView
                         android:layout_width="wrap_content"

@@ -62,7 +62,6 @@ public class AdminAddNewUserActivity extends AppCompatActivity implements View.O
         setSpinner();
 
         mAuth = FirebaseAuth.getInstance();
-        guideID = mAuth.getUid();
         db = FirebaseFirestore.getInstance();
 
         validation = new Validation(emailEditText, userNameEditText, passwordEditText, verifyPasswordEditText
@@ -157,8 +156,8 @@ public class AdminAddNewUserActivity extends AppCompatActivity implements View.O
         }
 
         else { //volunteer
-            user = new Volunteer(userName, newUserType, email, guideName, guideID, new HashMap<>(), new HashMap<>());
-            Guide.addVolunteerByGuideId(guideID , fbUser.getUid(), (Volunteer) user);
+            user = new Volunteer(userName, newUserType, email, guideName, guideID, new HashMap<>(),"");
+            Guide.addVolunteerByGuideName(fbUser.getUid(), (Volunteer) user);
             Admin.addVolunteer(fbUser.getUid(), userName);
         }
 

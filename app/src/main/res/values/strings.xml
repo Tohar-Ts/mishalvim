@@ -66,6 +66,7 @@
     <string name="empty_password">הסיסמה הינה שדה חובה, אנא מלא אותו</string>
     <string name="empty_verifyPassword">אנא אמת את הסיסמה</string>
     <string name="invalid_verifyPasswordSame">הסיסמאות אינן תואמות, אנא נסה שנית</string>
-
+    <string name="firebase_failed">תקלה בהצגת המידע, נסה שנית מאוחר יותר</string>
+    <string name="firebase_success">המידע עודכן בהצלחה</string>
 
 </resources>
