@@ -10,12 +10,15 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".model.UpdateDetailsActivity"></activity>
+        <activity android:name=".ChangeDetailsActivity" />
         <activity android:name=".guideActivities.GuideMainActivity" />
+        <activity android:name=".guideActivities.GuideAddVolunteerActivity" />
         <activity android:name=".volunteerActivities.FinishedFormActivity" />
         <activity
             android:name=".volunteerActivities.VolunteerMainActivity"
             android:label="volunteerMainActivity" />
-        <activity android:name=".guideActivities.GuideAddVolunteerActivity"/>
+        <activity android:name=".guideActivities.GuideAddVolunteerActivity" />
         <activity android:name=".volunteerActivities.VolunteerViewOldFormActivity" />
         <activity android:name=".volunteerActivities.FillOutFormActivity" />
         <activity android:name=".adminActivities.EditFormActivity" />

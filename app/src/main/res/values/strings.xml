@@ -71,5 +71,7 @@
     <string name="invalid_verifyPasswordSame">הסיסמאות אינן תואמות, אנא נסה שנית</string>
     <string name="firebase_failed">תקלה בהצגת המידע, נסה שנית מאוחר יותר</string>
     <string name="firebase_success">המידע עודכן בהצלחה</string>
+    <string name="update_details">עדכון פרטים</string>
+    <string name="prompt_phone">טלפון</string>
 
 </resources>
