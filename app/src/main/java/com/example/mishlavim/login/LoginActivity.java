@@ -112,13 +112,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             Admin admin = document.toObject(Admin.class);
             globalInstance.setAdminInstance(admin);
-            startActivity(new Intent(LoginActivity.this, AdminMainActivity.class));
+//            startActivity(new Intent(LoginActivity.this, AdminMainActivity.class));
+            startActivity(new Intent(LoginActivity.this, AdminAddNewUserActivity.class));
 
         } else if (type.equals(FirebaseStrings.guideStr())) {
 
             Guide guide = document.toObject(Guide.class);
             globalInstance.setGuideInstance(guide);
-            startActivity(new Intent(LoginActivity.this, GuideMainActivity.class));
+            startActivity(new Intent(LoginActivity.this, GuideAddVolunteerActivity.class));
+//            startActivity(new Intent(LoginActivity.this, GuideMainActivity.class));
 
         } else if (type.equals(FirebaseStrings.volunteerStr())) {
             Volunteer volu = document.toObject(Volunteer.class);
