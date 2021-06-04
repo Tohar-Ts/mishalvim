@@ -31,6 +31,7 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="more_light_green">#1bdece</color>
+    <color name="red">#FF0000</color>
     //final color palate
     <color name="purple">#892389</color>
     <color name="pink">#E848A0</color>

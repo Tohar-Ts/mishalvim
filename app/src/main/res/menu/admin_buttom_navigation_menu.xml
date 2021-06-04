@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/guides"
+        android:enabled="true"
+        android:icon="@drawable/ic_person"
+        android:title="מדריכים" />
+    <item
+        android:id="@+id/volunteers"
+        android:enabled="true"
+        android:icon="@drawable/ic_volu"
+        android:title="חניכים" />
+    <item
+        android:id="@+id/add_user"
+        android:enabled="true"
+        android:icon="@drawable/ic_person_add"
+        android:title="הוסף משתמש" />
+    <item
+        android:id="@+id/subject"
+        android:enabled="true"
+        android:icon="@drawable/ic_subject"
+        android:title="טפסים" />
+
+    <item
+        android:id="@+id/forms"
+        android:enabled="true"
+        android:icon="@drawable/ic_report"
+        android:title="דוחות"
+     />
+</menu>
