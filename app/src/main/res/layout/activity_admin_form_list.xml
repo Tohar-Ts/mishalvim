@@ -11,35 +11,165 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <Button
-
-            android:id="@+id/buttonFillNewForm"
-            android:layout_width="230dp"
-            android:layout_height="90dp"
-            android:layout_margin="15dp"
-            android:layout_marginTop="108dp"
-            android:background="@drawable/custom_pink_button"
-            android:onClick="AdminCreateFormActivity"
-            android:text="@string/add_new_form"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="23sp"
-            android:textStyle="bold" />
 
 
-        <TextView
-            android:id="@+id/existing_forms"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-black"
-            android:text="@string/existing_forms"
-            android:textAlignment="center"
-            android:textColor="@color/darker_other_blue"
-            android:textSize="30sp" />
-        <ListView
-            android:id="@+id/listview"
-            android:layout_margin="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="400dp"/>
+        <Space
+            android:id="@+id/newformspace0"
+            android:layout_width="match_parent"
+            android:layout_height="25dp" />
+
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/buttonFillForm1"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_margin="15dp"
+                    android:layout_marginTop="72dp"
+                    android:background="@drawable/custom_button"
+                    android:backgroundTint="#CCE4F6"
+                    android:onClick="viewOldFormActivity"
+                    android:text="@string/buttonName"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/buttonFillForm2"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_margin="15dp"
+                    android:layout_marginTop="72dp"
+                    android:background="@drawable/custom_button"
+                    android:backgroundTint="#CCE4F6"
+                    android:onClick="viewOldFormActivity"
+                    android:text="@string/button2"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/buttonFillForm3"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:layout_marginTop="72dp"
+                    android:background="@drawable/custom_button"
+                    android:onClick="viewOldFormActivity"
+                    android:text="@string/button3"
+                    android:textAlignment="center"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/buttonFillForm4"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_margin="15dp"
+                    android:layout_marginTop="72dp"
+                    android:background="@drawable/custom_button"
+                    android:backgroundTint="#CCE4F6"
+                    android:text="@string/button4"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/buttonFillForm5"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:layout_marginTop="72dp"
+                    android:background="@drawable/custom_button"
+                    android:backgroundTint="#CCE4F6"
+                    android:onClick="viewOldFormActivity"
+                    android:text="@string/button5"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/buttonFillForm6"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_margin="15dp"
+                    android:layout_marginTop="72dp"
+                    android:background="@drawable/custom_button"
+                    android:backgroundTint="#CCE4F6"
+                    android:text="@string/button6"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/buttonFillForm7"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:layout_marginTop="72dp"
+                    android:background="@drawable/custom_button"
+                    android:backgroundTint="#CCE4F6"
+                    android:onClick="viewOldFormActivity"
+                    android:text="@string/button7"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/buttonFillForm8"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_margin="15dp"
+                    android:layout_marginTop="72dp"
+                    android:background="@drawable/custom_button"
+                    android:backgroundTint="#CCE4F6"
+                    android:text="@string/button8"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </TableRow>
+        </TableLayout>
+        <Space
+            android:id="@+id/newformspace2"
+            android:layout_width="match_parent"
+            android:layout_height="100dp" />
     </LinearLayout>
 </ScrollView>

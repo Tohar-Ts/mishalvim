@@ -19,7 +19,7 @@
             android:layout_marginTop="108dp"
             android:background="@drawable/custom_pink_button"
             android:onClick="AdminAddNewUserActivity"
-            android:text="@string/add_new_guide"
+
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="23sp"
