@@ -7,6 +7,7 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,17 +17,34 @@ import android.widget.Space;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
+
 import com.example.mishlavim.R;
+<<<<<<< HEAD
+import com.example.mishlavim.adminActivities.AdminMainActivity;
+import com.example.mishlavim.login.LoginActivity;
+import com.example.mishlavim.model.Admin;
+=======
+import com.example.mishlavim.dialogs.DeleteUser;
+import com.example.mishlavim.model.Firebase.AuthenticationMethods;
+>>>>>>> 4acecd10840f296a9d7a012be1cac7fc70f1a2dc
+import com.example.mishlavim.model.Firebase.FirebaseStrings;
+import com.example.mishlavim.model.Firebase.FirestoreMethods;
 import com.example.mishlavim.model.Global;
 import com.example.mishlavim.model.Guide;
+import com.example.mishlavim.model.Volunteer;
+import com.example.mishlavim.volunteerActivities.VolunteerMainActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.example.mishlavim.volunteerActivities.VolunteerMainActivity;
 import java.util.HashMap;
+import java.util.Objects;
 
-public class GuideMainActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener, BottomNavigationView.OnNavigationItemSelectedListener {
+public class GuideMainActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener, BottomNavigationView.OnNavigationItemSelectedListener, DeleteUser.deleteUserListener {
 
     private TextView guideName;
     private TableLayout voluListLayout;
@@ -40,7 +58,7 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_guide_main);
 
         guideName = findViewById(R.id.guideName);
-        navBarButtons = findViewById(R.id.bottom_navigation);
+        navBarButtons = findViewById(R.id.admin_bottom_navigation);
         voluListLayout = findViewById(R.id.volu_list_layout);
 
         //set the current placement of the cursor on "home"
@@ -59,8 +77,11 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.go_home)
+        if (item.getItemId() == R.id.go_home){
+            finish();
+            startActivity(new Intent(getApplicationContext(), GuideMainActivity.class));
             return true;
+        }
         else if (item.getItemId() == R.id.add_user) {
                startActivity(new Intent(getApplicationContext(), GuideAddVolunteerActivity.class));
                overridePendingTransition(0, 0);
@@ -90,10 +111,12 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
     public boolean onMenuItemClick(MenuItem item) {
         //delete volunteer
         if (item.getItemId() == R.id.remove_volunteer){
-          //TODO - POP ARE YOU SURE? DIALOG
+            DialogFragment newFragment = new DeleteUser();
+            newFragment.show(getSupportFragmentManager(), "deleteUser");
             return true;
         }
         else if (item.getItemId() == R.id.view_volunteer) {
+            FirestoreMethods.getDocument(FirebaseStrings.usersStr(),  guide.getMyVolunteers().get(clickedRowName), this::getUserDocSuccess, this::getUserDocFailed);
             Log.d("clicked:", clickedRowName + " view" );
             return true;
         }
@@ -182,5 +205,60 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
     private int convertFromDpToPixels(int toConvert){
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, toConvert, getResources().getDisplayMetrics());
     }
+
+<<<<<<< HEAD
+    private Void getUserDocSuccess(DocumentSnapshot doc){
+        assert doc != null;
+        Global globalInstance = Global.getGlobalInstance();
+        Volunteer volu = doc.toObject(Volunteer.class);
+        globalInstance.setVoluInstance(volu);
+        startActivity(new Intent(GuideMainActivity.this, VolunteerMainActivity.class));
+        return null;
+    }
+
+    private Void getUserDocFailed(Void unused){
+        showError(R.string.login_failed);
+        return null;
+    }
+
+
+
+    private void showError(Integer msg) {
+        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+    }
+
+=======
+    @Override
+    public void onDeletePositiveClick(DialogFragment dialog) {
+        FirestoreMethods.deleteDocument(FirebaseStrings.usersStr(),guide.getMyVolunteers().get(clickedRowName),this::onDocumentDeleteSuccess, this::onDeleteFailed);
+
+
+    }
+
+    @Override
+    public void onDeleteNegativeClick(DialogFragment dialog) {
+
+    }
+
+    public Void onDocumentDeleteSuccess(Void noUse){
+        FirestoreMethods.deleteMapKey(FirebaseStrings.usersStr(), AuthenticationMethods.getCurrentUserID(),FirebaseStrings.myVolunteerStr(),clickedRowName,this::onKeyDeleteSuccess,this::onDeleteFailed);
+        return null;
+    }
+
+    public Void onDeleteFailed(Void noUse){
+        Toast.makeText(GuideMainActivity.this, "המחיקה נכשלה! באסה!", Toast.LENGTH_SHORT).show();
+        return null;
+    }
+    public Void onKeyDeleteSuccess(Void noUse){
+        Toast.makeText(GuideMainActivity.this, "המשתמש נמחק בהצלחה! אהוי!", Toast.LENGTH_SHORT).show();
+        reloadScreen();
+        return null;
+    }
+
+    private void reloadScreen() {
+        finish();
+        startActivity(getIntent());
+    }
+>>>>>>> 4acecd10840f296a9d7a012be1cac7fc70f1a2dc
 
 }

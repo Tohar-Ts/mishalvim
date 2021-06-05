@@ -19,11 +19,12 @@ import com.example.mishlavim.R;
 import com.example.mishlavim.dialogs.AddUserDialog;
 import com.example.mishlavim.dialogs.DeleteUser;
 import com.example.mishlavim.login.Validation;
+import com.example.mishlavim.model.Firebase.AuthenticationMethods;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
+import com.example.mishlavim.model.Firebase.FirestoreMethods;
 import com.example.mishlavim.model.Global;
 import com.example.mishlavim.model.Guide;
 import com.example.mishlavim.model.Volunteer;
-import com.example.mishlavim.volunteerActivities.VolunteerFinishedFormActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -31,7 +32,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 
-public class GuideAddVolunteerActivity extends AppCompatActivity implements View.OnClickListener, AddUserDialog.addUserDialogListener, DeleteUser.deleteUserListener  {
+public class GuideAddVolunteerActivity extends AppCompatActivity implements View.OnClickListener, AddUserDialog.addUserDialogListener, DeleteUser.deleteUserListener, BottomNavigationView.OnNavigationItemSelectedListener  {
     private EditText emailEditText;
     private EditText userNameEditText;
     private EditText passwordEditText;
@@ -41,7 +42,7 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
     private Validation validation;
     private FirebaseUser fbUser;
     private Volunteer volunteer;
-
+    BottomNavigationView navBarButtons;
     private Global globalInstance = Global.getGlobalInstance();
     private Guide guide = globalInstance.getGuideInstance();
 
@@ -51,32 +52,9 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
         setContentView(R.layout.activity_guide_add_volunteer);
 
         //init a the navbar selector variable
-        BottomNavigationView navBarButtons=(BottomNavigationView) findViewById(R.id.bottom_navigation);
+        navBarButtons=(BottomNavigationView) findViewById(R.id.admin_bottom_navigation);
         //set the current placement of the cursor on "home"
         navBarButtons.setSelectedItemId(R.id.add_user);
-
-        //activate a on click listener for the other buttons:
-        navBarButtons.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                switch(item.getItemId()){
-                    case R.id.add_user:
-                        return true;
-                    case R.id.go_home:
-                        startActivity(new Intent(getApplicationContext(),GuideMainActivity.class));
-                        overridePendingTransition(0, 0);
-                        return true;
-                    case R.id.forms:
-                        startActivity(new Intent(getApplicationContext(), VolunteerFinishedFormActivity.class));
-                        overridePendingTransition(0, 0);
-                        return true;
-                }
-                return false;
-            }
-        });
-
-
         emailEditText = findViewById(R.id.newEmail);
         userNameEditText = findViewById(R.id.newUserName);
         passwordEditText = findViewById(R.id.newPassword);
@@ -89,10 +67,27 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
 
         validation = new Validation(emailEditText,userNameEditText, passwordEditText, verifyPasswordEditText
                 , loadingProgressBar, getResources());
-
+        navBarButtons.setOnNavigationItemSelectedListener(this);
         addButton.setOnClickListener(this);
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.add_user:
+                return true;
+            case R.id.go_home:
+                startActivity(new Intent(getApplicationContext(), GuideMainActivity.class));
+                overridePendingTransition(0, 0);
+                return true;
+            case R.id.forms:
+                startActivity(new Intent(getApplicationContext(), GuideReportsActivity.class));
+                overridePendingTransition(0, 0);
+                return true;
+
+        }
+        return false;
+    }
     @Override
     public void onClick(View v) {
         registerUser();
@@ -117,12 +112,14 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
 
     private void registerToFirebase(String userName, String email, String password){
         String myGuide = guide.getName();
+        String guideID = mAuth.getUid();
 
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         fbUser = mAuth.getCurrentUser(); // this is the new user we just added.
-//                        volunteer = new Volunteer(userName, FirebaseStrings.volunteerStr(), email, myGuide, "", new HashMap<>(), "");
+                        volunteer = new Volunteer(userName, FirebaseStrings.volunteerStr(), email, myGuide, guideID, new HashMap<>(), "",false);
+                        // TODO: 6/5/2021 FIX THIS CONS.
                         createNewUser(fbUser, volunteer);
                     } else
                         showRegisterFailed();
@@ -137,13 +134,12 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
     private void addUserToDb(FirebaseUser fbUser, Volunteer volunteer) {
         String usersCollection = FirebaseStrings.usersStr();
         String userId = fbUser.getUid();
-
         db.collection(usersCollection)
                 .document(userId)
                 .set(volunteer)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        Toast.makeText(GuideAddVolunteerActivity.this, "Volunteer was added successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(GuideAddVolunteerActivity.this, "המשתמש נוצר בהצלחה!", Toast.LENGTH_SHORT).show();
                         userHasAdd();
                         loadingProgressBar.setVisibility(View.GONE);
 
@@ -184,11 +180,9 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
     @Override
     public void onDeletePositiveClick(DialogFragment dialog) {
         loadingProgressBar.setVisibility(View.VISIBLE);
-//        guide.deleteVolunteer(fbUser,db, volunteer);
+        FirestoreMethods.deleteDocument(FirebaseStrings.usersStr(),guide.getMyVolunteers().get(userNameEditText.getText().toString().trim()),this::onDocumentDeleteSuccess, this::onDeleteFailed);
         loadingProgressBar.setVisibility(View.GONE);
         finish();
-//        startActivity(new Intent(GuideAddVolunteerActivity.this, GuideMainActivity.class));
-
     }
 
 
@@ -196,5 +190,26 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
     public void onDeleteNegativeClick(DialogFragment dialog) {
         DialogFragment newFragment = new AddUserDialog();
         newFragment.show(getSupportFragmentManager(), "addUser");
+    }
+
+
+    public Void onDocumentDeleteSuccess(Void noUse){
+        FirestoreMethods.deleteMapKey(FirebaseStrings.usersStr(), AuthenticationMethods.getCurrentUserID(),FirebaseStrings.myVolunteerStr(),userNameEditText.getText().toString().trim(),this::onKeyDeleteSuccess,this::onDeleteFailed);
+        return null;
+    }
+
+    public Void onDeleteFailed(Void noUse){
+        Toast.makeText(GuideAddVolunteerActivity.this, "המחיקה נכשלה! באסה!", Toast.LENGTH_SHORT).show();
+        return null;
+    }
+    public Void onKeyDeleteSuccess(Void noUse){
+        Toast.makeText(GuideAddVolunteerActivity.this, "המשתמש נמחק בהצלחה! אהוי!", Toast.LENGTH_SHORT).show();
+        reloadScreen();
+        return null;
+    }
+
+    private void reloadScreen() {
+        finish();
+        startActivity(getIntent());
     }
 }

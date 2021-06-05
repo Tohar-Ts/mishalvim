@@ -7,235 +7,6 @@
     android:layout_height="match_parent"
     android:theme="@style/Theme.MishlavimPink">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/menu_admin"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layoutDirection="rtl"
-            app:layout_constraintVertical_bias="1.0"
-            app:layout_constraintTop_toTopOf="parent"
-            app:menu="@menu/setting_menu"/>
-
-
-<!--    <ScrollView-->
-<!--        android:id="@+id/questionsScroll"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="531dp"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:layout_marginBottom="20dp"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/guideListPrompt"-->
-<!--        app:layout_constraintVertical_bias="0.0">-->
-
-<!--        <TableLayout-->
-<!--            android:id="@+id/root"-->
-<!--            android:layout_width="fill_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="10dp"-->
-<!--            android:layout_marginEnd="10dp"-->
-<!--            android:stretchColumns="1">-->
-
-<!--            <TableRow-->
-<!--                android:id="@+id/first_row"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="60dp"-->
-<!--                android:layout_marginBottom="15dp"-->
-<!--                android:background="@drawable/borders"-->
-<!--                android:padding="10dp">-->
-
-<!--                <ImageView-->
-<!--                    android:id="@+id/addForm"-->
-<!--                    android:layout_width="40dp"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:layout_marginStart="20dp"-->
-<!--                    android:layout_marginEnd="20dp"-->
-<!--                    android:background="@drawable/ic_round_more_horiz"-->
-<!--                    android:gravity="center" />-->
-
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginEnd="40dp"-->
-<!--                    android:gravity="start"-->
-<!--                    android:text="השם שלי"-->
-<!--                    android:textColor="@color/black"-->
-<!--                    android:textSize="25sp" />-->
-
-
-<!--            </TableRow>-->
-
-<!--            <TableRow-->
-<!--                android:id="@+id/second_row"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="60dp"-->
-<!--                android:layout_marginBottom="15dp"-->
-<!--                android:background="@drawable/borders"-->
-<!--                android:padding="10dp">-->
-
-<!--                <ImageView-->
-<!--                    android:id="@+id/more"-->
-<!--                    android:layout_width="40dp"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:layout_marginStart="20dp"-->
-<!--                    android:layout_marginEnd="20dp"-->
-<!--                    android:background="@drawable/ic_round_more_horiz"-->
-<!--                    android:gravity="center" />-->
-
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginEnd="40dp"-->
-<!--                    android:gravity="start"-->
-<!--                    android:text="אני חניך נחמד"-->
-<!--                    android:textColor="@color/black"-->
-<!--                    android:textSize="25sp" />-->
-<!--            </TableRow>-->
-
-<!--            <TableRow-->
-<!--                android:id="@+id/third_row"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="60dp"-->
-<!--                android:layout_marginBottom="15dp"-->
-<!--                android:background="@drawable/borders"-->
-<!--                android:padding="10dp">-->
-
-<!--                <ImageView-->
-<!--                    android:id="@+id/more2"-->
-<!--                    android:layout_width="40dp"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:layout_marginStart="20dp"-->
-<!--                    android:layout_marginEnd="20dp"-->
-<!--                    android:background="@drawable/ic_round_more_horiz"-->
-<!--                    android:gravity="center" />-->
-
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginEnd="40dp"-->
-<!--                    android:gravity="start"-->
-<!--                    android:text="אני חניך טוב"-->
-<!--                    android:textColor="@color/black"-->
-<!--                    android:textSize="25sp" />-->
-
-
-<!--            </TableRow>-->
-<!--        </TableLayout>-->
-
-<!--    </ScrollView>-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/guideListPrompt"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:fontFamily="@font/alef"-->
-<!--        android:gravity="right"-->
-<!--        android:paddingStart="40dp"-->
-<!--        android:paddingEnd="60dp"-->
-<!--        android:text="רשימת המדריכים שלך"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:textSize="30sp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.0"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/WelcomeAdmin" />-->
-
-
-
-<!--    <androidx.appcompat.widget.SwitchCompat-->
-<!--        android:id="@+id/AdminSwitch"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_alignParentTop="true"-->
-<!--        android:layout_alignParentEnd="true"-->
-<!--        android:layout_marginTop="83dp"-->
-<!--        android:layout_marginEnd="108dp"-->
-<!--        android:checked="false"-->
-<!--        android:textOff="@string/forms"-->
-<!--        android:textOn="@string/guides"-->
-<!--        android:thumb="@drawable/thumb"-->
-<!--        app:showText="true"-->
-<!--        app:track="@drawable/track" />-->
-
-<!--    <FrameLayout-->
-<!--        android:id="@+id/frameLayout"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="419dp"-->
-<!--        android:layout_alignParentTop="true"-->
-<!--        android:layout_marginTop="205dp">-->
-
-<!--        <androidx.recyclerview.widget.RecyclerView-->
-<!--            android:id="@+id/formsList"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:visibility="gone"-->
-<!--            tools:itemCount="16"-->
-<!--            tools:listitem="@layout/recycler_view_item" />-->
-
-<!--        <androidx.recyclerview.widget.RecyclerView-->
-<!--            android:id="@+id/guidesList"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            tools:itemCount="16"-->
-<!--            tools:layoutManager="GridLayoutManager"-->
-<!--            tools:listitem="@layout/recycler_view_item"-->
-<!--            tools:spanCount="3" />-->
-<!--    </FrameLayout>-->
-
-<!--    <Button-->
-<!--        android:id="@+id/buttonFillNewForm"-->
-<!--        android:layout_width="230dp"-->
-<!--        android:layout_height="90dp"-->
-<!--        android:layout_centerInParent="true"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:background="@drawable/custom_button"-->
-<!--        android:backgroundTint="#CCE4F6"-->
-<!--        android:onClick="fillOutFormActivity"-->
-<!--        android:text="@string/add_new_form"-->
-<!--        android:textAlignment="center"-->
-<!--        android:textColor="@color/white"-->
-<!--        android:textSize="23sp"-->
-<!--        android:textStyle="bold" />-->
-<!--    <Button-->
-<!--        android:id="@+id/buttonAddNewUser"-->
-<!--        android:layout_width="230dp"-->
-<!--        android:layout_height="90dp"-->
-<!--        android:layout_centerInParent="true"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:background="@drawable/custom_button"-->
-<!--        android:backgroundTint="#CCE4F6"-->
-<!--        android:onClick="AdminAddNewUserActivity"-->
-<!--        android:visibility="gone"-->
-<!--        android:text="@string/add_new_user"-->
-<!--        android:textAlignment="center"-->
-<!--        android:textColor="@color/white"-->
-<!--        android:textSize="23sp"-->
-<!--        android:textStyle="bold" />-->
-
-
-
-
-
-<!--</RelativeLayout>-->
-<!--    <TextView-->
-<!--        android:id="@+id/WelcomeAdmin"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="40dp"-->
-<!--        android:fontFamily="@font/alef"-->
-<!--        android:gravity="right"-->
-<!--        android:paddingStart="40dp"-->
-<!--        android:paddingEnd="60dp"-->
-<!--        android:text="@string/welcome_admin"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:textSize="30sp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.0"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="0dp"
@@ -247,8 +18,65 @@
         app:theme="@style/MyTabTextStyle"
         app:menu="@menu/setting_menu"/>
 
+    <TextView
+        android:id="@+id/WelcomeAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/alef"
+        android:gravity="right"
+        android:paddingStart="40dp"
+        android:paddingEnd="60dp"
+        android:text="@string/welcome_admin"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/guideListPrompt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/alef"
+        android:gravity="right"
+        android:paddingStart="40dp"
+        android:paddingEnd="60dp"
+        android:text="רשימת המדריכים שלך"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/WelcomeAdmin" />
+
+        <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="531dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/admin_bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guideListPrompt"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TableLayout
+            android:id="@+id/guide_list_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:stretchColumns="1">
+
+        </TableLayout>
+
+    </ScrollView>
+
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
+        android:id="@+id/admin_bottom_navigation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -256,6 +84,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:menu="@menu/admin_buttom_navigation_menu" />
+        app:menu="@menu/admin_bottom_navigation_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
