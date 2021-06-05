@@ -24,14 +24,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.mishlavim.R;
-<<<<<<< HEAD
 import com.example.mishlavim.adminActivities.AdminMainActivity;
 import com.example.mishlavim.login.LoginActivity;
 import com.example.mishlavim.model.Admin;
-=======
+
 import com.example.mishlavim.dialogs.DeleteUser;
 import com.example.mishlavim.model.Firebase.AuthenticationMethods;
->>>>>>> 4acecd10840f296a9d7a012be1cac7fc70f1a2dc
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
 import com.example.mishlavim.model.Firebase.FirestoreMethods;
 import com.example.mishlavim.model.Global;
@@ -206,7 +204,7 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, toConvert, getResources().getDisplayMetrics());
     }
 
-<<<<<<< HEAD
+
     private Void getUserDocSuccess(DocumentSnapshot doc){
         assert doc != null;
         Global globalInstance = Global.getGlobalInstance();
@@ -227,7 +225,6 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
-=======
     @Override
     public void onDeletePositiveClick(DialogFragment dialog) {
         FirestoreMethods.deleteDocument(FirebaseStrings.usersStr(),guide.getMyVolunteers().get(clickedRowName),this::onDocumentDeleteSuccess, this::onDeleteFailed);
@@ -259,6 +256,5 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
         finish();
         startActivity(getIntent());
     }
->>>>>>> 4acecd10840f296a9d7a012be1cac7fc70f1a2dc
 
 }

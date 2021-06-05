@@ -5,16 +5,21 @@ import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.TextView;
 
 import com.example.mishlavim.R;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mishlavim.adminActivities.AdminMainActivity;
+import com.example.mishlavim.guideActivities.GuideAddVolunteerActivity;
 import com.example.mishlavim.guideActivities.GuideMainActivity;
+import com.example.mishlavim.guideActivities.GuideReportsActivity;
 import com.example.mishlavim.login.LoginActivity;
 import com.example.mishlavim.model.Admin;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
@@ -31,7 +36,7 @@ import java.util.Objects;
 //TODO - in the xml file replace plain text with strings
 //TODO - check if has open form to display the open form fill me button
 
-public class VolunteerMainActivity extends AppCompatActivity implements View.OnClickListener {
+public class VolunteerMainActivity extends AppCompatActivity implements View.OnClickListener, BottomNavigationView.OnNavigationItemSelectedListener{
 
     private TextView helloVolu;
     private GridLayout formsLayout;
@@ -42,7 +47,7 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_volunteer_main);
-
+//        navBarButtons.setSelectedItemId(null);
         //init xml views
         helloVolu = findViewById(R.id.HelloVolu);
         formsLayout = findViewById(R.id.finishedFormsLayout);
@@ -56,6 +61,7 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
         setHelloMsg();
         setAnsweredForms();
         showMenu();
+        navBarButtons.setOnNavigationItemSelectedListener(this);
 
 
     }
@@ -76,6 +82,24 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
             intent.putExtra("CLICKED_FORM_KEY", formKey);
             startActivity(intent);
         }
+    }
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.go_home){
+            finish();
+            startActivity(new Intent(getApplicationContext(), GuideMainActivity.class));
+            return true;
+        }
+        else if (item.getItemId() == R.id.add_user) {
+            startActivity(new Intent(getApplicationContext(), GuideAddVolunteerActivity.class));
+            overridePendingTransition(0, 0);
+            return true;
+        } else if (item.getItemId() == R.id.forms) {
+            startActivity(new Intent(getApplicationContext(), GuideReportsActivity.class));
+            overridePendingTransition(0, 0);
+            return true;
+        }
+        return false;
     }
 
    private void showMenu() { // a function that shows the menu to the guides
