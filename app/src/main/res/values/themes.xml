@@ -1,6 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.MishlavimPink" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:fontFamily">@font/alef</item>
+        <item name="fontFamily">@font/alef</item>
         <!-- Primary brand color. -->
         <!--   color for the app bar and other primary UI elements -->
         <item name="colorPrimary">@color/pink</item>
@@ -28,6 +30,8 @@
     <style name="Theme.MishlavimPink.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:fontFamily">@font/alef</item>
+        <item name="fontFamily">@font/alef</item>
     </style>
 
     <style name="Theme.MishlavimPink.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

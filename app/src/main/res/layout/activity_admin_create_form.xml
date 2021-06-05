@@ -108,7 +108,7 @@
             android:layout_marginBottom="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
-            android:background="@drawable/custom_pink_button"
+            android:background="@drawable/pink_button"
             android:text="@string/add_new_question" />
 
         <ProgressBar
@@ -130,7 +130,7 @@
             android:layout_height="60dp"
             android:layout_gravity="center"
 
-            android:background="@drawable/custom_pink_button"
+            android:background="@drawable/pink_button"
             android:text="@string/save_form"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
             tools:layout_editor_absoluteX="0dp" />

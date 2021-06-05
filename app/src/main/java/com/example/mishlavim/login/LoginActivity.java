@@ -9,30 +9,27 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.mishlavim.R;
-import com.example.mishlavim.adminActivities.AdminAddNewUserActivity;
 import com.example.mishlavim.adminActivities.AdminMainActivity;
-import com.example.mishlavim.guideActivities.GuideAddVolunteerActivity;
 import com.example.mishlavim.guideActivities.GuideMainActivity;
 import com.example.mishlavim.model.Admin;
-import com.example.mishlavim.model.FirebaseStrings;
+import com.example.mishlavim.model.Firebase.AuthenticationMethods;
+import com.example.mishlavim.model.Firebase.FirebaseStrings;
+import com.example.mishlavim.model.Firebase.FirestoreMethods;
 import com.example.mishlavim.model.Global;
 import com.example.mishlavim.model.Guide;
-import com.example.mishlavim.model.Validation;
 import com.example.mishlavim.model.Volunteer;
 import com.example.mishlavim.volunteerActivities.VolunteerMainActivity;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.util.Objects;
+
+//TODO - forgot password function on click
+//TODO - check if user is signed in. if yes - skip the login, init and redirect .
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText emailEditText, passwordEditText;
+    private Button loginButton;
     private ProgressBar loadingProgressBar;
-    private FirebaseAuth mAuth;
-    private FirebaseFirestore db;
     private Validation validation;
 
     @Override
@@ -40,15 +37,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        //init xml views
         emailEditText = findViewById(R.id.email);
         passwordEditText = findViewById(R.id.password);
-//        passwordEditText.setTextDirection(View.TEXT_DIRECTION_LTR);
-        Button loginButton = findViewById(R.id.login);
+        loginButton = findViewById(R.id.login);
         loadingProgressBar = findViewById(R.id.loading);
 
-        mAuth = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance();
-
+        //init validation class
         validation = new Validation(emailEditText, null, passwordEditText, null,
                 loadingProgressBar, getResources());
 
@@ -60,48 +55,47 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         userLogin();
     }
 
+    private void showError(Integer msg) {
+        loadingProgressBar.setVisibility(View.GONE);
+        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+    }
+
     private void userLogin() {
+        //validate input- if the input is invalid don't continue.
         if (validation.validateInput())
             return;
 
         String email = emailEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
 
+        //visible progress bar
         loadingProgressBar.setVisibility(View.VISIBLE);
-        loginToFirebase(email, password);
+
+        //login to firebase
+        AuthenticationMethods.signIn(email, password, this::loginSuccess, this::loginFailed);
     }
 
-    private void showLoginFailed() {
-        loadingProgressBar.setVisibility(View.GONE);
-        Toast.makeText(getApplicationContext(), R.string.login_failed, Toast.LENGTH_SHORT).show();
+    private Void loginSuccess(String userUid){
+        assert userUid != null;
+        //get user data from firestore
+        FirestoreMethods.getDocument(FirebaseStrings.usersStr(), userUid, this::getUserDocSuccess, this::getUserDocFailed);
+        return null;
     }
 
-    private void loginToFirebase(String email, String password) {
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(LoginActivity.this, task -> {
-                    if (task.isSuccessful()) {
-                        FirebaseUser fbUser = mAuth.getCurrentUser();
-                        assert fbUser != null;
-                        getUserType(fbUser);
-                    } else
-                        showLoginFailed();
-                });
+    private Void loginFailed(Void unused){
+        showError(R.string.login_auth_failed);
+        return null;
     }
 
-    private void getUserType(FirebaseUser fbUser) {
-        String userId = fbUser.getUid();
+    private Void getUserDocSuccess(DocumentSnapshot doc){
+        assert doc != null;
+        redirectUserByType(doc);
+        return null;
+    }
 
-        db.collection(FirebaseStrings.usersStr())
-                .document(userId)
-                .get()
-                .addOnCompleteListener(LoginActivity.this, task -> {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot document = task.getResult();
-                        assert document != null;
-                        redirectUserByType(document);
-                    } else
-                        showLoginFailed();
-                });
+    private Void getUserDocFailed(Void unused){
+        showError(R.string.login_failed);
+        return null;
     }
 
     private void redirectUserByType(DocumentSnapshot document) {
@@ -109,28 +103,33 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Global globalInstance = Global.getGlobalInstance();
         globalInstance.setType(type);
 
+        //admin
         if (type.equals(FirebaseStrings.adminStr())) {
-
             Admin admin = document.toObject(Admin.class);
             globalInstance.setAdminInstance(admin);
-//            startActivity(new Intent(LoginActivity.this, AdminMainActivity.class));
-            startActivity(new Intent(LoginActivity.this, AdminAddNewUserActivity.class));
+            startActivity(new Intent(LoginActivity.this, AdminMainActivity.class));
+        }
 
-        } else if (type.equals(FirebaseStrings.guideStr())) {
-
+        //guide
+        else if (type.equals(FirebaseStrings.guideStr())) {
             Guide guide = document.toObject(Guide.class);
             globalInstance.setGuideInstance(guide);
-            startActivity(new Intent(LoginActivity.this, GuideAddVolunteerActivity.class));
-//            startActivity(new Intent(LoginActivity.this, GuideMainActivity.class));
+            startActivity(new Intent(LoginActivity.this, GuideMainActivity.class));
+        }
 
-        } else if (type.equals(FirebaseStrings.volunteerStr())) {
+        //volunteer
+        else if (type.equals(FirebaseStrings.volunteerStr())) {
             Volunteer volu = document.toObject(Volunteer.class);
             globalInstance.setVoluInstance(volu);
             startActivity(new Intent(LoginActivity.this, VolunteerMainActivity.class));
-
-        } else {
-            showLoginFailed();
         }
+
+        //error
+        else {
+            showError(R.string.undefined_user);
+        }
+
         loadingProgressBar.setVisibility(View.GONE);
     }
+
 }

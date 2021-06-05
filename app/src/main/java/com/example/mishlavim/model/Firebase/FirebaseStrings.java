@@ -1,4 +1,4 @@
-package com.example.mishlavim.model;
+package com.example.mishlavim.model.Firebase;
 
 /**
  * FirebaseStrings class represents firebase collection names, user types, user fields..
@@ -50,6 +50,4 @@ public class FirebaseStrings {
     public static String allVolunteersListStr() {  return "allVolunteers";}
 
     public static String answersStr() {  return "answers";}
-
-
 }

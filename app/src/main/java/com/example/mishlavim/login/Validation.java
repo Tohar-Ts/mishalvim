@@ -1,4 +1,4 @@
-package com.example.mishlavim.model;
+package com.example.mishlavim.login;
 
 import android.content.res.Resources;
 import android.util.Patterns;

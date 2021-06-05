@@ -1,6 +1,10 @@
-package com.example.mishlavim.model;
+package com.example.mishlavim.model.Firebase;
 import android.util.Log;
 
+import com.example.mishlavim.model.Firebase.FirebaseStrings;
+import com.example.mishlavim.model.Guide;
+import com.example.mishlavim.model.User;
+import com.example.mishlavim.model.Volunteer;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;

@@ -6,7 +6,7 @@
         android:orientation="vertical"
     android:background="@drawable/backgroung_green"
         android:layout_height="match_parent"
-        tools:context=".volunteerActivities.FillOutFormActivity">
+        tools:context=".volunteerActivities.VolunteerFillOutFormActivity">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -57,7 +57,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="16sp"
-                        android:background="@drawable/orange_textview"
+                        android:background="@drawable/custom_orange_textview"
                         android:padding="16sp"
                         android:text=""
                         android:textColor="@android:color/black"
@@ -119,7 +119,7 @@
                     android:layout_height="90dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
-                    android:background="@drawable/green_button"
+                    android:background="@drawable/custom_green_button"
                     android:text="שאלה הבאה"
                     android:textSize="16dp"
                     android:textColor="@android:color/black"
@@ -136,7 +136,7 @@
                     android:layout_height="90dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
-                    android:background="@drawable/green_button"
+                    android:background="@drawable/custom_green_button"
                     android:text="שאלה קודמת"
                     android:drawableRight="@drawable/ic_arrowback"
                     android:drawablePadding="1dp"
@@ -152,8 +152,8 @@
                     android:layout_width="90dp"
                     android:layout_height="90dp"
                     android:layout_marginEnd="160dp"
-                    android:background="@drawable/custom_pink_button"
-                    android:text="שמור טופס"
+                    android:background="@drawable/pink_button"
+                    android:text="שמור תשובות"
                     android:textColor="@color/white"
                     android:textSize="20dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -162,7 +162,21 @@
                     app:layout_constraintTop_toBottomOf="@+id/options_containers"
                     app:layout_constraintVertical_bias="0.702" />
 
-
+                <Button
+                    android:id="@+id/send_btn"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_marginEnd="160dp"
+                    android:background="@drawable/pink_button"
+                    android:text="שמור ושלח"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.157"
+                    app:layout_constraintTop_toBottomOf="@+id/options_containers"
+                    app:layout_constraintVertical_bias="0.702" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
     </LinearLayout>

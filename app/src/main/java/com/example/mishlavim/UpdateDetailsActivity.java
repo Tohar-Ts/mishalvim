@@ -1,4 +1,4 @@
-package com.example.mishlavim.model;
+package com.example.mishlavim;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,9 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.mishlavim.R;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.textfield.TextInputEditText;
+import com.example.mishlavim.login.Validation;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 

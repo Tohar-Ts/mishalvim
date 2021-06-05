@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".model.UpdateDetailsActivity">
+    tools:context=".UpdateDetailsActivity">
 
     <TextView
         android:id="@+id/title"
@@ -74,7 +74,7 @@
         android:layout_marginTop="20dp"
         android:autofillHints="@string/prompt_email"
         android:background="@drawable/custom_input"
-        android:drawableEnd="@drawable/ic_eye"
+        android:drawableEnd="@drawable/ic_visibility"
         android:drawablePadding="12dp"
         android:hint="@string/prompt_password"
         android:inputType="textPassword"
@@ -93,7 +93,7 @@
         android:layout_marginTop="18dp"
         android:autofillHints="@string/prompt_email"
         android:background="@drawable/custom_input"
-        android:drawableEnd="@drawable/ic_eye"
+        android:drawableEnd="@drawable/ic_visibility"
         android:drawablePadding="12dp"
         android:hint="@string/prompt_password"
         android:inputType="textPassword"
@@ -130,7 +130,7 @@
         android:layout_height="60dp"
         android:layout_gravity="center"
         android:layout_marginTop="40dp"
-        android:background="@drawable/custom_pink_button"
+        android:background="@drawable/pink_button"
         android:text="@string/buttonSave"
         android:textColor="@color/white"
         android:textSize="20sp"

@@ -2,6 +2,7 @@ package com.example.mishlavim.model;
 
 import android.util.Log;
 
+import com.example.mishlavim.model.Firebase.FirebaseStrings;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -22,7 +23,6 @@ import java.util.concurrent.atomic.AtomicReference;
 public class Guide extends User {
 
     private HashMap<String, String> myVolunteers;
-    private HashMap<String, String> formsTemplates;
 
     /**
      * Empty constructor.
@@ -33,10 +33,9 @@ public class Guide extends User {
     /**
      * Parameterized constructor.
      */
-    public Guide(String name, String type, String email, HashMap<String, String> myVolunteers, HashMap<String, String> formsTemplates) {
+    public Guide(String name, String type, String email, HashMap<String, String> myVolunteers) {
         super(name, type, email);
         this.myVolunteers = myVolunteers;
-        this.formsTemplates = formsTemplates;
     }
 
     /**
@@ -132,7 +131,6 @@ public class Guide extends User {
     }
 
     public HashMap<String, String> getMyVolunteers() {
-
         return myVolunteers;
     }
 
@@ -140,11 +138,5 @@ public class Guide extends User {
         this.myVolunteers = myVolunteers;
     }
 
-    public HashMap<String, String> getFormsTemplates() {
-        return formsTemplates;
-    }
 
-    public void setFormsTemplates(HashMap<String, String> formsTemplates) {
-        this.formsTemplates = formsTemplates;
-    }
 }

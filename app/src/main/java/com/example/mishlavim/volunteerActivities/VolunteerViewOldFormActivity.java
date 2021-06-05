@@ -15,29 +15,26 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mishlavim.R;
 import com.example.mishlavim.model.AnsweredForm;
-import com.example.mishlavim.model.FirebaseStrings;
-import com.example.mishlavim.model.FirestoreMethods;
+import com.example.mishlavim.model.Firebase.FirebaseStrings;
+import com.example.mishlavim.model.Firebase.FirestoreMethods;
 import com.example.mishlavim.model.FormTemplate;
+import com.example.mishlavim.model.Global;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Function;
 
 public class VolunteerViewOldFormActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView formName;
     private FloatingActionButton editButton, saveButton;
     private LinearLayout savedAnswersLayout;
 
-    private boolean canEdit;
+    private boolean canEdit = false;
+    private String clickedFormKey;
     private String clickedFormId;
-    private String clickedFormName;
-    private Map<String, String> answers;
+    private HashMap<String, String> answers;
     private HashMap<String, String> questions;
-
-    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,15 +47,13 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
         saveButton = findViewById(R.id.answersSaveFloating);
         savedAnswersLayout = findViewById(R.id.SavedAnswersLayout);
 
-        //TODO: changes according to firebase
-        canEdit = true;
-        clickedFormId = "VoQPBSgwVj2gDhgnIQWs";
-        clickedFormName = "form name";
-
-        db = FirebaseFirestore.getInstance();
+        //Getting the clicked form id
+        clickedFormKey =  getIntent().getStringExtra("CLICKED_FORM_KEY");;
+        Global globalInstance = Global.getGlobalInstance();
+        HashMap<String, String> answeredForms = globalInstance.getVoluInstance().getFinishedForms();
+        clickedFormId = answeredForms.get(clickedFormKey);
 
         displayFormName();
-        updateEditMode();
         getAnswersFromFirebase();
     }
 
@@ -76,8 +71,27 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
         }
     }
 
+    private Void showError(Void v) {
+        Toast.makeText(getApplicationContext(), R.string.firebase_failed, Toast.LENGTH_SHORT).show();
+        return null;
+    }
+
     public void displayFormName(){
-        formName.setText(clickedFormName);
+        formName.setText(clickedFormKey);
+    }
+
+    private void changeScreenToEditMode() {
+        savedAnswersLayout.removeAllViews();
+
+        for (Map.Entry<String, String> qEntry : questions.entrySet()) {
+            String questionNum = qEntry.getKey();
+            String question = qEntry.getValue();
+            String answer = answers.get(questionNum);
+            if(answer == null)
+                answer = "";
+            addQuestion(question);
+            addEditAnswer(answer);
+        }
     }
 
     private void updateEditMode() {
@@ -90,34 +104,24 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
     }
 
     private void getAnswersFromFirebase() {
-        Function<DocumentSnapshot,Void> onSuccess = this::parseDocToAnsweredFormObj;
-        Function<Void,Void> onFailure = this::showError;
-
         FirestoreMethods.getDocument(FirebaseStrings.answeredFormsStr(), clickedFormId,
-                onSuccess, onFailure );
+                this::onGettingAnswersSuccess, this::showError);
     }
 
-    private Void parseDocToAnsweredFormObj(DocumentSnapshot document){
+    private Void onGettingAnswersSuccess(DocumentSnapshot document){
         assert document != null;
         AnsweredForm answersObj = document.toObject(AnsweredForm.class);
 
         assert answersObj != null;
         answers = answersObj.getAnswers();
+        canEdit = answersObj.getCanEdit();
 
-        getTemplateFromFirebase(answersObj.getTemplateId());
+        FirestoreMethods.getDocument(FirebaseStrings.formsTemplatesStr(), "Cfxrc4aUw5lnTOsNFk5B",
+                this::onGettingQuestionsSuccess, this::showError);
         return null;
     }
 
-
-    private void getTemplateFromFirebase(String templateId) {
-        Function<DocumentSnapshot,Void> onSuccess = this::parseDocToFormTemplateObj;
-        Function<Void,Void> onFailure = this::showError;
-
-        FirestoreMethods.getDocument(FirebaseStrings.formsTemplatesStr(), "Cfxrc4aUw5lnTOsNFk5B",
-                                        onSuccess, onFailure );
-    }
-
-    private Void parseDocToFormTemplateObj(DocumentSnapshot document) {
+    private Void onGettingQuestionsSuccess(DocumentSnapshot document) {
         assert document != null;
         FormTemplate questionsObj = document.toObject(FormTemplate.class);
 
@@ -128,8 +132,8 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
         return null;
     }
 
-
     private void displayFormOnScreen() {
+        updateEditMode();
 
         for (Map.Entry<String, String> qEntry : questions.entrySet()) {
             String questionNum = qEntry.getKey();
@@ -156,11 +160,11 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
         int padding = convertFromDpToPixels(16);
 
         //styling
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, height);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.setMargins(margin,margin,margin,margin);
         qTextView.setLayoutParams(params);
         qTextView.setGravity(Gravity.CENTER | Gravity.START);
-        qTextView.setBackgroundResource(R.drawable.orange_textview);
+        qTextView.setBackgroundResource(R.drawable.custom_orange_textview);
         qTextView.setPadding(padding,padding,padding,padding);
         qTextView.setText(question);
         qTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP,25);
@@ -215,20 +219,6 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
         savedAnswersLayout.addView(aEditText);
     }
 
-    private void changeScreenToEditMode() {
-        savedAnswersLayout.removeAllViews();
-
-        for (Map.Entry<String, String> qEntry : questions.entrySet()) {
-            String questionNum = qEntry.getKey();
-            String question = qEntry.getValue();
-            String answer = answers.get(questionNum);
-            if(answer == null)
-                answer = "";
-            addQuestion(question);
-            addEditAnswer(answer);
-        }
-    }
-
     private void saveEditedAnswers() {
 //        loadingProgressBar.setVisibility(View.VISIBLE);
         ViewGroup group = findViewById(R.id.SavedAnswersLayout);
@@ -242,27 +232,15 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
                 Log.d("view old form", "adding answer number: " + qNum);
             }
         }
-
-       updateAnswersInFirebase();
-    }
-
-    private void updateAnswersInFirebase() {
-        Function<Void,Void> onSuccess = this::reloadScreen;
-        Function<Void,Void> onFailure = this::showError;
-
+        //update answers in firebase
         FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), clickedFormId, FirebaseStrings.answersStr(), answers,
-                                                onSuccess, onFailure);
+                this::reloadScreen, this::showError);
     }
 
     private Void reloadScreen(Void unused) {
         Toast.makeText(getApplicationContext(), R.string.firebase_success, Toast.LENGTH_SHORT).show();
         finish();
         startActivity(getIntent());
-        return null;
-    }
-
-    private Void showError(Void v) {
-        Toast.makeText(getApplicationContext(), R.string.firebase_failed, Toast.LENGTH_SHORT).show();
         return null;
     }
 

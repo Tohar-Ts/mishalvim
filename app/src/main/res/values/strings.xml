@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Mishlavim</string>
+    <string name="app_name">משלבים</string>
     <string name="hint">סיסמא</string>
     <string name="buttonName">טופס 1</string>
     <string name="button3">טופס 3</string>
@@ -45,7 +45,6 @@
     <string name="invalid_userName">שם מלא אינו תקין</string>
     <string name="update_failed">"העדכון נכשל"</string>
     <string name="creat_new_form">טופס חדש</string>
-    <string name="register_failed">"הרשמה נכשלה"</string>
     <string name="welcome_admin">ברוך הבא ADMIN</string>
     <string name="title_activity_login">מסך כניסה</string>
     <string name="logo">לוגו</string>
@@ -55,14 +54,15 @@
     <string name="prompt_mishlavim">תכנית משלבים</string>
     <string name="create_new_form">יצירת שאלון חדש</string>
     <string name="name_form">שם השאלון:</string>
-    <string name="question1">שאלה 1:</string>
-    <string name="question2">שאלה 2:</string>
-    <string name="question3">שאלה 3:</string>
     <string name="add_new_question">הוסף שאלה</string>
     <string name="save_form">שמור שאלון</string>
     <!--    <string name="invalid_password">סיסמה קצרה מדי</string>-->
-    <string name="forget_password">שכחת סיסמה?</string>
     <string name="login_failed">"כניסה נכשלה"</string>
+    <string name="login_auth_failed">"שם משתמש וסיסמה אינם תואמים"</string>
+    <string name="register_failed">"הרשמה נכשלה"</string>
+    <string name="undefined_user">"הרשמה נכשלה"</string>
+    <string name="register_auth_failed">"אימייל זה כבר רשום במערכת"</string>
+    <string name="forget_password">שכחת סיסמה?</string>
     <string name="invalid_email">אימייל אינו תקין</string>
     <string name="empty_email">אימייל הינו שדה חובה, אנא מלא אותו</string>
     <string name="invalid_password">הסיסמה אינה תקינה, על הסיסמה להכיל לפחות 6 תווים</string>

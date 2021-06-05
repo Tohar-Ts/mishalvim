@@ -1,6 +1,7 @@
-package com.example.mishlavim.model;
+package com.example.mishlavim.model.Firebase;
 
 import android.util.Log;
+
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
@@ -12,15 +13,37 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 
+/**
+ * Firestore Methods class manages connecting to firestore and provides functions for:
+ * update document in the firestore, get, delete etc.
+ *
+ * How to use:
+ * First, declare the on success and on failed function in the class according to the function arguments.
+ * For example:
+ * if the function accept "Function<DocumentSnapshot, Void> successFunc" argument,
+ * then your success function should accept a DocumentSnapshot object and return a Void object.
+ *
+ * Then, call the wanted method.
+ *  For example:
+ * FirestoreMethods.getDocument(FirebaseStrings.formsTemplatesStr(), id,
+ *                                         this::mySuccessFunc, this::showError);
+ * Notice:
+ * "Void" with a capital V is different from "void".
+ * If the function needs to accept/return a void object, declare it this way:
+ * private Void onUpdateFailure(Void unused){
+ *     return null;
+ * }
+ */
 public class FirestoreMethods {
+    //TODO - add comments
 
-    public static void createNewDocument(String collection, Object newDataObj,
+    public static void createNewDocument(String collection, String newId, Object newDataObj,
                                          Function<Void, Void> successFunc,  Function<Void, Void> failedFunc){
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         db.collection(collection)
-                .document()
+                .document(newId)
                 .set(newDataObj)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {

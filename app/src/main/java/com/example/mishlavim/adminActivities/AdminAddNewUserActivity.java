@@ -17,63 +17,70 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mishlavim.R;
 import com.example.mishlavim.model.Admin;
-import com.example.mishlavim.model.FirebaseStrings;
+import com.example.mishlavim.model.Firebase.FirebaseStrings;
+import com.example.mishlavim.model.Firebase.FirestoreMethods;
 import com.example.mishlavim.model.Global;
 import com.example.mishlavim.model.Guide;
 import com.example.mishlavim.model.User;
-import com.example.mishlavim.model.Validation;
+import com.example.mishlavim.login.Validation;
 import com.example.mishlavim.model.Volunteer;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
+import java.util.function.Function;
 
 public class AdminAddNewUserActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
-    private EditText emailEditText;
-    private EditText userNameEditText;
-    private EditText passwordEditText;
-    private String guideName, guideID;
+    private EditText emailEditText, userNameEditText, passwordEditText, verifyPasswordEditText;
+    private Button addButton;
     private ProgressBar loadingProgressBar;
+    private Spinner guidesSpinner;
     private RadioGroup typesRadioGroup;
+
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
+
     private Validation validation;
+
     private String newUserType;
-    private Spinner spinner;
-    private ArrayList<String> listOfGuidesName;
-    private ArrayList<String> listOfGuidesID;
+    private String guideName, guideID;
+    private ArrayList<String> listOfGuidesName,  listOfGuidesID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_add_new_user);
 
-        spinner = findViewById(R.id.spinner);
+        //init xml views
+        guidesSpinner = findViewById(R.id.spinner);
         emailEditText = findViewById(R.id.newEmail);
         userNameEditText = findViewById(R.id.newUserName);
         passwordEditText = findViewById(R.id.newPassword);
-        EditText verifyPasswordEditText = findViewById(R.id.verifyPassword);
-        Button addButton = findViewById(R.id.addNewUser);
+        verifyPasswordEditText = findViewById(R.id.verifyPassword);
+        addButton = findViewById(R.id.addNewUser);
         loadingProgressBar = findViewById(R.id.registerLoading);
         typesRadioGroup = findViewById(R.id.typesRg);
 
+        //init guides list
         setSpinner();
 
+        //init firebase
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
+        //init validation class
         validation = new Validation(emailEditText, userNameEditText, passwordEditText, verifyPasswordEditText
                 , loadingProgressBar, getResources());
 
-        newUserType = FirebaseStrings.guideStr(); //default
+        newUserType = FirebaseStrings.guideStr(); //default user type
 
-        loadingProgressBar.setVisibility(View.GONE);
+        loadingProgressBar.setVisibility(View.GONE); //progress bar gone
 
         addButton.setOnClickListener(this);
-        spinner.setOnItemSelectedListener(this);
+        guidesSpinner.setOnItemSelectedListener(this);
     }
+
 
     @Override
     public void onClick(View v) {
@@ -90,10 +97,10 @@ public class AdminAddNewUserActivity extends AppCompatActivity implements View.O
         listOfGuidesName = new ArrayList<>(guideList.keySet());
         listOfGuidesID = new ArrayList<>(guideList.values());
 
-        ArrayAdapter ad = new ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line,listOfGuidesName);
-        ad.setDropDownViewResource(android.R.layout
-                .simple_spinner_dropdown_item);
-        spinner.setAdapter(ad);
+        //Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<String> adapter = new ArrayAdapter<String> (this,android.R.layout.simple_spinner_dropdown_item,listOfGuidesName);
+
+        guidesSpinner.setAdapter(adapter);
     }
 
     public void checkUserType(View v) {
@@ -103,79 +110,91 @@ public class AdminAddNewUserActivity extends AppCompatActivity implements View.O
 
         switch (wantedType) {
             case "מנהל":
-                spinner.setVisibility(View.GONE);
+                guidesSpinner.setVisibility(View.GONE);
                 newUserType = FirebaseStrings.adminStr();
                 break;
             case "מדריך":
-                spinner.setVisibility(View.GONE);
+                guidesSpinner.setVisibility(View.GONE);
                 newUserType = FirebaseStrings.guideStr();
                 break;
             default:
                 newUserType = FirebaseStrings.volunteerStr();
-                spinner.setVisibility(View.VISIBLE);
+                guidesSpinner.setVisibility(View.VISIBLE);
                 break;
         }
     }
 
     private void registerUser() {
+        //validate input - if the input is invalid, don't continue.
         if (validation.validateInput())
             return;
+        //parse input
         String email = emailEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
         String userName = userNameEditText.getText().toString().trim();
 
         loadingProgressBar.setVisibility(View.VISIBLE);
-        registerToFirebase(userName, email, password);
+        //register
+        addUserToFirebase(userName, email, password);
     }
 
-    private void showRegisterFailed() {
+    private void showRegisterFailed(Integer msg) {
         loadingProgressBar.setVisibility(View.GONE);
-        Toast.makeText(getApplicationContext(), R.string.register_failed, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),msg, Toast.LENGTH_SHORT).show();
     }
 
-    private void registerToFirebase(String userName, String email, String password){
+    private void addUserToFirebase(String userName, String email, String password){
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        FirebaseUser fbUser = mAuth.getCurrentUser();
-                        createNewUser(fbUser, userName, email);
-                    } else
-                        showRegisterFailed();
+                       String newUserUid = mAuth.getCurrentUser().getUid();
+                        Log.d("Admin add new user:", "Logged in successfully");
+                        createNewUser(newUserUid, userName, email);
+                    } else {
+                        Log.d("Admin add new user:", "Logged in failed");
+                        showRegisterFailed(R.string.register_auth_failed);
+                    }
                 });
     }
 
-    private void createNewUser(FirebaseUser fbUser, String userName, String email) {
+    private void createNewUser(String newUserUid, String userName, String email) {
         User user;
 
+        //admin
         if (newUserType.equals(FirebaseStrings.adminStr()))
             user = new Admin(userName, newUserType, email, new HashMap<>(), new HashMap<>());
 
-        else if (newUserType.equals(FirebaseStrings.guideStr())) {//guide
-            user = new Guide(userName, newUserType, email, new HashMap<>(), new HashMap<>());
-            Admin.addGuide(fbUser.getUid(), userName);
+        //guide
+        else if (newUserType.equals(FirebaseStrings.guideStr())) {
+            user = new Guide(userName, newUserType, email, new HashMap<>());
+            Admin.addGuide(newUserUid, userName); //TODO - pass this admin id
         }
 
         else { //volunteer
-            user = new Volunteer(userName, newUserType, email, guideName, guideID, new HashMap<>(),"");
-            Guide.addVolunteerByGuideName(fbUser.getUid(), (Volunteer) user);
-            Admin.addVolunteer(fbUser.getUid(), userName);
+            user = new Volunteer(userName, newUserType, email, guideName, guideID, new HashMap<>(),"", false);
+            Guide.addVolunteerByGuideId(guideID, newUserUid, userName);
+            Admin.addVolunteer(newUserUid, userName); //TODO - pass this admin id
         }
 
-        addUserToDb(fbUser, user);
+        addUserToDb(newUserUid, user);
     }
 
-    private void addUserToDb(FirebaseUser fbUser, User user) {
-        db.collection(FirebaseStrings.usersStr())
-                .document(fbUser.getUid())
-                .set(user)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(AdminAddNewUserActivity.this, newUserType + " was added successfully", Toast.LENGTH_SHORT).show();
-                        loadingProgressBar.setVisibility(View.GONE);
-                    } else {
-                        showRegisterFailed();
-                    }
-                });
+    private void addUserToDb(String newUserUid, User user) {
+        Function<Void,Void> onSuccess = this::updateDbSuccess;
+        Function<Void,Void> onFailure = this::updateDbFailed;
+        FirestoreMethods.createNewDocument(FirebaseStrings.usersStr(),newUserUid, user, onSuccess, onFailure);
+    }
+
+    private Void updateDbSuccess(Void unused){
+        Toast.makeText(AdminAddNewUserActivity.this, newUserType + " was added successfully", Toast.LENGTH_SHORT).show();
+        loadingProgressBar.setVisibility(View.GONE);
+        return null;
+    }
+
+    private Void updateDbFailed(Void unused){
+        showRegisterFailed(R.string.register_failed);
+        loadingProgressBar.setVisibility(View.GONE);
+        return null;
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.example.mishlavim.model;
 
-import java.util.Map;
+import java.util.HashMap;
 
 public class AnsweredForm {
     /**
@@ -14,15 +14,33 @@ public class AnsweredForm {
     boolean onWork;
 
     String templateId;
-    Map<String, String> answers; //<questionNumber, answer>
+    HashMap<String, String> answers; //<questionNumber, answer>
 
     public AnsweredForm(){
 
     }
 
-    public AnsweredForm(String templateId, Map<String, String> answers) {
+    public AnsweredForm(boolean canEdit, boolean onWork, String templateId, HashMap<String, String> answers) {
+        this.canEdit = canEdit;
+        this.onWork = onWork;
         this.templateId = templateId;
         this.answers = answers;
+    }
+
+    public boolean getCanEdit() {
+        return canEdit;
+    }
+
+    public void setCanEdit(boolean canEdit) {
+        this.canEdit = canEdit;
+    }
+
+    public boolean getOnWork() {
+        return onWork;
+    }
+
+    public void setOnWork(boolean onWork) {
+        this.onWork = onWork;
     }
 
     public String getTemplateId() {
@@ -33,11 +51,11 @@ public class AnsweredForm {
         this.templateId = templateId;
     }
 
-    public Map<String, String> getAnswers() {
+    public HashMap<String, String> getAnswers() {
         return answers;
     }
 
-    public void setAnswers(Map<String, String> answers) {
+    public void setAnswers(HashMap<String, String> answers) {
         this.answers = answers;
     }
 }

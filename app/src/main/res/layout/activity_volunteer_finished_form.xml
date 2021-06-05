@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/welldone_background"
-    tools:context=".volunteerActivities.FinishedFormActivity">
+    tools:context=".volunteerActivities.VolunteerFinishedFormActivity">
 
 
     <TextView
@@ -50,7 +50,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="40dp"
-        android:background="@drawable/custome_light_green"
+        android:background="@drawable/custom_green_button"
         android:fontFamily="@font/alef"
         android:onClick="VolunteerMainActivity"
         android:text="חזור למסך הבית"

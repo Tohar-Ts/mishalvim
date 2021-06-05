@@ -17,6 +17,7 @@ public class Volunteer extends User {
     private String myGuideId;
     private HashMap<String, String> finishedForms;
     private String openForm;
+    private boolean hasOpenForm;
 
     /**
      * Empty constructor.
@@ -27,14 +28,14 @@ public class Volunteer extends User {
     /**
      * Parameterized constructor.
      */
-    public Volunteer(String name, String type, String email, String myGuide, String myGuideId, HashMap<String, String> finishedForms, String openForm) {
+    public Volunteer(String name, String type, String email, String myGuide, String myGuideId, HashMap<String, String> finishedForms, String openForm, boolean hasOpenForm) {
         super(name, type, email);
         this.myGuide = myGuide;
         this.myGuideId = myGuideId;
         this.finishedForms = finishedForms;
         this.openForm = openForm;
+        this.hasOpenForm = hasOpenForm;
     }
-
 
     /**
      * Adding a open form to the 'openForms' map of a volunteer.
@@ -108,6 +109,9 @@ public class Volunteer extends User {
         /* TODO implement here */
     }
 
+    /*
+     * Getters and setters.
+     */
     public String getMyGuide() {
         return myGuide;
     }
@@ -140,4 +144,11 @@ public class Volunteer extends User {
         this.myGuideId = myGuideId;
     }
 
+    public boolean isHasOpenForm() {
+        return hasOpenForm;
+    }
+
+    public void setHasOpenForm(boolean hasOpenForm) {
+        this.hasOpenForm = hasOpenForm;
+    }
 }

@@ -5,44 +5,44 @@
     android:id="@+id/adminOptions"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical">
-        <Button
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:gravity="center"-->
+<!--        android:orientation="vertical">-->
+<!--        <Button-->
 
-            android:id="@+id/buttonFillNewForm"
-            android:layout_width="230dp"
-            android:layout_height="90dp"
-            android:layout_margin="15dp"
-            android:layout_marginTop="108dp"
-            android:background="@drawable/custom_pink_button"
-            android:onClick="AdminAddNewUserActivity"
+<!--            android:id="@+id/buttonFillNewForm"-->
+<!--            android:layout_width="230dp"-->
+<!--            android:layout_height="90dp"-->
+<!--            android:layout_margin="15dp"-->
+<!--            android:layout_marginTop="108dp"-->
+<!--            android:background="@drawable/custom_pink_button"-->
+<!--            android:onClick="AdminAddNewUserActivity"-->
 
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="23sp"
-            android:textStyle="bold" />
+<!--            android:textAlignment="center"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="23sp"-->
+<!--            android:textStyle="bold" />-->
 
 
-        <TextView
-            android:id="@+id/existing_guides"
-            android:layout_width="244dp"
-            android:layout_height="wrap_content"
+<!--        <TextView-->
+<!--            android:id="@+id/existing_guides"-->
+<!--            android:layout_width="244dp"-->
+<!--            android:layout_height="wrap_content"-->
 
-            android:fontFamily="sans-serif-black"
-            android:text="@string/existing_guides"
-            android:textAlignment="center"
-            android:textColor="@color/darker_other_blue"
-            android:textSize="30sp" />
+<!--            android:fontFamily="sans-serif-black"-->
+<!--            android:text="@string/existing_guides"-->
+<!--            android:textAlignment="center"-->
+<!--            android:textColor="@color/darker_other_blue"-->
+<!--            android:textSize="30sp" />-->
 
-        <ListView
-            android:id="@+id/listview"
-            android:layout_margin="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="400dp"/>
-    </LinearLayout>
+<!--        <ListView-->
+<!--            android:id="@+id/listview"-->
+<!--            android:layout_margin="20dp"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="400dp"/>-->
+<!--    </LinearLayout>-->
 </ScrollView>
 
 

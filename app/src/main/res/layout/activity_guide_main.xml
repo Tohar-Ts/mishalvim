@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/Theme.MishlavimPink"
-    tools:context=".guideActivities.GuideMainActivity">
+    android:theme="@style/Theme.MishlavimPink">
+
     <TextView
             android:id="@+id/guideName"
             android:layout_width="match_parent"
@@ -75,8 +75,6 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/ic_round_more_horiz"
                         android:gravity="center"/>
-                    <!-- android:onClick="onButtonClickEvent"-->
-
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -155,38 +153,5 @@
         app:layout_constraintVertical_bias="0.998"
         app:menu="@menu/bottom_navigation_menu"
         tools:layout_editor_absoluteX="0dp" />
-
-    <!--    -->
-        <!--    <ImageButton-->
-        <!--    style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"-->
-
-        <!--        android:id="@+id/guideHome"-->
-        <!--        android:layout_width="72dp"-->
-        <!--        android:layout_height="74dp"-->
-        <!--        android:layout_gravity="center"-->
-        <!--        android:layout_marginStart="52dp"-->
-        <!--        android:layout_marginBottom="72dp"-->
-        <!--        android:background="@drawable/custom_circle_pink_button"-->
-        <!--        android:src="@drawable/ic_home"-->
-        <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--        app:layout_constraintStart_toStartOf="parent"-->
-        <!--        app:layout_constraintTop_toBottomOf="@+id/questionsScroll"-->
-        <!--        app:layout_constraintVertical_bias="1.0" />-->
-
-        <!--    <ImageButton-->
-        <!--        android:id="@+id/guideAddVolu"-->
-        <!--        android:layout_width="72dp"-->
-        <!--        android:layout_height="74dp"-->
-        <!--        android:layout_gravity="center"-->
-        <!--        android:layout_marginStart="164dp"-->
-        <!--        android:layout_marginBottom="72dp"-->
-        <!--        android:background="@drawable/custom_circle_pink_button"-->
-        <!--        android:src="@drawable/ic_person_add"-->
-        <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--        app:layout_constraintEnd_toEndOf="parent"-->
-        <!--        app:layout_constraintHorizontal_bias="0.117"-->
-        <!--        app:layout_constraintStart_toEndOf="@+id/guideHome"-->
-        <!--        app:layout_constraintTop_toBottomOf="@+id/questionsScroll"-->
-        <!--        app:layout_constraintVertical_bias="1.0" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>

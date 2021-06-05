@@ -16,7 +16,7 @@ import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.example.mishlavim.R;
-import com.example.mishlavim.model.FirebaseStrings;
+import com.example.mishlavim.model.Firebase.FirebaseStrings;
 import com.example.mishlavim.model.FormTemplate;
 import com.google.firebase.firestore.FirebaseFirestore;
 
