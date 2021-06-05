@@ -38,16 +38,16 @@ public class DeleteUser extends DialogFragment {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        builder.setMessage("Are you sure you want to delete this user?")
+        builder.setMessage("האם למחוק את המשתמש?")
 
-                .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                .setPositiveButton("כן", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         Log.d("positive","positive delete button had pressed.");
                         listener.onDeletePositiveClick(DeleteUser.this);
                     }
                 })
 
-                .setNegativeButton("no", new DialogInterface.OnClickListener() {
+                .setNegativeButton("לא", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // User cancelled the dialog
                         Log.d("negative","negative delete button had pressed.");
