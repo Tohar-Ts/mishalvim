@@ -19,7 +19,9 @@ import com.example.mishlavim.R;
 import com.example.mishlavim.dialogs.AddUserDialog;
 import com.example.mishlavim.dialogs.DeleteUser;
 import com.example.mishlavim.login.Validation;
+import com.example.mishlavim.model.Firebase.AuthenticationMethods;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
+import com.example.mishlavim.model.Firebase.FirestoreMethods;
 import com.example.mishlavim.model.Global;
 import com.example.mishlavim.model.Guide;
 import com.example.mishlavim.model.Volunteer;
@@ -111,12 +113,14 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
 
     private void registerToFirebase(String userName, String email, String password){
         String myGuide = guide.getName();
+        String guideID = mAuth.getUid();
 
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         fbUser = mAuth.getCurrentUser(); // this is the new user we just added.
-//                        volunteer = new Volunteer(userName, FirebaseStrings.volunteerStr(), email, myGuide, "", new HashMap<>(), "");
+                        volunteer = new Volunteer(userName, FirebaseStrings.volunteerStr(), email, myGuide, guideID, new HashMap<>(), "",false);
+                        // TODO: 6/5/2021 FIX THIS CONS.
                         createNewUser(fbUser, volunteer);
                     } else
                         showRegisterFailed();
@@ -131,13 +135,12 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
     private void addUserToDb(FirebaseUser fbUser, Volunteer volunteer) {
         String usersCollection = FirebaseStrings.usersStr();
         String userId = fbUser.getUid();
-
         db.collection(usersCollection)
                 .document(userId)
                 .set(volunteer)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        Toast.makeText(GuideAddVolunteerActivity.this, "Volunteer was added successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(GuideAddVolunteerActivity.this, "המשתמש נוצר בהצלחה!", Toast.LENGTH_SHORT).show();
                         userHasAdd();
                         loadingProgressBar.setVisibility(View.GONE);
 
@@ -178,11 +181,9 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
     @Override
     public void onDeletePositiveClick(DialogFragment dialog) {
         loadingProgressBar.setVisibility(View.VISIBLE);
-//        guide.deleteVolunteer(fbUser,db, volunteer);
+        FirestoreMethods.deleteDocument(FirebaseStrings.usersStr(),guide.getMyVolunteers().get(userNameEditText.getText().toString().trim()),this::onDocumentDeleteSuccess, this::onDeleteFailed);
         loadingProgressBar.setVisibility(View.GONE);
         finish();
-//        startActivity(new Intent(GuideAddVolunteerActivity.this, GuideMainActivity.class));
-
     }
 
 
@@ -190,5 +191,26 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
     public void onDeleteNegativeClick(DialogFragment dialog) {
         DialogFragment newFragment = new AddUserDialog();
         newFragment.show(getSupportFragmentManager(), "addUser");
+    }
+
+
+    public Void onDocumentDeleteSuccess(Void noUse){
+        FirestoreMethods.deleteMapKey(FirebaseStrings.usersStr(), AuthenticationMethods.getCurrentUserID(),FirebaseStrings.myVolunteerStr(),userNameEditText.getText().toString().trim(),this::onKeyDeleteSuccess,this::onDeleteFailed);
+        return null;
+    }
+
+    public Void onDeleteFailed(Void noUse){
+        Toast.makeText(GuideAddVolunteerActivity.this, "המחיקה נכשלה! באסה!", Toast.LENGTH_SHORT).show();
+        return null;
+    }
+    public Void onKeyDeleteSuccess(Void noUse){
+        Toast.makeText(GuideAddVolunteerActivity.this, "המשתמש נמחק בהצלחה! אהוי!", Toast.LENGTH_SHORT).show();
+        reloadScreen();
+        return null;
+    }
+
+    private void reloadScreen() {
+        finish();
+        startActivity(getIntent());
     }
 }
