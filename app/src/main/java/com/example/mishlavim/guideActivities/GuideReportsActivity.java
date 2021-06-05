@@ -130,6 +130,7 @@ public class GuideReportsActivity extends AppCompatActivity implements View.OnCl
         int voluNum = myVolunteersMap.size();
         for(String volName : numOfForms.keySet()){
             allFormsSum += numOfForms.get(volName);
+            Log.d("calculateAvg", " "+ numOfForms.get(volName));
         }
         float avgFormsPerVolu = allFormsSum / voluNum;
         avgText.setText("ממוצע טפסים לחניך:" + avgFormsPerVolu);
