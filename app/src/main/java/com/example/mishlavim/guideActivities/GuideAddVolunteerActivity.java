@@ -31,7 +31,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 
-public class GuideAddVolunteerActivity extends AppCompatActivity implements View.OnClickListener, AddUserDialog.addUserDialogListener, DeleteUser.deleteUserListener  {
+public class GuideAddVolunteerActivity extends AppCompatActivity implements View.OnClickListener, AddUserDialog.addUserDialogListener, DeleteUser.deleteUserListener, BottomNavigationView.OnNavigationItemSelectedListener  {
     private EditText emailEditText;
     private EditText userNameEditText;
     private EditText passwordEditText;
@@ -41,7 +41,7 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
     private Validation validation;
     private FirebaseUser fbUser;
     private Volunteer volunteer;
-
+    BottomNavigationView navBarButtons;
     private Global globalInstance = Global.getGlobalInstance();
     private Guide guide = globalInstance.getGuideInstance();
 
@@ -51,30 +51,30 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
         setContentView(R.layout.activity_guide_add_volunteer);
 
         //init a the navbar selector variable
-        BottomNavigationView navBarButtons=(BottomNavigationView) findViewById(R.id.bottom_navigation);
+        navBarButtons=(BottomNavigationView) findViewById(R.id.bottom_navigation);
         //set the current placement of the cursor on "home"
         navBarButtons.setSelectedItemId(R.id.add_user);
 
         //activate a on click listener for the other buttons:
-        navBarButtons.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                switch(item.getItemId()){
-                    case R.id.add_user:
-                        return true;
-                    case R.id.go_home:
-                        startActivity(new Intent(getApplicationContext(),GuideMainActivity.class));
-                        overridePendingTransition(0, 0);
-                        return true;
-                    case R.id.forms:
-                        startActivity(new Intent(getApplicationContext(), VolunteerFinishedFormActivity.class));
-                        overridePendingTransition(0, 0);
-                        return true;
-                }
-                return false;
-            }
-        });
+//        navBarButtons.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//
+//                switch(item.getItemId()){
+//                    case R.id.add_user:
+//                        return true;
+//                    case R.id.go_home:
+//                        startActivity(new Intent(getApplicationContext(),GuideMainActivity.class));
+//                        overridePendingTransition(0, 0);
+//                        return true;
+//                    case R.id.forms:
+//                        startActivity(new Intent(getApplicationContext(), VolunteerFinishedFormActivity.class));
+//                        overridePendingTransition(0, 0);
+//                        return true;
+//                }
+//                return false;
+//            }
+//        });
 
 
         emailEditText = findViewById(R.id.newEmail);
@@ -89,10 +89,27 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
 
         validation = new Validation(emailEditText,userNameEditText, passwordEditText, verifyPasswordEditText
                 , loadingProgressBar, getResources());
-
+        navBarButtons.setOnNavigationItemSelectedListener(this);
         addButton.setOnClickListener(this);
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.add_user:
+                return true;
+            case R.id.go_home:
+                startActivity(new Intent(getApplicationContext(), GuideMainActivity.class));
+                overridePendingTransition(0, 0);
+                return true;
+            case R.id.forms:
+                startActivity(new Intent(getApplicationContext(), GuideReportsActivity.class));
+                overridePendingTransition(0, 0);
+                return true;
+
+        }
+        return false;
+    }
     @Override
     public void onClick(View v) {
         registerUser();

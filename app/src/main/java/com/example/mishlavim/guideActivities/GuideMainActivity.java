@@ -59,17 +59,19 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.go_home)
-            return true;
-        else if (item.getItemId() == R.id.add_user) {
-               startActivity(new Intent(getApplicationContext(), GuideAddVolunteerActivity.class));
-               overridePendingTransition(0, 0);
-            return true;
-        } else if (item.getItemId() == R.id.forms) {
-               startActivity(new Intent(getApplicationContext(), GuideReportsActivity.class));
-               overridePendingTransition(0, 0);
-            return true;
-        }
+        switch (item.getItemId()) {
+            case R.id.go_home:
+                return true;
+            case R.id.add_user:
+                startActivity(new Intent(getApplicationContext(), GuideAddVolunteerActivity.class));
+                overridePendingTransition(0, 0);
+                return true;
+            case R.id.forms:
+                startActivity(new Intent(getApplicationContext(), GuideReportsActivity.class));
+                overridePendingTransition(0, 0);
+                return true;
+
+            }
         return false;
     }
 
