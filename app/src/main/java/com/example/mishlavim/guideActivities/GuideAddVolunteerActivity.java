@@ -25,7 +25,6 @@ import com.example.mishlavim.model.Firebase.FirestoreMethods;
 import com.example.mishlavim.model.Global;
 import com.example.mishlavim.model.Guide;
 import com.example.mishlavim.model.Volunteer;
-import com.example.mishlavim.volunteerActivities.VolunteerFinishedFormActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -53,7 +52,7 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
         setContentView(R.layout.activity_guide_add_volunteer);
 
         //init a the navbar selector variable
-        navBarButtons=(BottomNavigationView) findViewById(R.id.bottom_navigation);
+        navBarButtons=(BottomNavigationView) findViewById(R.id.admin_bottom_navigation);
         //set the current placement of the cursor on "home"
         navBarButtons.setSelectedItemId(R.id.add_user);
         emailEditText = findViewById(R.id.newEmail);

@@ -56,7 +56,7 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_guide_main);
 
         guideName = findViewById(R.id.guideName);
-        navBarButtons = findViewById(R.id.bottom_navigation);
+        navBarButtons = findViewById(R.id.admin_bottom_navigation);
         voluListLayout = findViewById(R.id.volu_list_layout);
 
         //set the current placement of the cursor on "home"
