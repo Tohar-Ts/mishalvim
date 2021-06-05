@@ -2,6 +2,7 @@ package com.example.mishlavim.adminActivities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.TypedValue;
@@ -36,6 +37,10 @@ public class AdminCreateFormActivity extends AppCompatActivity implements View.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_create_form);
+
+        //import the forms from the value/forms xml:
+        Resources res = getResources();
+        String[] forms1 = res.getStringArray(R.array.form1);
 
         formNameEditText = findViewById(R.id.formName);
         question1EditText = findViewById(R.id.question1);
