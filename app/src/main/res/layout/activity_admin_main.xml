@@ -14,7 +14,7 @@
             android:layoutDirection="rtl"
             app:layout_constraintVertical_bias="1.0"
             app:layout_constraintTop_toTopOf="parent"
-            app:menu="@menu/menu_admin"/>
+            app:menu="@menu/setting_menu"/>
 
 
 <!--    <ScrollView-->
@@ -245,7 +245,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layoutDirection="rtl"
         app:theme="@style/MyTabTextStyle"
-        app:menu="@menu/menu_admin"/>
+        app:menu="@menu/setting_menu"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"

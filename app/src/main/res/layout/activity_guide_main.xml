@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/Theme.MishlavimPink">
+    android:theme="@style/Theme.MishlavimPink"
+    tools:context=".guideActivities.GuideMainActivity">
 
     <TextView
             android:id="@+id/guideName"
@@ -41,7 +42,6 @@
             app:layout_constraintTop_toBottomOf="@+id/guideName" />
 
         <ScrollView
-            android:id="@+id/questionsScroll"
             android:layout_width="match_parent"
             android:layout_height="531dp"
             android:layout_marginTop="20dp"
@@ -52,94 +52,96 @@
             tools:layout_editor_absoluteX="0dp">
 
             <TableLayout
-                android:id="@+id/root"
+                android:id="@+id/volu_list_layout"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
-                android:stretchColumns="1">
+                android:stretchColumns="1"
+                android:shrinkColumns="*"
+                android:orientation="vertical">
 
-                <TableRow
-                    android:id="@+id/first_row"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:padding="10dp"
-                    android:layout_marginBottom="15dp"
-                    android:background="@drawable/borders">
+<!--                <TableRow-->
+<!--                    android:id="@+id/first_row"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="60dp"-->
+<!--                    android:padding="10dp"-->
+<!--                    android:layout_marginBottom="15dp"-->
+<!--                    android:background="@drawable/borders">-->
 
-                    <ImageView
-                        android:id="@+id/addForm"
-                        android:layout_width="40dp"
-                        android:layout_marginEnd="20dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/ic_round_more_horiz"
-                        android:gravity="center"/>
+<!--                    <ImageView-->
+<!--                        android:id="@+id/addForm"-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_marginEnd="20dp"-->
+<!--                        android:layout_marginStart="20dp"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:background="@drawable/ic_round_more_horiz"-->
+<!--                        android:gravity="center"/>-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="start"
-                        android:text="השם שלי"
-                        android:layout_marginEnd="40dp"
-                        android:textSize="25sp" />
-
-
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/second_row"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:padding="10dp"
-                    android:layout_marginBottom="15dp"
-                    android:background="@drawable/borders">
-
-                    <ImageView
-                        android:id="@+id/more"
-                        android:layout_width="40dp"
-                        android:layout_marginEnd="20dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/ic_round_more_horiz"
-                        android:gravity="center" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="start"
-                        android:text="אני חניך נחמד"
-                        android:layout_marginEnd="40dp"
-                        android:textSize="25sp" />
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/third_row"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:padding="10dp"
-                    android:layout_marginBottom="15dp"
-                    android:background="@drawable/borders">
-
-                    <ImageView
-                        android:id="@+id/more2"
-                        android:layout_width="40dp"
-                        android:layout_marginEnd="20dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/ic_round_more_horiz"
-                        android:gravity="center" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="start"
-                        android:text="אני חניך טוב"
-                        android:layout_marginEnd="40dp"
-                        android:textSize="25sp" />
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:gravity="start"-->
+<!--                        android:text="השם שלי"-->
+<!--                        android:layout_marginEnd="40dp"-->
+<!--                        android:textSize="25sp" />-->
 
 
-                </TableRow>
+<!--                </TableRow>-->
+
+<!--                <TableRow-->
+<!--                    android:id="@+id/second_row"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="60dp"-->
+<!--                    android:padding="10dp"-->
+<!--                    android:layout_marginBottom="15dp"-->
+<!--                    android:background="@drawable/borders">-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/more"-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_marginEnd="20dp"-->
+<!--                        android:layout_marginStart="20dp"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:background="@drawable/ic_round_more_horiz"-->
+<!--                        android:gravity="center" />-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:gravity="start"-->
+<!--                        android:text="אני חניך נחמד"-->
+<!--                        android:layout_marginEnd="40dp"-->
+<!--                        android:textSize="25sp" />-->
+<!--                </TableRow>-->
+
+<!--                <TableRow-->
+<!--                    android:id="@+id/third_row"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="60dp"-->
+<!--                    android:padding="10dp"-->
+<!--                    android:layout_marginBottom="15dp"-->
+<!--                    android:background="@drawable/borders">-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/more2"-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_marginEnd="20dp"-->
+<!--                        android:layout_marginStart="20dp"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:background="@drawable/ic_round_more_horiz"-->
+<!--                        android:gravity="center" />-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:gravity="start"-->
+<!--                        android:text="אני חניך טוב"-->
+<!--                        android:layout_marginEnd="40dp"-->
+<!--                        android:textSize="25sp" />-->
+
+
+<!--                </TableRow>-->
             </TableLayout>
 
         </ScrollView>
@@ -151,7 +153,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.998"
-        app:menu="@menu/bottom_navigation_menu"
+        app:menu="@menu/guide_bottom_navigation_menu"
         tools:layout_editor_absoluteX="0dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
