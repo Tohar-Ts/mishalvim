@@ -40,7 +40,7 @@ public class AdminCreateFormActivity extends AppCompatActivity implements View.O
 
         //import the forms from the value/forms xml:
         Resources res = getResources();
-        String[] forms1 = res.getStringArray(R.array.form1);
+//        String[] forms1 = res.getStringArray(R.array.form1);
 
         formNameEditText = findViewById(R.id.formName);
         question1EditText = findViewById(R.id.question1);
