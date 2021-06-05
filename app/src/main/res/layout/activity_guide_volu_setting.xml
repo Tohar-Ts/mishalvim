@@ -5,11 +5,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".guideActivities.GuideVoluSettingActivity">
+
+    <TextView
+        android:id="@+id/edit_volu_prompt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:fontFamily="@font/alef"
+        android:gravity="right"
+        android:paddingStart="40dp"
+        android:paddingEnd="60dp"
+        android:text="הגדרות משתמש"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/edit_volu_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="112dp"
         android:fontFamily="@font/alef"
         android:gravity="right"
         android:paddingStart="40dp"
@@ -18,9 +36,10 @@
         android:textColor="@color/dark_gray"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
