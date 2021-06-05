@@ -38,7 +38,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
                         android:layout_marginBottom="12dp"
-                        android:progressDrawable="@drawable/pb_form_drawable" />
+                        android:progressDrawable="@drawable/pb_form_drawable"/>
 
                     <TextView
                         android:id="@+id/question_number"
@@ -48,7 +48,7 @@
                         android:layout_marginBottom="60dp"
                         android:fontFamily="@font/alef"
                         android:gravity="center"
-                        android:text="שאלה 1"
+                        android:text="@string/question"
                         android:textColor="@android:color/black"
                         android:textSize="35dp" />
 
@@ -60,8 +60,9 @@
                         android:background="@drawable/custom_orange_textview"
                         android:padding="16sp"
                         android:text=""
+                        android:fontFamily="@font/alef"
                         android:textColor="@android:color/black"
-                        android:textSize="25dp" />
+                        android:textSize="25sp" />
 
 
                 </LinearLayout>
@@ -83,7 +84,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:ems="10"
-                        android:hint="ענה תשובה פה:"
+                        android:hint="@string/put_answer_here"
                         android:inputType="textMultiLine"
                         android:lines="7"
                         android:gravity="top|right"
@@ -110,7 +111,6 @@
                             android:text="לא" />
                     </RadioGroup>
 
-
                 </LinearLayout>
 
                 <Button
@@ -120,7 +120,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:background="@drawable/custom_green_button"
-                    android:text="שאלה הבאה"
+                    android:text="@string/next_question"
                     android:textSize="16dp"
                     android:textColor="@android:color/black"
                     android:drawableLeft="@drawable/ic_arrowforward"
@@ -137,7 +137,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:background="@drawable/custom_green_button"
-                    android:text="שאלה קודמת"
+                    android:text="@string/previous_question"
                     android:drawableRight="@drawable/ic_arrowback"
                     android:drawablePadding="1dp"
                     android:textColor="@android:color/black"
@@ -153,7 +153,7 @@
                     android:layout_height="90dp"
                     android:layout_marginEnd="160dp"
                     android:background="@drawable/pink_button"
-                    android:text="שמור תשובות"
+                    android:text="@string/save_form"
                     android:textColor="@color/white"
                     android:textSize="20dp"
                     app:layout_constraintBottom_toBottomOf="parent"

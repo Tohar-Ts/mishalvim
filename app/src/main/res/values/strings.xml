@@ -73,5 +73,10 @@
     <string name="firebase_success">המידע עודכן בהצלחה</string>
     <string name="update_details">עדכון פרטים</string>
     <string name="prompt_phone">טלפון</string>
+    <string name="next_question">שאלה הבאה</string>
+    <string name="previous_question">שאלה קודמת</string>
+    <string name="question">שאלה </string>
+    <string name="put_answer_here">ענה תשובה פה: </string>
+
 
 </resources>
