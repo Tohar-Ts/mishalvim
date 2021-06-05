@@ -5,26 +5,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
-import android.view.ContextMenu;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.Space;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.mishlavim.R;
-import com.example.mishlavim.login.LoginActivity;
 import com.example.mishlavim.model.Global;
 import com.example.mishlavim.model.Guide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -36,7 +31,7 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
     private TextView guideName;
     private TableLayout voluListLayout;
     BottomNavigationView navBarButtons;
-    private String clickedRowId;
+    private String clickedRowName;
     private Guide guide;
 
     @Override
@@ -81,7 +76,7 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
     @Override
     public void onClick(View v) {
         //init clicked id
-        clickedRowId = (String) v.getTag();
+        clickedRowName = (String) v.getTag();
 
         //showing the popup menu
         Context myContext = new ContextThemeWrapper(GuideMainActivity.this,R.style.menuStyle);
@@ -93,17 +88,22 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
+        //delete volunteer
         if (item.getItemId() == R.id.remove_volunteer){
-            Log.d("clicked:", clickedRowId + " remove" );
+          //TODO - POP ARE YOU SURE? DIALOG
             return true;
         }
         else if (item.getItemId() == R.id.view_volunteer) {
-            Log.d("clicked:", clickedRowId + " view" );
+            Log.d("clicked:", clickedRowName + " view" );
             return true;
         }
 
         else if (item.getItemId() == R.id.edit_volunteer) {
-            Log.d("clicked:", clickedRowId + " edit" );
+            Intent intent = new Intent(getApplicationContext(), GuideVoluSettingActivity.class);
+            intent.putExtra("CLICKED_VOLU_KEY", clickedRowName);
+            intent.putExtra("CLICKED_VOLU_ID", guide.getMyVolunteers().get(clickedRowName));
+            startActivity(intent);
+            overridePendingTransition(0, 0);
             return true;
         }
         return false;
@@ -116,10 +116,10 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
     private void showVolunteerList() {
         HashMap<String, String> voluMap = guide.getMyVolunteers();
         for (String voluName : voluMap.keySet())
-            addVolu(voluName);
+            addVoluToList(voluName);
     }
 
-    private void addVolu(String voluName) {
+    private void addVoluToList(String voluName) {
         //creating new row
        TableRow voluRow = new TableRow(this);
 

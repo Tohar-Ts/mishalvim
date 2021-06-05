@@ -10,8 +10,8 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".guideActivities.GuideReportsActivity"></activity>
-        <!-- <activity android:name=".UpdateDetailsActivity"></activity> -->
+        <activity android:name=".guideActivities.GuideVoluSettingActivity"></activity>
+        <activity android:name=".guideActivities.GuideReportsActivity" /> <!-- <activity android:name=".UpdateDetailsActivity"></activity> -->
         <!-- <activity android:name=".ChangeDetailsActivity" /> -->
         <activity android:name=".guideActivities.GuideMainActivity" />
         <activity android:name=".guideActivities.GuideAddVolunteerActivity" />

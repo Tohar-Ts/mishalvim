@@ -48,7 +48,7 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
         savedAnswersLayout = findViewById(R.id.SavedAnswersLayout);
 
         //Getting the clicked form id
-        clickedFormKey =  getIntent().getStringExtra("CLICKED_FORM_KEY");;
+        clickedFormKey =  getIntent().getStringExtra("CLICKED_FORM_KEY");
         Global globalInstance = Global.getGlobalInstance();
         HashMap<String, String> answeredForms = globalInstance.getVoluInstance().getFinishedForms();
         clickedFormId = answeredForms.get(clickedFormKey);
