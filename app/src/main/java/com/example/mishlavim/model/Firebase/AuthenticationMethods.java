@@ -69,4 +69,10 @@ public class AuthenticationMethods {
         FirebaseAuth.getInstance().signOut();
     }
 
+    public static String getCurrentUserID(){
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        return currentUser.getUid();
+    }
+
 }
