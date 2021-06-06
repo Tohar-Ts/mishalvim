@@ -1,12 +1,15 @@
 package com.example.mishlavim.adminActivities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -19,11 +22,12 @@ import android.widget.Toast;
 import com.example.mishlavim.R;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
 import com.example.mishlavim.model.FormTemplate;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 
-public class AdminCreateFormActivity extends AppCompatActivity implements View.OnClickListener {
+public class AdminCreateFormActivity extends AppCompatActivity implements View.OnClickListener, BottomNavigationView.OnNavigationItemSelectedListener {
 
     private EditText formNameEditText, question1EditText, question2EditText, question3EditText;
     private Button addQuestionButton, saveButton;
@@ -32,6 +36,7 @@ public class AdminCreateFormActivity extends AppCompatActivity implements View.O
     private int numOfQuestions;
     private LinearLayout questionsLayout;
     private ScrollView questionsScroll;
+    private BottomNavigationView navBarButtons;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +59,49 @@ public class AdminCreateFormActivity extends AppCompatActivity implements View.O
         db = FirebaseFirestore.getInstance();
         numOfQuestions = 3;
 
+        navBarButtons = findViewById(R.id.admin_bottom_navigation);
+
+        //set the current placement of the cursor on "home"
+        navBarButtons.setSelectedItemId(R.id.add_forms);
+
         addQuestionButton.setOnClickListener(this);
         saveButton.setOnClickListener(this);
-    }
+        navBarButtons.setOnNavigationItemSelectedListener(this);
 
+    }
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.guides){
+            finish();
+            startActivity(new Intent(getApplicationContext(), AdminMainActivity.class));
+            return true;
+        }
+        else if (item.getItemId() == R.id.add_user) {
+            finish();
+            startActivity(new Intent(getApplicationContext(), AdminAddNewUserActivity.class));
+            overridePendingTransition(0, 0);
+            return true;
+        }
+        else if (item.getItemId() == R.id.forms) {
+            finish();
+            startActivity(new Intent(getApplicationContext(), AdminFormsActivity.class));
+            overridePendingTransition(0, 0);
+            return true;
+        }
+        else if (item.getItemId() == R.id.add_forms) {
+            finish();
+            startActivity(new Intent(getApplicationContext(), AdminCreateFormActivity.class));
+            overridePendingTransition(0, 0);
+            return true;
+        }
+        else if (item.getItemId() == R.id.reports) {
+            finish();
+            startActivity(new Intent(getApplicationContext(), AdminReportsActivity.class));
+            overridePendingTransition(0, 0);
+            return true;
+        }
+        return false;
+    }
     @Override
     public void onClick(View v) {
         if(v.getId() ==  R.id.addNewQuestion)

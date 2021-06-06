@@ -10,7 +10,9 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".guideActivities.GuideVoluSettingActivity"></activity>
+        <activity android:name=".adminActivities.AdminReportsActivity"></activity>
+        <activity android:name=".adminActivities.AdminFormsActivity" />
+        <activity android:name=".guideActivities.GuideVoluSettingActivity" />
         <activity android:name=".guideActivities.GuideReportsActivity" /> <!-- <activity android:name=".UpdateDetailsActivity"></activity> -->
         <!-- <activity android:name=".ChangeDetailsActivity" /> -->
         <activity android:name=".guideActivities.GuideMainActivity" />
@@ -21,7 +23,6 @@
             android:label="volunteerMainActivity" /> <!-- <activity android:name=".guideActivities.GuideAddVolunteerActivity" /> -->
         <activity android:name=".volunteerActivities.VolunteerViewOldFormActivity" />
         <activity android:name=".volunteerActivities.VolunteerFillOutFormActivity" />
-        <activity android:name=".adminActivities.EditFormActivity" />
         <activity android:name=".adminActivities.AdminMainActivity" />
         <activity android:name=".login.LoginActivity" />
         <activity android:name=".adminActivities.AdminAddNewUserActivity" />
