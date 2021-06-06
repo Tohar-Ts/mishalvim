@@ -58,7 +58,7 @@ public class AdminMainActivity extends AppCompatActivity implements View.OnClick
         adminName = findViewById(R.id.WelcomeAdmin);
         guideListLayout = findViewById(R.id.guide_list_layout);
         settingBar = findViewById(R.id.toolbar);
-        navBarButtons = findViewById(R.id.admin_bottom_navigation);
+        navBarButtons = findViewById(R.id.admin_main_bottom_navigation);
 
         //set the current placement of the cursor on "home"
         navBarButtons.setSelectedItemId(R.id.guides);
