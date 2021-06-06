@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/Theme.MishlavimPink"
     tools:context=".adminActivities.AdminCreateFormActivity">
 
 
@@ -30,7 +29,7 @@
             android:fontFamily="@font/alef"
             android:text="@string/create_new_form"
             android:gravity="center"
-            android:textColor="@color/black"
+            android:textColor="@color/dark_gray"
             android:layout_marginBottom="10dp"
             android:textSize="25sp" />
         <EditText
@@ -138,15 +137,5 @@
 
     </LinearLayout>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/admin_bottom_navigation"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:menu="@menu/admin_bottom_navigation_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -56,7 +56,6 @@
         android:backgroundTint="@color/pink"
         android:src="@drawable/ic_edit"
         app:fabCustomSize="70dp"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
