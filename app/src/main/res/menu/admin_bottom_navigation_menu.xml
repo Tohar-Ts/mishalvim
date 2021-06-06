@@ -6,24 +6,29 @@
         android:enabled="true"
         android:icon="@drawable/ic_person"
         android:title="מדריכים" />
-    <item
-        android:id="@+id/volunteers"
-        android:enabled="true"
-        android:icon="@drawable/ic_volu"
-        android:title="חניכים" />
+<!--    <item-->
+<!--        android:id="@+id/volunteers"-->
+<!--        android:enabled="true"-->
+<!--        android:icon="@drawable/ic_volu"-->
+<!--        android:title="חניכים" />-->
     <item
         android:id="@+id/add_user"
         android:enabled="true"
         android:icon="@drawable/ic_person_add"
         android:title="הוסף משתמש" />
     <item
-        android:id="@+id/subject"
+        android:id="@+id/forms"
         android:enabled="true"
         android:icon="@drawable/ic_subject"
         android:title="טפסים" />
+    <item
+        android:id="@+id/add_forms"
+        android:enabled="true"
+        android:icon="@drawable/ic_forms_add"
+        android:title="הוסף טופס" />
 
     <item
-        android:id="@+id/forms"
+        android:id="@+id/reports"
         android:enabled="true"
         android:icon="@drawable/ic_report"
         android:title="דוחות"

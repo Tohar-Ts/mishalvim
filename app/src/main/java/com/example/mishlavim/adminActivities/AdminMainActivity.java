@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,12 +55,12 @@ public class AdminMainActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_admin_main);
 
         adminName = findViewById(R.id.WelcomeAdmin);
-        navBarButtons = findViewById(R.id.admin_bottom_navigation);
         guideListLayout = findViewById(R.id.guide_list_layout);
         settingBar = findViewById(R.id.toolbar);
+        navBarButtons = findViewById(R.id.admin_bottom_navigation);
 
         //set the current placement of the cursor on "home"
-        navBarButtons.setSelectedItemId(R.id.go_home);
+        navBarButtons.setSelectedItemId(R.id.guides);
 
         //init the admin data
         Global globalInstance = Global.getGlobalInstance();
@@ -77,21 +78,42 @@ public class AdminMainActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.go_home){
+        if (item.getItemId() == R.id.guides){
             finish();
-            startActivity(new Intent(getApplicationContext(), GuideMainActivity.class));
+            startActivity(new Intent(getApplicationContext(), AdminMainActivity.class));
             return true;
         }
         else if (item.getItemId() == R.id.add_user) {
-            startActivity(new Intent(getApplicationContext(), GuideAddVolunteerActivity.class));
+            finish();
+            startActivity(new Intent(getApplicationContext(), AdminAddNewUserActivity.class));
             overridePendingTransition(0, 0);
             return true;
-        } else if (item.getItemId() == R.id.forms) {
-            startActivity(new Intent(getApplicationContext(), GuideReportsActivity.class));
+        }
+        else if (item.getItemId() == R.id.forms) {
+            finish();
+            startActivity(new Intent(getApplicationContext(), AdminFormsActivity.class));
+            overridePendingTransition(0, 0);
+            return true;
+        }
+        else if (item.getItemId() == R.id.add_forms) {
+            finish();
+            startActivity(new Intent(getApplicationContext(), AdminCreateFormActivity.class));
+            overridePendingTransition(0, 0);
+            return true;
+        }
+        else if (item.getItemId() == R.id.reports) {
+            finish();
+            startActivity(new Intent(getApplicationContext(), AdminReportsActivity.class));
             overridePendingTransition(0, 0);
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.setting_menu, menu);
+        return true;
     }
 
     @Override

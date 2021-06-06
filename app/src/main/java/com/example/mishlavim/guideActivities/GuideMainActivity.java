@@ -30,6 +30,7 @@ import com.example.mishlavim.R;
 import com.example.mishlavim.adminActivities.AdminMainActivity;
 import com.example.mishlavim.login.LoginActivity;
 import com.example.mishlavim.model.Admin;
+
 import com.example.mishlavim.dialogs.DeleteUser;
 import com.example.mishlavim.model.Firebase.AuthenticationMethods;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
@@ -227,6 +228,7 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
     private int convertFromDpToPixels(int toConvert){
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, toConvert, getResources().getDisplayMetrics());
     }
+
 
     private Void getUserDocSuccess(DocumentSnapshot doc){
         assert doc != null;
