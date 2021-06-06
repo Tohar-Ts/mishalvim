@@ -4,10 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,6 +38,7 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
     private String voluName;
     private String voluId;
     private TableLayout formsList;
+    private String clickedFormName;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,13 +60,13 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
             Log.d("createFormsList", document.getId() + " => " + document.getData());
             FormTemplate form = document.toObject(FormTemplate.class);
             Log.d("createFormsList", form.getFormName()+"");
-            addToTbl(form.getFormName());
+            addToTbl(form.getFormName(),document.getId());
         }
 
         return null;
     }
 
-    private void addToTbl(String formName) {
+    private void addToTbl(String formName, String id) {
         TableRow newRow = new TableRow(this);
         //calculate height
         int height = convertFromDpToPixels(60);
@@ -91,11 +94,11 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
         optionImg.setBackgroundResource(R.drawable.ic_round_more_horiz);
         optionImg.setClickable(true);
         optionImg.setOnClickListener(this);
-        optionImg.setTag(formName);
+        optionImg.setTag(id);
 
         //creating new text view
         TextView formNameView = new TextView(this);
-
+//        formNameView.setTag(id);
         //calculate height
         marginEnd =  convertFromDpToPixels(40);
 
@@ -126,17 +129,29 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
         getMenuInflater().inflate(R.menu.guide_forms_option, menu);
         return true;
     }
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
+        if (item.getItemId() == R.id.open_curr_form) {
+            Log.d("onMenuItemClick", "open form to "+ voluName+" form id "+ clickedFormName);
+            return true;
+        }
+        else if (item.getItemId() == R.id.allow_edit) {
+            Log.d("onMenuItemClick", "aloow edit form to "+ voluName+" form id "+ clickedFormName);
+
+            return true;
+        }
         return false;
     }
     @Override
     public void onClick(View v) {
+        clickedFormName = (String) v.getTag();
+        //showing the popup menu
+        Context myContext = new ContextThemeWrapper(GuideFormsPermissionActivity.this,R.style.menuStyle);
+        PopupMenu popup = new PopupMenu(myContext, v);
+        popup.setOnMenuItemClickListener(this);
+        popup.inflate(R.menu.guide_forms_option);
+        popup.show();
 
     }
     private int convertFromDpToPixels(int toConvert){
