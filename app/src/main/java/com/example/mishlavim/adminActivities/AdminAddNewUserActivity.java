@@ -207,7 +207,5 @@ public class AdminAddNewUserActivity extends AppCompatActivity implements View.O
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
+    public void onNothingSelected(AdapterView<?> parent) {}
 }
