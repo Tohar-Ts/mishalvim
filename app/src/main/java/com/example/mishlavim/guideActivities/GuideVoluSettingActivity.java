@@ -3,15 +3,32 @@ package com.example.mishlavim.guideActivities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.mishlavim.R;
+import com.example.mishlavim.login.Validation;
+import com.example.mishlavim.model.Admin;
+import com.example.mishlavim.model.Firebase.FirebaseStrings;
+import com.example.mishlavim.model.Firebase.FirestoreMethods;
+import com.example.mishlavim.model.Global;
+import com.example.mishlavim.model.Volunteer;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
-public class GuideVoluSettingActivity extends AppCompatActivity {
+import java.security.acl.Group;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class GuideVoluSettingActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
-
 
     private TextView userName, guideName;
     private EditText name, email, password,password_confirm ;
@@ -20,15 +37,16 @@ public class GuideVoluSettingActivity extends AppCompatActivity implements View.
     private FirebaseUser firebaseUser;
     private FirebaseFirestore db;
     private String voluToUpdateName, voluToUpdateId;
-    private TextView voluName;
+    private Spinner guidesSpinner;
+    private ArrayList<String> listOfGuidesName,  listOfGuidesID;
+    private Volunteer volunteer;
+    private Group group;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_guide_volu_setting);
-
-        //innit xml views
-        voluName = findViewById(R.id.edit_volu_name);
-
+        setContentView(R.layout.activity_update_details);
 
         //getting clicked volunteer details
         voluToUpdateName =  getIntent().getStringExtra("CLICKED_VOLU_KEY");
@@ -72,9 +90,9 @@ public class GuideVoluSettingActivity extends AppCompatActivity implements View.
 
         FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(),voluToUpdateId,FirebaseStrings.nameStr(),name.getText(),task ->{
             FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(),voluToUpdateId,FirebaseStrings.emailStr(),name.getText(),task2 ->{
-                    reloadScreen();
+                reloadScreen();
                 return  null;},this::onGetDocFailed);
-        return  null;},this::onGetDocFailed);
+            return  null;},this::onGetDocFailed);
 
     }
 
@@ -112,5 +130,8 @@ public class GuideVoluSettingActivity extends AppCompatActivity implements View.
     }
     public Void onGetDocFailed(Void noUse){return null;}
 
+    private void reloadScreen() {
+        finish();
+        startActivity(getIntent());
     }
 }

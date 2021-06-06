@@ -139,16 +139,6 @@
                 android:text="@string/prompt_volunteer"
                 android:textAlignment="textStart" />
 
-                <RadioButton
-                    android:id="@+id/volunteerRb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:layout_marginEnd="10dp"
-                    android:layoutDirection="rtl"
-                    android:onClick="checkUserType"
-                    android:text="@string/prompt_volunteer"
-                    android:textAlignment="textStart" />
             </RadioGroup>
 
         <ProgressBar

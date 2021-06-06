@@ -4,28 +4,44 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.TextView;
 
 import com.example.mishlavim.R;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.mishlavim.adminActivities.AdminMainActivity;
+import com.example.mishlavim.guideActivities.GuideAddVolunteerActivity;
+import com.example.mishlavim.guideActivities.GuideMainActivity;
+import com.example.mishlavim.guideActivities.GuideReportsActivity;
+import com.example.mishlavim.login.LoginActivity;
+import com.example.mishlavim.model.Admin;
+import com.example.mishlavim.model.Firebase.FirebaseStrings;
 import com.example.mishlavim.model.Global;
+import com.example.mishlavim.model.Guide;
 import com.example.mishlavim.model.Volunteer;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 //TODO - in the xml file replace plain text with strings
 //TODO - check if has open form to display the open form fill me button
 
-public class VolunteerMainActivity extends AppCompatActivity implements View.OnClickListener {
+public class VolunteerMainActivity extends AppCompatActivity implements View.OnClickListener, BottomNavigationView.OnNavigationItemSelectedListener{
 
     private TextView helloVolu;
     private GridLayout formsLayout;
     private Volunteer volu;
+    BottomNavigationView navBarButtons;
     private FloatingActionButton openFormBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +52,8 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
         helloVolu = findViewById(R.id.HelloVolu);
         formsLayout = findViewById(R.id.finishedFormsLayout);
         openFormBtn = findViewById(R.id.openFormBtn);
-
+        navBarButtons = findViewById(R.id.bottom_navigation);
+        navBarButtons.getMenu().getItem(0).setCheckable(false);
         //init volu object
         Global globalInstance = Global.getGlobalInstance();
         volu = globalInstance.getVoluInstance();
@@ -45,7 +62,6 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
         setHelloMsg();
         setAnsweredForms();
         showMenu();
-
         navBarButtons.setOnNavigationItemSelectedListener(this);
 
 
@@ -53,7 +69,6 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public void onClick(View v) {
-
         //clicked the open form button
         if(v.getId() ==  R.id.openFormBtn) {
             Intent intent = new Intent(VolunteerMainActivity.this, VolunteerFillOutFormActivity.class);
@@ -68,6 +83,35 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
             intent.putExtra("CLICKED_FORM_KEY", formKey);
             startActivity(intent);
         }
+    }
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.go_home){
+            finish();
+            startActivity(new Intent(getApplicationContext(), GuideMainActivity.class));
+            return true;
+        }
+        else if (item.getItemId() == R.id.add_user) {
+            startActivity(new Intent(getApplicationContext(), GuideAddVolunteerActivity.class));
+            overridePendingTransition(0, 0);
+            return true;
+        } else if (item.getItemId() == R.id.forms) {
+            startActivity(new Intent(getApplicationContext(), GuideReportsActivity.class));
+            overridePendingTransition(0, 0);
+            return true;
+        }
+        return false;
+    }
+
+    private void showMenu() { // a function that shows the menu to the guides
+        Global globalInstance = Global.getGlobalInstance();
+        if(globalInstance.getType().equals(FirebaseStrings.guideStr())) {
+            navBarButtons.setVisibility(View.VISIBLE);
+        }
+        else{
+            navBarButtons.setVisibility(View.GONE);
+        }
+
     }
 
     private void setHelloMsg() {

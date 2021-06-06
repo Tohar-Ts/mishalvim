@@ -86,6 +86,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:menu="@menu/admin_buttom_navigation_menu" />
+        app:menu="@menu/admin_bottom_navigation_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

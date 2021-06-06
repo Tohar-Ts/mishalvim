@@ -14,9 +14,11 @@ public class FirebaseStrings {
         return "admin";
     }
 
-    public static String guideStr() {
-        return "guide";
-    }
+    public static String guideStr() { return "guide"; }
+
+    public static String myGuideStr() { return "myGuide"; }
+
+    public static String myGuideIdStr() { return "myGuideID"; }
 
     public static String volunteerStr() {
         return "volunteer";
@@ -28,6 +30,10 @@ public class FirebaseStrings {
 
     public static String typeStr() {
         return "type";
+    }
+
+    public static String emailStr() {
+        return "email";
     }
 
     public static String nameStr() {

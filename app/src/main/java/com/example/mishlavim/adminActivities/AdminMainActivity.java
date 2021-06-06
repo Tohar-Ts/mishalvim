@@ -42,7 +42,7 @@ public class AdminMainActivity extends AppCompatActivity implements View.OnClick
 
     private TextView adminName;
     private TableLayout guideListLayout;
-    private BottomNavigationView navBarButtons;
+    private BottomNavigationView navBarButtons ;
     private Toolbar settingBar;
 
 
