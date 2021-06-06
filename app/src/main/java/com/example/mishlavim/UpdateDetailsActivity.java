@@ -26,12 +26,12 @@ public class UpdateDetailsActivity extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details);
 
-        username = findViewById(R.id.user_name);
+//        username = findViewById(R.id.user_name);
         name = findViewById(R.id.name);
         email = findViewById(R.id.email);
         password =findViewById(R.id.password);
         password_confirm = findViewById(R.id.password_confirm);
-        phone = findViewById(R.id.phone);
+//        phone = findViewById(R.id.phone);
         Button saveBTM = findViewById(R.id.updateBTM);
 
 //        validation = new Validation(emailEditText, null, passwordEditText, null,
