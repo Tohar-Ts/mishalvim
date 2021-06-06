@@ -19,6 +19,7 @@ public class AdminReportsActivity extends AppCompatActivity implements BottomNav
         setContentView(R.layout.activity_admin_reports);
         navBarButtons = findViewById(R.id.admin_bottom_navigation);
 
+
         //set the current placement of the cursor on "home"
         navBarButtons.setSelectedItemId(R.id.reports);
         navBarButtons.setOnNavigationItemSelectedListener(this);

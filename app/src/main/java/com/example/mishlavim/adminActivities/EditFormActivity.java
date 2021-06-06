@@ -1,14 +1,16 @@
-package com.example.mishlavim.guideActivities;
+package com.example.mishlavim.adminActivities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import com.example.mishlavim.R;
 import android.os.Bundle;
 
-public class GuideReportsActivity extends AppCompatActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.mishlavim.R;
+
+public class EditFormActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_guide_reports);
+        setContentView(R.layout.activity_edit_form);
     }
 }
