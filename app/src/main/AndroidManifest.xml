@@ -22,6 +22,7 @@
             android:resource="@xml/searchable"/>
         </activity>
 
+
         <activity android:name=".guideActivities.GuideAddVolunteerActivity" />
         <activity android:name=".volunteerActivities.VolunteerFinishedFormActivity" />
         <activity

@@ -156,6 +156,7 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
         //creating new row
        TableRow voluRow = new TableRow(this);
 
+
         //calculate height
         int height = convertFromDpToPixels(60);
         int padding =  convertFromDpToPixels(10);
