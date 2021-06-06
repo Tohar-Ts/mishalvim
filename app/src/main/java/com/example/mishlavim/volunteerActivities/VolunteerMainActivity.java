@@ -61,6 +61,7 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
         setHelloMsg();
         setAnsweredForms();
         showMenu();
+
         navBarButtons.setOnNavigationItemSelectedListener(this);
 
 

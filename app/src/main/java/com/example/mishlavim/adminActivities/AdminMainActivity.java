@@ -95,6 +95,7 @@ public class AdminMainActivity extends AppCompatActivity implements View.OnClick
         return false;
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.setting_menu, menu);

@@ -18,6 +18,7 @@
         app:theme="@style/MyTabTextStyle"
         app:menu="@menu/setting_menu"/>
 
+
     <TextView
         android:id="@+id/WelcomeAdmin"
         android:layout_width="match_parent"
