@@ -4,7 +4,7 @@
         android:id="@+id/open_curr_form"
         android:title="פתח שאלון" />
     <item
-        android:id="@+id/allow_edit"ss
+        android:id="@+id/allow_edit"
         android:title="אפשר עריכה" />
 
 </menu>
