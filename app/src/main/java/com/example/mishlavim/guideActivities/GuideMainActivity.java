@@ -7,6 +7,7 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,15 +24,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.mishlavim.R;
+import com.example.mishlavim.adminActivities.AdminMainActivity;
+import com.example.mishlavim.login.LoginActivity;
+import com.example.mishlavim.model.Admin;
 import com.example.mishlavim.dialogs.DeleteUser;
 import com.example.mishlavim.model.Firebase.AuthenticationMethods;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
 import com.example.mishlavim.model.Firebase.FirestoreMethods;
 import com.example.mishlavim.model.Global;
 import com.example.mishlavim.model.Guide;
+import com.example.mishlavim.model.Volunteer;
+import com.example.mishlavim.volunteerActivities.VolunteerMainActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.example.mishlavim.volunteerActivities.VolunteerMainActivity;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class GuideMainActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener, BottomNavigationView.OnNavigationItemSelectedListener, DeleteUser.deleteUserListener {
 
@@ -47,7 +55,7 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_guide_main);
 
         guideName = findViewById(R.id.guideName);
-        navBarButtons = findViewById(R.id.bottom_navigation);
+        navBarButtons = findViewById(R.id.admin_bottom_navigation);
         voluListLayout = findViewById(R.id.volu_list_layout);
 
         //set the current placement of the cursor on "home"
@@ -72,12 +80,12 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
             return true;
         }
         else if (item.getItemId() == R.id.add_user) {
-               startActivity(new Intent(getApplicationContext(), GuideAddVolunteerActivity.class));
-               overridePendingTransition(0, 0);
+            startActivity(new Intent(getApplicationContext(), GuideAddVolunteerActivity.class));
+            overridePendingTransition(0, 0);
             return true;
         } else if (item.getItemId() == R.id.forms) {
-               startActivity(new Intent(getApplicationContext(), GuideReportsActivity.class));
-               overridePendingTransition(0, 0);
+            startActivity(new Intent(getApplicationContext(), GuideReportsActivity.class));
+            overridePendingTransition(0, 0);
             return true;
         }
         return false;
@@ -105,6 +113,7 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
             return true;
         }
         else if (item.getItemId() == R.id.view_volunteer) {
+            FirestoreMethods.getDocument(FirebaseStrings.usersStr(),  guide.getMyVolunteers().get(clickedRowName), this::getUserDocSuccess, this::getUserDocFailed);
             Log.d("clicked:", clickedRowName + " view" );
             return true;
         }
@@ -132,7 +141,7 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
 
     private void addVoluToList(String voluName) {
         //creating new row
-       TableRow voluRow = new TableRow(this);
+        TableRow voluRow = new TableRow(this);
 
         //calculate height
         int height = convertFromDpToPixels(60);
@@ -192,6 +201,26 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
 
     private int convertFromDpToPixels(int toConvert){
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, toConvert, getResources().getDisplayMetrics());
+    }
+
+    private Void getUserDocSuccess(DocumentSnapshot doc){
+        assert doc != null;
+        Global globalInstance = Global.getGlobalInstance();
+        Volunteer volu = doc.toObject(Volunteer.class);
+        globalInstance.setVoluInstance(volu);
+        startActivity(new Intent(GuideMainActivity.this, VolunteerMainActivity.class));
+        return null;
+    }
+
+    private Void getUserDocFailed(Void unused){
+        showError(R.string.login_failed);
+        return null;
+    }
+
+
+
+    private void showError(Integer msg) {
+        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override

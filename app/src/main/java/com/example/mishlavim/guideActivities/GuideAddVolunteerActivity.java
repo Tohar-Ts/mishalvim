@@ -26,7 +26,6 @@ import com.example.mishlavim.model.Firebase.FirestoreMethods;
 import com.example.mishlavim.model.Global;
 import com.example.mishlavim.model.Guide;
 import com.example.mishlavim.model.Volunteer;
-import com.example.mishlavim.volunteerActivities.VolunteerFinishedFormActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -54,32 +53,9 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
         setContentView(R.layout.activity_guide_add_volunteer);
 
         //init a the navbar selector variable
-        navBarButtons=(BottomNavigationView) findViewById(R.id.bottom_navigation);
+        navBarButtons=(BottomNavigationView) findViewById(R.id.admin_bottom_navigation);
         //set the current placement of the cursor on "home"
         navBarButtons.setSelectedItemId(R.id.add_user);
-
-        //activate a on click listener for the other buttons:
-//        navBarButtons.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//
-//                switch(item.getItemId()){
-//                    case R.id.add_user:
-//                        return true;
-//                    case R.id.go_home:
-//                        startActivity(new Intent(getApplicationContext(),GuideMainActivity.class));
-//                        overridePendingTransition(0, 0);
-//                        return true;
-//                    case R.id.forms:
-//                        startActivity(new Intent(getApplicationContext(), VolunteerFinishedFormActivity.class));
-//                        overridePendingTransition(0, 0);
-//                        return true;
-//                }
-//                return false;
-//            }
-//        });
-
-
         emailEditText = findViewById(R.id.newEmail);
         userNameEditText = findViewById(R.id.newUserName);
         passwordEditText = findViewById(R.id.newPassword);
