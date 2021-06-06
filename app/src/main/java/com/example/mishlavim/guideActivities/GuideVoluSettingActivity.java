@@ -67,7 +67,7 @@ public class GuideVoluSettingActivity extends AppCompatActivity implements View.
 
         group = findViewById(R.id.group2);
         userName = findViewById(R.id.edit_volu_name);
-        userName.setText(voluToUpdateName);
+//        userName.setText(voluToUpdateName);
         name = findViewById(R.id.name);
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
