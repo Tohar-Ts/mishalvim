@@ -10,7 +10,7 @@
         android:id="@+id/edit_volu_prompt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="56dp"
         android:fontFamily="@font/alef"
         android:gravity="right"
         android:paddingStart="40dp"
@@ -23,12 +23,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <TextView
         android:id="@+id/edit_volu_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="124dp"
+        android:layout_marginTop="112dp"
         android:fontFamily="@font/alef"
         android:gravity="right"
         android:paddingStart="40dp"
@@ -41,43 +40,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/name"
-        android:layout_width="365dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="100dp"
-        android:autofillHints="@string/nametext"
-        android:background="@drawable/custom_input"
-        android:drawableEnd="@drawable/ic_identity"
-        android:drawablePadding="12dp"
-        android:gravity="center|start"
-        android:hint="@string/title_user_name"
-        android:inputType="text"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:selectAllOnFocus="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_volu_name" />
 
-    <EditText
-        android:id="@+id/email"
-        android:layout_width="365dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="20dp"
-        android:autofillHints="@string/prompt_email"
-        android:background="@drawable/custom_input"
-        android:drawableEnd="@drawable/ic_email"
-        android:drawablePadding="12dp"
-        android:gravity="center|start"
-        android:hint="@string/prompt_email"
-        android:inputType="textEmailAddress"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:selectAllOnFocus="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
 
     <EditText
         android:id="@+id/password"

@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".adminActivities.AdminCreateFormActivity">
 
-
     <LinearLayout
         android:id="@+id/linearLayout4"
         android:layout_width="match_parent"

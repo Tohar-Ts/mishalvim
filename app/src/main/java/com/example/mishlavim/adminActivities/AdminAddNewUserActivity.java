@@ -32,6 +32,7 @@ import java.util.function.Function;
 
 public class AdminAddNewUserActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
+
     private EditText emailEditText, userNameEditText, passwordEditText, verifyPasswordEditText;
     private Button addButton;
     private ProgressBar loadingProgressBar;
@@ -206,5 +207,7 @@ public class AdminAddNewUserActivity extends AppCompatActivity implements View.O
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {}
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 }

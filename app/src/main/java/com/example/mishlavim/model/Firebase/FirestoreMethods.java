@@ -246,4 +246,24 @@ public class FirestoreMethods {
 
 
 
+    public static void getCollection(String collection, Function<QuerySnapshot, Void> successFunc,  Function<Void, Void> failedFunc){
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        db.collection(collection)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        QuerySnapshot document = task.getResult();
+                        assert document != null;
+                        successFunc.apply(document);
+                        Log.d("FirestoreMethods:", "Get document ended successfully");
+                    }
+                    else {
+                        Log.d("FirestoreMethods:", "Get document failed" + task.getException());
+                        failedFunc.apply(null);
+                    }
+                });
+    }
+
 }

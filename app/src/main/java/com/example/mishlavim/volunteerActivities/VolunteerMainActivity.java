@@ -44,6 +44,11 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
         openFormBtn.setOnClickListener(this);
         setHelloMsg();
         setAnsweredForms();
+        showMenu();
+
+        navBarButtons.setOnNavigationItemSelectedListener(this);
+
+
     }
 
     @Override
