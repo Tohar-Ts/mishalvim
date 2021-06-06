@@ -7,11 +7,21 @@
     android:theme="@style/Theme.MishlavimPink"
     tools:context=".guideActivities.GuideMainActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layoutDirection="rtl"
+        app:theme="@style/MyTabTextStyle2"
+        app:menu="@menu/setting_menu"/>
     <TextView
             android:id="@+id/guideName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="50dp"
             android:fontFamily="@font/alef"
             android:gravity="right"
             android:paddingStart="40dp"
@@ -41,17 +51,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/guideName" />
 
-    <TextView
+
+    
+    <androidx.appcompat.widget.SearchView
         android:id="@+id/search_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="search"
-        android:textColor="@color/dark_gray"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView_view"
+        android:gravity="center|right"
+        app:defaultQueryHint="@string/searchHint"
+        app:layout_constraintBottom_toTopOf="@+id/guideName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.997"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/voluListPrompt" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+    </androidx.appcompat.widget.SearchView>
 
 
     <ScrollView
@@ -60,7 +74,7 @@
         android:layout_height="494dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/admin_bottom_navigation"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/voluListPrompt"
@@ -75,12 +89,13 @@
             android:layout_marginEnd="10dp"
             android:orientation="vertical"
             android:shrinkColumns="*"
-            android:stretchColumns="1"></TableLayout>
+            android:stretchColumns="1">
+        </TableLayout>
 
     </ScrollView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/admin_bottom_navigation"
+        android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"

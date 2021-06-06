@@ -9,19 +9,18 @@
     android:title="">
     <menu>
 
-        <item
-            android:id="@+id/setting"
-            android:title="הגדרות"
-            android:icon="@drawable/ic_settings"
-            app:showAsAction="never" />
-        <item
-            android:id="@+id/exit"
-            android:title="יציאה"
-            android:icon="@drawable/ic_exit"
-            app:showAsAction="never"
-           />
+            <item
+                android:id="@+id/setting"
+                android:title="הגדרות"
+                android:icon="@drawable/ic_settings"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/exit"
+                android:title="יציאה"
+                android:icon="@drawable/ic_exit"
+                app:showAsAction="never"
+                />
 
-<!--        app:iconTint="@color/red"-->
-    </menu>
-</item>
-    </menu>
+        </menu>
+    </item>
+</menu>

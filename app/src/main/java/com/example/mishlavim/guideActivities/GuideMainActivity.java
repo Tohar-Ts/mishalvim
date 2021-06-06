@@ -1,5 +1,6 @@
 package com.example.mishlavim.guideActivities;
 
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,26 +23,20 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.mishlavim.R;
-import com.example.mishlavim.adminActivities.AdminMainActivity;
-import com.example.mishlavim.login.LoginActivity;
-import com.example.mishlavim.model.Admin;
-
 import com.example.mishlavim.dialogs.DeleteUser;
 import com.example.mishlavim.model.Firebase.AuthenticationMethods;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
 import com.example.mishlavim.model.Firebase.FirestoreMethods;
 import com.example.mishlavim.model.Global;
 import com.example.mishlavim.model.Guide;
-import com.example.mishlavim.model.Volunteer;
-import com.example.mishlavim.volunteerActivities.VolunteerMainActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.example.mishlavim.volunteerActivities.VolunteerMainActivity;
+
 import java.util.HashMap;
-import java.util.Objects;
 
 public class GuideMainActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener, BottomNavigationView.OnNavigationItemSelectedListener, DeleteUser.deleteUserListener {
 
@@ -49,15 +45,36 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
     BottomNavigationView navBarButtons;
     private String clickedRowName;
     private Guide guide;
-
+    private Toolbar settingBar;
+    SearchView searchBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide_main);
 
         guideName = findViewById(R.id.guideName);
-        navBarButtons = findViewById(R.id.admin_bottom_navigation);
+        navBarButtons = findViewById(R.id.bottom_navigation);
         voluListLayout = findViewById(R.id.volu_list_layout);
+        settingBar = findViewById(R.id.toolbar);
+        searchBar = findViewById(R.id.search_bar);
+
+
+        searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            //when user press submit button in searchview get string as query parameter
+            public boolean onQueryTextSubmit(String query) {
+                Context context = getApplicationContext();
+                //here im checking to see if the search is working upon submit
+                Toast.makeText(context,"Our word : "+query,Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
+            @Override
+            //when user type in searchview get string as newText parameter
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
 
         //set the current placement of the cursor on "home"
         navBarButtons.setSelectedItemId(R.id.go_home);
@@ -68,8 +85,33 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
 
         setGuideName();
         showVolunteerList();
-
+        setSupportActionBar(settingBar);
+        getSupportActionBar().setTitle(null);
         navBarButtons.setOnNavigationItemSelectedListener(this);
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.setting_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        switch (id){
+            case R.id.setting:
+                Toast.makeText(GuideMainActivity.this, item.getTitle().toString(), Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.exit:
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                overridePendingTransition(0, 0);
+                Toast.makeText(GuideMainActivity.this, item.getTitle().toString(), Toast.LENGTH_SHORT).show();
+                break;
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 
@@ -108,12 +150,10 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         //delete volunteer
-        if (item.getItemId() == R.id.remove_volunteer){
+        if (item.getItemId() == R.id.remove_volunteer) {
             DialogFragment newFragment = new DeleteUser();
             newFragment.show(getSupportFragmentManager(), "deleteUser");
             return true;
-        }
-
         else if (item.getItemId() == R.id.view_volunteer) {
             FirestoreMethods.getDocument(FirebaseStrings.usersStr(),  guide.getMyVolunteers().get(clickedRowName), this::getUserDocSuccess, this::getUserDocFailed);
             Log.d("clicked:", clickedRowName + " view" );
@@ -126,6 +166,19 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
             intent.putExtra("CLICKED_VOLU_ID", guide.getMyVolunteers().get(clickedRowName));
             startActivity(intent);
             overridePendingTransition(0, 0);
+            return true;
+        }
+        else if (item.getItemId() == R.id.open_form_to_volunteer) {
+            Intent intent = new Intent(getApplicationContext(), GuideFormsPermissionActivity.class);
+            intent.putExtra("CLICKED_VOLU_KEY", clickedRowName);
+            intent.putExtra("CLICKED_VOLU_ID", guide.getMyVolunteers().get(clickedRowName));
+            startActivity(intent);
+            overridePendingTransition(0, 0);
+            return true;
+        }
+        else if (item.getItemId() == R.id.view_volunteer) {
+            FirestoreMethods.getDocument(FirebaseStrings.usersStr(), guide.getMyVolunteers().get(clickedRowName), this::getUserDocSuccess, this::getUserDocFailed);
+            Log.d("clicked:", clickedRowName + " view" );
             return true;
         }
         return false;
@@ -144,6 +197,7 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
     private void addVoluToList(String voluName) {
         //creating new row
        TableRow voluRow = new TableRow(this);
+
 
         //calculate height
         int height = convertFromDpToPixels(60);
@@ -203,27 +257,6 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
 
     private int convertFromDpToPixels(int toConvert){
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, toConvert, getResources().getDisplayMetrics());
-    }
-
-
-    private Void getUserDocSuccess(DocumentSnapshot doc){
-        assert doc != null;
-        Global globalInstance = Global.getGlobalInstance();
-        Volunteer volu = doc.toObject(Volunteer.class);
-        globalInstance.setVoluInstance(volu);
-        startActivity(new Intent(GuideMainActivity.this, VolunteerMainActivity.class));
-        return null;
-    }
-
-    private Void getUserDocFailed(Void unused){
-        showError(R.string.login_failed);
-        return null;
-    }
-
-
-
-    private void showError(Integer msg) {
-        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override

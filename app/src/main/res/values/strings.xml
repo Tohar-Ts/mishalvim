@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">משלבים</string>
     <string name="hint">סיסמא</string>
     <string name="buttonName">טופס 1</string>
@@ -18,6 +19,7 @@
     <string name="existing_guides">מדריכים קיימים:</string>
     <string name="forms">טפסים</string>
     <string name="guides">מדריכים</string>
+    <string name="searchHint">חפש מדריך</string>
     <string name="question1">מלל שאלה 1</string>
     <string name="question2">מלל שאלה 2</string>
     <string name="question3">מלל שאלה 3</string>
