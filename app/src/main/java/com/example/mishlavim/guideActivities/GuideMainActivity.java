@@ -81,12 +81,12 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
             return true;
         }
         else if (item.getItemId() == R.id.add_user) {
-               startActivity(new Intent(getApplicationContext(), GuideAddVolunteerActivity.class));
-               overridePendingTransition(0, 0);
+            startActivity(new Intent(getApplicationContext(), GuideAddVolunteerActivity.class));
+            overridePendingTransition(0, 0);
             return true;
         } else if (item.getItemId() == R.id.forms) {
-               startActivity(new Intent(getApplicationContext(), GuideReportsActivity.class));
-               overridePendingTransition(0, 0);
+            startActivity(new Intent(getApplicationContext(), GuideReportsActivity.class));
+            overridePendingTransition(0, 0);
             return true;
         }
         return false;
@@ -142,7 +142,7 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
 
     private void addVoluToList(String voluName) {
         //creating new row
-       TableRow voluRow = new TableRow(this);
+        TableRow voluRow = new TableRow(this);
 
         //calculate height
         int height = convertFromDpToPixels(60);

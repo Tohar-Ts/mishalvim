@@ -47,12 +47,13 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_volunteer_main);
-//        navBarButtons.setSelectedItemId(null);
+
         //init xml views
         helloVolu = findViewById(R.id.HelloVolu);
         formsLayout = findViewById(R.id.finishedFormsLayout);
         openFormBtn = findViewById(R.id.openFormBtn);
         navBarButtons = findViewById(R.id.bottom_navigation);
+        navBarButtons.getMenu().getItem(0).setCheckable(false);
         //init volu object
         Global globalInstance = Global.getGlobalInstance();
         volu = globalInstance.getVoluInstance();
