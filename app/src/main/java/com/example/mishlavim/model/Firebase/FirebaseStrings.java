@@ -9,6 +9,7 @@ public class FirebaseStrings {
     public FirebaseStrings() {
     }
 
+
     public static String adminStr() {
         return "admin";
     }

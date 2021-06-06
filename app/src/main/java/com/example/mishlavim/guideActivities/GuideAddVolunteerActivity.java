@@ -80,6 +80,7 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
 //        });
 
 
+
         emailEditText = findViewById(R.id.newEmail);
         userNameEditText = findViewById(R.id.newUserName);
         passwordEditText = findViewById(R.id.newPassword);
@@ -150,6 +151,7 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
                         showRegisterFailed();
                 });
     }
+
 
     private void createNewUser(FirebaseUser fbUser, Volunteer volunteer) {
         Guide.addVolunteerByGuideName(fbUser.getUid(), volunteer);

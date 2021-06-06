@@ -30,6 +30,7 @@ import java.util.HashMap;
 
 public class GuideVoluSettingActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
+
     private TextView userName, guideName;
     private EditText name, email, password,password_confirm ;
     private Validation validation;

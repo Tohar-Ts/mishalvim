@@ -37,7 +37,6 @@ public class AdminAddNewUserActivity extends AppCompatActivity implements View.O
     private ProgressBar loadingProgressBar;
     private Spinner guidesSpinner;
     private RadioGroup typesRadioGroup;
-
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
 
