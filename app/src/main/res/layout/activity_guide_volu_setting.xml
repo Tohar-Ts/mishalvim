@@ -10,7 +10,7 @@
         android:id="@+id/edit_volu_prompt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="28dp"
         android:fontFamily="@font/alef"
         android:gravity="right"
         android:paddingStart="40dp"
@@ -23,11 +23,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <TextView
         android:id="@+id/edit_volu_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="112dp"
+        android:layout_marginTop="124dp"
         android:fontFamily="@font/alef"
         android:gravity="right"
         android:paddingStart="40dp"
@@ -40,6 +41,123 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="365dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="100dp"
+        android:autofillHints="@string/nametext"
+        android:background="@drawable/custom_input"
+        android:drawableEnd="@drawable/ic_identity"
+        android:drawablePadding="12dp"
+        android:gravity="center|start"
+        android:hint="@string/title_user_name"
+        android:inputType="text"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:selectAllOnFocus="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_volu_name" />
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="365dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="20dp"
+        android:autofillHints="@string/prompt_email"
+        android:background="@drawable/custom_input"
+        android:drawableEnd="@drawable/ic_email"
+        android:drawablePadding="12dp"
+        android:gravity="center|start"
+        android:hint="@string/prompt_email"
+        android:inputType="textEmailAddress"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:selectAllOnFocus="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="365dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="20dp"
+        android:autofillHints="@string/prompt_email"
+        android:background="@drawable/custom_input"
+        android:drawableEnd="@drawable/ic_visibility"
+        android:drawablePadding="12dp"
+        android:hint="@string/prompt_password"
+        android:inputType="textPassword"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:selectAllOnFocus="true"
+        android:textAlignment="textEnd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email" />
+
+    <EditText
+        android:id="@+id/password_confirm"
+        android:layout_width="365dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="18dp"
+        android:autofillHints="@string/prompt_email"
+        android:background="@drawable/custom_input"
+        android:drawableEnd="@drawable/ic_visibility"
+        android:drawablePadding="12dp"
+        android:hint="@string/prompt_password"
+        android:inputType="textPassword"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:selectAllOnFocus="true"
+        android:textAlignment="textEnd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password" />
+
+
+    <Button
+        android:id="@+id/updateBTM"
+        android:layout_width="307dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="70dp"
+        android:background="@drawable/pink_button"
+        android:text="@string/buttonSave"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password_confirm" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="name,email,password,password_confirm" />
+
+    <TextView
+        android:id="@+id/my_guide"
+        android:layout_width="133dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="@string/title_my_guide"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/edit_volu_name" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="204dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintEnd_toStartOf="@+id/my_guide"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/edit_volu_name" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
