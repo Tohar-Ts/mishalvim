@@ -18,7 +18,7 @@ public class AdminFormsActivity extends AppCompatActivity implements BottomNavig
         setContentView(R.layout.activity_admin_forms);
 
 
-        navBarButtons = findViewById(R.id.admin_bottom_navigation);
+        navBarButtons = findViewById(R.id.admin_forms_bottom_navigation);
 
         //set the current placement of the cursor on "home"
         navBarButtons.setSelectedItemId(R.id.forms);

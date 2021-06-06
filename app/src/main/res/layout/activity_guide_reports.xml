@@ -10,7 +10,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="דוחות"
+        android:text="@string/reports"
         android:layout_marginTop="30dp"
         android:gravity="center"
         android:textSize="30sp"
@@ -49,12 +49,12 @@
                 <TableRow>
                     <TextView
                         android:padding="3dip"
-                        android:text="מספר טפסים שמולאו"
+                        android:text="@string/num_of_filled_forms"
                         android:textSize="25sp"
                         android:background="@drawable/borders"/>
                     <TextView
                         android:padding="3dip"
-                        android:text="שם החניך"
+                        android:text="@string/volu_name"
                         android:textSize="25sp"
                         android:background="@drawable/borders"/>
                     />
