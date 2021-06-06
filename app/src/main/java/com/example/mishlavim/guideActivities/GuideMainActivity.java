@@ -158,25 +158,10 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         //delete volunteer
-            if (item.getItemId() == R.id.remove_volunteer) {
-                DialogFragment newFragment = new DeleteUser();
-                newFragment.show(getSupportFragmentManager(), "deleteUser");
-                return true;
-<<<<<<< HEAD
-
-            case R.id.view_volunteer:
-                FirestoreMethods.getDocument(FirebaseStrings.usersStr(),  guide.getMyVolunteers().get(clickedRowName), this::getUserDocSuccess, this::getUserDocFailed);
-                Log.d("clicked:", clickedRowName + " view" );
-                return true;
-            case R.id.edit_volunteer:
-                Intent intent = new Intent(getApplicationContext(), GuideVoluSettingActivity.class);
-                intent.putExtra("CLICKED_VOLU_KEY", clickedRowName);
-                intent.putExtra("CLICKED_VOLU_ID", guide.getMyVolunteers().get(clickedRowName));
-                startActivity(intent);
-                overridePendingTransition(0, 0);
-                return true;
-=======
->>>>>>> 86ce0c55c94cf5c8864ace29ab577df80c597a51
+        if (item.getItemId() == R.id.remove_volunteer) {
+            DialogFragment newFragment = new DeleteUser();
+            newFragment.show(getSupportFragmentManager(), "deleteUser");
+            return true;
             }
 
         else if (item.getItemId() == R.id.edit_volunteer) {
