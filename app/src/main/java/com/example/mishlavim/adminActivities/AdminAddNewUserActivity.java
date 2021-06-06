@@ -1,7 +1,10 @@
 package com.example.mishlavim.adminActivities;
 import java.util.*;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,6 +16,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mishlavim.R;
@@ -24,19 +28,21 @@ import com.example.mishlavim.model.Guide;
 import com.example.mishlavim.model.User;
 import com.example.mishlavim.login.Validation;
 import com.example.mishlavim.model.Volunteer;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.function.Function;
 
-public class AdminAddNewUserActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class AdminAddNewUserActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
 
     private EditText emailEditText, userNameEditText, passwordEditText, verifyPasswordEditText;
     private Button addButton;
     private ProgressBar loadingProgressBar;
     private Spinner guidesSpinner;
     private RadioGroup typesRadioGroup;
+    private BottomNavigationView navBarButtons;
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
@@ -61,6 +67,10 @@ public class AdminAddNewUserActivity extends AppCompatActivity implements View.O
         addButton = findViewById(R.id.addNewUser);
         loadingProgressBar = findViewById(R.id.registerLoading);
         typesRadioGroup = findViewById(R.id.typesRg);
+        navBarButtons = findViewById(R.id.admin_bottom_navigation);
+
+        //set the current placement of the cursor on "home"
+        navBarButtons.setSelectedItemId(R.id.add_user);
 
         //init guides list
         setSpinner();
@@ -79,6 +89,8 @@ public class AdminAddNewUserActivity extends AppCompatActivity implements View.O
 
         addButton.setOnClickListener(this);
         guidesSpinner.setOnItemSelectedListener(this);
+        navBarButtons.setOnNavigationItemSelectedListener(this);
+
     }
 
 
@@ -102,7 +114,39 @@ public class AdminAddNewUserActivity extends AppCompatActivity implements View.O
 
         guidesSpinner.setAdapter(adapter);
     }
-
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.guides){
+            finish();
+            startActivity(new Intent(getApplicationContext(), AdminMainActivity.class));
+            return true;
+        }
+        else if (item.getItemId() == R.id.add_user) {
+            finish();
+            startActivity(new Intent(getApplicationContext(), AdminAddNewUserActivity.class));
+            overridePendingTransition(0, 0);
+            return true;
+        }
+        else if (item.getItemId() == R.id.forms) {
+            finish();
+            startActivity(new Intent(getApplicationContext(), AdminFormsActivity.class));
+            overridePendingTransition(0, 0);
+            return true;
+        }
+        else if (item.getItemId() == R.id.add_forms) {
+            finish();
+            startActivity(new Intent(getApplicationContext(), AdminCreateFormActivity.class));
+            overridePendingTransition(0, 0);
+            return true;
+        }
+        else if (item.getItemId() == R.id.reports) {
+            finish();
+            startActivity(new Intent(getApplicationContext(), AdminReportsActivity.class));
+            overridePendingTransition(0, 0);
+            return true;
+        }
+        return false;
+    }
     public void checkUserType(View v) {
         int radioId = typesRadioGroup.getCheckedRadioButtonId();
         RadioButton checkedRadioButton = findViewById(radioId);
@@ -207,7 +251,5 @@ public class AdminAddNewUserActivity extends AppCompatActivity implements View.O
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
+    public void onNothingSelected(AdapterView<?> parent) {}
 }
