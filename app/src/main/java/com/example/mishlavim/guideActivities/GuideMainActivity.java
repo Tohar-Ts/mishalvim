@@ -27,6 +27,10 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.mishlavim.R;
+import com.example.mishlavim.adminActivities.AdminMainActivity;
+import com.example.mishlavim.login.LoginActivity;
+import com.example.mishlavim.model.Admin;
+
 import com.example.mishlavim.dialogs.DeleteUser;
 import com.example.mishlavim.model.Firebase.AuthenticationMethods;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
@@ -214,6 +218,27 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
 
     private int convertFromDpToPixels(int toConvert){
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, toConvert, getResources().getDisplayMetrics());
+    }
+
+
+    private Void getUserDocSuccess(DocumentSnapshot doc){
+        assert doc != null;
+        Global globalInstance = Global.getGlobalInstance();
+        Volunteer volu = doc.toObject(Volunteer.class);
+        globalInstance.setVoluInstance(volu);
+        startActivity(new Intent(GuideMainActivity.this, VolunteerMainActivity.class));
+        return null;
+    }
+
+    private Void getUserDocFailed(Void unused){
+        showError(R.string.login_failed);
+        return null;
+    }
+
+
+
+    private void showError(Integer msg) {
+        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override

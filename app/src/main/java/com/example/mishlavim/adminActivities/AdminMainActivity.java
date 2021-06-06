@@ -1,5 +1,133 @@
 package com.example.mishlavim.adminActivities;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.TypedValue;
+import android.view.ContextThemeWrapper;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.PopupMenu;
+import android.widget.Space;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.DialogFragment;
+
+import com.example.mishlavim.R;
+import com.example.mishlavim.dialogs.DeleteUser;
+import com.example.mishlavim.guideActivities.GuideAddVolunteerActivity;
+import com.example.mishlavim.guideActivities.GuideMainActivity;
+import com.example.mishlavim.guideActivities.GuideReportsActivity;
+import com.example.mishlavim.login.LoginActivity;
+import com.example.mishlavim.model.Admin;
+import com.example.mishlavim.model.Firebase.AuthenticationMethods;
+import com.example.mishlavim.model.Firebase.FirebaseStrings;
+import com.example.mishlavim.model.Firebase.FirestoreMethods;
+import com.example.mishlavim.model.Global;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.HashMap;
+
+public class AdminMainActivity extends AppCompatActivity implements View.OnClickListener,
+        PopupMenu.OnMenuItemClickListener,BottomNavigationView.OnNavigationItemSelectedListener, DeleteUser.deleteUserListener {
+
+    private TextView adminName;
+    private TableLayout guideListLayout;
+    private BottomNavigationView navBarButtons;
+    private Toolbar settingBar;
+
+    private String clickedRowName;
+    private String clickedRowId;
+    private Admin admin;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_admin_main);
+
+        adminName = findViewById(R.id.WelcomeAdmin);
+        guideListLayout = findViewById(R.id.guide_list_layout);
+        settingBar = findViewById(R.id.toolbar);
+        navBarButtons = findViewById(R.id.admin_bottom_navigation);
+
+        //set the current placement of the cursor on "home"
+        navBarButtons.setSelectedItemId(R.id.guides);
+
+        //init the admin data
+        Global globalInstance = Global.getGlobalInstance();
+        admin = globalInstance.getAdminInstance();
+
+        setAdminName();
+        showVolunteerList();
+
+        //init menu buttons listeners
+        setSupportActionBar(settingBar);
+        getSupportActionBar().setTitle(null);
+        navBarButtons.setOnNavigationItemSelectedListener(this);
+    }
+
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.guides){
+            finish();
+            startActivity(new Intent(getApplicationContext(), AdminMainActivity.class));
+            return true;
+        }
+        else if (item.getItemId() == R.id.add_user) {
+            finish();
+            startActivity(new Intent(getApplicationContext(), AdminAddNewUserActivity.class));
+            overridePendingTransition(0, 0);
+            return true;
+        }
+        else if (item.getItemId() == R.id.forms) {
+            finish();
+            startActivity(new Intent(getApplicationContext(), AdminFormsActivity.class));
+            overridePendingTransition(0, 0);
+            return true;
+        }
+        else if (item.getItemId() == R.id.add_forms) {
+            finish();
+            startActivity(new Intent(getApplicationContext(), AdminCreateFormActivity.class));
+            overridePendingTransition(0, 0);
+            return true;
+        }
+        else if (item.getItemId() == R.id.reports) {
+            finish();
+            startActivity(new Intent(getApplicationContext(), AdminReportsActivity.class));
+            overridePendingTransition(0, 0);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.setting_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+            int id = item.getItemId();
+            switch (id){
+                case R.id.setting:
+                    Toast.makeText(AdminMainActivity.this, item.getTitle().toString(), Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.exit:
+                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                    overridePendingTransition(0, 0);
+                    Toast.makeText(AdminMainActivity.this, item.getTitle().toString(), Toast.LENGTH_SHORT).show();
+                    break;
 
 public class AdminMainActivity extends AppCompatActivity {
 //
