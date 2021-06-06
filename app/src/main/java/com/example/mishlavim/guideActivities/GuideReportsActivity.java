@@ -132,7 +132,8 @@ public class GuideReportsActivity extends AppCompatActivity implements View.OnCl
             allFormsSum += numOfForms.get(volName);
             Log.d("calculateAvg", " "+ numOfForms.get(volName));
         }
-        float avgFormsPerVolu = allFormsSum / voluNum;
+        Log.d("calculateAvg", " "+ allFormsSum+" "+ voluNum);
+        double avgFormsPerVolu = (double)allFormsSum / (double)voluNum;
         avgText.setText("ממוצע טפסים לחניך:" + avgFormsPerVolu);
 
     }

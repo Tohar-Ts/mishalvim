@@ -83,7 +83,8 @@
     <string name="num_of_filled_forms">מספר טפסים שמולאו</string>
     <string name="volu_name">שם החניך</string>
     <string name="forms_list">רשימת השאלונים</string>
-    מספר טפסים שמולאו
+    <string name="avg_forms_per_volu">ממוצע טפסים לחניך</string>
+
 
 
 </resources>
