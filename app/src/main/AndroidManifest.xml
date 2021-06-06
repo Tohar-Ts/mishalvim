@@ -13,8 +13,9 @@
         <activity android:name=".adminActivities.AdminReportsActivity"></activity>
         <activity android:name=".adminActivities.AdminFormsActivity" />
         <activity android:name=".guideActivities.GuideVoluSettingActivity" />
-        <activity android:name=".guideActivities.GuideReportsActivity" /> <!-- <activity android:name=".UpdateDetailsActivity"></activity> -->
-        <!-- <activity android:name=".ChangeDetailsActivity" /> -->
+        <activity android:name=".guideActivities.GuideReportsActivity" />
+        <activity android:name=".guideActivities.GuideFormsPermissionActivity" />
+
 
         <activity android:name=".guideActivities.GuideMainActivity">
         <intent-filter>

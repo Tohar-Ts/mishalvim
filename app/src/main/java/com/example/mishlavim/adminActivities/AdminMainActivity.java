@@ -44,7 +44,6 @@ public class AdminMainActivity extends AppCompatActivity implements View.OnClick
     private TableLayout guideListLayout;
     private BottomNavigationView navBarButtons;
     private Toolbar settingBar;
-
     private String clickedRowName;
     private String clickedRowId;
     private Admin admin;

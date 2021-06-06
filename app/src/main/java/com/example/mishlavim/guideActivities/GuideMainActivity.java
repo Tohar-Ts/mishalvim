@@ -152,6 +152,11 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
             overridePendingTransition(0, 0);
             return true;
         }
+        else if (item.getItemId() == R.id.view_volunteer) {
+            FirestoreMethods.getDocument(FirebaseStrings.usersStr(), guide.getMyVolunteers().get(clickedRowName), this::getUserDocSuccess, this::getUserDocFailed);
+            Log.d("clicked:", clickedRowName + " view" );
+            return true;
+        }
         return false;
     }
 
