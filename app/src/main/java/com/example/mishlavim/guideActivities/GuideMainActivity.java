@@ -24,6 +24,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.mishlavim.R;
@@ -44,6 +45,7 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
     BottomNavigationView navBarButtons;
     private String clickedRowName;
     private Guide guide;
+    private Toolbar settingBar;
     SearchView searchBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +55,9 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
         guideName = findViewById(R.id.guideName);
         navBarButtons = findViewById(R.id.bottom_navigation);
         voluListLayout = findViewById(R.id.volu_list_layout);
+        settingBar = findViewById(R.id.toolbar);
         searchBar = findViewById(R.id.search_bar);
+
 
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -81,10 +85,34 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
 
         setGuideName();
         showVolunteerList();
+        setSupportActionBar(settingBar);
+        getSupportActionBar().setTitle(null);
         navBarButtons.setOnNavigationItemSelectedListener(this);
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.setting_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        switch (id){
+            case R.id.setting:
+                Toast.makeText(GuideMainActivity.this, item.getTitle().toString(), Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.exit:
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                overridePendingTransition(0, 0);
+                Toast.makeText(GuideMainActivity.this, item.getTitle().toString(), Toast.LENGTH_SHORT).show();
+                break;
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 
     @Override
@@ -121,25 +149,35 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
-        switch (item.getItemId()){
         //delete volunteer
-            case R.id.remove_volunteer:
-                DialogFragment newFragment = new DeleteUser();
-                newFragment.show(getSupportFragmentManager(), "deleteUser");
-                return true;
-
-            case R.id.view_volunteer:
-                Log.d("clicked:", clickedRowName + " view" );
-                return true;
-            case R.id.edit_volunteer:
-                Intent intent = new Intent(getApplicationContext(), GuideVoluSettingActivity.class);
-                intent.putExtra("CLICKED_VOLU_KEY", clickedRowName);
-                intent.putExtra("CLICKED_VOLU_ID", guide.getMyVolunteers().get(clickedRowName));
-                startActivity(intent);
-                overridePendingTransition(0, 0);
-                return true;
+        if (item.getItemId() == R.id.remove_volunteer) {
+            DialogFragment newFragment = new DeleteUser();
+            newFragment.show(getSupportFragmentManager(), "deleteUser");
+            return true;
             }
-            return false;
+
+        else if (item.getItemId() == R.id.edit_volunteer) {
+            Intent intent = new Intent(getApplicationContext(), GuideVoluSettingActivity.class);
+            intent.putExtra("CLICKED_VOLU_KEY", clickedRowName);
+            intent.putExtra("CLICKED_VOLU_ID", guide.getMyVolunteers().get(clickedRowName));
+            startActivity(intent);
+            overridePendingTransition(0, 0);
+            return true;
+        }
+        else if (item.getItemId() == R.id.open_form_to_volunteer) {
+            Intent intent = new Intent(getApplicationContext(), GuideFormsPermissionActivity.class);
+            intent.putExtra("CLICKED_VOLU_KEY", clickedRowName);
+            intent.putExtra("CLICKED_VOLU_ID", guide.getMyVolunteers().get(clickedRowName));
+            startActivity(intent);
+            overridePendingTransition(0, 0);
+            return true;
+        }
+        else if (item.getItemId() == R.id.view_volunteer) {
+            FirestoreMethods.getDocument(FirebaseStrings.usersStr(), guide.getMyVolunteers().get(clickedRowName), this::getUserDocSuccess, this::getUserDocFailed);
+            Log.d("clicked:", clickedRowName + " view" );
+            return true;
+        }
+        return false;
     }
 
     private void setGuideName() {
