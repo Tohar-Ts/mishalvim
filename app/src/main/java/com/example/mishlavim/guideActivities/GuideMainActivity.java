@@ -128,12 +128,12 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
-        switch (item.getItemId()){
         //delete volunteer
-            case R.id.remove_volunteer:
+            if (item.getItemId() == R.id.remove_volunteer) {
                 DialogFragment newFragment = new DeleteUser();
                 newFragment.show(getSupportFragmentManager(), "deleteUser");
                 return true;
+            }
 
         else if (item.getItemId() == R.id.edit_volunteer) {
             Intent intent = new Intent(getApplicationContext(), GuideVoluSettingActivity.class);
