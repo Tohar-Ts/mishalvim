@@ -13,7 +13,15 @@
         <activity android:name=".guideActivities.GuideVoluSettingActivity"></activity>
         <activity android:name=".guideActivities.GuideReportsActivity" /> <!-- <activity android:name=".UpdateDetailsActivity"></activity> -->
         <!-- <activity android:name=".ChangeDetailsActivity" /> -->
-        <activity android:name=".guideActivities.GuideMainActivity" />
+
+        <activity android:name=".guideActivities.GuideMainActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.SEARCH" />
+        </intent-filter>
+        <meta-data android:name="android.app.searchable"
+            android:resource="@xml/searchable"/>
+        </activity>
+
         <activity android:name=".guideActivities.GuideAddVolunteerActivity" />
         <activity android:name=".volunteerActivities.VolunteerFinishedFormActivity" />
         <activity
