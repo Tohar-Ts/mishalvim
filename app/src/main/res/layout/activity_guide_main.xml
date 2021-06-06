@@ -11,7 +11,7 @@
             android:id="@+id/guideName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="50dp"
             android:fontFamily="@font/alef"
             android:gravity="right"
             android:paddingStart="40dp"
@@ -41,17 +41,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/guideName" />
 
-    <TextView
+
+    <androidx.appcompat.widget.SearchView
         android:id="@+id/search_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="search"
-        android:textColor="@color/dark_gray"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView_view"
+        android:gravity="center|right"
+        app:defaultQueryHint="@string/searchHint"
+        app:layout_constraintBottom_toTopOf="@+id/guideName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.997"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/voluListPrompt" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+    </androidx.appcompat.widget.SearchView>
 
     <ScrollView
         android:id="@+id/scrollView_view"
@@ -74,7 +77,8 @@
             android:layout_marginEnd="10dp"
             android:orientation="vertical"
             android:shrinkColumns="*"
-            android:stretchColumns="1"></TableLayout>
+            android:stretchColumns="1">
+        </TableLayout>
 
     </ScrollView>
 
