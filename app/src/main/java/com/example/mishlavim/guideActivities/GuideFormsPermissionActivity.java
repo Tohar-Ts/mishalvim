@@ -1,11 +1,8 @@
 package com.example.mishlavim.guideActivities;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
@@ -16,20 +13,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.Space;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.mishlavim.R;
-import com.example.mishlavim.dialogs.DeleteUser;
-import com.example.mishlavim.login.LoginActivity;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
 import com.example.mishlavim.model.Firebase.FirestoreMethods;
 import com.example.mishlavim.model.FormTemplate;
+import com.example.mishlavim.model.Volunteer;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -38,7 +33,7 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
     private String voluName;
     private String voluId;
     private TableLayout formsList;
-    private String clickedFormName;
+    private String clickedFormId;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,19 +128,25 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         if (item.getItemId() == R.id.open_curr_form) {
-            Log.d("onMenuItemClick", "open form to "+ voluName+" form id "+ clickedFormName);
+            Log.d("onMenuItemClick", "open form to "+ voluName+" form id "+ clickedFormId);
+            FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(),voluId, FirebaseStrings.openForm(),clickedFormId,this::onSuccess, this::showError);
+
             return true;
         }
         else if (item.getItemId() == R.id.allow_edit) {
-            Log.d("onMenuItemClick", "aloow edit form to "+ voluName+" form id "+ clickedFormName);
-
+            Log.d("onMenuItemClick", "aloow edit form to "+ voluName+" form id "+ clickedFormId);
             return true;
         }
         return false;
     }
+
+    private Void onSuccess(Void unused) {
+        return null;
+    }
+
     @Override
     public void onClick(View v) {
-        clickedFormName = (String) v.getTag();
+        clickedFormId = (String) v.getTag();
         //showing the popup menu
         Context myContext = new ContextThemeWrapper(GuideFormsPermissionActivity.this,R.style.menuStyle);
         PopupMenu popup = new PopupMenu(myContext, v);
