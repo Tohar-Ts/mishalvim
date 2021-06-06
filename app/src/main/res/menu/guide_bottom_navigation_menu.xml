@@ -6,6 +6,7 @@
         android:icon="@drawable/ic_home"
         android:title="מסך הבית"/>
     <item
+
         android:id="@+id/add_user"
         android:enabled="true"
         android:icon="@drawable/ic_person_add"
@@ -14,6 +15,6 @@
     <item
         android:id="@+id/forms"
         android:enabled="true"
-        android:icon="@drawable/ic_report"
+        android:icon="@drawable/ic_subject"
         android:title="דוחות"/>
 </menu>

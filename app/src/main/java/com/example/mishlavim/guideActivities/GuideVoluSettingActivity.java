@@ -67,7 +67,7 @@ public class GuideVoluSettingActivity extends AppCompatActivity implements View.
 
         group = findViewById(R.id.group2);
         userName = findViewById(R.id.edit_volu_name);
-        userName.setText(voluToUpdateName);
+//        userName.setText(voluToUpdateName);
         name = findViewById(R.id.name);
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
@@ -90,9 +90,9 @@ public class GuideVoluSettingActivity extends AppCompatActivity implements View.
 
         FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(),voluToUpdateId,FirebaseStrings.nameStr(),name.getText(),task ->{
             FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(),voluToUpdateId,FirebaseStrings.emailStr(),name.getText(),task2 ->{
-                    reloadScreen();
+                reloadScreen();
                 return  null;},this::onGetDocFailed);
-        return  null;},this::onGetDocFailed);
+            return  null;},this::onGetDocFailed);
 
     }
 

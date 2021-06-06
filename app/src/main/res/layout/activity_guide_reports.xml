@@ -35,31 +35,31 @@
             android:gravity="center"
             android:orientation="vertical">
 
-                <TableLayout
-                    android:id="@+id/volunteers_tbl"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:stretchColumns="1"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="30dp"
-                    >
+            <TableLayout
+                android:id="@+id/volunteers_tbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:stretchColumns="1"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="30dp"
+                >
 
-                    <TableRow>
-                        <TextView
-                            android:padding="3dip"
-                            android:text="מספר טפסים שמולאו"
-                            android:textSize="25sp"
-                            android:background="@drawable/borders"/>
-                        <TextView
-                            android:padding="3dip"
-                            android:text="שם החניך"
-                            android:textSize="25sp"
-                            android:background="@drawable/borders"/>
-                        />
-                        </TableRow>
-                </TableLayout>
+                <TableRow>
+                    <TextView
+                        android:padding="3dip"
+                        android:text="מספר טפסים שמולאו"
+                        android:textSize="25sp"
+                        android:background="@drawable/borders"/>
+                    <TextView
+                        android:padding="3dip"
+                        android:text="שם החניך"
+                        android:textSize="25sp"
+                        android:background="@drawable/borders"/>
+                    />
+                </TableRow>
+            </TableLayout>
 
             <TextView
                 android:id="@+id/avg_text"

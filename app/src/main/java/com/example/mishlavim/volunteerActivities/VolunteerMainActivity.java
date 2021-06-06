@@ -103,16 +103,16 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
         return false;
     }
 
-   private void showMenu() { // a function that shows the menu to the guides
-       Global globalInstance = Global.getGlobalInstance();
-       if(globalInstance.getType().equals(FirebaseStrings.guideStr())) {
-           navBarButtons.setVisibility(View.VISIBLE);
-       }
-       else{
-           navBarButtons.setVisibility(View.GONE);
-       }
+    private void showMenu() { // a function that shows the menu to the guides
+        Global globalInstance = Global.getGlobalInstance();
+        if(globalInstance.getType().equals(FirebaseStrings.guideStr())) {
+            navBarButtons.setVisibility(View.VISIBLE);
+        }
+        else{
+            navBarButtons.setVisibility(View.GONE);
+        }
 
-   }
+    }
 
     private void setHelloMsg() {
         helloVolu.setText("שלום, " + volu.getName());

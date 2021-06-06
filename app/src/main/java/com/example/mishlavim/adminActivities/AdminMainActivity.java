@@ -42,8 +42,10 @@ public class AdminMainActivity extends AppCompatActivity implements View.OnClick
 
     private TextView adminName;
     private TableLayout guideListLayout;
-    private BottomNavigationView navBarButtons;
+    private BottomNavigationView navBarButtons ;
     private Toolbar settingBar;
+
+
     private String clickedRowName;
     private String clickedRowId;
     private Admin admin;
@@ -108,6 +110,7 @@ public class AdminMainActivity extends AppCompatActivity implements View.OnClick
         }
         return false;
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

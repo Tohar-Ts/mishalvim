@@ -52,6 +52,7 @@
         app:layout_constraintTop_toBottomOf="@+id/guideName" />
 
 
+    
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_bar"
         android:layout_width="wrap_content"
@@ -66,13 +67,14 @@
         app:layout_constraintVertical_bias="0.0">
     </androidx.appcompat.widget.SearchView>
 
+
     <ScrollView
         android:id="@+id/scrollView_view"
         android:layout_width="409dp"
         android:layout_height="494dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/admin_bottom_navigation"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/voluListPrompt"
@@ -93,7 +95,7 @@
     </ScrollView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/admin_bottom_navigation"
+        android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"

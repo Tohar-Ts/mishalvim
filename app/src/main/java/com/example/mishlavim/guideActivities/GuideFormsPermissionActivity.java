@@ -16,6 +16,7 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
     private String voluName;
     private String voluId;
     LinearLayout formsList;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

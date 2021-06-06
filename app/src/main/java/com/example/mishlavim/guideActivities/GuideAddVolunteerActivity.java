@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
@@ -26,6 +25,7 @@ import com.example.mishlavim.model.Firebase.FirestoreMethods;
 import com.example.mishlavim.model.Global;
 import com.example.mishlavim.model.Guide;
 import com.example.mishlavim.model.Volunteer;
+import com.example.mishlavim.volunteerActivities.VolunteerFinishedFormActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -53,7 +53,7 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
         setContentView(R.layout.activity_guide_add_volunteer);
 
         //init a the navbar selector variable
-        navBarButtons=(BottomNavigationView) findViewById(R.id.admin_bottom_navigation);
+        navBarButtons=(BottomNavigationView) findViewById(R.id.bottom_navigation);
         //set the current placement of the cursor on "home"
         navBarButtons.setSelectedItemId(R.id.add_user);
         emailEditText = findViewById(R.id.newEmail);
@@ -126,6 +126,7 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
                         showRegisterFailed();
                 });
     }
+
 
     private void createNewUser(FirebaseUser fbUser, Volunteer volunteer) {
         Guide.addVolunteerByGuideName(fbUser.getUid(), volunteer);
