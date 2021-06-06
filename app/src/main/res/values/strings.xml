@@ -79,6 +79,12 @@
     <string name="previous_question">שאלה קודמת</string>
     <string name="question">שאלה </string>
     <string name="put_answer_here">ענה תשובה פה: </string>
+    <string name="reports">דוחות</string>
+    <string name="num_of_filled_forms">מספר טפסים שמולאו</string>
+    <string name="volu_name">שם החניך</string>
+    <string name="forms_list">רשימת השאלונים</string>
+    <string name="avg_forms_per_volu">ממוצע טפסים לחניך</string>
+
 
 
 </resources>

@@ -17,7 +17,7 @@ public class AdminReportsActivity extends AppCompatActivity implements BottomNav
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_reports);
-        navBarButtons = findViewById(R.id.admin_bottom_navigation);
+        navBarButtons = findViewById(R.id.admin_reports_bottom_navigation);
 
 
         //set the current placement of the cursor on "home"
