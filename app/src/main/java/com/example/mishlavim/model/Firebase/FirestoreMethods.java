@@ -245,8 +245,7 @@ public class FirestoreMethods {
 
 
 
-    public static void getCollection(String collection, Function<QuerySnapshot,
-            Void> successFunc,  Function<Void, Void> failedFunc){
+    public static void getCollection(String collection, Function<QuerySnapshot, Void> successFunc,  Function<Void, Void> failedFunc){
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
