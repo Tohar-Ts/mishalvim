@@ -9,6 +9,8 @@ import android.widget.LinearLayout;
 import com.example.mishlavim.R;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
 import com.example.mishlavim.model.Firebase.FirestoreMethods;
+import com.example.mishlavim.model.FormTemplate;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 public class GuideFormsPermissionActivity extends AppCompatActivity implements View.OnClickListener{
@@ -32,7 +34,14 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
         return null;
     }
 
-    private Void createFormsList(QuerySnapshot doc) {
+    private Void createFormsList(QuerySnapshot docArr) {
+        for (QueryDocumentSnapshot document : docArr) {
+            Log.d("createFormsList", document.getId() + " => " + document.getData());
+            FormTemplate form = document.toObject(FormTemplate.class);
+            Log.d("createFormsList", form.getFormName()+"");
+            
+        }
+
         return null;
     }
 
