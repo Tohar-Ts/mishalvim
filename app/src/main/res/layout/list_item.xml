@@ -13,7 +13,6 @@
         android:layout_alignParentTop="true"
         android:src="@drawable/ic_identity" />
 
-
     <TextView
         android:id="@+id/list_item_text"
         android:layout_width="219dp"

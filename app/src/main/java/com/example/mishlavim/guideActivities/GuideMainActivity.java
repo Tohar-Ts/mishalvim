@@ -37,6 +37,7 @@ import androidx.fragment.app.DialogFragment;
 import com.example.mishlavim.R;
 import com.example.mishlavim.dialogs.DeleteUser;
 import com.example.mishlavim.login.LoginActivity;
+import com.example.mishlavim.model.Adapter.MyListAdapter;
 import com.example.mishlavim.model.Firebase.AuthenticationMethods;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
 import com.example.mishlavim.model.Firebase.FirestoreMethods;
@@ -76,6 +77,7 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
         searchBar = findViewById(R.id.search_bar);
 //        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, voluNames);
 //        listViewActivity.setAdapter(adapter);
+
         //now we search using the search adapter
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -109,7 +111,7 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
         getSupportActionBar().setTitle(null);
         navBarButtons.setOnNavigationItemSelectedListener(this);
         listViewActivity = findViewById(R.id.listview);
-        adapter =new  MyListAdapter(this,R.layout.list_item, voluNames);
+        adapter =new MyListAdapter(this,R.layout.list_item, voluNames);
         listViewActivity.setAdapter(adapter);
        // listViewActivity.setAdapter(new MyListAdapter(this,R.layout.list_item, voluNames));
 
@@ -249,67 +251,8 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
     //add the current volunteer to the Array of volunteers
     private void addVoluToList(String voluName) {
         voluNames.add(voluName);
-
-
     }
-    //an adapter to connect the list_item with the listview in order to display the volunteers
-    private class MyListAdapter extends ArrayAdapter<String> implements Filterable {
-        private int layout;
-        private List<String> mObjects;
-        private MyListAdapter(Context context, int resource, List<String> objects) {
-            super(context, resource, objects);
-            mObjects = objects;
-            layout = resource;
-        }
-        @Override
-        public View getView(final int position, View convertView, ViewGroup parent) {
-            ViewHolder mainViewholder = null;
-            if(convertView == null) {
-                LayoutInflater inflater = LayoutInflater.from(getContext());
-                convertView = inflater.inflate(layout, parent, false);
-                ViewHolder viewHolder = new ViewHolder();
-                viewHolder.thumbnail = (ImageView) convertView.findViewById(R.id.list_item_thumbnail);
-                viewHolder.title = (TextView) convertView.findViewById(R.id.list_item_text);
-                viewHolder.imagebutton = (ImageButton) convertView.findViewById(R.id.list_item_btn);
-                convertView.setTag(viewHolder);
-            }
-            mainViewholder = (ViewHolder) convertView.getTag();
-            mainViewholder.imagebutton.setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View v) {
-                   //init clicked id
-                   clickedRowName = (String) v.getTag();
 
-                   //showing the popup menu
-                   PopupMenu popup = new PopupMenu(getBaseContext(), v);
-                   MenuInflater inflater = popup.getMenuInflater();
-                   inflater.inflate(R.menu.volunteer_options_menu, popup.getMenu());
-                   popup.show();
-               }
-            });
-//            mainViewholder.imagebutton.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Toast.makeText(getContext(), "Button was clicked for list item " + position, Toast.LENGTH_SHORT).show();
-//                }
-//            });
-            mainViewholder.title.setText(getItem(position));
-
-            return convertView;
-        }
-
-        @NonNull
-        @Override
-        public Filter getFilter() {
-            return super.getFilter();
-        }
-    }
-    public class ViewHolder {
-
-        ImageView thumbnail;
-        TextView title;
-        ImageButton imagebutton;
-    }
     /*
     private void addVoluToList(String voluName) {
         //creating new row
