@@ -10,8 +10,9 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".adminActivities.AdminNavigationActivity"/>
-        <activity android:name=".forgotPassword"/>
+        <activity android:name=".guideActivities.GuideNavigationActivity"></activity>
+        <activity android:name=".adminActivities.AdminNavigationActivity" />
+        <activity android:name=".forgotPassword" />
         <activity android:name=".adminActivities.AdminReportsActivity" />
         <activity android:name=".adminActivities.AdminFormsActivity" />
         <activity android:name=".guideActivities.GuideVoluSettingActivity" />
