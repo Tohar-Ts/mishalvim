@@ -18,6 +18,7 @@ public class Volunteer extends User {
     private HashMap<String, String> finishedForms;
     private String openForm;
     private boolean hasOpenForm;
+    private String [] myFinishedTemplate;
 
     /**
      * Empty constructor.
@@ -130,6 +131,10 @@ public class Volunteer extends User {
 
     public String getOpenForm() {
         return openForm;
+    }
+
+    public String[] getMyFinishedTemplate() {
+        return myFinishedTemplate;
     }
 
     public void setOpenForm(String openForm) {

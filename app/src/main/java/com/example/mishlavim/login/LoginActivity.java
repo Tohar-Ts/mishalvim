@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.mishlavim.R;
 import com.example.mishlavim.adminActivities.AdminMainActivity;
+import com.example.mishlavim.adminActivities.BottomNavigation;
 import com.example.mishlavim.guideActivities.GuideMainActivity;
 import com.example.mishlavim.model.Admin;
 import com.example.mishlavim.model.Firebase.AuthenticationMethods;
@@ -107,7 +108,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (type.equals(FirebaseStrings.adminStr())) {
             Admin admin = document.toObject(Admin.class);
             globalInstance.setAdminInstance(admin);
-            startActivity(new Intent(LoginActivity.this, AdminMainActivity.class));
+            startActivity(new Intent(LoginActivity.this, BottomNavigation.class));
         }
 
         //guide

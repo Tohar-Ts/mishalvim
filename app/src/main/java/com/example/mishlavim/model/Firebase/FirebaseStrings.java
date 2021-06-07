@@ -59,4 +59,8 @@ public class FirebaseStrings {
     public static String answersStr() {  return "answers";}
 
     public static String openForm() {  return "openForm";}
+
+    public static String canEdit() {  return "canEdit";}
+
+
 }

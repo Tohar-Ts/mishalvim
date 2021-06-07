@@ -36,7 +36,10 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
     private String voluId;
     private TableLayout formsList;
     private String clickedFormId;
-    
+    private String clickedFormName;
+    private HashMap <String, String> templateMap = new HashMap<>();//key = id val = form name
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +78,6 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
 
         //creating new options image
         ImageView optionImg = new ImageView(this);
-
         //calculate height
         int width = convertFromDpToPixels(40);
         int marginEnd =  convertFromDpToPixels(25);
@@ -115,6 +117,7 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
         TableRow.LayoutParams spcParams =  new TableRow.LayoutParams(0, marginEnd);
         space.setLayoutParams(spcParams);
         formsList.addView(space);
+        templateMap.put(id,formName);
     }
 
     @Override
@@ -127,7 +130,7 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
     public boolean onMenuItemClick(MenuItem item) {
         if (item.getItemId() == R.id.open_curr_form) {
             Log.d("onMenuItemClick", "open form to "+ voluName+" form id "+ clickedFormId);
-            //TODO add validation and "are you sure" pop up
+            //TODO add "are you sure" pop up
             //FirestoreMethods.getDocument(FirebaseStrings.usersStr(),voluId,this::updateOpenForm, this::showError);
             HashMap<String, String> answers = new HashMap<>();
             AnsweredForm ansForm = new AnsweredForm(true, true, clickedFormId, answers);
@@ -137,11 +140,45 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
         }
         else if (item.getItemId() == R.id.allow_edit) {
             Log.d("onMenuItemClick", "allow edit form to "+ voluName+" form id "+ clickedFormId);
-           // FirestoreMethods.updateMapKey(FirebaseStrings.usersStr(),voluId, FirebaseStrings.answeredFormsStr(),);
+            FirestoreMethods.getDocument(FirebaseStrings.usersStr(), voluId, this::findFormToEdit, this::showError);
+            // FirestoreMethods.updateMapKey(FirebaseStrings.usersStr(),voluId, FirebaseStrings.answeredFormsStr(),);
             return true;
         }
         return false;
     }
+
+    private Void findFormToEdit(DocumentSnapshot doc) {
+        Volunteer volu = doc.toObject(Volunteer.class);
+        String [] voluTemplate = volu.getMyFinishedTemplate();
+        //HashMap<String, String> finishedForms = volu.getFinishedForms();
+        int i;
+        for(i = 0; i < voluTemplate.length ; i++){
+            if(voluTemplate[i].compareTo(clickedFormId) == 0){
+                HashMap<String, String> finishedForms = volu.getFinishedForms();
+                for(String finishedFormName : finishedForms.keySet()){
+                    if(finishedFormName.compareTo(templateMap.get(clickedFormId)) == 0){
+                        FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), finishedForms.get(finishedFormName),FirebaseStrings.canEdit(),true ,this::onSuccess, this::showError);
+                    }
+                }
+            }
+            break;
+        }
+        if(i == voluTemplate.length){
+            //TODO change to popup dialog with "OK" button
+            Log.e("GuideFormsPermissionActivity", "something went wrong");
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "ניתן לאפשר עריכה לשאלון שהושלם בלבד!",
+                    Toast.LENGTH_SHORT);
+            toast.show();
+        }
+        return null;
+    }
+
+//    private Void allowToEdit(DocumentSnapshot doc) {
+//        AnsweredForm newAnsForm = doc.toObject(AnsweredForm.class);
+//
+//        return null;
+//    }
 
     private Void updateOpenForm(DocumentReference doc) {
         String newId = doc.getId();
@@ -149,7 +186,6 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
         Log.d("updateOpenForm"," ");
         return null;
     }
-
     private Void onSuccess(Void unused) {
         Toast toast = Toast.makeText(getApplicationContext(),
                 "הפעולה הושלמה בהצלחה",
@@ -168,7 +204,7 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
 
     @Override
     public void onClick(View v) {
-        clickedFormId = (String) v.getTag();
+        clickedFormId = (String)v.getTag();
         //showing the popup menu
         Context myContext = new ContextThemeWrapper(GuideFormsPermissionActivity.this,R.style.menuStyle);
         PopupMenu popup = new PopupMenu(myContext, v);

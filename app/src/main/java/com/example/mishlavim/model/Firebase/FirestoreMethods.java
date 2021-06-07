@@ -123,7 +123,6 @@ public class FirestoreMethods {
         //init
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         String mapKeyRef = mapName + "." + key;
-
         //updating the guide list
         db.collection(collection)
                 .document(documentId)
