@@ -46,7 +46,7 @@ public class AdminReportsActivity extends AppCompatActivity implements BottomNav
         }
         else if (item.getItemId() == R.id.add_forms) {
             finish();
-            startActivity(new Intent(getApplicationContext(), AdminCreateFormActivity.class));
+//            startActivity(new Intent(getApplicationContext(), AdminCreateFormActivity.class));
             overridePendingTransition(0, 0);
             return true;
         }

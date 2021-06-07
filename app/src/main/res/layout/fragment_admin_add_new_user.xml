@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="30dp">
+    android:padding="30dp"
+    tools:context=".adminActivities.AdminAddNewUserFragment">
 
 
     <TextView
@@ -89,6 +91,7 @@
         android:id="@+id/typesRg"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
+        android:layout_above="@+id/registerLoading"
         android:layout_below="@+id/verifyPassword"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
@@ -140,6 +143,7 @@
         android:id="@+id/guides_spinner"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_above="@+id/addNewUser"
         android:layout_centerInParent="true"
         android:visibility="gone"
         android:layout_below="@+id/typesRg"/>
@@ -150,7 +154,7 @@
         android:layout_height="60dp"
         android:layout_centerInParent="true"
         android:layout_marginBottom="40dp"
-        android:background="@drawable/custom_blue_button"
+        android:background="@drawable/blue_button"
         android:text="@string/action_register"
         android:layout_alignParentBottom="true"/>
 

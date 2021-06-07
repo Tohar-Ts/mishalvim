@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -24,11 +25,12 @@ public class AdminNavigationActivity extends AppCompatActivity implements Bottom
 
         //setting the main fragment
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.admin_fragment_container, new AdminAddNewUserFragments())
+                .replace(R.id.admin_fragment_container, new AdminGuidesFragment())
                 .commit();
 
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
         Fragment selectedFragment = null;
@@ -36,26 +38,25 @@ public class AdminNavigationActivity extends AppCompatActivity implements Bottom
         //choose a screen to show
         switch(item.getItemId()){
             case R.id.guides:
-                getSupportFragmentManager().beginTransaction()
-                .replace(R.id.admin_fragment_container, new AdminAddNewUserFragments())
-                .commit();
-            break;
+                selectedFragment = new AdminGuidesFragment();
+                break;
             case R.id.add_user:
-                selectedFragment = new AdminAddNewUserFragments();
+                selectedFragment = new AdminAddNewUserFragment();
                 break;
             case R.id.forms:
-            break;
+                selectedFragment = new AdminFormsFragment();
+                break;
             case R.id.add_forms:
-
+                selectedFragment = new AdminCreateFormFragment();
             break;
             case R.id.reports:
-
+                selectedFragment = new AdminGuidesFragment();
             break;
         }
-//        //Transaction
-//        getSupportFragmentManager().beginTransaction()
-//                .replace(R.id.admin_fragment_container, selectedFragment)
-//                .commit();
+        //Transaction
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.admin_fragment_container, selectedFragment)
+                .commit();
 
         return true;
     }
