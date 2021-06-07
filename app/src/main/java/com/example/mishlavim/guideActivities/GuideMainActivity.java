@@ -8,12 +8,19 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.Space;
 import android.widget.TableLayout;
@@ -40,7 +47,9 @@ import com.example.mishlavim.volunteerActivities.VolunteerMainActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.DocumentSnapshot;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class GuideMainActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener, BottomNavigationView.OnNavigationItemSelectedListener, DeleteUser.deleteUserListener {
 
@@ -51,6 +60,10 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
     private Guide guide;
     private Toolbar settingBar;
     SearchView searchBar;
+    private ListView listViewActivity;
+    private ArrayList<String> voluNames;
+    private ArrayAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,11 +71,12 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
 
         guideName = findViewById(R.id.guideName);
         navBarButtons = findViewById(R.id.bottom_navigation);
-        voluListLayout = findViewById(R.id.volu_list_layout);
+        //voluListLayout = findViewById(R.id.volu_list_layout);
         settingBar = findViewById(R.id.toolbar);
         searchBar = findViewById(R.id.search_bar);
-
-
+//        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, voluNames);
+//        listViewActivity.setAdapter(adapter);
+        //now we search using the search adapter
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             //when user press submit button in searchview get string as query parameter
@@ -76,6 +90,7 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
             @Override
             //when user type in searchview get string as newText parameter
             public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
                 return false;
             }
         });
@@ -86,12 +101,24 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
         //init the guide data
         Global globalInstance = Global.getGlobalInstance();
         guide = globalInstance.getGuideInstance();
-
+        //init voluNames
+        voluNames= new ArrayList<String>();
         setGuideName();
         showVolunteerList();
         setSupportActionBar(settingBar);
         getSupportActionBar().setTitle(null);
         navBarButtons.setOnNavigationItemSelectedListener(this);
+        listViewActivity = findViewById(R.id.listview);
+        adapter =new  MyListAdapter(this,R.layout.list_item, voluNames);
+        listViewActivity.setAdapter(adapter);
+       // listViewActivity.setAdapter(new MyListAdapter(this,R.layout.list_item, voluNames));
+
+//        listViewActivity.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Toast.makeText(GuideMainActivity.this, "List item was clicked at " + position, Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
     }
 
@@ -148,6 +175,15 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
         PopupMenu popup = new PopupMenu(myContext, v);
         popup.setOnMenuItemClickListener(this);
         popup.inflate(R.menu.volunteer_options_menu);
+        popup.show();
+    }
+
+
+    //additional pop-up for the button in the list_view
+    public void showPopup(View v) {
+        PopupMenu popup = new PopupMenu(this, v);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.volunteer_options_menu, popup.getMenu());
         popup.show();
     }
 
@@ -210,7 +246,71 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
         for (String voluName : voluMap.keySet())
             addVoluToList(voluName);
     }
+    //add the current volunteer to the Array of volunteers
+    private void addVoluToList(String voluName) {
+        voluNames.add(voluName);
 
+
+    }
+    //an adapter to connect the list_item with the listview in order to display the volunteers
+    private class MyListAdapter extends ArrayAdapter<String> implements Filterable {
+        private int layout;
+        private List<String> mObjects;
+        private MyListAdapter(Context context, int resource, List<String> objects) {
+            super(context, resource, objects);
+            mObjects = objects;
+            layout = resource;
+        }
+        @Override
+        public View getView(final int position, View convertView, ViewGroup parent) {
+            ViewHolder mainViewholder = null;
+            if(convertView == null) {
+                LayoutInflater inflater = LayoutInflater.from(getContext());
+                convertView = inflater.inflate(layout, parent, false);
+                ViewHolder viewHolder = new ViewHolder();
+                viewHolder.thumbnail = (ImageView) convertView.findViewById(R.id.list_item_thumbnail);
+                viewHolder.title = (TextView) convertView.findViewById(R.id.list_item_text);
+                viewHolder.imagebutton = (ImageButton) convertView.findViewById(R.id.list_item_btn);
+                convertView.setTag(viewHolder);
+            }
+            mainViewholder = (ViewHolder) convertView.getTag();
+            mainViewholder.imagebutton.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   //init clicked id
+                   clickedRowName = (String) v.getTag();
+
+                   //showing the popup menu
+                   PopupMenu popup = new PopupMenu(getBaseContext(), v);
+                   MenuInflater inflater = popup.getMenuInflater();
+                   inflater.inflate(R.menu.volunteer_options_menu, popup.getMenu());
+                   popup.show();
+               }
+            });
+//            mainViewholder.imagebutton.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Toast.makeText(getContext(), "Button was clicked for list item " + position, Toast.LENGTH_SHORT).show();
+//                }
+//            });
+            mainViewholder.title.setText(getItem(position));
+
+            return convertView;
+        }
+
+        @NonNull
+        @Override
+        public Filter getFilter() {
+            return super.getFilter();
+        }
+    }
+    public class ViewHolder {
+
+        ImageView thumbnail;
+        TextView title;
+        ImageButton imagebutton;
+    }
+    /*
     private void addVoluToList(String voluName) {
         //creating new row
        TableRow voluRow = new TableRow(this);
@@ -271,6 +371,9 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
         space.setLayoutParams(spcParams);
         voluListLayout.addView(space);
     }
+
+
+     */
 
     private int convertFromDpToPixels(int toConvert){
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, toConvert, getResources().getDisplayMetrics());
