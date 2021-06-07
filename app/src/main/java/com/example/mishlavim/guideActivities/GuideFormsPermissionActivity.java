@@ -183,15 +183,12 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
             return null;
     }
 
-//    private Void allowToEdit(DocumentSnapshot doc) {
-//        AnsweredForm newAnsForm = doc.toObject(AnsweredForm.class);
-//
-//        return null;
-//    }
 
     private Void updateOpenForm(DocumentReference doc) {
         String newId = doc.getId();
+        String formName = templateMap.get(clickedFormId);
         FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(),voluId, FirebaseStrings.openForm(),newId,this::onSuccess, this::showError);
+        FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(),voluId, FirebaseStrings.openFormName(),formName,this::onSuccess, this::showError);
         Log.d("updateOpenForm"," ");
         return null;
     }

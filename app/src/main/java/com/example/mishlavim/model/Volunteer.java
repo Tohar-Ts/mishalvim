@@ -19,17 +19,19 @@ public class Volunteer extends User {
     private String openForm;
     private boolean hasOpenForm;
     private  HashMap<String, String> myFinishedTemplate;
+    private String openFormName;
 
     /**
      * Empty constructor.
      */
     public Volunteer() {
+
     }
 
     /**
      * Parameterized constructor.
      */
-    public Volunteer(String name, String type, String email, String myGuide, String myGuideId, HashMap<String, String> finishedForms, String openForm, boolean hasOpenForm, HashMap<String, String> myFinishedTemplate) {
+    public Volunteer(String name, String type, String email, String myGuide, String myGuideId, HashMap<String, String> finishedForms, String openForm, boolean hasOpenForm, HashMap<String, String> myFinishedTemplate, String openFormName) {
         super(name, type, email);
         this.myGuide = myGuide;
         this.myGuideId = myGuideId;
@@ -37,6 +39,7 @@ public class Volunteer extends User {
         this.openForm = openForm;
         this.hasOpenForm = hasOpenForm;
         this.myFinishedTemplate = myFinishedTemplate;
+        this.openFormName = openFormName;
     }
 
     /**
