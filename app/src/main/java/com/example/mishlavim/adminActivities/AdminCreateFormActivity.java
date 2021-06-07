@@ -86,7 +86,7 @@ public class AdminCreateFormActivity extends AppCompatActivity implements View.O
         }
         else if (item.getItemId() == R.id.add_user) {
             finish();
-            startActivity(new Intent(getApplicationContext(), AdminAddNewUserActivity.class));
+//            startActivity(new Intent(getApplicationContext(), AdminAddNewUserActivity.class));
             overridePendingTransition(0, 0);
             return true;
         }

@@ -10,8 +10,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.mishlavim.R;
+<<<<<<< HEAD
 import com.example.mishlavim.adminActivities.AdminMainActivity;
 import com.example.mishlavim.forgotPassword;
+=======
+import com.example.mishlavim.adminActivities.AdminNavigationActivity;
+>>>>>>> 0f826ea66ae0b05a592033781b91689b3336cfa9
 import com.example.mishlavim.guideActivities.GuideMainActivity;
 import com.example.mishlavim.model.Admin;
 import com.example.mishlavim.model.Firebase.AuthenticationMethods;
@@ -114,21 +118,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Global globalInstance = Global.getGlobalInstance();
         globalInstance.setType(type);
 
-        //admin
+        //init admin and go to admin main screen
         if (type.equals(FirebaseStrings.adminStr())) {
             Admin admin = document.toObject(Admin.class);
             globalInstance.setAdminInstance(admin);
-            startActivity(new Intent(LoginActivity.this, AdminMainActivity.class));
+            startActivity(new Intent(LoginActivity.this, AdminNavigationActivity.class));
         }
 
-        //guide
+        //init guide and go to guide main screen
         else if (type.equals(FirebaseStrings.guideStr())) {
             Guide guide = document.toObject(Guide.class);
             globalInstance.setGuideInstance(guide);
             startActivity(new Intent(LoginActivity.this, GuideMainActivity.class));
         }
 
-        //volunteer
+        //volunteer and go to volunteer main screen
         else if (type.equals(FirebaseStrings.volunteerStr())) {
             Volunteer volu = document.toObject(Volunteer.class);
             globalInstance.setVoluInstance(volu);

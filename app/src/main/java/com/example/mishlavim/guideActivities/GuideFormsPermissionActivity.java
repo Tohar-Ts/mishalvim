@@ -1,11 +1,7 @@
 package com.example.mishlavim.guideActivities;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
-
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
@@ -16,30 +12,34 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.Space;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.mishlavim.R;
-import com.example.mishlavim.dialogs.DeleteUser;
-import com.example.mishlavim.login.LoginActivity;
+import com.example.mishlavim.model.AnsweredForm;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
 import com.example.mishlavim.model.Firebase.FirestoreMethods;
 import com.example.mishlavim.model.FormTemplate;
+import com.example.mishlavim.model.Volunteer;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import java.util.HashMap;
 
 public class GuideFormsPermissionActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener{
 
-    private String voluName;
-    private String voluId;
-    private TableLayout formsList;
-    private String clickedFormName;
-    
+    private String voluName; //the clicked volunteer name
+    private String voluId;//the clicked volunteer id
+    private TableLayout formsList; //layout
+    private String clickedFormId; // the clicked form id
+    //private String clickedFormName;
+    private HashMap <String, String> templateMap = new HashMap<>();// all template : key = id val = form name
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,22 +47,16 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
         voluName = getIntent().getStringExtra("CLICKED_VOLU_KEY");
         voluId =  getIntent().getStringExtra("CLICKED_VOLU_ID");
         formsList = findViewById(R.id.forms_list);
-        FirestoreMethods.getCollection(FirebaseStrings.formsTemplatesStr(),this::createFormsList, this::showError);
-
-    }
-
-    private Void showError(Void unused) {
-        return null;
+        FirestoreMethods.getCollection(FirebaseStrings.formsTemplatesStr(),this::createFormsList, this::showError);//create table
     }
 
     private Void createFormsList(QuerySnapshot docArr) {
         for (QueryDocumentSnapshot document : docArr) {
-            Log.d("createFormsList", document.getId() + " => " + document.getData());
+            // go over all the forms templates
             FormTemplate form = document.toObject(FormTemplate.class);
             Log.d("createFormsList", form.getFormName()+"");
             addToTbl(form.getFormName(),document.getId());
         }
-
         return null;
     }
 
@@ -82,7 +76,6 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
 
         //creating new options image
         ImageView optionImg = new ImageView(this);
-
         //calculate height
         int width = convertFromDpToPixels(40);
         int marginEnd =  convertFromDpToPixels(25);
@@ -98,7 +91,7 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
 
         //creating new text view
         TextView formNameView = new TextView(this);
-//        formNameView.setTag(id);
+
         //calculate height
         marginEnd =  convertFromDpToPixels(40);
 
@@ -122,6 +115,7 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
         TableRow.LayoutParams spcParams =  new TableRow.LayoutParams(0, marginEnd);
         space.setLayoutParams(spcParams);
         formsList.addView(space);
+        templateMap.put(id,formName);
     }
 
     @Override
@@ -133,19 +127,96 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         if (item.getItemId() == R.id.open_curr_form) {
-            Log.d("onMenuItemClick", "open form to "+ voluName+" form id "+ clickedFormName);
+            Log.d("onMenuItemClick", "open form to "+ voluName+" form id "+ clickedFormId);
+            //TODO add "are you sure" pop up
+            HashMap<String, String> answers = new HashMap<>();
+            AnsweredForm ansForm = new AnsweredForm(true, true, clickedFormId, answers);
+            FirestoreMethods.createNewDocumentRandomId(FirebaseStrings.answeredFormsStr(),ansForm,this::updateOpenForm, this::showError);
+            Log.d("onMenuItemClick","ansForm "+ ansForm.getTemplateId());
             return true;
         }
         else if (item.getItemId() == R.id.allow_edit) {
-            Log.d("onMenuItemClick", "aloow edit form to "+ voluName+" form id "+ clickedFormName);
-
+            Log.d("onMenuItemClick", "allow edit form to "+ voluName+" form id "+ clickedFormId);
+            FirestoreMethods.getDocument(FirebaseStrings.usersStr(), voluId, this::findFormToEdit, this::showError);
+            // FirestoreMethods.updateMapKey(FirebaseStrings.usersStr(),voluId, FirebaseStrings.answeredFormsStr(),);
             return true;
         }
         return false;
     }
+
+    private Void findFormToEdit(DocumentSnapshot doc) {
+        Volunteer volu = doc.toObject(Volunteer.class);
+        assert volu != null;
+        HashMap<String, String> voluTemplate = volu.getMyFinishedTemplate();
+        HashMap<String, String> finishedForms = volu.getFinishedForms();
+        int i = 0;
+        Log.d("findFormToEdit", "clicked template id "+ clickedFormId);
+        for (String finishedTempName : voluTemplate.keySet()) {
+            Log.d("findFormToEdit", "finishedTempId "+ finishedTempName);
+            if (voluTemplate.get(finishedTempName).compareTo(clickedFormId) == 0) {
+                for (String finishedFormName : finishedForms.keySet()) {
+                    Log.d("findFormToEdit", "finishedFormName "+ finishedFormName);
+                    if (finishedFormName.compareTo(templateMap.get(clickedFormId)) == 0) {
+                        Log.d("findFormToEdit", "now update ");
+                        FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), finishedForms.get(finishedFormName), FirebaseStrings.canEdit(), true, this::onSuccess, this::showError);
+                        //exit;
+                    }
+                }
+            }
+        }
+//        for(i = 0; i < voluTemplate.size() ; i++){
+//            if(voluTemplate.get().compareTo(clickedFormId) == 0){
+//                HashMap<String, String> finishedForms = volu.getFinishedForms();
+//                for(String finishedFormName : finishedForms.keySet()){
+//                    if(finishedFormName.compareTo(templateMap.get(clickedFormId)) == 0){
+//                        FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), finishedForms.get(finishedFormName),FirebaseStrings.canEdit(),true ,this::onSuccess, this::showError);
+//                    }
+//                }
+//            }
+//            break;
+//        }
+            if (i == voluTemplate.size()) {
+                //TODO change to popup dialog with "OK" button
+                Log.e("GuideFormsPermissionActivity", "something went wrong");
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "ניתן לאפשר עריכה לשאלון שהושלם בלבד!",
+                        Toast.LENGTH_SHORT);
+                toast.show();
+            }
+            return null;
+        }
+
+//    private Void allowToEdit(DocumentSnapshot doc) {
+//        AnsweredForm newAnsForm = doc.toObject(AnsweredForm.class);
+//
+//        return null;
+//    }
+
+    private Void updateOpenForm(DocumentReference doc) {
+        String newId = doc.getId();
+        FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(),voluId, FirebaseStrings.openForm(),newId,this::onSuccess, this::showError);
+        Log.d("updateOpenForm"," ");
+        return null;
+    }
+    private Void onSuccess(Void unused) {
+        Toast toast = Toast.makeText(getApplicationContext(),
+                "הפעולה הושלמה בהצלחה",
+                Toast.LENGTH_SHORT);
+        toast.show();
+        return null;
+    }
+    private Void showError(Void unused) {
+        Log.e("GuideFormsPermissionActivity", "something went wrong");
+        Toast toast = Toast.makeText(getApplicationContext(),
+                "לא ניתן להשלים את הפעולה",
+                Toast.LENGTH_SHORT);
+        toast.show();
+        return null;
+    }
+
     @Override
     public void onClick(View v) {
-        clickedFormName = (String) v.getTag();
+        clickedFormId = (String)v.getTag();
         //showing the popup menu
         Context myContext = new ContextThemeWrapper(GuideFormsPermissionActivity.this,R.style.menuStyle);
         PopupMenu popup = new PopupMenu(myContext, v);

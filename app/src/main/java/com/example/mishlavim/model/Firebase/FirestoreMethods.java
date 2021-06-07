@@ -3,6 +3,7 @@ package com.example.mishlavim.model.Firebase;
 import android.util.Log;
 
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -55,6 +56,24 @@ public class FirestoreMethods {
                     }
                 });
     }
+    public static void createNewDocumentRandomId(String collection, Object newDataObj,
+                                                 Function<DocumentReference, Void> successFunc, Function<Void, Void> failedFunc){
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection(collection)
+                .add(newDataObj)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+
+                        successFunc.apply(task.getResult());
+                        Log.d("FirestoreMethods:", "Creating document ended successfully");
+                    } else {
+                        Log.d("FirestoreMethods:", "Creating document failed" + task.getException());
+                        failedFunc.apply(null);
+                    }
+                });
+    }
+
 
     public static void getDocument(String collection, String documentId, Function<DocumentSnapshot,
                                     Void> successFunc,  Function<Void, Void> failedFunc){
@@ -104,7 +123,6 @@ public class FirestoreMethods {
         //init
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         String mapKeyRef = mapName + "." + key;
-
         //updating the guide list
         db.collection(collection)
                 .document(documentId)
