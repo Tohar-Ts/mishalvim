@@ -32,12 +32,12 @@ import java.util.HashMap;
 
 public class GuideFormsPermissionActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener{
 
-    private String voluName;
-    private String voluId;
-    private TableLayout formsList;
-    private String clickedFormId;
-    private String clickedFormName;
-    private HashMap <String, String> templateMap = new HashMap<>();//key = id val = form name
+    private String voluName; //the clicked volunteer name
+    private String voluId;//the clicked volunteer id
+    private TableLayout formsList; //layout
+    private String clickedFormId; // the clicked form id
+    //private String clickedFormName;
+    private HashMap <String, String> templateMap = new HashMap<>();// all template : key = id val = form name
 
 
     @Override
@@ -47,18 +47,16 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
         voluName = getIntent().getStringExtra("CLICKED_VOLU_KEY");
         voluId =  getIntent().getStringExtra("CLICKED_VOLU_ID");
         formsList = findViewById(R.id.forms_list);
-        FirestoreMethods.getCollection(FirebaseStrings.formsTemplatesStr(),this::createFormsList, this::showError);
-
+        FirestoreMethods.getCollection(FirebaseStrings.formsTemplatesStr(),this::createFormsList, this::showError);//create table
     }
 
     private Void createFormsList(QuerySnapshot docArr) {
         for (QueryDocumentSnapshot document : docArr) {
-            Log.d("createFormsList", document.getId() + " => " + document.getData());
+            // go over all the forms templates
             FormTemplate form = document.toObject(FormTemplate.class);
             Log.d("createFormsList", form.getFormName()+"");
             addToTbl(form.getFormName(),document.getId());
         }
-
         return null;
     }
 
@@ -93,7 +91,7 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
 
         //creating new text view
         TextView formNameView = new TextView(this);
-//        formNameView.setTag(id);
+
         //calculate height
         marginEnd =  convertFromDpToPixels(40);
 
@@ -131,7 +129,6 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
         if (item.getItemId() == R.id.open_curr_form) {
             Log.d("onMenuItemClick", "open form to "+ voluName+" form id "+ clickedFormId);
             //TODO add "are you sure" pop up
-            //FirestoreMethods.getDocument(FirebaseStrings.usersStr(),voluId,this::updateOpenForm, this::showError);
             HashMap<String, String> answers = new HashMap<>();
             AnsweredForm ansForm = new AnsweredForm(true, true, clickedFormId, answers);
             FirestoreMethods.createNewDocumentRandomId(FirebaseStrings.answeredFormsStr(),ansForm,this::updateOpenForm, this::showError);
