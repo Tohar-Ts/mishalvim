@@ -6,10 +6,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.mishlavim.R;
 import com.example.mishlavim.adminActivities.AdminMainActivity;
+import com.example.mishlavim.forgotPassword;
 import com.example.mishlavim.guideActivities.GuideMainActivity;
 import com.example.mishlavim.model.Admin;
 import com.example.mishlavim.model.Firebase.AuthenticationMethods;
@@ -30,6 +32,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText emailEditText, passwordEditText;
     private Button loginButton;
     private ProgressBar loadingProgressBar;
+    private TextView forPasswordEditText;
     private Validation validation;
 
     @Override
@@ -42,17 +45,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         passwordEditText = findViewById(R.id.password);
         loginButton = findViewById(R.id.login);
         loadingProgressBar = findViewById(R.id.loading);
-
+        forPasswordEditText = findViewById(R.id.forget_password_btn);
         //init validation class
         validation = new Validation(emailEditText, null, passwordEditText, null,
                 loadingProgressBar, getResources());
 
         loginButton.setOnClickListener(this);
+        forPasswordEditText.setOnClickListener(this);
+
     }
 
     @Override
     public void onClick(View v) {
-        userLogin();
+        if(v.getId() ==  R.id.forget_password_btn){
+            finish();
+            startActivity(new Intent(getApplicationContext(), forgotPassword.class));
+        }
+        if(v.getId() ==  R.id.login){
+            userLogin();
+        }
     }
 
     private void showError(Integer msg) {
