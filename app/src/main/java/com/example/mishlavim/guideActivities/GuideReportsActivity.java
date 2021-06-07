@@ -142,7 +142,8 @@ public class GuideReportsActivity extends AppCompatActivity implements View.OnCl
         return pixels;
     }
     private Void showError(Void unused) {
-        //TODO - show an error msg
+        Log.e("err","failed to load from dataBase");
+        Toast.makeText(getApplicationContext(), "Something went wrong (dataBase)", Toast.LENGTH_SHORT).show();
         return null;
     }
 }

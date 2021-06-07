@@ -6,137 +6,218 @@
     android:layout_height="match_parent"
     tools:context=".UpdateDetailsActivity">
 
+
+    <!--    <LinearLayout-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        android:layout_marginBottom="236dp"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/updateBTM"-->
+<!--        app:layout_constraintStart_toStartOf="parent">-->
+
+
+<!--        <EditText-->
+<!--            android:id="@+id/name"-->
+<!--            android:layout_width="365dp"-->
+<!--            android:layout_height="53dp"-->
+<!--            android:layout_marginTop="48dp"-->
+<!--            android:autofillHints="@string/nametext"-->
+<!--            android:background="@drawable/custom_input"-->
+<!--            android:drawableEnd="@drawable/ic_identity"-->
+<!--            android:drawablePadding="12dp"-->
+<!--            android:gravity="center|start"-->
+<!--            android:hint="@string/title_user_name"-->
+<!--            android:inputType="text"-->
+<!--            android:paddingStart="12dp"-->
+<!--            android:paddingEnd="12dp"-->
+<!--            android:selectAllOnFocus="true" />-->
+
+<!--        <EditText-->
+<!--            android:id="@+id/email"-->
+<!--            android:layout_width="365dp"-->
+<!--            android:layout_height="53dp"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:autofillHints="@string/prompt_email"-->
+<!--            android:background="@drawable/custom_input"-->
+<!--            android:drawableEnd="@drawable/ic_email"-->
+<!--            android:drawablePadding="12dp"-->
+<!--            android:gravity="center|start"-->
+<!--            android:hint="@string/prompt_email"-->
+<!--            android:inputType="textEmailAddress"-->
+<!--            android:paddingStart="12dp"-->
+<!--            android:paddingEnd="12dp"-->
+<!--            android:selectAllOnFocus="true" />-->
+
+<!--        <EditText-->
+<!--            android:id="@+id/password"-->
+<!--            android:layout_width="365dp"-->
+<!--            android:layout_height="53dp"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:autofillHints="סיסמה"-->
+<!--            android:background="@drawable/custom_input"-->
+<!--            android:drawableEnd="@drawable/ic_visibility"-->
+<!--            android:drawablePadding="12dp"-->
+<!--            android:hint="@string/prompt_password"-->
+<!--            android:inputType="textPassword"-->
+<!--            android:paddingStart="12dp"-->
+<!--            android:paddingEnd="12dp"-->
+<!--            android:selectAllOnFocus="true"-->
+<!--            android:textAlignment="textEnd" />-->
+
+<!--        <EditText-->
+<!--            android:id="@+id/password_confirm"-->
+<!--            android:layout_width="365dp"-->
+<!--            android:layout_height="53dp"-->
+<!--            android:layout_marginTop="18dp"-->
+<!--            android:autofillHints="אימות סיסמה"-->
+<!--            android:background="@drawable/custom_input"-->
+<!--            android:drawableEnd="@drawable/ic_visibility"-->
+<!--            android:drawablePadding="12dp"-->
+<!--            android:hint="אימות סיסמה"-->
+<!--            android:inputType="textPassword"-->
+<!--            android:paddingStart="12dp"-->
+<!--            android:paddingEnd="12dp"-->
+<!--            android:selectAllOnFocus="true"-->
+<!--            android:textAlignment="textEnd" />-->
+
+<!--    </LinearLayout>-->
+
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginBottom="20dp"
         android:text="@string/update_details"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.566"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/user_name"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="76dp"
-        android:layout_marginTop="29dp"
-        android:text="@string/title_user_name"
-        android:textAlignment="center"
-        android:textSize="50sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="60dp"
+        android:paddingTop="30dp"
+        android:paddingRight="60dp"
+        android:paddingBottom="60dp"
 
-    <EditText
-        android:id="@+id/name"
-        android:layout_width="365dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="48dp"
-        android:autofillHints="@string/nametext"
-        android:background="@drawable/custom_input"
-        android:drawableEnd="@drawable/ic_identity"
-        android:drawablePadding="12dp"
-        android:gravity="center|start"
-        android:hint="@string/title_user_name"
-        android:inputType="text"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:selectAllOnFocus="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_name" />
+        app:layout_constraintTop_toBottomOf="@id/title">
 
-    <EditText
-        android:id="@+id/email"
-        android:layout_width="365dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="20dp"
-        android:autofillHints="@string/prompt_email"
-        android:background="@drawable/custom_input"
-        android:drawableEnd="@drawable/ic_email"
-        android:drawablePadding="12dp"
-        android:gravity="center|start"
-        android:hint="@string/prompt_email"
-        android:inputType="textEmailAddress"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:selectAllOnFocus="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
+        <TextView
+            android:id="@+id/welcome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/alef"
+            android:text="@string/prompt_add_user"
+            android:textColor="@color/dark_gray"
+            android:textSize="25sp" />
 
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="365dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="20dp"
-        android:autofillHints="@string/prompt_email"
-        android:background="@drawable/custom_input"
-        android:drawableEnd="@drawable/ic_visibility"
-        android:drawablePadding="12dp"
-        android:hint="@string/prompt_password"
-        android:inputType="textPassword"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:selectAllOnFocus="true"
-        android:textAlignment="textEnd"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email" />
 
-    <EditText
-        android:id="@+id/password_confirm"
-        android:layout_width="365dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="18dp"
-        android:autofillHints="@string/prompt_email"
-        android:background="@drawable/custom_input"
-        android:drawableEnd="@drawable/ic_visibility"
-        android:drawablePadding="12dp"
-        android:hint="@string/prompt_password"
-        android:inputType="textPassword"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:selectAllOnFocus="true"
-        android:textAlignment="textEnd"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password" />
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="24dp"
+            android:autofillHints="@string/title_email"
+            android:background="@drawable/custom_input"
+            android:drawableEnd="@drawable/ic_email"
+            android:drawablePadding="12dp"
+            android:gravity="center|start"
+            android:hint="@string/title_email"
+            android:inputType="textEmailAddress"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:selectAllOnFocus="true" />
 
-    <EditText
-        android:id="@+id/phone"
-        android:layout_width="365dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="22dp"
-        android:autofillHints="@string/prompt_email"
-        android:background="@drawable/custom_input"
-        android:drawableEnd="@drawable/common_google_signin_btn_icon_dark"
-        android:drawablePadding="12dp"
-        android:hint="@string/prompt_phone"
-        android:inputType="phone"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:selectAllOnFocus="true"
-        android:textAlignment="textEnd"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password_confirm" />
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="24dp"
+            android:autofillHints="@string/title_user_name"
+            android:background="@drawable/custom_input"
+            android:drawableEnd="@drawable/ic_person"
+            android:drawablePadding="12dp"
+            android:gravity="center|start"
+            android:hint="@string/title_user_name"
+            android:inputType="textPersonName"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:selectAllOnFocus="true" />
 
-    <Button
-        android:id="@+id/updateBTM"
-        android:layout_width="307dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/pink_button"
-        android:text="@string/buttonSave"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phone" />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="24dp"
+            android:autofillHints="@string/title_user_password"
+            android:background="@drawable/custom_input"
+            android:drawableEnd="@drawable/ic_lock"
+            android:drawablePadding="12dp"
+            android:gravity="center|end"
+            android:hint="@string/title_user_password"
+            android:inputType="textPassword"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:selectAllOnFocus="true" />
+
+        <EditText
+            android:id="@+id/password_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="24dp"
+            android:autofillHints="@string/title_verify_password"
+            android:background="@drawable/custom_input"
+            android:drawableEnd="@drawable/ic_lock"
+            android:drawablePadding="12dp"
+            android:gravity="center|end"
+            android:hint="@string/title_verify_password"
+            android:inputType="textPassword"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:selectAllOnFocus="true" />
+
+
+        <ProgressBar
+            android:id="@+id/registerLoading"
+            android:layout_width="120dp"
+            android:layout_height="112dp"
+            android:layout_gravity="center"
+            android:theme="@style/GreenProgressBarTheme"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.546"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.494" />
+
+        <Button
+            android:id="@+id/updateBTM"
+            android:layout_width="307dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/pink_button"
+            android:text="@string/buttonSave"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.586"
+            app:layout_constraintStart_toStartOf="parent" />
+    </LinearLayout>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
