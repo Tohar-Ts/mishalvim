@@ -132,7 +132,8 @@ public class GuideReportsActivity extends AppCompatActivity implements View.OnCl
             allFormsSum += numOfForms.get(volName);
             Log.d("calculateAvg", " "+ numOfForms.get(volName));
         }
-        float avgFormsPerVolu = allFormsSum / voluNum;
+        Log.d("calculateAvg", " "+ allFormsSum+" "+ voluNum);
+        double avgFormsPerVolu = (double)allFormsSum / (double)voluNum;
         avgText.setText("ממוצע טפסים לחניך:" + avgFormsPerVolu);
 
     }
@@ -141,7 +142,8 @@ public class GuideReportsActivity extends AppCompatActivity implements View.OnCl
         return pixels;
     }
     private Void showError(Void unused) {
-        //TODO - show an error msg
+        Log.e("err","failed to load from dataBase");
+        Toast.makeText(getApplicationContext(), "Something went wrong (dataBase)", Toast.LENGTH_SHORT).show();
         return null;
     }
 }
