@@ -25,7 +25,6 @@ import com.example.mishlavim.model.Firebase.FirestoreMethods;
 import com.example.mishlavim.model.Global;
 import com.example.mishlavim.model.Guide;
 import com.example.mishlavim.model.Volunteer;
-import com.example.mishlavim.volunteerActivities.VolunteerFinishedFormActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -119,7 +118,7 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         fbUser = mAuth.getCurrentUser(); // this is the new user we just added.
-                        volunteer = new Volunteer(userName, FirebaseStrings.volunteerStr(), email, myGuide, guideID, new HashMap<>(), "",false);
+                        volunteer = new Volunteer(userName, FirebaseStrings.volunteerStr(), email, myGuide, guideID, new HashMap<>(), "",false, new HashMap<>());
                         // TODO: 6/5/2021 FIX THIS CONS.
                         createNewUser(fbUser, volunteer);
                     } else
@@ -129,7 +128,7 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
 
 
     private void createNewUser(FirebaseUser fbUser, Volunteer volunteer) {
-        Guide.addVolunteerByGuideName(fbUser.getUid(), volunteer);
+        //Guide.addVolunteerByGuideName(fbUser.getUid(), volunteer);
         addUserToDb(fbUser, volunteer);
     }
 

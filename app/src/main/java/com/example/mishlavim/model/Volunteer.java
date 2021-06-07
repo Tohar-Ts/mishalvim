@@ -29,13 +29,14 @@ public class Volunteer extends User {
     /**
      * Parameterized constructor.
      */
-    public Volunteer(String name, String type, String email, String myGuide, String myGuideId, HashMap<String, String> finishedForms, String openForm, boolean hasOpenForm) {
+    public Volunteer(String name, String type, String email, String myGuide, String myGuideId, HashMap<String, String> finishedForms, String openForm, boolean hasOpenForm, HashMap<String, String> myFinishedTemplate) {
         super(name, type, email);
         this.myGuide = myGuide;
         this.myGuideId = myGuideId;
         this.finishedForms = finishedForms;
         this.openForm = openForm;
         this.hasOpenForm = hasOpenForm;
+        this.myFinishedTemplate = myFinishedTemplate;
     }
 
     /**
