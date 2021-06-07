@@ -226,7 +226,7 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void setGuideName() {
-       // guideName.setText("שלום, " + guide.getName());
+        guideName.setText("שלום, " + guide.getName());
     }
     private Void getUserDocSuccess(DocumentSnapshot doc){
         assert doc != null;
