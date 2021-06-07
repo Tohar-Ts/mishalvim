@@ -1,7 +1,6 @@
 package com.example.mishlavim.guideActivities;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,15 +17,18 @@ import android.widget.Space;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-
+import android.widget.Toast;
 import com.example.mishlavim.R;
+import com.example.mishlavim.model.AnsweredForm;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
 import com.example.mishlavim.model.Firebase.FirestoreMethods;
 import com.example.mishlavim.model.FormTemplate;
 import com.example.mishlavim.model.Volunteer;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import java.util.HashMap;
 
 public class GuideFormsPermissionActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener{
 
@@ -44,10 +46,6 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
         formsList = findViewById(R.id.forms_list);
         FirestoreMethods.getCollection(FirebaseStrings.formsTemplatesStr(),this::createFormsList, this::showError);
 
-    }
-
-    private Void showError(Void unused) {
-        return null;
     }
 
     private Void createFormsList(QuerySnapshot docArr) {
@@ -129,18 +127,42 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
     public boolean onMenuItemClick(MenuItem item) {
         if (item.getItemId() == R.id.open_curr_form) {
             Log.d("onMenuItemClick", "open form to "+ voluName+" form id "+ clickedFormId);
-            FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(),voluId, FirebaseStrings.openForm(),clickedFormId,this::onSuccess, this::showError);
-
+            //TODO add validation and "are you sure" pop up
+            //FirestoreMethods.getDocument(FirebaseStrings.usersStr(),voluId,this::updateOpenForm, this::showError);
+            HashMap<String, String> answers = new HashMap<>();
+            AnsweredForm ansForm = new AnsweredForm(true, true, clickedFormId, answers);
+            FirestoreMethods.createNewDocumentRandomId(FirebaseStrings.answeredFormsStr(),ansForm,this::updateOpenForm, this::showError);
+            Log.d("onMenuItemClick","ansForm "+ ansForm.getTemplateId());
             return true;
         }
         else if (item.getItemId() == R.id.allow_edit) {
-            Log.d("onMenuItemClick", "aloow edit form to "+ voluName+" form id "+ clickedFormId);
+            Log.d("onMenuItemClick", "allow edit form to "+ voluName+" form id "+ clickedFormId);
+           // FirestoreMethods.updateMapKey(FirebaseStrings.usersStr(),voluId, FirebaseStrings.answeredFormsStr(),);
             return true;
         }
         return false;
     }
 
+    private Void updateOpenForm(DocumentReference doc) {
+        String newId = doc.getId();
+        FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(),voluId, FirebaseStrings.openForm(),newId,this::onSuccess, this::showError);
+        Log.d("updateOpenForm"," ");
+        return null;
+    }
+
     private Void onSuccess(Void unused) {
+        Toast toast = Toast.makeText(getApplicationContext(),
+                "הפעולה הושלמה בהצלחה",
+                Toast.LENGTH_SHORT);
+        toast.show();
+        return null;
+    }
+    private Void showError(Void unused) {
+        Log.e("GuideFormsPermissionActivity", "something went wrong");
+        Toast toast = Toast.makeText(getApplicationContext(),
+                "לא ניתן להשלים את הפעולה",
+                Toast.LENGTH_SHORT);
+        toast.show();
         return null;
     }
 
