@@ -18,7 +18,7 @@ public class Volunteer extends User {
     private HashMap<String, String> finishedForms;
     private String openForm;
     private boolean hasOpenForm;
-    private String [] myFinishedTemplate;
+    private  HashMap<String, String> myFinishedTemplate;
 
     /**
      * Empty constructor.
@@ -133,7 +133,7 @@ public class Volunteer extends User {
         return openForm;
     }
 
-    public String[] getMyFinishedTemplate() {
+    public HashMap<String, String> getMyFinishedTemplate() {
         return myFinishedTemplate;
     }
 

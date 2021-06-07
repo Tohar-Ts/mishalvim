@@ -149,30 +149,45 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
 
     private Void findFormToEdit(DocumentSnapshot doc) {
         Volunteer volu = doc.toObject(Volunteer.class);
-        String [] voluTemplate = volu.getMyFinishedTemplate();
-        //HashMap<String, String> finishedForms = volu.getFinishedForms();
-        int i;
-        for(i = 0; i < voluTemplate.length ; i++){
-            if(voluTemplate[i].compareTo(clickedFormId) == 0){
-                HashMap<String, String> finishedForms = volu.getFinishedForms();
-                for(String finishedFormName : finishedForms.keySet()){
-                    if(finishedFormName.compareTo(templateMap.get(clickedFormId)) == 0){
-                        FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), finishedForms.get(finishedFormName),FirebaseStrings.canEdit(),true ,this::onSuccess, this::showError);
+        assert volu != null;
+        HashMap<String, String> voluTemplate = volu.getMyFinishedTemplate();
+        HashMap<String, String> finishedForms = volu.getFinishedForms();
+        int i = 0;
+        Log.d("findFormToEdit", "clicked template id "+ clickedFormId);
+        for (String finishedTempName : voluTemplate.keySet()) {
+            Log.d("findFormToEdit", "finishedTempId "+ finishedTempName);
+            if (voluTemplate.get(finishedTempName).compareTo(clickedFormId) == 0) {
+                for (String finishedFormName : finishedForms.keySet()) {
+                    Log.d("findFormToEdit", "finishedFormName "+ finishedFormName);
+                    if (finishedFormName.compareTo(templateMap.get(clickedFormId)) == 0) {
+                        Log.d("findFormToEdit", "now update ");
+                        FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), finishedForms.get(finishedFormName), FirebaseStrings.canEdit(), true, this::onSuccess, this::showError);
+                        //exit;
                     }
                 }
             }
-            break;
         }
-        if(i == voluTemplate.length){
-            //TODO change to popup dialog with "OK" button
-            Log.e("GuideFormsPermissionActivity", "something went wrong");
-            Toast toast = Toast.makeText(getApplicationContext(),
-                    "ניתן לאפשר עריכה לשאלון שהושלם בלבד!",
-                    Toast.LENGTH_SHORT);
-            toast.show();
+//        for(i = 0; i < voluTemplate.size() ; i++){
+//            if(voluTemplate.get().compareTo(clickedFormId) == 0){
+//                HashMap<String, String> finishedForms = volu.getFinishedForms();
+//                for(String finishedFormName : finishedForms.keySet()){
+//                    if(finishedFormName.compareTo(templateMap.get(clickedFormId)) == 0){
+//                        FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), finishedForms.get(finishedFormName),FirebaseStrings.canEdit(),true ,this::onSuccess, this::showError);
+//                    }
+//                }
+//            }
+//            break;
+//        }
+            if (i == voluTemplate.size()) {
+                //TODO change to popup dialog with "OK" button
+                Log.e("GuideFormsPermissionActivity", "something went wrong");
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "ניתן לאפשר עריכה לשאלון שהושלם בלבד!",
+                        Toast.LENGTH_SHORT);
+                toast.show();
+            }
+            return null;
         }
-        return null;
-    }
 
 //    private Void allowToEdit(DocumentSnapshot doc) {
 //        AnsweredForm newAnsForm = doc.toObject(AnsweredForm.class);
