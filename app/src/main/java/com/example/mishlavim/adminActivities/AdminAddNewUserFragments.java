@@ -32,7 +32,6 @@ import com.example.mishlavim.model.Volunteer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.function.Function;
 
 public class AdminAddNewUserFragments extends Fragment  implements View.OnClickListener,RadioGroup.OnCheckedChangeListener , AdapterView.OnItemSelectedListener{
 
@@ -187,7 +186,8 @@ public class AdminAddNewUserFragments extends Fragment  implements View.OnClickL
         }
 
         else { //volunteer
-            fsUser = new Volunteer(authUser.getName(), newUserType,authUser.getEmail(), guideName, guideID, new HashMap<>(),"", false);
+
+            fsUser = new Volunteer(authUser.getName(), newUserType,authUser.getEmail(), guideName, guideID, new HashMap<>(),"", false, new HashMap<>());
             Guide.addVolunteer(guideID, newUserUid, authUser.getName());
         }
 
