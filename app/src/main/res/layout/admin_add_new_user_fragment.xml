@@ -103,7 +103,6 @@
             android:layout_marginEnd="10dp"
             android:checked="true"
             android:layoutDirection="rtl"
-            android:onClick="checkUserType"
             android:text="@string/prompt_guide"
             android:textAlignment="textStart" />
 
@@ -114,7 +113,6 @@
             android:layout_gravity="start"
             android:layout_marginEnd="10dp"
             android:layoutDirection="rtl"
-            android:onClick="checkUserType"
             android:text="@string/prompt_admin"
             android:textAlignment="textStart" />
 
@@ -125,7 +123,6 @@
             android:layout_gravity="start"
             android:layout_marginEnd="10dp"
             android:layoutDirection="rtl"
-            android:onClick="checkUserType"
             android:text="@string/prompt_volunteer"
             android:textAlignment="textStart" />
 
@@ -135,9 +132,17 @@
         android:id="@+id/registerLoading"
         android:layout_width="120dp"
         android:layout_height="112dp"
-        android:theme="@style/PinkProgressBarTheme"
+        android:theme="@style/BlueProgressBarTheme"
         android:visibility="gone"
         android:layout_centerInParent="true"/>
+
+    <Spinner
+        android:id="@+id/guides_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:layout_below="@+id/typesRg"/>
 
     <Button
         android:id="@+id/addNewUser"
@@ -145,7 +150,7 @@
         android:layout_height="60dp"
         android:layout_centerInParent="true"
         android:layout_marginBottom="40dp"
-        android:background="@drawable/pink_button"
+        android:background="@drawable/custom_blue_button"
         android:text="@string/action_register"
         android:layout_alignParentBottom="true"/>
 
