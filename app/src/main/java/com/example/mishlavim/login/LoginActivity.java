@@ -10,12 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.mishlavim.R;
-<<<<<<< HEAD
-import com.example.mishlavim.adminActivities.AdminMainActivity;
 import com.example.mishlavim.forgotPassword;
-=======
 import com.example.mishlavim.adminActivities.AdminNavigationActivity;
->>>>>>> 0f826ea66ae0b05a592033781b91689b3336cfa9
 import com.example.mishlavim.guideActivities.GuideMainActivity;
 import com.example.mishlavim.model.Admin;
 import com.example.mishlavim.model.Firebase.AuthenticationMethods;

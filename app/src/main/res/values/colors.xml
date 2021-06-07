@@ -37,6 +37,8 @@
     <color name="pink">#E848A0</color>
     <color name="orange">#F79520</color>
     <color name="green">#13BFA8</color>
+    <color name="bar_blue">#0291A3</color>
+    <color name="button_blue">#00C6DF</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 </resources>
