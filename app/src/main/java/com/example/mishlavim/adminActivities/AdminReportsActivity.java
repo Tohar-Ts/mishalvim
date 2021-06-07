@@ -34,7 +34,7 @@ public class AdminReportsActivity extends AppCompatActivity implements BottomNav
         }
         else if (item.getItemId() == R.id.add_user) {
             finish();
-            startActivity(new Intent(getApplicationContext(), AdminAddNewUserActivity.class));
+//            startActivity(new Intent(getApplicationContext(), AdminAddNewUserActivity.class));
             overridePendingTransition(0, 0);
             return true;
         }

@@ -3,6 +3,7 @@ package com.example.mishlavim.model;
 import android.util.Log;
 
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
+import com.example.mishlavim.model.Firebase.FirestoreMethods;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -10,6 +11,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Function;
 
 /**
  * Guide class represents the guide user data.
@@ -42,39 +44,16 @@ public class Guide extends User {
      * Adding a volunteer to the 'myVolunteers' map of the guide.
      * Given the guide id, the function set his data.
      *
-     * @param guideId - the guide Uid to update
+     * @param guideUid - the guide Uid to update
      * @param voluID  - the volunteer Uid
      * @param voluName   - Volunteer name
      */
-    public static void addVolunteerByGuideId(String guideId, String voluID, String voluName) {
-        //init
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        String voluRef = FirebaseStrings.myVolunteerStr() + "." + voluName;
+    public static void addVolunteer(String guideUid, String voluID, String voluName) {
+        Function<Void, Void> onSuccess = unused -> {Log.d("Guide class", "Volunteer successfully updated!");return null;};
+        Function<Void, Void> onFailure = unused ->  {Log.d("Guide class", "Error - Guide update failed.");return null;};
 
-        //updating the guide list
-        db.collection(FirebaseStrings.usersStr())
-                .document(guideId)
-                .update(voluRef, voluID)
-                .addOnCompleteListener(task2 -> {
-                    if (task2.isSuccessful())
-                        Log.d("Guide", "Guide successfully updated!");
-                    else
-                        Log.d("Guide", "Error - Guide update failed.", task2.getException());
-                });
-    }
-
-    /**
-     * For the given guide, Finds the volunteer id from 'myVolunteer' map given his name,
-     * Then gets the volunteer data from the database,
-     * And finally init and returns a Volunteer object with the volunteer data.
-     *
-     * @param guideId  - guide Uid
-     * @param voluName - volunteer name to find
-     * @return Volunteer object with the volunteer data from the database
-     */
-    public static Volunteer findVolunteer(String guideId, String voluName) {
-        // TODO implement here
-        return null;
+        FirestoreMethods.updateMapKey(FirebaseStrings.usersStr(), guideUid, FirebaseStrings.myGuideStr(), voluID,
+                voluName,onSuccess,onFailure);
     }
 
     /**
@@ -88,46 +67,6 @@ public class Guide extends User {
 //        Log.d("delete", "deleteVolunteer: " + name + "was remove");
 //        deleteUser toDelete = new deleteUser();
 //        toDelete.deleteUser(fbUser, db, user);
-    }
-
-    /**
-     * Adding a volunteer to the 'myVolunteers' map of the guide.
-     * Given only the guide name from a Volunteer object,
-     * First the function finds the guide in the database,
-     * then call 'addVolunteerByGuideId' function to set his data.
-     *
-     * @param voluID - the volunteer Uid
-     * @param volu   - Volunteer object with the volunteer data. including his guide name.
-     */
-    public static void addVolunteerByGuideName(String voluID, Volunteer volu) {
-        //init
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        CollectionReference usersRef = db.collection(FirebaseStrings.usersStr());
-        String guideName = volu.getMyGuide();
-
-        //getting the given guide id
-        usersRef.whereEqualTo(FirebaseStrings.nameStr(), guideName)
-                .get()
-                .addOnCompleteListener(task -> {
-
-                    if (task.isSuccessful()) {
-
-                        if (Objects.requireNonNull(task.getResult()).isEmpty())
-                            Log.d("Guide class", "Guide document returned empty.");
-                        else {
-
-                            //succeed at getting the guide id by his name
-                            AtomicReference<String> guideId = new AtomicReference<>();
-                            for (QueryDocumentSnapshot document : task.getResult())
-                                guideId.set(document.getId());
-
-                            //updating the guide list
-                            addVolunteerByGuideId(guideId.get(), voluID, volu.name);
-                        }
-
-                    } else
-                        Log.d("Guide class", "cannot find guide in fireBase");
-                });
     }
 
     public HashMap<String, String> getMyVolunteers() {
