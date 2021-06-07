@@ -3,7 +3,6 @@
     package="com.example.mishlavim">
 
     <application
-
         android:allowBackup="true"
         android:hardwareAccelerated="false"
         android:icon="@drawable/bat_ami_logo"
@@ -11,22 +10,21 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".adminActivities.AdminReportsActivity"></activity>
+        <activity android:name=".adminActivities.BottomNavigation"></activity>
+        <activity android:name=".adminActivities.AdminReportsActivity" />
         <activity android:name=".adminActivities.AdminFormsActivity" />
         <activity android:name=".guideActivities.GuideVoluSettingActivity" />
         <activity android:name=".guideActivities.GuideReportsActivity" />
         <activity android:name=".guideActivities.GuideFormsPermissionActivity" />
-
-
         <activity android:name=".guideActivities.GuideMainActivity">
-        <intent-filter>
-            <action android:name="android.intent.action.SEARCH" />
-        </intent-filter>
-        <meta-data android:name="android.app.searchable"
-            android:resource="@xml/searchable"/>
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
         </activity>
-
-
         <activity android:name=".guideActivities.GuideAddVolunteerActivity" />
         <activity android:name=".volunteerActivities.VolunteerFinishedFormActivity" />
         <activity

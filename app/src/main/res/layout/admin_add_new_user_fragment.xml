@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="30dp">
+
+
+    <TextView
+        android:id="@+id/welcome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="34dp"
+        android:fontFamily="@font/alef"
+        android:text="@string/prompt_add_user"
+        android:textColor="@color/black"
+        android:textSize="30sp" />
+
+    <EditText
+        android:id="@+id/newUserName"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/welcome"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="48dp"
+        android:autofillHints="@string/title_user_name"
+        android:background="@drawable/custom_input"
+        android:drawableEnd="@drawable/ic_person"
+        android:drawablePadding="12dp"
+        android:gravity="center|start"
+        android:hint="@string/title_user_name"
+        android:inputType="textPersonName"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp" />
+
+    <EditText
+        android:id="@+id/newEmail"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/newUserName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:autofillHints="@string/title_email"
+        android:background="@drawable/custom_input"
+        android:drawableEnd="@drawable/ic_email"
+        android:drawablePadding="12dp"
+        android:gravity="center|start"
+        android:hint="@string/title_email"
+        android:inputType="textEmailAddress"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp" />
+
+    <EditText
+        android:id="@+id/newPassword"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/newEmail"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:autofillHints="@string/title_user_password"
+        android:background="@drawable/custom_input"
+        android:drawableEnd="@drawable/ic_lock"
+        android:drawablePadding="12dp"
+        android:gravity="center|end"
+        android:hint="@string/title_user_password"
+        android:inputType="textPassword"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp" />
+
+    <EditText
+        android:id="@+id/verifyPassword"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/newPassword"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:autofillHints="@string/title_verify_password"
+        android:background="@drawable/custom_input"
+        android:drawableEnd="@drawable/ic_lock"
+        android:drawablePadding="12dp"
+        android:gravity="center|end"
+        android:hint="@string/title_verify_password"
+        android:inputType="textPassword"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp" />
+
+    <RadioGroup
+        android:id="@+id/typesRg"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_below="@+id/verifyPassword"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:layoutDirection="rtl"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/guideRb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginEnd="10dp"
+            android:checked="true"
+            android:layoutDirection="rtl"
+            android:onClick="checkUserType"
+            android:text="@string/prompt_guide"
+            android:textAlignment="textStart" />
+
+        <RadioButton
+            android:id="@+id/adminRb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginEnd="10dp"
+            android:layoutDirection="rtl"
+            android:onClick="checkUserType"
+            android:text="@string/prompt_admin"
+            android:textAlignment="textStart" />
+
+        <RadioButton
+            android:id="@+id/volunteerRb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginEnd="10dp"
+            android:layoutDirection="rtl"
+            android:onClick="checkUserType"
+            android:text="@string/prompt_volunteer"
+            android:textAlignment="textStart" />
+
+    </RadioGroup>
+
+    <ProgressBar
+        android:id="@+id/registerLoading"
+        android:layout_width="120dp"
+        android:layout_height="112dp"
+        android:theme="@style/PinkProgressBarTheme"
+        android:visibility="gone"
+        android:layout_centerInParent="true"/>
+
+    <Button
+        android:id="@+id/addNewUser"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/pink_button"
+        android:text="@string/action_register"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>
