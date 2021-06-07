@@ -72,7 +72,7 @@ public class AdminAddNewUserFragments extends Fragment  implements View.OnClickL
         typesRadioGroup = view.findViewById(R.id.typesRg);
 
         //init guides list
-        setSpinner();
+//        setSpinner();
         //init validation class
         validation = new Validation(emailEditText, userNameEditText, passwordEditText, verifyPasswordEditText
                 , loadingProgressBar, getResources());
@@ -84,7 +84,7 @@ public class AdminAddNewUserFragments extends Fragment  implements View.OnClickL
 
         addButton.setOnClickListener(this); //buttons listeners
         typesRadioGroup.setOnCheckedChangeListener(this);
-        guidesSpinner.setOnItemSelectedListener(this);
+//        guidesSpinner.setOnItemSelectedListener(this);
     }
 
     @Override
@@ -105,7 +105,7 @@ public class AdminAddNewUserFragments extends Fragment  implements View.OnClickL
                 break;
             default:
                 newUserType = FirebaseStrings.volunteerStr();
-                guidesSpinner.setVisibility(View.VISIBLE);
+//                guidesSpinner.setVisibility(View.VISIBLE);
                 break;
         }
     }
