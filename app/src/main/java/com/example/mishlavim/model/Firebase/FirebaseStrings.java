@@ -14,11 +14,17 @@ public class FirebaseStrings {
         return "admin";
     }
 
-    public static String guideStr() { return "guide"; }
+    public static String guideStr() {
+        return "guide";
+    }
 
-    public static String myGuideStr() { return "myGuide"; }
+    public static String myGuideStr() {
+        return "myGuide";
+    }
 
-    public static String myGuideIdStr() { return "myGuideID"; }
+    public static String myGuideIdStr() {
+        return "myGuideID";
+    }
 
     public static String volunteerStr() {
         return "volunteer";
@@ -52,15 +58,23 @@ public class FirebaseStrings {
         return "answeredForm";
     }
 
-    public static String guideListStr() { return "guideList";}
+    public static String guideListStr() {
+        return "guideList";
+    }
 
-    public static String allVolunteersListStr() {  return "allVolunteers";}
+    public static String allVolunteersListStr() {
+        return "allVolunteers";
+    }
 
-    public static String answersStr() {  return "answers";}
-
-    public static String openForm() {  return "openForm";}
+    public static String answersStr() {
+        return "answers";
+    }
 
     public static String canEdit() {  return "canEdit";}
-
-
+    public static String formsTemplatesListStr() {
+        return "formsTemplatesList";
+    }
+    public static String openForm() {
+        return "openForm";
+    }
 }

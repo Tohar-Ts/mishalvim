@@ -25,38 +25,38 @@ public class AdminFormsActivity extends AppCompatActivity implements BottomNavig
         navBarButtons.setOnNavigationItemSelectedListener(this);
 
     }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.guides){
-            finish();
-            startActivity(new Intent(getApplicationContext(), AdminMainActivity.class));
-            return true;
-        }
-        else if (item.getItemId() == R.id.add_user) {
-            finish();
-            startActivity(new Intent(getApplicationContext(), AdminAddNewUserActivity.class));
-            overridePendingTransition(0, 0);
-            return true;
-        }
-        else if (item.getItemId() == R.id.forms) {
-            finish();
-            startActivity(new Intent(getApplicationContext(), AdminFormsActivity.class));
-            overridePendingTransition(0, 0);
-            return true;
-        }
-        else if (item.getItemId() == R.id.add_forms) {
-            finish();
-            startActivity(new Intent(getApplicationContext(), AdminCreateFormActivity.class));
-            overridePendingTransition(0, 0);
-            return true;
-        }
-        else if (item.getItemId() == R.id.reports) {
-            finish();
-            startActivity(new Intent(getApplicationContext(), AdminReportsActivity.class));
-            overridePendingTransition(0, 0);
-            return true;
-        }
-        return false;
-    }
+//
+//    @Override
+//    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//        if (item.getItemId() == R.id.guides){
+//            finish();
+//            startActivity(new Intent(getApplicationContext(), AdminMainActivity.class));
+//            return true;
+//        }
+//        else if (item.getItemId() == R.id.add_user) {
+//            finish();
+//            startActivity(new Intent(getApplicationContext(), AdminAddNewUserActivity.class));
+//            overridePendingTransition(0, 0);
+//            return true;
+//        }
+//        else if (item.getItemId() == R.id.forms) {
+//            finish();
+//            startActivity(new Intent(getApplicationContext(), AdminFormsActivity.class));
+//            overridePendingTransition(0, 0);
+//            return true;
+//        }
+//        else if (item.getItemId() == R.id.add_forms) {
+//            finish();
+//            startActivity(new Intent(getApplicationContext(), AdminCreateFormActivity.class));
+//            overridePendingTransition(0, 0);
+//            return true;
+//        }
+//        else if (item.getItemId() == R.id.reports) {
+//            finish();
+//            startActivity(new Intent(getApplicationContext(), AdminReportsActivity.class));
+//            overridePendingTransition(0, 0);
+//            return true;
+//        }
+//        return false;
+//    }
 }
