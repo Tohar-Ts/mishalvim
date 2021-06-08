@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="30dp"
     android:background="#F5F5F5"
     tools:context=".adminActivities.AdminGuidesFragment">
 
@@ -11,11 +13,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
         android:fontFamily="@font/alef"
         android:layout_alignParentTop="true"
         android:text="@string/guides"
         android:textColor="@color/black"
         android:textSize="30sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/guidesPrompt">
 
+        <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/guides_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+    </LinearLayout>
 </RelativeLayout>
