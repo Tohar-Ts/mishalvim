@@ -45,6 +45,7 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
     BottomNavigationView navBarButtons;
     private Global globalInstance = Global.getGlobalInstance();
     private Guide guide = globalInstance.getGuideInstance();
+    private String guideID, myGuide = guide.getName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +64,7 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
         loadingProgressBar = findViewById(R.id.registerLoading);
 
         mAuth = FirebaseAuth.getInstance();
+        guideID = mAuth.getUid();
         db = FirebaseFirestore.getInstance();
 
         validation = new Validation(emailEditText,userNameEditText, passwordEditText, verifyPasswordEditText
@@ -111,9 +113,6 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
     }
 
     private void registerToFirebase(String userName, String email, String password){
-        String myGuide = guide.getName();
-        String guideID = mAuth.getUid();
-
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -126,9 +125,9 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
                 });
     }
 
-
+//Add user to guide's list, and builde new document for the volunteer.
     private void createNewUser(FirebaseUser fbUser, Volunteer volunteer) {
-        //Guide.addVolunteerByGuideName(fbUser.getUid(), volunteer);
+        Guide.addVolunteer(guideID,fbUser.getUid(), volunteer.getName());
         addUserToDb(fbUser, volunteer);
     }
 
