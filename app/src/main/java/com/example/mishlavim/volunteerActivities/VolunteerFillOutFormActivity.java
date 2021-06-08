@@ -23,13 +23,12 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import java.util.HashMap;
 
 public class VolunteerFillOutFormActivity extends AppCompatActivity implements View.OnClickListener {
-    //TODO - ADD A PROGRESS BAR
     private ProgressBar progressBar;
     private Button nextBtn, backBtn, saveBtn, sendBtn;
     private TextView fireBaseQuestion, questionNumTextView;
     private EditText volunteerAnswer;
 
-    private String formId;
+    private String formId, voluId;
     private int numOfQuestions;
     private int numOfCurrentQuestion;
     private HashMap<String, String> questions;
@@ -56,7 +55,8 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
         Global globalInstance = Global.getGlobalInstance();
         Volunteer volu = globalInstance.getVoluInstance();
         formId = volu.getOpenForm();
-
+// TODO: 6/8/2021 VERY IMPORTANT!!! CHANGE VOLUID TO THE RIGHT VOLUNTEER ID!!!!
+        voluId = getIntent().getStringExtra("CLICKED_VOLU_ID");
         //getting answers object from firestore
         FirestoreMethods.getDocument(FirebaseStrings.answeredFormsStr(), formId, this::getAnswersObjSuccess, this::showError);
     }
@@ -75,7 +75,7 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
 
 
     private Void showError(Void unused) {
-        //TODO - show an error msg
+        Toast.makeText(getApplicationContext(), R.string.update_failed, Toast.LENGTH_SHORT).show();
         return null;
     }
 
@@ -179,27 +179,47 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
     }
 
     private void saveBtnOn() {
+
+        progressBar.setVisibility(View.VISIBLE);
         //parsing the last answer
         parseAnswer();
         //sending the updated answers to firestore
         FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), formId, FirebaseStrings.answersStr(), currentAnswers,
                                                         this::goToMain, this::showError);
+
     }
 
     private void sendBtnOn() {
+        progressBar.setVisibility(View.VISIBLE);
         //parsing the last answer
         parseAnswer();
-        //TODO- check if there is an empty answer
+
+        //Validation for empty answers
+        if (currentAnswers.containsValue("")){
+            Toast.makeText(getApplicationContext(), R.string.empty_answer, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         //sending the updated answers to firestore
         FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), formId, FirebaseStrings.answersStr(), currentAnswers,
-                this::showFinishedForm, this::showError);
+                this::updateOpenForm, this::showError);
+
         //TODO - updating open form in volunteer
         //TODO - updating on work field in answers
         //TODO - updating finished forms map in volunteer
         //TODO - notifying guide
     }
+     private Void updateOpenForm(Void unused){
+         FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(), voluId, FirebaseStrings.emptyString(), currentAnswers,
+                 this::showFinishedForm, this::showError);
+     }
+     private Void updateFinishedForms(Void unused){
+
+     }
 
     private Void showFinishedForm(Void unused) {
+        progressBar.setVisibility(View.GONE);
+        Toast.makeText(getApplicationContext(), R.string.firebase_success, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(VolunteerFillOutFormActivity.this, VolunteerFinishedFormActivity.class);
         startActivity(intent);
         finish();
@@ -207,6 +227,7 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
     }
 
     private Void goToMain(Void unused) {
+        progressBar.setVisibility(View.GONE);
         Toast.makeText(getApplicationContext(), R.string.firebase_success, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(VolunteerFillOutFormActivity.this, VolunteerMainActivity.class);
         startActivity(intent);

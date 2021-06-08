@@ -1,6 +1,10 @@
 package com.example.mishlavim.model;
 
+import com.example.mishlavim.model.Firebase.FirebaseStrings;
+import com.example.mishlavim.model.Firebase.FirestoreMethods;
+
 import java.util.HashMap;
+import java.util.function.Function;
 
 /**
  * Volunteer class represents the volunteer user data.
@@ -15,6 +19,7 @@ import java.util.HashMap;
 public class Volunteer extends User {
     private String myGuide;
     private String myGuideId;
+
     private HashMap<String, String> finishedForms;
     private String openForm;
     private boolean hasOpenForm;
@@ -82,34 +87,13 @@ public class Volunteer extends User {
      * @param voluId - the volunteer Uid
      * @param formId - the form Uid
      * @param form   - AnsweredForm object containing the form data
+     * @param onSuccess - function to execute when update success
+     * @param onFailed -  function to execute when update failed.
      */
-    public static void addFinishedForm(String voluId, String formId, AnsweredForm form) {
-        /* TODO implement here */
+    public static void addFinishedForm(String voluId, String formId, AnsweredForm form, Function<Void,Void> onSuccess, Function<Void,Void> onFailed) {
+        FirestoreMethods.updateMapKey(FirebaseStrings.usersStr(),voluId,FirebaseStrings.finishedFormsStr(),form.getTemplateId(),formId,onSuccess,onFailed);
     }
-
-    /**
-     * For the given volunteer, finds the finished form id from 'finishedForms' map given his name,
-     * Then returns a Form object with the finished form data.
-     *
-     * @param voluId   - the volunteer Uid
-     * @param formName - form name to find
-     * @return AnsweredForm object with the form data from the map
-     */
-    public static AnsweredForm findFinishedForm(String voluId, String formName) {
-        /* TODO implement here */
-        return null;
-    }
-
-    /**
-     * For the given volunteer, deletes a finished form from 'finishedForms' map.
-     * Updating the change in the database.
-     *
-     * @param voluId   - the volunteer Uid
-     * @param formName - form name to find
-     */
-    public static void deleteFinishedForm(String voluId, String formName) {
-        /* TODO implement here */
-    }
+    
 
     /*
      * Getters and setters.
@@ -157,4 +141,7 @@ public class Volunteer extends User {
     public void setHasOpenForm(boolean hasOpenForm) {
         this.hasOpenForm = hasOpenForm;
     }
+
+
+
 }
