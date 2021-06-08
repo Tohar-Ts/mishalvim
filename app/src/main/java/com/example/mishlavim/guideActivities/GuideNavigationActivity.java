@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.mishlavim.R;
-import com.example.mishlavim.adminActivities.AdminAddNewUserFragments;
+import com.example.mishlavim.adminActivities.AdminAddNewUserFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.jetbrains.annotations.NotNull;
@@ -35,7 +35,7 @@ public class GuideNavigationActivity extends AppCompatActivity implements Bottom
 
         //setting the main fragment
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.guide_fragment_container, new AdminAddNewUserFragments())
+                .replace(R.id.guide_fragment_container, new AdminAddNewUserFragment())
                 .commit();
     }
 

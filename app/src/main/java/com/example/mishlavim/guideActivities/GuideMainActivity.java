@@ -1,30 +1,19 @@
 package com.example.mishlavim.guideActivities;
 
-import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Filter;
-import android.widget.Filterable;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupMenu;
-import android.widget.Space;
 import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,7 +24,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.mishlavim.R;
-import com.example.mishlavim.dialogs.DeleteUser;
+import com.example.mishlavim.dialogs.DeleteUserDialog;
 import com.example.mishlavim.login.LoginActivity;
 import com.example.mishlavim.model.Adapter.MyListAdapter;
 import com.example.mishlavim.model.Firebase.AuthenticationMethods;
@@ -50,9 +39,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
-public class GuideMainActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener, BottomNavigationView.OnNavigationItemSelectedListener, DeleteUser.deleteUserListener {
+public class GuideMainActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener, BottomNavigationView.OnNavigationItemSelectedListener, DeleteUserDialog.deleteUserListener {
 
     private TextView guideName;
     private TableLayout voluListLayout;
@@ -193,7 +181,7 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
     public boolean onMenuItemClick(MenuItem item) {
         //delete volunteer
         if (item.getItemId() == R.id.remove_volunteer) {
-            DialogFragment newFragment = new DeleteUser();
+            DialogFragment newFragment = new DeleteUserDialog();
             newFragment.show(getSupportFragmentManager(), "deleteUser");
             return true;
         }

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="30dp"
+    tools:context=".adminActivities.AdminCreateFormFragment">
+
+    <TextView
+        android:id="@+id/createFormPrompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/alef"
+        android:layout_alignParentTop="true"
+        android:text="@string/create_new_form"
+        android:textColor="@color/black"
+        android:textSize="30sp" />
+
+    <EditText
+        android:id="@+id/formName"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/custom_input"
+        android:hint="@string/name_form"
+        android:inputType="text"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:layout_below="@id/createFormPrompt"
+        android:layout_centerInParent="true"
+        android:selectAllOnFocus="true" />
+
+    <ScrollView
+        android:id="@+id/questionsScroll"
+        android:layout_width="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/formName"
+        android:layout_marginTop="20dp"
+        android:layout_above="@+id/addNewQuestion"
+        android:layout_marginBottom="10dp"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/questionsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/question1"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/custom_input"
+                android:gravity="center|start"
+                android:hint="@string/question1"
+                android:inputType="text"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:selectAllOnFocus="true" />
+
+            <EditText
+                android:id="@+id/question2"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/custom_input"
+                android:gravity="center|start"
+                android:hint="@string/question2"
+                android:inputType="text"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:selectAllOnFocus="true" />
+
+
+            <EditText
+                android:id="@+id/question3"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/custom_input"
+                android:gravity="center|start"
+                android:hint="@string/question3"
+                android:inputType="text"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:selectAllOnFocus="true" />
+        </LinearLayout>
+    </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/createFormLoading"
+        android:layout_width="120dp"
+        android:layout_height="112dp"
+        android:layout_centerInParent="true"
+        android:theme="@style/BlueProgressBarTheme"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/addNewQuestion"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_above="@+id/addNewForm"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/blue_button2"
+        android:text="@string/add_new_question"
+        android:textColor="@drawable/blue_text_pressed"/>
+
+    <Button
+        android:id="@+id/addNewForm"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/blue_button"
+        android:text="@string/save_form"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"/>
+
+</RelativeLayout>
