@@ -68,17 +68,17 @@
     </androidx.appcompat.widget.SearchView>
 
 
-    <ScrollView
-        android:id="@+id/scrollView_view"
-        android:layout_width="409dp"
-        android:layout_height="494dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/voluListPrompt"
-        app:layout_constraintVertical_bias="0.051">
+<!--    <ScrollView-->
+<!--        android:id="@+id/scrollView_view"-->
+<!--        android:layout_width="409dp"-->
+<!--        android:layout_height="494dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_marginBottom="20dp"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/voluListPrompt"-->
+<!--        app:layout_constraintVertical_bias="0.051">-->
 
 
 <!--        <TableLayout-->
@@ -94,14 +94,19 @@
 
         <ListView
             android:id="@+id/listview"
+            android:transcriptMode="alwaysScroll"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/voluListPrompt"
+            app:layout_constraintVertical_bias="0.051"
             android:orientation="vertical">
         </ListView>
 
-    </ScrollView>
+<!--    </ScrollView>-->
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
