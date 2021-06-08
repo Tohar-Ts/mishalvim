@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="30dp">
-
+    android:padding="30dp"
+    tools:context=".adminActivities.AdminAddNewUserFragment">
 
     <TextView
         android:id="@+id/welcome"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="34dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/alef"
+        android:layout_alignParentTop="true"
         android:text="@string/prompt_add_user"
         android:textColor="@color/black"
         android:textSize="30sp" />
@@ -89,6 +90,7 @@
         android:id="@+id/typesRg"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
+        android:layout_above="@+id/registerLoading"
         android:layout_below="@+id/verifyPassword"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
@@ -103,7 +105,6 @@
             android:layout_marginEnd="10dp"
             android:checked="true"
             android:layoutDirection="rtl"
-            android:onClick="checkUserType"
             android:text="@string/prompt_guide"
             android:textAlignment="textStart" />
 
@@ -114,7 +115,6 @@
             android:layout_gravity="start"
             android:layout_marginEnd="10dp"
             android:layoutDirection="rtl"
-            android:onClick="checkUserType"
             android:text="@string/prompt_admin"
             android:textAlignment="textStart" />
 
@@ -125,7 +125,6 @@
             android:layout_gravity="start"
             android:layout_marginEnd="10dp"
             android:layoutDirection="rtl"
-            android:onClick="checkUserType"
             android:text="@string/prompt_volunteer"
             android:textAlignment="textStart" />
 
@@ -135,9 +134,18 @@
         android:id="@+id/registerLoading"
         android:layout_width="120dp"
         android:layout_height="112dp"
-        android:theme="@style/PinkProgressBarTheme"
+        android:theme="@style/BlueProgressBarTheme"
         android:visibility="gone"
         android:layout_centerInParent="true"/>
+
+    <Spinner
+        android:id="@+id/guides_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_above="@+id/addNewUser"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:layout_below="@+id/typesRg"/>
 
     <Button
         android:id="@+id/addNewUser"
@@ -145,7 +153,7 @@
         android:layout_height="60dp"
         android:layout_centerInParent="true"
         android:layout_marginBottom="40dp"
-        android:background="@drawable/pink_button"
+        android:background="@drawable/blue_button"
         android:text="@string/action_register"
         android:layout_alignParentBottom="true"/>
 

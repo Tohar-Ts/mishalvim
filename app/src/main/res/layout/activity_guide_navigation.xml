@@ -4,26 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".adminActivities.AdminNavigationActivity">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layoutDirection="rtl"
-        android:layout_alignParentLeft="true"
-        app:theme="@style/MyTabTextStyle"
-        app:menu="@menu/setting_menu"/>
+    tools:context=".guideActivities.GuideNavigationActivity">
 
     <FrameLayout
-        android:id="@+id/admin_fragment_container"
+        android:id="@+id/guide_fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        android:layout_above ="@+id/admin_bottom_navigation"/>
+        android:layout_above ="@+id/guide_bottom_navigation"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/admin_bottom_navigation"
+        android:id="@+id/guide_bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -31,5 +22,5 @@
         app:itemTextColor="@color/nav_pink_item"
         android:background="@drawable/nav_pink_corners"
 
-        app:menu="@menu/admin_bottom_navigation_menu" />
+        app:menu="@menu/guide_bottom_navigation_menu" />
 </RelativeLayout>

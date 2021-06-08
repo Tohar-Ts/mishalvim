@@ -1,6 +1,7 @@
 package com.example.mishlavim.adminActivities;
 
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,7 +34,7 @@ import com.example.mishlavim.model.Volunteer;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class AdminAddNewUserFragments extends Fragment  implements View.OnClickListener,RadioGroup.OnCheckedChangeListener , AdapterView.OnItemSelectedListener{
+public class AdminAddNewUserFragment extends Fragment  implements View.OnClickListener,RadioGroup.OnCheckedChangeListener , AdapterView.OnItemSelectedListener{
 
     private EditText emailEditText, userNameEditText, passwordEditText, verifyPasswordEditText;
     private Button addButton;
@@ -46,7 +47,7 @@ public class AdminAddNewUserFragments extends Fragment  implements View.OnClickL
     private ArrayList<String> listOfGuidesName,  listOfGuidesID;
     User authUser;
 
-    public AdminAddNewUserFragments() {
+    public AdminAddNewUserFragment() {
         // Required empty public constructor
     }
 
@@ -54,7 +55,7 @@ public class AdminAddNewUserFragments extends Fragment  implements View.OnClickL
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.admin_add_new_user_fragment, container, false);
+         return inflater.inflate(R.layout.fragment_admin_add_new_user, container, false);
     }
 
     @Override
@@ -62,7 +63,7 @@ public class AdminAddNewUserFragments extends Fragment  implements View.OnClickL
         super.onViewCreated(view, savedInstanceState);
 
         //init xml views
-        guidesSpinner = view.findViewById(R.id.spinner);
+        guidesSpinner = view.findViewById(R.id.guides_spinner);
         emailEditText = view.findViewById(R.id.newEmail);
         userNameEditText = view.findViewById(R.id.newUserName);
         passwordEditText = view.findViewById(R.id.newPassword);
@@ -72,7 +73,8 @@ public class AdminAddNewUserFragments extends Fragment  implements View.OnClickL
         typesRadioGroup = view.findViewById(R.id.typesRg);
 
         //init guides list
-//        setSpinner();
+        setSpinner();
+
         //init validation class
         validation = new Validation(emailEditText, userNameEditText, passwordEditText, verifyPasswordEditText
                 , loadingProgressBar, getResources());
@@ -84,7 +86,6 @@ public class AdminAddNewUserFragments extends Fragment  implements View.OnClickL
 
         addButton.setOnClickListener(this); //buttons listeners
         typesRadioGroup.setOnCheckedChangeListener(this);
-//        guidesSpinner.setOnItemSelectedListener(this);
     }
 
     @Override
@@ -92,6 +93,7 @@ public class AdminAddNewUserFragments extends Fragment  implements View.OnClickL
         registerUser();
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         switch (checkedId) {
@@ -105,7 +107,7 @@ public class AdminAddNewUserFragments extends Fragment  implements View.OnClickL
                 break;
             default:
                 newUserType = FirebaseStrings.volunteerStr();
-//                guidesSpinner.setVisibility(View.VISIBLE);
+                guidesSpinner.setVisibility(View.VISIBLE);
                 break;
         }
     }
@@ -121,9 +123,12 @@ public class AdminAddNewUserFragments extends Fragment  implements View.OnClickL
         listOfGuidesID = new ArrayList<>(guideList.values());
 
         //Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<String> adapter = new ArrayAdapter<String> (getActivity(), android.R.layout.simple_list_item_1,listOfGuidesName);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(requireActivity().getApplicationContext(), android.R.layout.simple_spinner_item, listOfGuidesName);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         guidesSpinner.setAdapter(adapter);
+        guidesSpinner.setOnItemSelectedListener(this);
     }
 
     @Override

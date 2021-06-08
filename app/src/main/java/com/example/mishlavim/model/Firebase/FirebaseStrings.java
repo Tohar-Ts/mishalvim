@@ -57,6 +57,7 @@ public class FirebaseStrings {
     public static String answeredFormsStr() {
         return "answeredForm";
     }
+    public static String finishedFormsStr(){ return "finishedForms";}
 
     public static String guideListStr() {
         return "guideList";
@@ -83,4 +84,5 @@ public class FirebaseStrings {
     public static String openFormName() {
         return "openFormName";
     }
+    public static String emptyString(){return  "";}
 }

@@ -27,6 +27,10 @@
         <item name="colorAccent">@color/green</item>
     </style>
 
+    <style name="BlueProgressBarTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorAccent">@color/pretty_blue</item>
+    </style>
+
     <style name="Theme.MishlavimPink.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

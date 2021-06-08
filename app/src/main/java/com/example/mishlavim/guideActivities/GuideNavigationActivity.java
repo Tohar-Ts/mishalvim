@@ -1,4 +1,17 @@
-package com.example.mishlavim.adminActivities;
+package com.example.mishlavim.guideActivities;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
+import android.os.Bundle;
+import android.view.MenuItem;
+
+import com.example.mishlavim.R;
+import com.example.mishlavim.adminActivities.AdminAddNewUserFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import org.jetbrains.annotations.NotNull;
 import com.example.mishlavim.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -6,58 +19,52 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import org.jetbrains.annotations.NotNull;
-
-public class AdminNavigationActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class GuideNavigationActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_navigation);
-
+        setContentView(R.layout.activity_guide_navigation);
         //navigation bar listener
-        BottomNavigationView navigationBtn = findViewById(R.id.admin_bottom_navigation);
+        BottomNavigationView navigationBtn = findViewById(R.id.guide_bottom_navigation);
         navigationBtn.setOnNavigationItemSelectedListener(this);
 
         //setting the main fragment
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.admin_fragment_container, new AdminGuidesFragment())
+                .replace(R.id.guide_fragment_container, new AdminAddNewUserFragment())
                 .commit();
-
     }
 
-    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
         Fragment selectedFragment = null;
 
         //choose a screen to show
         switch(item.getItemId()){
-            case R.id.guides:
-                selectedFragment = new AdminGuidesFragment();
+            case R.id.go_home:
+                //selectedFragment = new GuideHomeFragments();
                 break;
             case R.id.add_user:
-                selectedFragment = new AdminAddNewUserFragment();
+                //selectedFragment = new GuideAddNewUserFragments();
                 break;
             case R.id.forms:
-                selectedFragment = new AdminFormsFragment();
+                //selectedFragment = new GuideFormsFragments();
                 break;
-            case R.id.add_forms:
-                selectedFragment = new AdminCreateFormFragment();
-            break;
-            case R.id.reports:
-                selectedFragment = new AdminReportsFragment();
-            break;
         }
         //Transaction
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.admin_fragment_container, selectedFragment)
+                .replace(R.id.guide_fragment_container, selectedFragment)
                 .commit();
 
         return true;
     }
 }
+
+
+
+
+

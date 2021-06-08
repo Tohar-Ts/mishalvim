@@ -17,7 +17,7 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.mishlavim.R;
 import com.example.mishlavim.dialogs.AddUserDialog;
-import com.example.mishlavim.dialogs.DeleteUser;
+import com.example.mishlavim.dialogs.DeleteUserDialog;
 import com.example.mishlavim.login.Validation;
 import com.example.mishlavim.model.Firebase.AuthenticationMethods;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
@@ -32,7 +32,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 
-public class GuideAddVolunteerActivity extends AppCompatActivity implements View.OnClickListener, AddUserDialog.addUserDialogListener, DeleteUser.deleteUserListener, BottomNavigationView.OnNavigationItemSelectedListener  {
+public class GuideAddVolunteerActivity extends AppCompatActivity implements View.OnClickListener, AddUserDialog.addUserDialogListener, DeleteUserDialog.deleteUserListener, BottomNavigationView.OnNavigationItemSelectedListener  {
     private EditText emailEditText;
     private EditText userNameEditText;
     private EditText passwordEditText;
@@ -45,6 +45,7 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
     BottomNavigationView navBarButtons;
     private Global globalInstance = Global.getGlobalInstance();
     private Guide guide = globalInstance.getGuideInstance();
+    private String guideID, myGuide = guide.getName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +64,7 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
         loadingProgressBar = findViewById(R.id.registerLoading);
 
         mAuth = FirebaseAuth.getInstance();
+        guideID = mAuth.getUid();
         db = FirebaseFirestore.getInstance();
 
         validation = new Validation(emailEditText,userNameEditText, passwordEditText, verifyPasswordEditText
@@ -111,9 +113,6 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
     }
 
     private void registerToFirebase(String userName, String email, String password){
-        String myGuide = guide.getName();
-        String guideID = mAuth.getUid();
-
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -126,9 +125,9 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
                 });
     }
 
-
+//Add user to guide's list, and builde new document for the volunteer.
     private void createNewUser(FirebaseUser fbUser, Volunteer volunteer) {
-        //Guide.addVolunteerByGuideName(fbUser.getUid(), volunteer);
+        Guide.addVolunteer(guideID,fbUser.getUid(), volunteer.getName());
         addUserToDb(fbUser, volunteer);
     }
 
@@ -164,7 +163,7 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
     public void onAddNegativeClick(DialogFragment dialog) {
         Log.d("guide", "onDialogNegativeClick: after dialog closed");
         //Show dialog to confirm delete user.
-        DialogFragment newFragment = new DeleteUser();
+        DialogFragment newFragment = new DeleteUserDialog();
         newFragment.show(getSupportFragmentManager(), "deleteUser");
 //        finish();
         // TODO: 5/23/2021 undo operations and delete the user from FB.

@@ -23,10 +23,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.mishlavim.R;
-import com.example.mishlavim.dialogs.DeleteUser;
-import com.example.mishlavim.guideActivities.GuideAddVolunteerActivity;
-import com.example.mishlavim.guideActivities.GuideMainActivity;
-import com.example.mishlavim.guideActivities.GuideReportsActivity;
+import com.example.mishlavim.dialogs.DeleteUserDialog;
 import com.example.mishlavim.login.LoginActivity;
 import com.example.mishlavim.model.Admin;
 import com.example.mishlavim.model.Firebase.AuthenticationMethods;
@@ -38,7 +35,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.HashMap;
 
 public class AdminMainActivity extends AppCompatActivity implements View.OnClickListener,
-        PopupMenu.OnMenuItemClickListener,BottomNavigationView.OnNavigationItemSelectedListener, DeleteUser.deleteUserListener {
+        PopupMenu.OnMenuItemClickListener,BottomNavigationView.OnNavigationItemSelectedListener, DeleteUserDialog.deleteUserListener {
 
     private TextView adminName;
     private TableLayout guideListLayout;
@@ -98,7 +95,7 @@ public class AdminMainActivity extends AppCompatActivity implements View.OnClick
         }
         else if (item.getItemId() == R.id.add_forms) {
             finish();
-            startActivity(new Intent(getApplicationContext(), AdminCreateFormActivity.class));
+//            startActivity(new Intent(getApplicationContext(), AdminCreateFormActivity.class));
             overridePendingTransition(0, 0);
             return true;
         }

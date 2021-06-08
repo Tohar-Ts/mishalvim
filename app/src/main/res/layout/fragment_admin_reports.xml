@@ -3,17 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".adminActivities.AdminGuidesFragment">
+    tools:context=".adminActivities.AdminReportsFragment">
+
 
     <TextView
-        android:id="@+id/guidesPrompt"
+        android:id="@+id/reportsPrompt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
         android:fontFamily="@font/alef"
         android:layout_alignParentTop="true"
-        android:text="@string/guides"
+        android:text="@string/reports"
         android:textColor="@color/black"
         android:textSize="30sp" />
 
