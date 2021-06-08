@@ -35,7 +35,7 @@ import java.util.HashMap;
 import java.util.Objects;
 
 //TODO - in the xml file replace plain text with strings
-//TODO - check if has open form to display the open form fill me button
+
 
 public class VolunteerMainActivity extends AppCompatActivity implements View.OnClickListener, BottomNavigationView.OnNavigationItemSelectedListener{
 
@@ -58,6 +58,10 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
         //init volu object
         Global globalInstance = Global.getGlobalInstance();
         volu = globalInstance.getVoluInstance();
+
+        if (!volu.isHasOpenForm()){
+            openFormBtn.setVisibility(View.GONE);
+        }
 
         openFormBtn.setOnClickListener(this);
         setHelloMsg();

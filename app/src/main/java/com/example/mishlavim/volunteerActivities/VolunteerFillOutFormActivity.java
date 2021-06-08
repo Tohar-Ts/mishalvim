@@ -207,7 +207,7 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
         parseAnswer();
 
         //Validation for empty answers
-        if (currentAnswers.containsValue("")){
+        if (currentAnswers.containsValue("") || currentAnswers.containsValue(null)){
             Toast.makeText(getApplicationContext(), R.string.empty_answer, Toast.LENGTH_SHORT).show();
             return;
         }
@@ -216,8 +216,8 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
         FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), formId, FirebaseStrings.answersStr(), currentAnswers,
                 this::updateOpenForm, this::showError);
 
-        //TODO - updating on work field in answers
-        //TODO - notifying guide
+        
+       
     }
     //update the open form on the volunteer's document.
     private Void updateOpenForm(Void unused){
@@ -237,6 +237,7 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
     }
 
     private Void notifyGuide(Void unused){
+        // TODO: 6/8/2021 notify guide 
         showFinishedForm(unused);
         return null;
     }
