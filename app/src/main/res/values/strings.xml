@@ -75,6 +75,7 @@
     <string name="volu_name">שם החניך</string>
     <string name="forms_list">רשימת השאלונים</string>
     <string name="avg_forms_per_volu">ממוצע טפסים לחניך</string>
+    <string name="empty_answer">נא לענות על כל השאלות</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
