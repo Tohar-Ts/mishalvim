@@ -202,14 +202,25 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
 
         //sending the updated answers to firestore
         FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), formId, FirebaseStrings.answersStr(), currentAnswers,
-                this::showFinishedForm, this::showError);
+                this::updateOpenForm, this::showError);
+
+
         //TODO - updating open form in volunteer
         //TODO - updating on work field in answers
         //TODO - updating finished forms map in volunteer
         //TODO - notifying guide
     }
 
-     }
+    private Void updateOpenForm(Void unused){
+        FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(), voluId, FirebaseStrings.emptyString(), currentAnswers,
+                this::updateFinishedForms, this::showError);
+        return null;
+    }
+    private Void updateFinishedForms(Void unused){
+        return null;
+    }
+
+
 
     private Void showFinishedForm(Void unused) {
         progressBar.setVisibility(View.GONE);
