@@ -40,7 +40,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class GuideMainActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener, BottomNavigationView.OnNavigationItemSelectedListener, DeleteUserDialog.deleteUserListener {
+public class GuideMainActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener, BottomNavigationView.OnNavigationItemSelectedListener, DeleteUserDialog.deleteUserListener, SearchView.OnQueryTextListener {
 
     private TextView guideName;
     private TableLayout voluListLayout;
@@ -62,29 +62,9 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
         navBarButtons = findViewById(R.id.bottom_navigation);
         //voluListLayout = findViewById(R.id.volu_list_layout);
         settingBar = findViewById(R.id.toolbar);
+        //add the searchBar and set the method for searching
         searchBar = findViewById(R.id.search_bar);
-//        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, voluNames);
-//        listViewActivity.setAdapter(adapter);
-
-        //now we search using the search adapter
-        searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            //when user press submit button in searchview get string as query parameter
-            public boolean onQueryTextSubmit(String query) {
-                Context context = getApplicationContext();
-                //here im checking to see if the search is working upon submit
-                Toast.makeText(context,"Our word : "+query,Toast.LENGTH_SHORT).show();
-                return false;
-            }
-
-            @Override
-            //when user type in searchview get string as newText parameter
-            public boolean onQueryTextChange(String newText) {
-                adapter.getFilter().filter(newText);
-                return false;
-            }
-        });
-
+        searchBar.setOnQueryTextListener(this);
         //set the current placement of the cursor on "home"
         navBarButtons.setSelectedItemId(R.id.go_home);
 
@@ -102,7 +82,6 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
         adapter =new MyListAdapter(this,R.layout.list_item, voluNames);
         listViewActivity.setAdapter(adapter);
 //        listViewActivity.setOnClickListener(this::onClick);
-        //listViewActivity.setMinimumHeight(500);
        // listViewActivity.setAdapter(new MyListAdapter(this,R.layout.list_item, voluNames));
 
 //        listViewActivity.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -113,6 +92,8 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
 //        });
 
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -343,4 +324,18 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        Context context = getApplicationContext();
+        //here im checking to see if the search is working upon submit
+        Toast.makeText(context,"Our word : "+query,Toast.LENGTH_SHORT).show();
+        return false;
+    }
+
+    @Override
+    //when user type in searchview get string as newText parameter
+    public boolean onQueryTextChange(String newText) {
+        adapter.getFilter().filter(newText);
+        return false;
+    }
 }
