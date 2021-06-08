@@ -20,7 +20,6 @@ import com.example.mishlavim.model.Firebase.FirestoreMethods;
 import com.example.mishlavim.model.FormTemplate;
 import com.example.mishlavim.model.Global;
 import com.example.mishlavim.model.Guide;
-import com.example.mishlavim.model.User;
 import com.example.mishlavim.model.Volunteer;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;

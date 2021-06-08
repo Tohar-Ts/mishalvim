@@ -101,6 +101,8 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
         listViewActivity = findViewById(R.id.listview);
         adapter =new MyListAdapter(this,R.layout.list_item, voluNames);
         listViewActivity.setAdapter(adapter);
+//        listViewActivity.setOnClickListener(this::onClick);
+        //listViewActivity.setMinimumHeight(500);
        // listViewActivity.setAdapter(new MyListAdapter(this,R.layout.list_item, voluNames));
 
 //        listViewActivity.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -159,23 +161,22 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         //init clicked id
         clickedRowName = (String) v.getTag();
-
-        //showing the popup menu
-        Context myContext = new ContextThemeWrapper(GuideMainActivity.this,R.style.menuStyle);
-        PopupMenu popup = new PopupMenu(myContext, v);
-        popup.setOnMenuItemClickListener(this);
-        popup.inflate(R.menu.volunteer_options_menu);
-        popup.show();
+//        //showing the popup menu
+//        Context myContext = new ContextThemeWrapper(GuideMainActivity.this,R.style.menuStyle);
+//        PopupMenu popup = new PopupMenu(myContext, v);
+//        popup.setOnMenuItemClickListener(this);
+//        popup.inflate(R.menu.volunteer_options_menu);
+//        popup.show();
     }
 
 
     //additional pop-up for the button in the list_view
-    public void showPopup(View v) {
-        PopupMenu popup = new PopupMenu(this, v);
-        MenuInflater inflater = popup.getMenuInflater();
-        inflater.inflate(R.menu.volunteer_options_menu, popup.getMenu());
-        popup.show();
-    }
+//    public void showPopup(View v) {
+//        PopupMenu popup = new PopupMenu(this, v);
+//        MenuInflater inflater = popup.getMenuInflater();
+//        inflater.inflate(R.menu.volunteer_options_menu, popup.getMenu());
+//        popup.show();
+//    }
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
@@ -313,13 +314,10 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
     @Override
     public void onDeletePositiveClick(DialogFragment dialog) {
         FirestoreMethods.deleteDocument(FirebaseStrings.usersStr(),guide.getMyVolunteers().get(clickedRowName),this::onDocumentDeleteSuccess, this::onDeleteFailed);
-
-
     }
 
     @Override
     public void onDeleteNegativeClick(DialogFragment dialog) {
-
     }
 
     public Void onDocumentDeleteSuccess(Void noUse){

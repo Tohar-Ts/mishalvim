@@ -38,7 +38,7 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
     private String clickedFormId; // the clicked form id
     //private String clickedFormName;
     private HashMap <String, String> templateMap = new HashMap<>();// all template : key = id val = form name
-
+    private boolean newCanEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,10 +137,16 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
         }
         else if (item.getItemId() == R.id.allow_edit) {
             Log.d("onMenuItemClick", "allow edit form to "+ voluName+" form id "+ clickedFormId);
+            newCanEdit = true;
             FirestoreMethods.getDocument(FirebaseStrings.usersStr(), voluId, this::updateCanEdit, this::showError);
             return true;
         }
-        // TODO: 07/06/2021 add unable edit 
+        else if (item.getItemId() == R.id.disable_edit) {
+            Log.d("onMenuItemClick", "disable edit form to "+ voluName+" form id "+ clickedFormId);
+            newCanEdit = false;
+            FirestoreMethods.getDocument(FirebaseStrings.usersStr(), voluId, this::updateCanEdit, this::showError);
+            return true;
+        }
         return false;
     }
 
@@ -153,6 +159,7 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
         Log.d("findFormToEdit", "clicked template id "+ clickedFormId);
         for (String voluTemplateName : voluTemplate.keySet()) {
             Log.d("findFormToEdit", "finishedTempId "+ voluTemplateName);
+            i++;
             if (voluTemplate.get(voluTemplateName).compareTo(clickedFormId) == 0) {//if we found form template in the volunteer's finished templates with the same id
                 // the volu does have this form in his finished forms map
                 for (String voluFinishedFormName : voluFinishedForms.keySet()) {
@@ -160,7 +167,7 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
                     if (voluFinishedFormName.compareTo(templateMap.get(clickedFormId)) == 0) {
                         //found the needed form
                         Log.d("findFormToEdit", "now update ");
-                        FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), voluFinishedForms.get(voluFinishedFormName), FirebaseStrings.canEdit(), true, this::onSuccess, this::showError);
+                        FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), voluFinishedForms.get(voluFinishedFormName), FirebaseStrings.canEdit(), newCanEdit, this::onSuccess, this::showError);
                     }
                 }
             }
@@ -176,15 +183,12 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
             return null;
     }
 
-//    private Void allowToEdit(DocumentSnapshot doc) {
-//        AnsweredForm newAnsForm = doc.toObject(AnsweredForm.class);
-//
-//        return null;
-//    }
 
     private Void updateOpenForm(DocumentReference doc) {
         String newId = doc.getId();
+        String formName = templateMap.get(clickedFormId);
         FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(),voluId, FirebaseStrings.openForm(),newId,this::onSuccess, this::showError);
+        FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(),voluId, FirebaseStrings.openFormName(),formName,this::onSuccess, this::showError);
         Log.d("updateOpenForm"," ");
         return null;
     }

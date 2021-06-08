@@ -192,7 +192,7 @@ public class AdminAddNewUserFragment extends Fragment  implements View.OnClickLi
 
         else { //volunteer
 
-            fsUser = new Volunteer(authUser.getName(), newUserType,authUser.getEmail(), guideName, guideID, new HashMap<>(),"", false, new HashMap<>());
+            fsUser = new Volunteer(authUser.getName(), newUserType,authUser.getEmail(), guideName, guideID, new HashMap<>(),"", false, new HashMap<>(), "");
             Guide.addVolunteer(guideID, newUserUid, authUser.getName());
         }
 

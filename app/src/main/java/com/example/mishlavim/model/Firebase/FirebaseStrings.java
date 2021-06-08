@@ -72,11 +72,17 @@ public class FirebaseStrings {
     }
 
     public static String canEdit() {  return "canEdit";}
+
     public static String formsTemplatesListStr() {
         return "formsTemplatesList";
     }
+
     public static String openForm() {
         return "openForm";
+    }
+
+    public static String openFormName() {
+        return "openFormName";
     }
     public static String emptyString(){return  "";}
 }

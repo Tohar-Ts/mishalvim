@@ -6,5 +6,8 @@
     <item
         android:id="@+id/allow_edit"
         android:title="אפשר עריכה" />
+    <item
+        android:id="@+id/disable_edit"
+        android:title="חסום אפשרות עריכה" />
 
 </menu>

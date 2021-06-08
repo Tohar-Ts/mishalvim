@@ -54,7 +54,14 @@ public class AdminNavigationActivity extends AppCompatActivity implements Bottom
             break;
         }
         //Transaction
-        getSupportFragmentManager().beginTransaction()
+        getSupportFragmentManager().beginTransaction().
+                setCustomAnimations(
+
+                R.anim.fragment_slide_right_to_left,
+                R.anim.fragment_exit_right_to_left,
+                        R.anim.fragment_slide_left_to_right,
+                        R.anim.fragment_exit_left_to_right
+                )
                 .replace(R.id.admin_fragment_container, selectedFragment)
                 .commit();
 
