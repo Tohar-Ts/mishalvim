@@ -22,6 +22,7 @@ import com.example.mishlavim.guideActivities.GuideMainActivity;
 import com.example.mishlavim.guideActivities.GuideReportsActivity;
 import com.example.mishlavim.login.LoginActivity;
 import com.example.mishlavim.model.Admin;
+import com.example.mishlavim.model.Firebase.AuthenticationMethods;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
 import com.example.mishlavim.model.Global;
 import com.example.mishlavim.model.Guide;
@@ -105,12 +106,17 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
 
     private void showMenu() { // a function that shows the menu to the guides
         Global globalInstance = Global.getGlobalInstance();
+        //guide enter to volunteer screen
         if(globalInstance.getType().equals(FirebaseStrings.guideStr())) {
             navBarButtons.setVisibility(View.VISIBLE);
+            String voluIdFromGuide = globalInstance.getGuideInstance().getMyVolunteers().get(volu.getName());
         }
         else{
             navBarButtons.setVisibility(View.GONE);
+            String voluIdFromGuide = AuthenticationMethods.getCurrentUserID();
+
         }
+
 
     }
 
