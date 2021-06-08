@@ -101,7 +101,7 @@ public class GuideMainActivity extends AppCompatActivity implements View.OnClick
         listViewActivity = findViewById(R.id.listview);
         adapter =new MyListAdapter(this,R.layout.list_item, voluNames);
         listViewActivity.setAdapter(adapter);
-        listViewActivity.setOnClickListener(this::onClick);
+//        listViewActivity.setOnClickListener(this::onClick);
         //listViewActivity.setMinimumHeight(500);
        // listViewActivity.setAdapter(new MyListAdapter(this,R.layout.list_item, voluNames));
 
