@@ -16,7 +16,7 @@
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/alef"
         android:layout_alignParentTop="true"
-        android:text="@string/forms"
+        android:text="שאלונים"
         android:textColor="@color/black"
         android:textSize="30sp" />
 
