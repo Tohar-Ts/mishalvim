@@ -17,6 +17,7 @@ import com.example.mishlavim.model.Firebase.FirebaseStrings;
 import com.example.mishlavim.model.Firebase.FirestoreMethods;
 import com.example.mishlavim.model.FormTemplate;
 import com.example.mishlavim.model.Global;
+import com.example.mishlavim.model.Guide;
 import com.example.mishlavim.model.Volunteer;
 import com.google.firebase.firestore.DocumentSnapshot;
 
@@ -54,6 +55,9 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
         //init open form id
         Global globalInstance = Global.getGlobalInstance();
         Volunteer volu = globalInstance.getVoluInstance();
+
+
+
         formId = volu.getOpenForm();
 // TODO: 6/8/2021 VERY IMPORTANT!!! CHANGE VOLUID TO THE RIGHT VOLUNTEER ID!!!!
         voluId = getIntent().getStringExtra("CLICKED_VOLU_ID");

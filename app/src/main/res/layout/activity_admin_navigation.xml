@@ -27,9 +27,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:itemIconTint="@color/nav_pink_item"
-        app:itemTextColor="@color/nav_pink_item"
-        android:background="@drawable/nav_pink_corners"
-
+        app:itemIconTint="@color/nav_blue_item"
+        app:itemTextColor="@color/nav_blue_item"
+        android:background="@drawable/nav_blue_corners"
         app:menu="@menu/admin_bottom_navigation_menu" />
 </RelativeLayout>
