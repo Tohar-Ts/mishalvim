@@ -6,15 +6,14 @@
     android:padding="30dp"
     tools:context=".adminActivities.AdminAddNewUserFragment">
 
-
     <TextView
         android:id="@+id/welcome"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="34dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/alef"
+        android:layout_alignParentTop="true"
         android:text="@string/prompt_add_user"
         android:textColor="@color/black"
         android:textSize="30sp" />

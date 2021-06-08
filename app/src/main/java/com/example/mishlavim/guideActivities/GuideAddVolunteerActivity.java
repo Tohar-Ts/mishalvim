@@ -17,7 +17,7 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.mishlavim.R;
 import com.example.mishlavim.dialogs.AddUserDialog;
-import com.example.mishlavim.dialogs.DeleteUser;
+import com.example.mishlavim.dialogs.DeleteUserDialog;
 import com.example.mishlavim.login.Validation;
 import com.example.mishlavim.model.Firebase.AuthenticationMethods;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
@@ -32,7 +32,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 
-public class GuideAddVolunteerActivity extends AppCompatActivity implements View.OnClickListener, AddUserDialog.addUserDialogListener, DeleteUser.deleteUserListener, BottomNavigationView.OnNavigationItemSelectedListener  {
+public class GuideAddVolunteerActivity extends AppCompatActivity implements View.OnClickListener, AddUserDialog.addUserDialogListener, DeleteUserDialog.deleteUserListener, BottomNavigationView.OnNavigationItemSelectedListener  {
     private EditText emailEditText;
     private EditText userNameEditText;
     private EditText passwordEditText;
@@ -164,7 +164,7 @@ public class GuideAddVolunteerActivity extends AppCompatActivity implements View
     public void onAddNegativeClick(DialogFragment dialog) {
         Log.d("guide", "onDialogNegativeClick: after dialog closed");
         //Show dialog to confirm delete user.
-        DialogFragment newFragment = new DeleteUser();
+        DialogFragment newFragment = new DeleteUserDialog();
         newFragment.show(getSupportFragmentManager(), "deleteUser");
 //        finish();
         // TODO: 5/23/2021 undo operations and delete the user from FB.

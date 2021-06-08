@@ -50,7 +50,7 @@ public class AdminNavigationActivity extends AppCompatActivity implements Bottom
                 selectedFragment = new AdminCreateFormFragment();
             break;
             case R.id.reports:
-                selectedFragment = new AdminGuidesFragment();
+                selectedFragment = new AdminReportsFragment();
             break;
         }
         //Transaction

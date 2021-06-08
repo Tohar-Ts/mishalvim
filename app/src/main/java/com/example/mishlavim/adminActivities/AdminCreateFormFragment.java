@@ -2,6 +2,7 @@ package com.example.mishlavim.adminActivities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.annotation.SuppressLint;
@@ -36,8 +37,7 @@ import java.util.HashMap;
  */
 public class AdminCreateFormFragment extends Fragment implements View.OnClickListener {
     private EditText formNameEditText;
-    private FloatingActionButton addQuestionButton;
-    private Button saveButton;
+    private Button saveButton, addQuestionButton;
     private ProgressBar loadingProgressBar;
     private int numOfQuestions;
     private LinearLayout questionsLayout;
