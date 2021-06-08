@@ -19,13 +19,10 @@ import com.example.mishlavim.model.Firebase.FirebaseStrings;
 import com.example.mishlavim.model.Firebase.FirestoreMethods;
 import com.example.mishlavim.model.FormTemplate;
 import com.example.mishlavim.model.Global;
-import com.example.mishlavim.model.Guide;
 import com.example.mishlavim.model.Volunteer;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
-
 import java.util.HashMap;
-import java.util.function.Function;
+
 
 public class VolunteerFillOutFormActivity extends AppCompatActivity implements View.OnClickListener {
     private ProgressBar progressBar;
@@ -33,7 +30,7 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
     private TextView fireBaseQuestion, questionNumTextView;
     private EditText volunteerAnswer;
 
-    private String formId, voluId, voluName;
+    private String formId,formName ,voluId, voluName;
     private int numOfQuestions;
     private int numOfCurrentQuestion;
     private HashMap<String, String> questions;
@@ -116,7 +113,7 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
         assert templateObj != null;
         questions = templateObj.getQuestionArr();
         numOfQuestions = questions.size();
-
+        formName = templateObj.getFormName();
         initScreen();
         return null;
     }
@@ -220,7 +217,6 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
                 this::updateOpenForm, this::showError);
 
         //TODO - updating on work field in answers
-        //TODO - updating finished forms map in volunteer
         //TODO - notifying guide
     }
     //update the open form on the volunteer's document.
@@ -230,11 +226,13 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
         return null;
     }
     private Void updateFinishedForms(Void unused){
-        //FirestoreMethods.updateMapKey(FirebaseStrings.usersStr(),voluId,FirebaseStrings.finishedFormsStr(),formId,this::updateOnWork,this::showError);
+        FirestoreMethods.updateMapKey(FirebaseStrings.usersStr(),voluId,FirebaseStrings.finishedFormsStr(),formName,formId,this::updateOnWork,this::showError);
         return null;
     }
 
     private Void updateOnWork(Void unused){
+        FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), formId, FirebaseStrings.onWorkStr(),"false",
+                this::notifyGuide, this::showError);
         return null;
     }
 
