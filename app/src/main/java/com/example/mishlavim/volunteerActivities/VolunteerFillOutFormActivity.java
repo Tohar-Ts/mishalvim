@@ -2,6 +2,7 @@ package com.example.mishlavim.volunteerActivities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,14 +14,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mishlavim.R;
 import com.example.mishlavim.model.AnsweredForm;
+import com.example.mishlavim.model.Firebase.AuthenticationMethods;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
 import com.example.mishlavim.model.Firebase.FirestoreMethods;
 import com.example.mishlavim.model.FormTemplate;
 import com.example.mishlavim.model.Global;
+import com.example.mishlavim.model.Guide;
+import com.example.mishlavim.model.User;
 import com.example.mishlavim.model.Volunteer;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.HashMap;
+import java.util.function.Function;
 
 public class VolunteerFillOutFormActivity extends AppCompatActivity implements View.OnClickListener {
     private ProgressBar progressBar;
@@ -28,15 +34,16 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
     private TextView fireBaseQuestion, questionNumTextView;
     private EditText volunteerAnswer;
 
-    private String formId, voluId;
+    private String formId, voluId, voluName;
     private int numOfQuestions;
     private int numOfCurrentQuestion;
     private HashMap<String, String> questions;
     private HashMap<String, String> savedAnswers;
     private HashMap<String, String> currentAnswers;
+    private Volunteer volunteer;
+
 
     @Override
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_volunteer_fill_out_form);
@@ -53,13 +60,22 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
 
         //init open form id
         Global globalInstance = Global.getGlobalInstance();
-        Volunteer volu = globalInstance.getVoluInstance();
-        formId = volu.getOpenForm();
-// TODO: 6/8/2021 VERY IMPORTANT!!! CHANGE VOLUID TO THE RIGHT VOLUNTEER ID!!!!
-        voluId = getIntent().getStringExtra("CLICKED_VOLU_ID");
+        volunteer = globalInstance.getVoluInstance();
+        voluName = volunteer.getName();
+        formId = volunteer.getOpenForm();
+
+        //user is guide
+        if (globalInstance.getType().equals(FirebaseStrings.guideStr())){
+          voluId = globalInstance.getGuideInstance().getMyVolunteers().get(voluName);
+        }
+        else{//user is volunteer
+            voluId = AuthenticationMethods.getCurrentUserID();
+        }
         //getting answers object from firestore
         FirestoreMethods.getDocument(FirebaseStrings.answeredFormsStr(), formId, this::getAnswersObjSuccess, this::showError);
     }
+
+
 
     @Override
     public void onClick(View v) {
@@ -204,22 +220,29 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
         FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), formId, FirebaseStrings.answersStr(), currentAnswers,
                 this::updateOpenForm, this::showError);
 
-
-        //TODO - updating open form in volunteer
         //TODO - updating on work field in answers
         //TODO - updating finished forms map in volunteer
         //TODO - notifying guide
     }
-
+    //update the open form on the volunteer's document.
     private Void updateOpenForm(Void unused){
-        FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(), voluId, FirebaseStrings.emptyString(), currentAnswers,
+        FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(), voluId, FirebaseStrings.openForm(),FirebaseStrings.emptyString(),
                 this::updateFinishedForms, this::showError);
         return null;
     }
     private Void updateFinishedForms(Void unused){
+        FirestoreMethods.updateMapKey(FirebaseStrings.usersStr(),voluId,FirebaseStrings.finishedFormsStr(),,formId,this::updateOnWork,this::showError);
         return null;
     }
 
+    private Void updateOnWork(Void unused){
+        return null;
+    }
+
+    private Void notifyGuide(Void unused){
+        showFinishedForm(unused);
+        return null;
+    }
 
 
     private Void showFinishedForm(Void unused) {
