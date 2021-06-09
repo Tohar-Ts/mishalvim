@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.example.mishlavim.R;
 import com.example.mishlavim.dialogs.AddUserDialog;
 import com.example.mishlavim.dialogs.DeleteUserDialog;
+import com.example.mishlavim.dialogs.userExistDialog;
 import com.example.mishlavim.model.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import android.content.Intent;
@@ -27,10 +28,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
-
-import com.example.mishlavim.R;
-import com.example.mishlavim.dialogs.AddUserDialog;
-import com.example.mishlavim.dialogs.DeleteUserDialog;
 import com.example.mishlavim.login.Validation;
 import com.example.mishlavim.model.Firebase.AuthenticationMethods;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
@@ -48,7 +45,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 
 
-public class GuideAddVolunteerFragment extends Fragment implements View.OnClickListener, AddUserDialog.addUserDialogListener, DeleteUserDialog.deleteUserListener,BottomNavigationView.OnNavigationItemSelectedListener {
+public class GuideAddVolunteerFragment extends Fragment implements View.OnClickListener, userExistDialog.userExistDialogListener
+        ,AddUserDialog.addUserDialogListener, DeleteUserDialog.deleteUserListener,BottomNavigationView.OnNavigationItemSelectedListener {
 
     private EditText emailEditText;
     private EditText userNameEditText;
@@ -150,8 +148,12 @@ public class GuideAddVolunteerFragment extends Fragment implements View.OnClickL
                         volunteer = new Volunteer(userName, FirebaseStrings.volunteerStr(), email, myGuide, guideID, new HashMap<>(), "",false, new HashMap<>(), "");
                         // TODO: 6/5/2021 FIX THIS CONS.
                         createNewUser(fbUser, volunteer);
-                    } else
+                    } else{
+                        DialogFragment newFragment = new userExistDialog();
+                        newFragment.show(getParentFragmentManager(), "userExist");
                         showRegisterFailed();
+                    }
+
                 });
     }
 
@@ -180,13 +182,14 @@ public class GuideAddVolunteerFragment extends Fragment implements View.OnClickL
     }
     private void userHasAdd() {
         DialogFragment newFragment = new AddUserDialog();
-//        newFragment.show(getSupportFragmentManager(), "addUser");
+        newFragment.show(getParentFragmentManager(), "addUser");
     }
     @Override
     public void onAddPositiveClick(DialogFragment dialog) {
         Log.d("guide", "onDialogPositiveClick: after dialog closed");
 //        finish();
-        startActivity(new Intent(getActivity(), GuideAddVolunteerActivity.class));
+        // TODO: 6/9/2021 reset the fragment
+//        startActivity(new Intent(getActivity(), GuideAddVolunteerActivity.class));
     }
 
     @Override
@@ -194,7 +197,7 @@ public class GuideAddVolunteerFragment extends Fragment implements View.OnClickL
         Log.d("guide", "onDialogNegativeClick: after dialog closed");
         //Show dialog to confirm delete user.
         DialogFragment newFragment = new DeleteUserDialog();
-//        newFragment.show(getSupportFragmentManager(), "deleteUser");
+        newFragment.show(getParentFragmentManager(), "deleteUser");
 //        finish();
         // TODO: 5/23/2021 undo operations and delete the user from FB.
     }
@@ -215,11 +218,14 @@ public class GuideAddVolunteerFragment extends Fragment implements View.OnClickL
 //        finish();
     }
 
+    @Override
+    public void onExistNeutralClick(DialogFragment dialog){
+        return; }
 
     @Override
     public void onDeleteNegativeClick(DialogFragment dialog) {
-//        DialogFragment newFragment = new AddUserDialog();
-//        newFragment.show(getSupportFragmentManager(), "addUser");
+        DialogFragment newFragment = new AddUserDialog();
+        newFragment.show(getParentFragmentManager(), "addUser");
     }
 
 
