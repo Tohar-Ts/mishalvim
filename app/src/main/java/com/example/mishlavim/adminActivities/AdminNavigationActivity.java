@@ -37,7 +37,7 @@ public class AdminNavigationActivity extends AppCompatActivity implements Bottom
 
         //showing the main fragment
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.admin_fragment_container, new AdminGuidesFragment())
+                .replace(R.id.admin_fragment_container, new AdminAddNewUserFragment())
                 .commit();
 
     }

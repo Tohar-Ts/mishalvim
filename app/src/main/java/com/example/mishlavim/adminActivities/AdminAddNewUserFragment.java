@@ -45,8 +45,10 @@ public class AdminAddNewUserFragment extends Fragment  implements View.OnClickLi
     private String newUserType;
     private String guideName, guideID;
     private ArrayList<String> listOfGuidesName,  listOfGuidesID;
+
     String thisAdminUid;
-    User authUser;
+    User newAuthUser;
+    Global globalInstance;
 
     public AdminAddNewUserFragment() {
         // Required empty public constructor
@@ -55,7 +57,6 @@ public class AdminAddNewUserFragment extends Fragment  implements View.OnClickLi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        thisAdminUid = AuthenticationMethods.getCurrentUserID();
         // Inflate the layout for this fragment
          return inflater.inflate(R.layout.fragment_admin_add_new_user, container, false);
     }
@@ -74,6 +75,9 @@ public class AdminAddNewUserFragment extends Fragment  implements View.OnClickLi
         loadingProgressBar = view.findViewById(R.id.registerLoading);
         typesRadioGroup = view.findViewById(R.id.typesRg);
 
+        globalInstance = Global.getGlobalInstance(); //init the global instance
+        thisAdminUid = globalInstance.getUid(); //getting admin id
+
         //init guides list
         setSpinner();
 
@@ -82,7 +86,7 @@ public class AdminAddNewUserFragment extends Fragment  implements View.OnClickLi
                 , loadingProgressBar, getResources());
 
         newUserType = FirebaseStrings.guideStr(); //default user type
-        authUser = new User();
+        newAuthUser = new User();
 
         loadingProgressBar.setVisibility(View.GONE); //progress bar gone
 
@@ -117,12 +121,16 @@ public class AdminAddNewUserFragment extends Fragment  implements View.OnClickLi
     public void setSpinner(){
         //SPINNER SETUP
         //get the guides list.
-        Global globalInstance = Global.getGlobalInstance();
         Admin admin = globalInstance.getAdminInstance();
         HashMap<String,String> guideList = admin.getGuideList();
-
+        //if guide list is empty show a msg
+        if(guideList.isEmpty()){
+            Toast.makeText(getActivity(), "רשימת המדריכים ריקה", Toast.LENGTH_SHORT).show();
+            return;
+        }
         listOfGuidesName = new ArrayList<>(guideList.keySet());
         listOfGuidesID = new ArrayList<>(guideList.values());
+
         //Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<String> adapter = new ArrayAdapter<>(requireActivity().getApplicationContext(), android.R.layout.simple_spinner_item, listOfGuidesName);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -158,8 +166,8 @@ public class AdminAddNewUserFragment extends Fragment  implements View.OnClickLi
         String password = passwordEditText.getText().toString().trim();
         String userName = userNameEditText.getText().toString().trim();
 
-        authUser.setEmail(email);
-        authUser.setName(userName);
+        newAuthUser.setEmail(email);
+        newAuthUser.setName(userName);
 
         loadingProgressBar.setVisibility(View.VISIBLE);
         //register
@@ -180,18 +188,17 @@ public class AdminAddNewUserFragment extends Fragment  implements View.OnClickLi
 
         //admin
         if (newUserType.equals(FirebaseStrings.adminStr()))
-            // TODO: 09/06/2021 add list of guides and form template
-            fsUser = new Admin(authUser.getName(), newUserType, authUser.getEmail(), new HashMap<>(), new HashMap<>());
+            fsUser = new Admin(newAuthUser.getName(), newUserType, newAuthUser.getEmail(), new HashMap<>());
 
         //guide
         else if (newUserType.equals(FirebaseStrings.guideStr())) {
-            fsUser = new Guide(authUser.getName(), newUserType, authUser.getEmail(), new HashMap<>());
-            Admin.addGuide(thisAdminUid, authUser.getName(), newUserUid);
+            fsUser = new Guide(newAuthUser.getName(), newUserType, newAuthUser.getEmail(), new HashMap<>());
+            Admin.addGuide(thisAdminUid, newAuthUser.getName(), newUserUid);
         }
 
         else { //volunteer
-            fsUser = new Volunteer(authUser.getName(), newUserType,authUser.getEmail(), guideName, guideID, new HashMap<>(),"", false, new HashMap<>(), "");
-            Guide.addVolunteer(guideID, newUserUid, authUser.getName());
+            fsUser = new Volunteer(newAuthUser.getName(), newUserType, newAuthUser.getEmail(), guideName, guideID, new HashMap<>(),"", false, new HashMap<>(), "");
+            Guide.addVolunteer(guideID, newUserUid, newAuthUser.getName());
         }
         //init a new user data in firestore
         FirestoreMethods.createNewDocument(FirebaseStrings.usersStr(),newUserUid, fsUser, this::updateDbSuccess,this::updateDbFailed);
@@ -200,6 +207,7 @@ public class AdminAddNewUserFragment extends Fragment  implements View.OnClickLi
     private Void updateDbSuccess(Void unused){
         Toast.makeText(getActivity(), newUserType + " was added successfully", Toast.LENGTH_SHORT).show();
         loadingProgressBar.setVisibility(View.GONE);
+        reload();
         return null;
     }
 
@@ -209,5 +217,8 @@ public class AdminAddNewUserFragment extends Fragment  implements View.OnClickLi
         return null;
     }
 
+    private void reload(){
+        getActivity().recreate();
+    }
 
 }
