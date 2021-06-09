@@ -18,9 +18,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import com.example.mishlavim.R;
+import com.example.mishlavim.dialogs.userExistDialog;
 import com.example.mishlavim.login.Validation;
 import com.example.mishlavim.model.Admin;
 import com.example.mishlavim.model.Firebase.AuthenticationMethods;
@@ -34,7 +36,9 @@ import com.example.mishlavim.model.Volunteer;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class AdminAddNewUserFragment extends Fragment  implements View.OnClickListener,RadioGroup.OnCheckedChangeListener , AdapterView.OnItemSelectedListener{
+public class AdminAddNewUserFragment extends Fragment  implements View.OnClickListener,
+        RadioGroup.OnCheckedChangeListener ,AdapterView.OnItemSelectedListener,userExistDialog.userExistDialogListener
+{
 
     private EditText emailEditText, userNameEditText, passwordEditText, verifyPasswordEditText;
     private Button addButton;
@@ -168,6 +172,8 @@ public class AdminAddNewUserFragment extends Fragment  implements View.OnClickLi
     }
 
     private Void addAuthFailed(Void unused) {
+        DialogFragment newFragment = new userExistDialog();
+        newFragment.show(getParentFragmentManager(), "userExist");
         showRegisterFailed(R.string.register_auth_failed);
         return null;
     }
@@ -214,4 +220,7 @@ public class AdminAddNewUserFragment extends Fragment  implements View.OnClickLi
     }
 
 
+    @Override
+    public void onExistNeutralClick(DialogFragment dialog) {
+        return; }
 }
