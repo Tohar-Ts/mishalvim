@@ -111,6 +111,7 @@ public class GuideReportsFragment extends Fragment implements View.OnClickListen
         Volunteer volu = doc.toObject(Volunteer.class);
         assert volu != null;
         Log.d("pushAndGotoCreateTbl",volu.getName()+ " "+ volu.getFinishedForms());
+        //TODO fix this function makes the report crash
         if(!(volu.getFinishedForms().isEmpty()))
             numOfForms.put(volu.getName(), volu.getFinishedForms().size());
         else
@@ -144,6 +145,7 @@ public class GuideReportsFragment extends Fragment implements View.OnClickListen
             name.setText(voluName);
             name.setGravity(Gravity.RIGHT);
 //            name.setTextColor(getColor(R.color.black));
+            //TODO fixthe get color function which doesnt work
             name.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
 
             // create num of forms text
