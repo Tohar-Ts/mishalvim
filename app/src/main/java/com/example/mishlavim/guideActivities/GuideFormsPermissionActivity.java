@@ -1,6 +1,8 @@
 package com.example.mishlavim.guideActivities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +21,8 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.mishlavim.R;
+import com.example.mishlavim.dialogs.alertOpenFormDialog;
+import com.example.mishlavim.dialogs.openFormDialog;
 import com.example.mishlavim.model.AnsweredForm;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
 import com.example.mishlavim.model.Firebase.FirestoreMethods;
@@ -30,7 +34,9 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import java.util.HashMap;
 
-public class GuideFormsPermissionActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener{
+public class GuideFormsPermissionActivity extends AppCompatActivity implements View.OnClickListener,
+        openFormDialog.openFormListener, alertOpenFormDialog.alertOpenFormListener,
+        PopupMenu.OnMenuItemClickListener{
 
     private String voluName; //the clicked volunteer name
     private String voluId;//the clicked volunteer id
@@ -38,7 +44,7 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
     private String clickedFormId; // the clicked form id
     //private String clickedFormName;
     private HashMap <String, String> templateMap = new HashMap<>();// all template : key = id val = form name
-    private boolean newCanEdit;
+    private boolean newCanEdit, flag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,7 +134,13 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
     public boolean onMenuItemClick(MenuItem item) {
         if (item.getItemId() == R.id.open_curr_form) {
             Log.d("onMenuItemClick", "open form to "+ voluName+" form id "+ clickedFormId);
-            // TODO: 07/06/2021  add "are you sure" pop up text: "לפתוח שאלון זה לחניך? שים לב, פעולה זאת תחליף את השאלון הפתוח אצל החניך לשאלון זה"
+
+            //Show dialog to confirm the form's replacement.
+            DialogFragment dialogFragment = new openFormDialog();
+            dialogFragment.show(getSupportFragmentManager(),"openForm");
+            //if user not confirm - return.
+            if(flag)
+                return false;
             HashMap<String, String> answers = new HashMap<>();
             AnsweredForm ansForm = new AnsweredForm(true, true, clickedFormId, answers);
             FirestoreMethods.createNewDocumentRandomId(FirebaseStrings.answeredFormsStr(),ansForm,this::updateOpenForm, this::showError);
@@ -173,12 +185,9 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
             }
         }
         if (i == voluTemplate.size()) {
-            //TODO change to popup dialog with "OK" button
+           DialogFragment alertDialog = new alertOpenFormDialog();
+           alertDialog.show(getSupportFragmentManager(),"alert dialog");
             Log.e("GuideFormsPermissionActivity", "something went wrong");
-            Toast toast = Toast.makeText(getApplicationContext(),
-                    "לא ניתן לשנות הגדרות עריכה לשאלון שלא הושלם בעבר",
-                    Toast.LENGTH_SHORT);
-            toast.show();
         }
             return null;
     }
@@ -221,5 +230,21 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
     }
     private int convertFromDpToPixels(int toConvert){
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, toConvert, getResources().getDisplayMetrics());
+    }
+
+    @Override
+    public void onOpenFormPositiveClick(DialogFragment dialog) {
+        flag = false;
+    }
+
+    @Override
+    public void onOpenFormNegativeClick(DialogFragment dialog) {
+        flag = true;
+    }
+
+
+    @Override
+    public void onAlertOpenFormNeutralClick(DialogFragment dialog) {
+        return;
     }
 }
