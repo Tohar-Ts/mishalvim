@@ -149,6 +149,7 @@ public class GuideVolunteerListFragment extends Fragment implements PopupMenu.On
         return false;
     }
 
+
     @Override
     //when user type in searchview get string as newText parameter
     public boolean onQueryTextChange(String newText) {

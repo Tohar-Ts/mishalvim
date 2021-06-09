@@ -46,7 +46,7 @@ import java.util.HashMap;
 
 
 public class GuideAddVolunteerFragment extends Fragment implements View.OnClickListener, userExistDialog.userExistDialogListener
-        ,AddUserDialog.addUserDialogListener, DeleteUserDialog.deleteUserListener,BottomNavigationView.OnNavigationItemSelectedListener {
+        ,AddUserDialog.addUserDialogListener, DeleteUserDialog.deleteUserListener{
 
     private EditText emailEditText;
     private EditText userNameEditText;
@@ -99,24 +99,6 @@ public class GuideAddVolunteerFragment extends Fragment implements View.OnClickL
         addButton.setOnClickListener(this);
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//        if (item.getItemId() == R.id.go_home){
-//            finish();
-//            startActivity(new Intent(getApplicationContext(), GuideMainActivity.class));
-//            return true;
-//        }
-//        else if (item.getItemId() == R.id.add_user) {
-//            startActivity(new Intent(getApplicationContext(), GuideAddVolunteerActivity.class));
-//            overridePendingTransition(0, 0);
-//            return true;
-//        } else if (item.getItemId() == R.id.forms) {
-//            startActivity(new Intent(getApplicationContext(), GuideReportsActivity.class));
-//            overridePendingTransition(0, 0);
-//            return true;
-//        }
-        return false;
-    }
 
     @Override
     public void onClick(View v) {

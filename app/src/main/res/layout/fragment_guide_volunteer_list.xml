@@ -7,6 +7,16 @@
         android:background="@color/gray_background"
         tools:context=".guideActivities.GuideVolunteerListFragment">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:layoutDirection="rtl"
+            app:theme="@style/MyTabTextStyle2"
+            app:menu="@menu/setting_menu"/>
+
     <TextView
         android:id="@+id/voluListPrompt"
         android:layout_width="wrap_content"
@@ -32,4 +42,27 @@
 
     </LinearLayout>
 
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:defaultQueryHint="@string/searchHint"
+            android:layout_alignParentTop="true"
+            android:layout_below="@+id/listview"
+            android:layoutDirection="rtl"
+            >
+        </androidx.appcompat.widget.SearchView>
+
+        <ListView
+            android:id="@+id/listview"
+            android:transcriptMode="alwaysScroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:orientation="vertical"
+            android:layout_below="@+id/voluListPrompt"
+
+            >
+        </ListView>
 </RelativeLayout>
