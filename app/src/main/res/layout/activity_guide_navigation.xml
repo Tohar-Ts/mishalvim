@@ -7,11 +7,21 @@
     android:background="@color/gray_background"
     tools:context=".guideActivities.GuideNavigationActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/guide_setting_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layoutDirection="rtl"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        app:menu="@menu/setting_menu"/>
+
     <FrameLayout
         android:id="@+id/guide_fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
+        android:layout_below="@+id/guide_setting_button"
         android:layout_above ="@+id/guide_bottom_navigation"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -21,7 +31,6 @@
         android:layout_alignParentBottom="true"
         app:itemIconTint="@color/nav_blue_item"
         app:itemTextColor="@color/nav_blue_item"
-        android:background="@drawable/nav_blue_corners"
-
+        android:background="@drawable/nav_orange_corners"
         app:menu="@menu/guide_bottom_navigation_menu" />
 </RelativeLayout>

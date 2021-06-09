@@ -42,8 +42,8 @@ public class Guide extends User {
         Function<Void, Void> onSuccess = unused -> {Log.d("Guide class", "Volunteer successfully updated!");return null;};
         Function<Void, Void> onFailure = unused ->  {Log.d("Guide class", "Error - Guide update failed.");return null;};
 
-        FirestoreMethods.updateMapKey(FirebaseStrings.usersStr(), guideUid, FirebaseStrings.myVolunteerStr(), voluID,
-                voluName,onSuccess,onFailure);
+        FirestoreMethods.updateMapKey(FirebaseStrings.usersStr(), guideUid, FirebaseStrings.myVolunteerStr(),voluName ,
+                voluID ,onSuccess,onFailure);
     }
 
     /**
