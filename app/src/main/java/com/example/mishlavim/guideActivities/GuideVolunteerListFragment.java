@@ -105,7 +105,7 @@ public class GuideVolunteerListFragment extends Fragment implements PopupMenu.On
         clickedRowUid = ""; //default
 
         //init xml views
-        guidesView = view.findViewById(R.id.guides_recycler_view);
+        guidesView = view.findViewById(R.id.volunteers_recycler_view);
         recyclerAdapter = new RecyclerAdapter(guidesNames, this, R.menu.volunteer_options_menu);
         guidesView.setAdapter(recyclerAdapter);
     }
