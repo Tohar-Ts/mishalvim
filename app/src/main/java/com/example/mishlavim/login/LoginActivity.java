@@ -13,6 +13,7 @@ import com.example.mishlavim.R;
 import com.example.mishlavim.forgotPassword;
 import com.example.mishlavim.adminActivities.AdminNavigationActivity;
 import com.example.mishlavim.guideActivities.GuideMainActivity;
+import com.example.mishlavim.guideActivities.GuideNavigationActivity;
 import com.example.mishlavim.model.Admin;
 import com.example.mishlavim.model.Firebase.AuthenticationMethods;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
@@ -129,7 +130,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         else if (type.equals(FirebaseStrings.guideStr())) {
             Guide guide = document.toObject(Guide.class);
             globalInstance.setGuideInstance(guide);
-            startActivity(new Intent(LoginActivity.this, GuideMainActivity.class));
+            startActivity(new Intent(LoginActivity.this, GuideNavigationActivity.class));
         }
 
         //volunteer and go to volunteer main screen

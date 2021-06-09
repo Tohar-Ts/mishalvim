@@ -88,14 +88,14 @@ public class GuideVolunteerListFragment extends Fragment implements View.OnClick
         super.onViewCreated(view, savedInstanceState);
         this.view = view;
         guideName = view.findViewById(R.id.guideName);
-        navBarButtons = view.findViewById(R.id.bottom_navigation);
+        //navBarButtons = view.findViewById(R.id.bottom_navigation);
         //voluListLayout = findViewById(R.id.volu_list_layout);
         settingBar = view.findViewById(R.id.toolbar);
         //add the searchBar and set the method for searching
         searchBar = view.findViewById(R.id.search_bar);
         searchBar.setOnQueryTextListener(this);
         //set the current placement of the cursor on "home"
-        navBarButtons.setSelectedItemId(R.id.go_home);
+        //navBarButtons.setSelectedItemId(R.id.go_home);
         //init the guide data
         Global globalInstance = Global.getGlobalInstance();
         guide = globalInstance.getGuideInstance();
@@ -105,7 +105,7 @@ public class GuideVolunteerListFragment extends Fragment implements View.OnClick
         showVolunteerList();
 //        setSupportActionBar(settingBar);
 //        getSupportActionBar().setTitle(null);
-        navBarButtons.setOnNavigationItemSelectedListener(this);
+        //navBarButtons.setOnNavigationItemSelectedListener(this);
         listViewActivity = view.findViewById(R.id.listview);
         adapter =new MyListAdapter(getContext(),R.layout.list_item, voluNames);
         listViewActivity.setAdapter(adapter);

@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.mishlavim.R;
@@ -35,10 +37,11 @@ public class GuideNavigationActivity extends AppCompatActivity implements Bottom
 
         //setting the main fragment
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.guide_fragment_container, new AdminAddNewUserFragment())
+                .replace(R.id.guide_fragment_container, new GuideVolunteerListFragment())
                 .commit();
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
         Fragment selectedFragment = null;
@@ -46,16 +49,18 @@ public class GuideNavigationActivity extends AppCompatActivity implements Bottom
         //choose a screen to show
         switch(item.getItemId()){
             case R.id.go_home:
-                //selectedFragment = new GuideHomeFragments();
+                selectedFragment = new GuideVolunteerListFragment();
                 break;
             case R.id.add_user:
-                //selectedFragment = new GuideAddNewUserFragments();
+                selectedFragment = new GuideAddVolunteerFragment();
                 break;
             case R.id.forms:
-                //selectedFragment = new GuideFormsFragments();
+                selectedFragment = new GuideReportsFragment();
                 break;
         }
         //Transaction
+        assert selectedFragment != null;
+
         getSupportFragmentManager().beginTransaction().setCustomAnimations(
 
                 R.anim.fragment_slide_right_to_left,
@@ -68,6 +73,14 @@ public class GuideNavigationActivity extends AppCompatActivity implements Bottom
 
         return true;
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.setting_menu, menu);
+        return true;
+    }
+
+
 }
 
 

@@ -1,6 +1,8 @@
 package com.example.mishlavim.guideActivities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +21,8 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.mishlavim.R;
+import com.example.mishlavim.dialogs.alertOpenFormDialog;
+import com.example.mishlavim.dialogs.openFormDialog;
 import com.example.mishlavim.model.AnsweredForm;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
 import com.example.mishlavim.model.Firebase.FirestoreMethods;
@@ -38,7 +42,7 @@ public class GuideFormsPermissionActivity extends AppCompatActivity{
     private String clickedFormId; // the clicked form id
     //private String clickedFormName;
     private HashMap <String, String> templateMap = new HashMap<>();// all template : key = id val = form name
-    private boolean newCanEdit;
+    private boolean newCanEdit, flag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
