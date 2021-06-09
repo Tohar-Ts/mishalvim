@@ -159,14 +159,7 @@ public class AdminMainActivity extends AppCompatActivity implements View.OnClick
 //            return true;
 //        }
 //
-//        else if (item.getItemId() == R.id.edit_volunteer) {
-//            Intent intent = new Intent(getApplicationContext(), GuideVoluSettingActivity.class);
-//            intent.putExtra("CLICKED_VOLU_KEY", clickedRowName);
-//            intent.putExtra("CLICKED_VOLU_ID", guide.getMyVolunteers().get(clickedRowName));
-//            startActivity(intent);
-//            overridePendingTransition(0, 0);
-//            return true;
-//        }
+
         return false;
     }
 

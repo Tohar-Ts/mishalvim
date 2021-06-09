@@ -23,7 +23,6 @@ import androidx.fragment.app.DialogFragment;
 import com.example.mishlavim.R;
 import com.example.mishlavim.dialogs.DeleteUserDialog;
 import com.example.mishlavim.guideActivities.GuideFormsPermissionActivity;
-import com.example.mishlavim.guideActivities.GuideVoluSettingActivity;
 import com.example.mishlavim.guideActivities.GuideMainActivity;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
 import com.example.mishlavim.model.Firebase.FirestoreMethods;
@@ -122,14 +121,7 @@ public class MyListAdapter extends ArrayAdapter<String> implements Filterable {
 //                return true;
 //            }
 //
-//            else if (item.getItemId() == R.id.edit_volunteer) {
-//                Intent intent = new Intent(getApplicationContext(), GuideVoluSettingActivity.class);
-//                intent.putExtra("CLICKED_VOLU_KEY", clickedRowName);
-//                intent.putExtra("CLICKED_VOLU_ID", guide.getMyVolunteers().get(clickedRowName));
-//                startActivity(intent);
-//                overridePendingTransition(0, 0);
-//                return true;
-//            }
+
 //            else if (item.getItemId() == R.id.open_form_to_volunteer) {
 //                Intent intent = new Intent(getApplicationContext(), GuideFormsPermissionActivity.class);
 //                intent.putExtra("CLICKED_VOLU_KEY", clickedRowName);

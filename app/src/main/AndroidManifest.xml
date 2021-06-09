@@ -15,7 +15,6 @@
         <activity android:name=".forgotPassword" />
         <activity android:name=".adminActivities.AdminReportsActivity" />
         <activity android:name=".adminActivities.AdminFormsActivity" />
-        <activity android:name=".guideActivities.GuideVoluSettingActivity" />
         <activity android:name=".guideActivities.GuideReportsActivity" />
         <activity android:name=".guideActivities.GuideFormsPermissionActivity" />
         <activity android:name=".guideActivities.GuideMainActivity">
