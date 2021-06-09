@@ -79,7 +79,7 @@ public class AdminAddNewUserFragment extends Fragment  implements View.OnClickLi
         thisAdminUid = globalInstance.getUid(); //getting admin id
 
         //init guides list
-        setSpinner();
+        //setSpinner();
 
         //init validation class
         validation = new Validation(emailEditText, userNameEditText, passwordEditText, verifyPasswordEditText
