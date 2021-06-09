@@ -51,7 +51,7 @@ import java.util.HashMap;
 import static com.google.android.material.color.MaterialColors.getColor;
 
 
-public class GuideReportsFragment extends Fragment implements View.OnClickListener, BottomNavigationView.OnNavigationItemSelectedListener {
+public class GuideReportsFragment extends Fragment implements View.OnClickListener{
 
     private Guide guide;
     private HashMap<String, String> myVolunteersMap;
@@ -186,9 +186,4 @@ public class GuideReportsFragment extends Fragment implements View.OnClickListen
         return null;
     }
 
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
-        return false;
-    }
 }

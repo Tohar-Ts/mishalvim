@@ -60,7 +60,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class GuideVolunteerListFragment extends Fragment implements View.OnClickListener, PopupMenu.OnMenuItemClickListener, DeleteUserDialog.deleteUserListener, SearchView.OnQueryTextListener,BottomNavigationView.OnNavigationItemSelectedListener {
+public class GuideVolunteerListFragment extends Fragment implements View.OnClickListener, PopupMenu.OnMenuItemClickListener, DeleteUserDialog.deleteUserListener, SearchView.OnQueryTextListener {
     private TextView guideName;
     private TableLayout voluListLayout;
     BottomNavigationView navBarButtons;
@@ -137,24 +137,7 @@ public class GuideVolunteerListFragment extends Fragment implements View.OnClick
     }
 
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//        if (item.getItemId() == R.id.go_home){
-//            finish();
-//            startActivity(new Intent(getApplicationContext(), GuideMainActivity.class));
-//            return true;
-//        }
-//        else if (item.getItemId() == R.id.add_user) {
-//            startActivity(new Intent(getApplicationContext(), GuideAddVolunteerActivity.class));
-//            overridePendingTransition(0, 0);
-//            return true;
-//        } else if (item.getItemId() == R.id.forms) {
-//            startActivity(new Intent(getApplicationContext(), GuideReportsActivity.class));
-//            overridePendingTransition(0, 0);
-//            return true;
-//        }
-        return false;
-    }
+
 
     @Override
     public void onClick(View v) {
