@@ -34,12 +34,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private ProgressBar loadingProgressBar;
     private TextView forPasswordEditText;
     private Validation validation;
+    Global globalInstance;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        //check if user is logged in
+        //TODO
         //init xml views
         emailEditText = findViewById(R.id.email);
         passwordEditText = findViewById(R.id.password);
@@ -49,6 +51,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //init validation class
         validation = new Validation(emailEditText, null, passwordEditText, null,
                 loadingProgressBar, getResources());
+        globalInstance = Global.getGlobalInstance();
 
         loginButton.setOnClickListener(this);
         forPasswordEditText.setOnClickListener(this);
@@ -88,6 +91,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private Void loginSuccess(String userUid){
         assert userUid != null;
+        //init user id in the global class
+        globalInstance.setUid(userUid);
         //get user data from firestore
         FirestoreMethods.getDocument(FirebaseStrings.usersStr(), userUid, this::getUserDocSuccess, this::getUserDocFailed);
         return null;
@@ -111,7 +116,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void redirectUserByType(DocumentSnapshot document) {
         String type = Objects.requireNonNull(document.get(FirebaseStrings.typeStr())).toString();
-        Global globalInstance = Global.getGlobalInstance();
         globalInstance.setType(type);
 
         //init admin and go to admin main screen

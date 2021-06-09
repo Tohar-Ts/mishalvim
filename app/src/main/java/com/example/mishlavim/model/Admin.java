@@ -23,7 +23,6 @@ import java.util.function.Function;
 public class Admin extends User {
 
     private HashMap<String, String> guideList;
-    private HashMap<String, String> formsTemplatesList;
 
     /**
      * Empty constructor
@@ -34,10 +33,9 @@ public class Admin extends User {
     /**
      * Parameterized constructor
      */
-    public Admin(String name, String type, String email, HashMap<String, String> guideList, HashMap<String, String> formsTemplatesList) {
+    public Admin(String name, String type, String email, HashMap<String, String> guideList) {
         super(name, type, email);
         this.guideList = guideList;
-        this.formsTemplatesList = formsTemplatesList;
     }
 
     /**
@@ -46,24 +44,13 @@ public class Admin extends User {
      * @param guideID   - the guide Uid
      * @param guideName - Guide object with the guide data.
      */
-    public static void addGuide(String adminUid, String guideID, String guideName) {
+    public static void addGuide(String adminUid, String guideName, String guideID) {
         Function<Void, Void> onSuccess = unused -> {Log.d("Admin class", "Guide successfully updated!");return null;};
         Function<Void, Void> onFailure = unused ->  {Log.d("Admin class", "Error - Admin update failed.");return null;};
-
-        FirestoreMethods.updateMapKey(FirebaseStrings.usersStr(), adminUid, FirebaseStrings.guideListStr(), guideID,
-                                        guideName,onSuccess,onFailure);
+        FirestoreMethods.updateMapKey(FirebaseStrings.usersStr(), adminUid, FirebaseStrings.guideListStr(), guideName,
+                                        guideID,onSuccess,onFailure);
     }
 
-    /**
-     * Adding a formTemplate to the 'formsTemplates' map.
-     */
-    public static void addFormTemplate(String adminUid, String templateID, String templateName) {
-        Function<Void, Void> onSuccess = unused -> {Log.d("Admin class", "Template successfully updated!");return null;};
-        Function<Void, Void> onFailure = unused ->  {Log.d("Admin class", "Error - Admin update failed.");return null;};
-
-        FirestoreMethods.updateMapKey(FirebaseStrings.formsTemplatesStr(), adminUid, FirebaseStrings.formsTemplatesListStr(), templateID,
-                templateName,onSuccess,onFailure);
-    }
 
     /**
      * Deletes a guide from 'guideList' map.
@@ -71,15 +58,6 @@ public class Admin extends User {
      * @param guideName - guide name to find
      */
     public void deleteGuide(String guideName) {
-        // TODO implement here
-    }
-
-    /**
-     * Deletes a form template from 'formsTemplates' map.
-     *
-     * @param formName - form name to find
-     */
-    public void deleteForm(String formName) {
         // TODO implement here
     }
 
@@ -91,11 +69,5 @@ public class Admin extends User {
         this.guideList = guideList;
     }
 
-    public HashMap<String, String> getAllVolunteers() {
-        return formsTemplatesList;
-    }
 
-    public void setAllVolunteers(HashMap<String, String> allVolunteers) {
-        this.formsTemplatesList = allVolunteers;
-    }
 }
