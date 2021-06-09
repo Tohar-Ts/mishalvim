@@ -4,15 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F5F5F5"
     tools:context=".adminActivities.AdminNavigationActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/admin_setting_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layoutDirection="rtl"
-        android:layout_alignParentLeft="true"
-        app:theme="@style/MyTabTextStyle"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
         app:menu="@menu/setting_menu"/>
 
     <FrameLayout
@@ -20,6 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
+        android:layout_below="@+id/admin_setting_button"
         android:layout_above ="@+id/admin_bottom_navigation"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

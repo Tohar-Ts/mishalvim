@@ -1,16 +1,24 @@
 package com.example.mishlavim.adminActivities;
 import com.example.mishlavim.R;
+import com.example.mishlavim.login.LoginActivity;
+import com.example.mishlavim.model.Firebase.AuthenticationMethods;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 public class AdminNavigationActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -18,12 +26,16 @@ public class AdminNavigationActivity extends AppCompatActivity implements Bottom
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_navigation);
+        //setting bar
+        Toolbar settingBar = findViewById(R.id.admin_setting_button);
+        setSupportActionBar(settingBar);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(null);
 
         //navigation bar listener
         BottomNavigationView navigationBtn = findViewById(R.id.admin_bottom_navigation);
         navigationBtn.setOnNavigationItemSelectedListener(this);
 
-        //setting the main fragment
+        //showing the main fragment
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.admin_fragment_container, new AdminGuidesFragment())
                 .commit();
@@ -54,6 +66,7 @@ public class AdminNavigationActivity extends AppCompatActivity implements Bottom
             break;
         }
         //Transaction
+        assert selectedFragment != null;
         getSupportFragmentManager().beginTransaction().
                 setCustomAnimations(
 
@@ -66,5 +79,31 @@ public class AdminNavigationActivity extends AppCompatActivity implements Bottom
                 .commit();
 
         return true;
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.setting_menu, menu);
+        return true;
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        switch (id){
+            case R.id.setting:
+                //TODO navigate to setting
+                Toast.makeText(AdminNavigationActivity.this, item.getTitle().toString(), Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.exit:
+                AuthenticationMethods.signOut();
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                overridePendingTransition(0, 0);
+                break;
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
