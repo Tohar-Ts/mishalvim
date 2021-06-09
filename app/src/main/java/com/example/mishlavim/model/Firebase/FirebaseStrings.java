@@ -1,5 +1,7 @@
 package com.example.mishlavim.model.Firebase;
 
+import java.util.HashMap;
+
 /**
  * FirebaseStrings class represents firebase collection names, user types, user fields..
  * Common strings that are used to get and identify data from the firebase.
@@ -9,7 +11,7 @@ public class FirebaseStrings {
     public FirebaseStrings() {
     }
 
-
+    //user types
     public static String adminStr() {
         return "admin";
     }
@@ -18,26 +20,11 @@ public class FirebaseStrings {
         return "guide";
     }
 
-    public static String myGuideStr() {
-        return "myGuide";
-    }
-
-    public static String myGuideIdStr() {
-        return "myGuideID";
-    }
-
     public static String volunteerStr() {
         return "volunteer";
     }
 
-    public static String usersStr() {
-        return "users";
-    }
-
-    public static String typeStr() {
-        return "type";
-    }
-
+    //all users fields
     public static String emailStr() {
         return "email";
     }
@@ -46,47 +33,85 @@ public class FirebaseStrings {
         return "name";
     }
 
+    public static String typeStr() {
+        return "type";
+    }
+
+    //volunteer fields
+    public static String finishedFormsStr(){ return "finishedForms";}
+
+    public static String finishedTemplatesStr(){ return "myFinishedTemplate";}
+    public static String openFormUidStr() {
+        return "openForm";
+    }
+
+    public static String hasOpenFormStr() {
+        return "hasOpenForm";
+    }
+
+    public static String myGuideNameStr() {
+        return "myGuide";
+    }
+
+    public static String myGuideIdStr() {
+        return "myGuideID";
+    }
+
+    public static String openFormNameStr() {
+        return "openFormName";
+    }
+
+    //guide fields
     public static String myVolunteerStr() {
         return "myVolunteers";
     }
 
-    public static String formsTemplatesStr() {
-        return "forms_templates";
-    }
-
-    public static String answeredFormsStr() {
-        return "answeredForm";
-    }
-
-    public static String finishedFormsStr(){ return "finishedForms";}
-
+    //admin fields
     public static String guideListStr() {
         return "guideList";
     }
 
-    public static String allVolunteersListStr() {
-        return "allVolunteers";
+    //form template fields
+    public static String questionsMapStr(){return "questionsMap"; }
+
+    public static String formNameStr(){return "formName"; }
+
+    //answered form fields
+
+    public static String finishedCanEditStr() {
+        return "finishedButCanEdit";
+    }
+
+    public static String isOpenStr() {
+        return "isOpenForm";
+    }
+
+    public static String templateNameStr() {
+        return "templateName";
+    }
+
+    public static String templateIdStr() {
+        return "templateId";
     }
 
     public static String answersStr() {
         return "answers";
     }
 
-    public static String canEdit() {  return "canEdit";}
-
-    public static String formsTemplatesListStr() {
-        return "formsTemplatesList";
+    //collections
+    public static String usersStr() {
+        return "users";
     }
 
-    public static String openForm() {
-        return "openForm";
+    public static String formsTemplatesStr() {
+        return "formsTemplates";
     }
 
-    public static String openFormName() {
-        return "openFormName";
+    public static String answeredFormsStr() {
+        return "answeredForms";
     }
 
+    //??
     public static String emptyString(){return  "";}
 
-    public static String onWorkStr(){return "onWork";}
 }

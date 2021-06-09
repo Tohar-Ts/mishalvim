@@ -3,14 +3,13 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:theme="@style/Theme.MishlavimPink"
         android:padding="30dp"
-        android:background="#F5F5F5"
+        android:background="@color/gray_background"
         tools:context=".guideActivities.GuideVolunteerListFragment">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_alignParentTop="true"
@@ -19,44 +18,39 @@
             app:menu="@menu/setting_menu"/>
 
     <TextView
-        android:id="@+id/guideName"
-        android:layout_width="match_parent"
+        android:id="@+id/voluListPrompt"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar"
-        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
         android:fontFamily="@font/alef"
-        android:gravity="right"
-        android:paddingStart="40dp"
-        android:paddingEnd="60dp"
-        android:text=" Xמדריך"
-        android:textColor="@color/dark_gray"
+        android:layout_alignParentTop="true"
+        android:text="מתנדבים"
+        android:textColor="@color/black"
         android:textSize="30sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/voluListPrompt">
 
-            <TextView
-            android:id="@+id/voluListPrompt"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/volunteers_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/alef"
-            android:textAlignment="textStart"
-            android:paddingStart="40dp"
-            android:paddingEnd="60dp"
-            android:text="רשימת החניכים שלך"
-            android:textColor="@color/dark_gray"
-            android:textSize="30sp"
-            android:layout_below="@+id/guideName"/>
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
+    </LinearLayout>
 
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/search_bar"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="right"
             app:defaultQueryHint="@string/searchHint"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="300dp"
-
+            android:layout_below="@+id/listview"
+            android:layoutDirection="rtl"
             >
         </androidx.appcompat.widget.SearchView>
 

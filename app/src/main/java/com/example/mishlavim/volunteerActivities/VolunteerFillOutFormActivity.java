@@ -2,7 +2,6 @@ package com.example.mishlavim.volunteerActivities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -58,7 +57,7 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
         Global globalInstance = Global.getGlobalInstance();
         volunteer = globalInstance.getVoluInstance();
         voluName = volunteer.getName();
-        formId = volunteer.getOpenForm();
+        formId = volunteer.getOpenFormId();
 
         //user is guide
         if (globalInstance.getType().equals(FirebaseStrings.guideStr())){
@@ -111,7 +110,7 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
         FormTemplate templateObj = doc.toObject(FormTemplate.class);
 
         assert templateObj != null;
-        questions = templateObj.getQuestionArr();
+        questions = templateObj.getQuestionsMap();
         numOfQuestions = questions.size();
         formName = templateObj.getFormName();
         initScreen();
@@ -221,12 +220,12 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
     }
     //Update document fields and maps.
     private Void updateOpenForm(Void unused){
-        FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(), voluId, FirebaseStrings.openForm(),FirebaseStrings.emptyString(),
+        FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(), voluId, FirebaseStrings.openFormNameStr(),FirebaseStrings.emptyString(),
                 this::updateOpenFormName, this::showError);
         return null;
     }
     private Void updateOpenFormName(Void unused){
-        FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(), voluId, FirebaseStrings.openFormName(),FirebaseStrings.emptyString(),
+        FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(), voluId, FirebaseStrings.openFormNameStr(),FirebaseStrings.emptyString(),
                 this::updateFinishedForms, this::showError);
         return null;
     }
@@ -237,13 +236,13 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
     }
 
     private Void updateOnWork(Void unused){
-        FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), formId, FirebaseStrings.onWorkStr(),false,
-                this::updateCanEdit, this::showError);
+//        FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), formId, FirebaseStrings.onWorkStr(),false,
+//                this::updateCanEdit, this::showError);
         return null;
     }
     private Void updateCanEdit(Void unused){
-        FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), formId, FirebaseStrings.canEdit(),false,
-                this::notifyGuide, this::showError);
+//        FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), formId, FirebaseStrings.canEdit(),false,
+//                this::notifyGuide, this::showError);
         return null;
     }
 

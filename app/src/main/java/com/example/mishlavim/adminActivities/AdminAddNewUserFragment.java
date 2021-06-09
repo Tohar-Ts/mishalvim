@@ -18,9 +18,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import com.example.mishlavim.R;
+import com.example.mishlavim.dialogs.userExistDialog;
 import com.example.mishlavim.login.Validation;
 import com.example.mishlavim.model.Admin;
 import com.example.mishlavim.model.Firebase.AuthenticationMethods;
@@ -34,7 +36,9 @@ import com.example.mishlavim.model.Volunteer;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class AdminAddNewUserFragment extends Fragment  implements View.OnClickListener,RadioGroup.OnCheckedChangeListener , AdapterView.OnItemSelectedListener{
+public class AdminAddNewUserFragment extends Fragment  implements View.OnClickListener,
+        RadioGroup.OnCheckedChangeListener ,AdapterView.OnItemSelectedListener,userExistDialog.userExistDialogListener
+{
 
     private EditText emailEditText, userNameEditText, passwordEditText, verifyPasswordEditText;
     private Button addButton;
@@ -77,9 +81,13 @@ public class AdminAddNewUserFragment extends Fragment  implements View.OnClickLi
 
         globalInstance = Global.getGlobalInstance(); //init the global instance
         thisAdminUid = globalInstance.getUid(); //getting admin id
+        if(thisAdminUid == null){
+            Toast.makeText(getActivity(), "תקלה בהצגת המידע, יש לסגור ולפתוח את האפליקציה מחדש", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         //init guides list
-        setSpinner();
+        //setSpinner();
 
         //init validation class
         validation = new Validation(emailEditText, userNameEditText, passwordEditText, verifyPasswordEditText
@@ -122,6 +130,10 @@ public class AdminAddNewUserFragment extends Fragment  implements View.OnClickLi
         //SPINNER SETUP
         //get the guides list.
         Admin admin = globalInstance.getAdminInstance();
+        if(admin == null){
+            Toast.makeText(getActivity(), "תקלה בהצגת המידע, יש לסגור ולפתוח את האפליקציה מחדש", Toast.LENGTH_SHORT).show();
+            return;
+        }
         HashMap<String,String> guideList = admin.getGuideList();
         //if guide list is empty show a msg
         if(guideList.isEmpty()){
@@ -175,6 +187,8 @@ public class AdminAddNewUserFragment extends Fragment  implements View.OnClickLi
     }
 
     private Void addAuthFailed(Void unused) {
+        DialogFragment newFragment = new userExistDialog();
+        newFragment.show(getParentFragmentManager(), "userExist");
         showRegisterFailed(R.string.register_auth_failed);
         return null;
     }
@@ -221,4 +235,7 @@ public class AdminAddNewUserFragment extends Fragment  implements View.OnClickLi
         getActivity().recreate();
     }
 
+    @Override
+    public void onExistNeutralClick(DialogFragment dialog) {
+        return; }
 }

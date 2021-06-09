@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="30dp"
-    android:background="#F5F5F5"
+    android:background="@color/gray_background"
     tools:context=".adminActivities.AdminAddNewUserFragment">
 
     <TextView
@@ -16,7 +16,8 @@
         android:layout_alignParentTop="true"
         android:text="@string/prompt_add_user"
         android:textColor="@color/black"
-        android:textSize="30sp" />
+        android:textSize="25sp"
+        android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/newUserName"
@@ -24,12 +25,12 @@
         android:layout_height="50dp"
         android:layout_below="@+id/welcome"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="30dp"
         android:autofillHints="@string/title_user_name"
         android:background="@drawable/custom_input"
-        android:drawableEnd="@drawable/ic_person"
+        android:drawableRight="@drawable/ic_person"
         android:drawablePadding="12dp"
-        android:gravity="center|start"
+        android:gravity="center|right"
         android:hint="@string/title_user_name"
         android:inputType="textPersonName"
         android:paddingStart="12dp"
@@ -44,9 +45,9 @@
         android:layout_marginTop="30dp"
         android:autofillHints="@string/title_email"
         android:background="@drawable/custom_input"
-        android:drawableEnd="@drawable/ic_email"
+        android:drawableRight="@drawable/ic_email"
         android:drawablePadding="12dp"
-        android:gravity="center|start"
+        android:gravity="center|right"
         android:hint="@string/title_email"
         android:inputType="textEmailAddress"
         android:paddingStart="12dp"
@@ -61,9 +62,9 @@
         android:layout_marginTop="30dp"
         android:autofillHints="@string/title_user_password"
         android:background="@drawable/custom_input"
-        android:drawableEnd="@drawable/ic_lock"
+        android:drawableRight="@drawable/ic_lock"
         android:drawablePadding="12dp"
-        android:gravity="center|end"
+        android:gravity="center|right"
         android:hint="@string/title_user_password"
         android:inputType="textPassword"
         android:paddingStart="12dp"
@@ -78,9 +79,9 @@
         android:layout_marginTop="30dp"
         android:autofillHints="@string/title_verify_password"
         android:background="@drawable/custom_input"
-        android:drawableEnd="@drawable/ic_lock"
+        android:drawableRight="@drawable/ic_lock"
         android:drawablePadding="12dp"
-        android:gravity="center|end"
+        android:gravity="center|right"
         android:hint="@string/title_verify_password"
         android:inputType="textPassword"
         android:paddingStart="12dp"
@@ -141,11 +142,12 @@
     <Spinner
         android:id="@+id/guides_spinner"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_above="@+id/addNewUser"
-        android:layout_centerInParent="true"
-        android:visibility="gone"
-        android:layout_below="@+id/typesRg"/>
+        android:layout_height="60dp"
+        android:layout_below="@+id/typesRg"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="9dp"
+        android:background="@drawable/custom_input"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/addNewUser"
