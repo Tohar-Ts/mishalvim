@@ -4,7 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:orientation="vertical"
-    android:background="@drawable/backgroung_green"
+    android:background="@drawable/background_green"
         android:layout_height="match_parent"
         tools:context=".volunteerActivities.VolunteerFillOutFormActivity">
 

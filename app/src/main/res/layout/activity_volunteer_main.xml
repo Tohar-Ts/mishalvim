@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/Theme.MishlavimPink.NoActionBar"
-    android:background="@drawable/backgroung_green"
+    android:background="@drawable/background_green"
     tools:context=".volunteerActivities.VolunteerMainActivity">
 
 

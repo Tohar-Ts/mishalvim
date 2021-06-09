@@ -115,7 +115,7 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
         assert answersObj != null;
         answers = answersObj.getAnswers();
         canEdit = answersObj.getFinishedButCanEdit();
-
+        // TODO: 6/9/2021 CHANGE THIS FUNCTION CUZ DOCUMENT ID IS WRONG!!!
         FirestoreMethods.getDocument(FirebaseStrings.formsTemplatesStr(), "Cfxrc4aUw5lnTOsNFk5B",
                 this::onGettingQuestionsSuccess, this::showError);
         return null;
