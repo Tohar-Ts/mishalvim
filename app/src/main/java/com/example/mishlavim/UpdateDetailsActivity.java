@@ -32,7 +32,7 @@ public class UpdateDetailsActivity extends AppCompatActivity implements View.OnC
         password =findViewById(R.id.password);
         password_confirm = findViewById(R.id.password_confirm);
 //        phone = findViewById(R.id.phone);
-        Button saveBTM = findViewById(R.id.updateBTM);
+        Button saveBTM = findViewById(R.id.updateBTM_vulo_setting);
 
 //        validation = new Validation(emailEditText, null, passwordEditText, null,
 //                loadingProgressBar, getResources());

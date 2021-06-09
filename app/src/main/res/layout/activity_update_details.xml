@@ -201,7 +201,7 @@
             app:layout_constraintVertical_bias="0.494" />
 
         <Button
-            android:id="@+id/updateBTM"
+            android:id="@+id/updateBTM_vulo_setting"
             android:layout_width="307dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

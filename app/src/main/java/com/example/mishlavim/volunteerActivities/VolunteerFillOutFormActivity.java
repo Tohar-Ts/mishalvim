@@ -219,20 +219,30 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
         
        
     }
-    //update the open form on the volunteer's document.
+    //Update document fields and maps.
     private Void updateOpenForm(Void unused){
         FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(), voluId, FirebaseStrings.openForm(),FirebaseStrings.emptyString(),
+                this::updateOpenFormName, this::showError);
+        return null;
+    }
+    private Void updateOpenFormName(Void unused){
+        FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(), voluId, FirebaseStrings.openFormName(),FirebaseStrings.emptyString(),
                 this::updateFinishedForms, this::showError);
         return null;
     }
     private Void updateFinishedForms(Void unused){
-
-        FirestoreMethods.updateMapKey(FirebaseStrings.usersStr(),voluId,FirebaseStrings.finishedFormsStr(),formName,formId,this::updateOnWork,this::showError);
+        FirestoreMethods.updateMapKey(FirebaseStrings.usersStr(),voluId,FirebaseStrings.finishedFormsStr(),formName,formId,
+                this::updateOnWork,this::showError);
         return null;
     }
 
     private Void updateOnWork(Void unused){
-        FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), formId, FirebaseStrings.onWorkStr(),"false",
+        FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), formId, FirebaseStrings.onWorkStr(),false,
+                this::updateCanEdit, this::showError);
+        return null;
+    }
+    private Void updateCanEdit(Void unused){
+        FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), formId, FirebaseStrings.canEdit(),false,
                 this::notifyGuide, this::showError);
         return null;
     }
@@ -247,18 +257,18 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
     private Void showFinishedForm(Void unused) {
         progressBar.setVisibility(View.GONE);
         Toast.makeText(getApplicationContext(), R.string.firebase_success, Toast.LENGTH_SHORT).show();
+        finish();
         Intent intent = new Intent(VolunteerFillOutFormActivity.this, VolunteerFinishedFormActivity.class);
         startActivity(intent);
-        finish();
         return null;
     }
 
     private Void goToMain(Void unused) {
         progressBar.setVisibility(View.GONE);
         Toast.makeText(getApplicationContext(), R.string.firebase_success, Toast.LENGTH_SHORT).show();
+        finish();
         Intent intent = new Intent(VolunteerFillOutFormActivity.this, VolunteerMainActivity.class);
         startActivity(intent);
-        finish();
         return null;
     }
 
