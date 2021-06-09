@@ -22,7 +22,7 @@ public class FormTemplate {
     /**
      * Parameterized constructor
      */
-    public FormTemplate(HashMap<String, String> questionArr, String formName, HashMap<String, String> answers) {
+    public FormTemplate(HashMap<String, String> questionArr, String formName) {
         this.questionsMap = questionArr;
         this.formName = formName;
     }

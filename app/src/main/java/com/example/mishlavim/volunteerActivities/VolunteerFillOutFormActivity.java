@@ -220,7 +220,7 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
     }
     //Update document fields and maps.
     private Void updateOpenForm(Void unused){
-        FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(), voluId, FirebaseStrings.openFormStr(),FirebaseStrings.emptyString(),
+        FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(), voluId, FirebaseStrings.openFormNameStr(),FirebaseStrings.emptyString(),
                 this::updateOpenFormName, this::showError);
         return null;
     }
@@ -236,13 +236,13 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
     }
 
     private Void updateOnWork(Void unused){
-        FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), formId, FirebaseStrings.onWorkStr(),false,
-                this::updateCanEdit, this::showError);
+//        FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), formId, FirebaseStrings.onWorkStr(),false,
+//                this::updateCanEdit, this::showError);
         return null;
     }
     private Void updateCanEdit(Void unused){
-        FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), formId, FirebaseStrings.canEdit(),false,
-                this::notifyGuide, this::showError);
+//        FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), formId, FirebaseStrings.canEdit(),false,
+//                this::notifyGuide, this::showError);
         return null;
     }
 

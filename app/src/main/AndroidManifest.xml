@@ -14,8 +14,6 @@
         <activity android:name=".adminActivities.AdminNavigationActivity"
             android:windowSoftInputMode="adjustNothing"/>
         <activity android:name=".forgotPassword" />
-        <activity android:name=".adminActivities.AdminReportsActivity" />
-        <activity android:name=".adminActivities.AdminFormsActivity" />
         <activity android:name=".guideActivities.GuideReportsActivity" />
         <activity android:name=".guideActivities.GuideFormsPermissionActivity" />
         <activity android:name=".guideActivities.GuideMainActivity">
@@ -31,7 +29,6 @@
         <activity android:name=".volunteerActivities.VolunteerMainActivity" />
         <activity android:name=".volunteerActivities.VolunteerViewOldFormActivity" />
         <activity android:name=".volunteerActivities.VolunteerFillOutFormActivity" />
-        <activity android:name=".adminActivities.AdminMainActivity" />
         <activity android:name=".login.LoginActivity" />
         <activity
             android:name=".login.SplashScreenActivity">
@@ -39,6 +36,7 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
     </application>
 

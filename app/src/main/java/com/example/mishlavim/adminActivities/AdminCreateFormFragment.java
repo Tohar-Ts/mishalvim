@@ -54,13 +54,12 @@ public class AdminCreateFormFragment extends Fragment implements View.OnClickLis
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_admin_create_form, container, false);
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         this.view = view;
-        //import the forms from the value/forms xml:
-//        Resources res = getResources();
-//        String[] forms1 = res.getStringArray(R.array.form1);
+
         formNameEditText = view.findViewById(R.id.formName);
         loadingProgressBar = view.findViewById(R.id.createFormLoading);
         addQuestionButton = view.findViewById(R.id.addNewQuestion);
@@ -68,7 +67,8 @@ public class AdminCreateFormFragment extends Fragment implements View.OnClickLis
         questionsLayout = view.findViewById(R.id.questionsLayout);
         questionsScroll = view.findViewById(R.id.questionsScroll);
 
-        numOfQuestions = 3;
+        numOfQuestions = 3; //default
+        loadingProgressBar.setVisibility(View.GONE);
 
         addQuestionButton.setOnClickListener(this);
         saveButton.setOnClickListener(this);
@@ -131,24 +131,28 @@ public class AdminCreateFormFragment extends Fragment implements View.OnClickLis
             View view = group.getChildAt(i);
             if (view instanceof EditText) {
                 String question = ((EditText)view).getText().toString().trim();
+                if(question.isEmpty())
+                    continue;
                 questionsMap.put(i+"", question);
             }
         }
 
         String formName = formNameEditText.getText().toString().trim();
         //adding the form to firestore
-        FormTemplate newForm = new FormTemplate(questionsMap, formName,new HashMap<>());
+        FormTemplate newForm = new FormTemplate(questionsMap, formName);
         FirestoreMethods.createNewDocumentRandomId(FirebaseStrings.formsTemplatesStr(),newForm,
                                                 this::onAddingSuccess, this::onAddingFailed);
     }
 
     private Void onAddingFailed(Void unused) {
         Toast.makeText(getContext(), R.string.update_failed, Toast.LENGTH_SHORT).show();
+        loadingProgressBar.setVisibility(View.GONE);
         return null;
     }
 
     private Void onAddingSuccess(DocumentReference documentReference) {
         Toast.makeText(getContext(), R.string.firebase_success, Toast.LENGTH_SHORT).show();
+        loadingProgressBar.setVisibility(View.GONE);
         return null;
     }
 

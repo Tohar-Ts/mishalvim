@@ -77,6 +77,10 @@ public class AdminAddNewUserFragment extends Fragment  implements View.OnClickLi
 
         globalInstance = Global.getGlobalInstance(); //init the global instance
         thisAdminUid = globalInstance.getUid(); //getting admin id
+        if(thisAdminUid == null){
+            Toast.makeText(getActivity(), "תקלה בהצגת המידע, יש לסגור ולפתוח את האפליקציה מחדש", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         //init guides list
         setSpinner();
