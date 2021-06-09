@@ -8,15 +8,15 @@
         android:background="#F5F5F5"
         tools:context=".guideActivities.GuideVolunteerListFragment">
 
-<!--        <androidx.appcompat.widget.Toolbar-->
-<!--            android:id="@+id/toolbar"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_centerHorizontal="true"-->
-<!--            android:layout_alignParentTop="true"-->
-<!--            android:layoutDirection="rtl"-->
-<!--            app:theme="@style/MyTabTextStyle2"-->
-<!--            app:menu="@menu/setting_menu"/>-->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:layoutDirection="rtl"
+            app:theme="@style/MyTabTextStyle2"
+            app:menu="@menu/setting_menu"/>
 
     <TextView
         android:id="@+id/guideName"
