@@ -98,7 +98,7 @@ public class GuideAddVolunteerFragment extends Fragment implements View.OnClickL
                 , loadingProgressBar, getResources());
         addButton.setOnClickListener(this);
     }
-    
+
 
     @Override
     public void onClick(View v) {

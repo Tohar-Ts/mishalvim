@@ -106,8 +106,11 @@ public class GuideVolunteerListFragment extends Fragment implements View.OnClick
 //        setSupportActionBar(settingBar);
 //        getSupportActionBar().setTitle(null);
         //navBarButtons.setOnNavigationItemSelectedListener(this);
+
+        //TODO change the listview to recycle View
         listViewActivity = view.findViewById(R.id.listview);
         adapter =new MyListAdapter(getContext(),R.layout.list_item, voluNames);
+        //TODO maybe use the recycle adapter too and see how to use search within it
         listViewActivity.setAdapter(adapter);
     }
 
@@ -245,6 +248,8 @@ public class GuideVolunteerListFragment extends Fragment implements View.OnClick
     }
 
     private void reloadScreen() {
+
+        //TODO fix this function
 //        finish();
 //        startActivity(getIntent());
     }
@@ -253,6 +258,7 @@ public class GuideVolunteerListFragment extends Fragment implements View.OnClick
     }
 
     @Override
+    //TODO fix the search
     public boolean onQueryTextSubmit(String query) {
         Context context = getContext();
         //here im checking to see if the search is working upon submit
