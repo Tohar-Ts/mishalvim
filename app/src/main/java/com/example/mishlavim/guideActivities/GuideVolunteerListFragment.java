@@ -18,29 +18,58 @@ import android.widget.PopupMenu;
 import com.example.mishlavim.R;
 import com.example.mishlavim.dialogs.DeleteUserDialog;
 import com.example.mishlavim.model.Adapter.RecyclerAdapter;
+import com.example.mishlavim.model.Admin;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import org.jetbrains.annotations.NotNull;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.util.TypedValue;
+import android.view.ContextThemeWrapper;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.PopupMenu;
+import android.widget.TableLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mishlavim.R;
+import com.example.mishlavim.dialogs.DeleteUserDialog;
+import com.example.mishlavim.login.LoginActivity;
+import com.example.mishlavim.model.Adapter.MyListAdapter;
+import com.example.mishlavim.model.Firebase.AuthenticationMethods;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
 import com.example.mishlavim.model.Firebase.FirestoreMethods;
 import com.example.mishlavim.model.Global;
 import com.example.mishlavim.model.Guide;
 import com.example.mishlavim.model.Volunteer;
 import com.example.mishlavim.volunteerActivities.VolunteerMainActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class GuideVolunteerListFragment extends Fragment implements PopupMenu.OnMenuItemClickListener, DeleteUserDialog.deleteUserListener, SearchView.OnQueryTextListener {
 
-    RecyclerView volunteersView;
+    RecyclerView guidesView;
     RecyclerAdapter recyclerAdapter;
-    List<String> volunteersNames;
+    List<String> guidesNames;
     Guide guide;
     Global global;
     String clickedRowText;
@@ -71,15 +100,14 @@ public class GuideVolunteerListFragment extends Fragment implements PopupMenu.On
             return;
         }
 
-        volunteersNames = new ArrayList<>(guide.getMyVolunteers().keySet());
-
+        guidesNames = new ArrayList<>(guide.getMyVolunteers().keySet());
         clickedRowText = ""; //default
         clickedRowUid = ""; //default
 
         //init xml views
-        volunteersView = view.findViewById(R.id.volunteers_recycler_view);
-        recyclerAdapter = new RecyclerAdapter(volunteersNames, this, R.menu.volunteer_options_menu);
-        volunteersView.setAdapter(recyclerAdapter);
+        guidesView = view.findViewById(R.id.guides_recycler_view);
+        recyclerAdapter = new RecyclerAdapter(guidesNames, this, R.menu.volunteer_options_menu);
+        guidesView.setAdapter(recyclerAdapter);
     }
 
 
@@ -162,7 +190,7 @@ public class GuideVolunteerListFragment extends Fragment implements PopupMenu.On
     }
 
     private Void getUserDocFailed(Void unused){
-        Toast.makeText(getActivity(), "נכשל בטעינת החניך", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT).show();
         return null;
     }
 
