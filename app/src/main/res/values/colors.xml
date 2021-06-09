@@ -43,5 +43,6 @@
     <color name="button_blue2">#56C0CD</color>
     <color name="button_dark_blue2">#34666C</color>
     <color name="black">#FF000000</color>
+    <color name="gray_background">#F5F5F5</color>
     <color name="white">#FFFFFFFF</color>
 </resources>
