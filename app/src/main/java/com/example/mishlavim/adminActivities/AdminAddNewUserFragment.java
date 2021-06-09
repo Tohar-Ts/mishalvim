@@ -122,6 +122,10 @@ public class AdminAddNewUserFragment extends Fragment  implements View.OnClickLi
         //SPINNER SETUP
         //get the guides list.
         Admin admin = globalInstance.getAdminInstance();
+        if(admin == null){
+            Toast.makeText(getActivity(), "תקלה בהצגת המידע, יש לסגור ולפתוח את האפליקציה מחדש", Toast.LENGTH_SHORT).show();
+            return;
+        }
         HashMap<String,String> guideList = admin.getGuideList();
         //if guide list is empty show a msg
         if(guideList.isEmpty()){

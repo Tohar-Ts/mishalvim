@@ -40,25 +40,21 @@ public class Admin extends User {
 
     /**
      * Adding a Guide to the 'guideList' map for all admins.
-     *
-     * @param guideID   - the guide Uid
-     * @param guideName - Guide object with the guide data.
      */
     public static void addGuide(String adminUid, String guideName, String guideID) {
-        Function<Void, Void> onSuccess = unused -> {Log.d("Admin class", "Guide successfully updated!");return null;};
-        Function<Void, Void> onFailure = unused ->  {Log.d("Admin class", "Error - Admin update failed.");return null;};
+        Function<Void, Void> onSuccess = unused -> {Log.d("Admin class", "Guide successfully updated in admin map!");return null;};
+        Function<Void, Void> onFailure = unused ->  {Log.d("Admin class", "Error - guide update in admin map failed.");return null;};
         FirestoreMethods.updateMapKey(FirebaseStrings.usersStr(), adminUid, FirebaseStrings.guideListStr(), guideName,
                                         guideID,onSuccess,onFailure);
     }
 
-
     /**
      * Deletes a guide from 'guideList' map.
-     *
-     * @param guideName - guide name to find
      */
-    public void deleteGuide(String guideName) {
-        // TODO implement here
+    public void deleteGuide(String adminUid, String guideName) {
+        Function<Void, Void> onSuccess = unused -> {Log.d("Admin class", "Guide successfully deleted from the map.");return null;};
+        Function<Void, Void> onFailure = unused ->  {Log.d("Admin class", "Error - Guide delete from the map failed.");return null;};
+        FirestoreMethods.deleteMapKey(FirebaseStrings.usersStr(), adminUid, FirebaseStrings.guideListStr(), guideName ,onSuccess,onFailure);
     }
 
     public HashMap<String, String> getGuideList() {
@@ -68,6 +64,5 @@ public class Admin extends User {
     public void setGuideList(HashMap<String, String> guideList) {
         this.guideList = guideList;
     }
-
 
 }

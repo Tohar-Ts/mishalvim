@@ -114,7 +114,7 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
 
         assert answersObj != null;
         answers = answersObj.getAnswers();
-        canEdit = answersObj.getCanEdit();
+        canEdit = answersObj.getFinishedButCanEdit();
 
         FirestoreMethods.getDocument(FirebaseStrings.formsTemplatesStr(), "Cfxrc4aUw5lnTOsNFk5B",
                 this::onGettingQuestionsSuccess, this::showError);
@@ -126,7 +126,7 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
         FormTemplate questionsObj = document.toObject(FormTemplate.class);
 
         assert questionsObj != null;
-        questions = questionsObj.getQuestionArr();
+        questions = questionsObj.getQuestionsMap();
 
         displayFormOnScreen();
         return null;

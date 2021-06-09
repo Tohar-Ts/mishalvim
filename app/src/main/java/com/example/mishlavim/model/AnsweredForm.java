@@ -1,18 +1,16 @@
 package com.example.mishlavim.model;
 
+import com.example.mishlavim.model.Firebase.FirebaseStrings;
+import com.example.mishlavim.model.Firebase.FirestoreMethods;
+
 import java.util.HashMap;
+import java.util.function.Function;
 
 public class AnsweredForm {
-    /**
-     *if this flag is turned on- this is a finished form the the guide opened to edit after it was send
-     */
-    boolean canEdit;
-    /**
-     * if this flag is turned on- this is a the open form that will show up in the main circle.
-     * Need to be only one at a time!
-     */
-    boolean onWork;
 
+    boolean finishedButCanEdit;      //if this flag is turned on- this is a finished form the the guide opened to edit after it was send
+    boolean isOpenForm;              //if this flag is turned on- this is a the open form that will show up in the main circle.
+    String templateName;
     String templateId;
     HashMap<String, String> answers; //<questionNumber, answer>
 
@@ -20,27 +18,37 @@ public class AnsweredForm {
 
     }
 
-    public AnsweredForm(boolean canEdit, boolean onWork, String templateId, HashMap<String, String> answers) {
-        this.canEdit = canEdit;
-        this.onWork = onWork;
+    public AnsweredForm(boolean finishedButCanEdit, boolean isOpenForm, String templateName, String templateId, HashMap<String, String> answers) {
+        this.finishedButCanEdit = finishedButCanEdit;
+        this.isOpenForm = isOpenForm;
+        this.templateName = templateName;
         this.templateId = templateId;
         this.answers = answers;
     }
 
-    public boolean getCanEdit() {
-        return canEdit;
+    //setters and getters
+    public boolean getFinishedButCanEdit() {
+        return finishedButCanEdit;
     }
 
-    public void setCanEdit(boolean canEdit) {
-        this.canEdit = canEdit;
+    public void setFinishedButCanEdit(boolean finishedButCanEdit) {
+        this.finishedButCanEdit = finishedButCanEdit;
     }
 
-    public boolean getOnWork() {
-        return onWork;
+    public boolean getIsOpenForm() {
+        return isOpenForm;
     }
 
-    public void setOnWork(boolean onWork) {
-        this.onWork = onWork;
+    public void setIsOpenForm(boolean openForm) {
+        isOpenForm = openForm;
+    }
+
+    public String getTemplateName() {
+        return templateName;
+    }
+
+    public void setTemplateName(String templateName) {
+        this.templateName = templateName;
     }
 
     public String getTemplateId() {
