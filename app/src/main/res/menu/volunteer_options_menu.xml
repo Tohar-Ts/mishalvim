@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
-        <item
-            android:id="@+id/remove_volunteer"
-            android:title="מחק מתנדב" />
-        <item
-            android:id="@+id/edit_volunteer"
-            android:title="הגדרות משתמש" />
         <item
             android:id="@+id/open_form_to_volunteer"
             android:title="פתיחת שאלון" />
         <item
             android:id="@+id/view_volunteer"
             android:title="צפייה בשאלונים" />
+        <item
+            android:id="@+id/edit_volunteer"
+            android:title="הגדרות משתמש" />
+        <item
+            android:id="@+id/remove_volunteer"
+            android:title="מחק מתנדב" />
 </menu>

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#F5F5F5"
+    android:background="@color/gray_background"
     android:padding="30dp"
     tools:context=".adminActivities.AdminFormsFragment">
 

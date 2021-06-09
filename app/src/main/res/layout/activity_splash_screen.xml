@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".login.SplashScreenActivity">
 
     <ImageView
@@ -31,6 +32,7 @@
         android:textSize="50sp"
         android:textStyle="bold"
         android:transitionName="logoTxt1"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.541"
@@ -45,6 +47,7 @@
         android:layout_marginLeft="30dp"
         android:fontFamily="@font/alef"
         android:text="משלבים"
+        android:textColor="@color/black"
         android:textSize="50sp"
         android:textStyle="bold"
         android:transitionName="logoTxt2"
