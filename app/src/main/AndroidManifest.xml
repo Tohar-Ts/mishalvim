@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".guideActivities.GuideNavigationActivity"></activity>
-        <activity android:name=".adminActivities.AdminNavigationActivity" />
+        <activity android:name=".adminActivities.AdminNavigationActivity"
+            android:windowSoftInputMode="adjustNothing"/>
         <activity android:name=".forgotPassword" />
         <activity android:name=".adminActivities.AdminReportsActivity" />
         <activity android:name=".adminActivities.AdminFormsActivity" />

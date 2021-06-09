@@ -45,6 +45,7 @@ public class AdminAddNewUserFragment extends Fragment  implements View.OnClickLi
     private String newUserType;
     private String guideName, guideID;
     private ArrayList<String> listOfGuidesName,  listOfGuidesID;
+    String thisAdminUid;
     User authUser;
 
     public AdminAddNewUserFragment() {
@@ -54,6 +55,7 @@ public class AdminAddNewUserFragment extends Fragment  implements View.OnClickLi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        thisAdminUid = AuthenticationMethods.getCurrentUserID();
         // Inflate the layout for this fragment
          return inflater.inflate(R.layout.fragment_admin_add_new_user, container, false);
     }
@@ -121,12 +123,9 @@ public class AdminAddNewUserFragment extends Fragment  implements View.OnClickLi
 
         listOfGuidesName = new ArrayList<>(guideList.keySet());
         listOfGuidesID = new ArrayList<>(guideList.values());
-
         //Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<String> adapter = new ArrayAdapter<>(requireActivity().getApplicationContext(), android.R.layout.simple_spinner_item, listOfGuidesName);
-
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
         guidesSpinner.setAdapter(adapter);
         guidesSpinner.setOnItemSelectedListener(this);
     }
@@ -171,7 +170,6 @@ public class AdminAddNewUserFragment extends Fragment  implements View.OnClickLi
         showRegisterFailed(R.string.register_auth_failed);
         return null;
     }
-
     private Void addAuthSuccess(String newUserUid) {
         createNewUser(newUserUid);
         return null;
@@ -179,9 +177,10 @@ public class AdminAddNewUserFragment extends Fragment  implements View.OnClickLi
 
     private void createNewUser(String newUserUid) {
         User fsUser;
-        String thisAdminUid = AuthenticationMethods.getCurrentUserID();
+
         //admin
         if (newUserType.equals(FirebaseStrings.adminStr()))
+            // TODO: 09/06/2021 add list of guides and form template
             fsUser = new Admin(authUser.getName(), newUserType, authUser.getEmail(), new HashMap<>(), new HashMap<>());
 
         //guide
@@ -191,15 +190,12 @@ public class AdminAddNewUserFragment extends Fragment  implements View.OnClickLi
         }
 
         else { //volunteer
-
             fsUser = new Volunteer(authUser.getName(), newUserType,authUser.getEmail(), guideName, guideID, new HashMap<>(),"", false, new HashMap<>(), "");
             Guide.addVolunteer(guideID, newUserUid, authUser.getName());
         }
-
         //init a new user data in firestore
         FirestoreMethods.createNewDocument(FirebaseStrings.usersStr(),newUserUid, fsUser, this::updateDbSuccess,this::updateDbFailed);
     }
-
 
     private Void updateDbSuccess(Void unused){
         Toast.makeText(getActivity(), newUserType + " was added successfully", Toast.LENGTH_SHORT).show();

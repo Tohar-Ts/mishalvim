@@ -49,7 +49,6 @@ public class Admin extends User {
     public static void addGuide(String adminUid, String guideID, String guideName) {
         Function<Void, Void> onSuccess = unused -> {Log.d("Admin class", "Guide successfully updated!");return null;};
         Function<Void, Void> onFailure = unused ->  {Log.d("Admin class", "Error - Admin update failed.");return null;};
-
         FirestoreMethods.updateMapKey(FirebaseStrings.usersStr(), adminUid, FirebaseStrings.guideListStr(), guideID,
                                         guideName,onSuccess,onFailure);
     }

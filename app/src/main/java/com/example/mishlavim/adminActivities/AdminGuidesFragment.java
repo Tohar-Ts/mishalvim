@@ -61,7 +61,7 @@ public class AdminGuidesFragment extends Fragment implements PopupMenu.OnMenuIte
         admin = global.getAdminInstance();
         if (admin.getGuideList().isEmpty())
             guidesNames = new ArrayList<>();
-        else guidesNames = new ArrayList<>(admin.getGuideList().keySet());
+        else guidesNames = new ArrayList<>(admin.getGuideList().values());
 
         //init xml views
         guidesView = view.findViewById(R.id.guides_recycler_view);
