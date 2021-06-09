@@ -11,23 +11,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/reports"
+        android:textStyle="bold"
         android:layout_marginTop="30dp"
         android:gravity="center"
         android:textSize="30sp"
+        android:textColor="@color/pink"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
-        android:layout_width="405dp"
+        android:layout_width="match_parent"
         android:layout_height="662dp"
         android:layout_marginTop="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.166">
+        app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,34 +41,157 @@
                 android:id="@+id/volunteers_tbl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:stretchColumns="1"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_marginBottom="30dp"
-                >
+                android:divider="@drawable/border_new_row"
+                android:gravity="center"
+                android:showDividers="middle"
+                android:stretchColumns="1">
 
                 <TableRow>
+
                     <TextView
+                        android:layout_width="250dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/borders"
+                        android:gravity="center"
                         android:padding="3dip"
                         android:text="@string/num_of_filled_forms"
-                        android:textSize="25sp"
-                        android:background="@drawable/borders"/>
+                        android:textColor="@color/black"
+                        android:textSize="25sp" />
+
                     <TextView
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/borders"
+                        android:gravity="center"
                         android:padding="3dip"
                         android:text="@string/volu_name"
-                        android:textSize="25sp"
-                        android:background="@drawable/borders"/>
+                        android:textColor="@color/black"
+                        android:textSize="25sp" />
                     />
                 </TableRow>
+
+<!--                <TableRow>-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="1dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:gravity="center"-->
+<!--                        android:text="3 שאלונים שמולאו"-->
+
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="20dp" />-->
+                    <!--                    android:padding="3dip"-->
+<!--                    <TextView-->
+
+<!--                        android:layout_width="1dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginRight="10dp"-->
+<!--                        android:layout_marginBottom="10dp"-->
+<!--                        android:gravity="start"-->
+<!--                        android:singleLine="false"-->
+<!--                        android:text="אילת ג'יבלי שלום לך"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="20dp" />-->
+<!--                    &lt;!&ndash;                    android:textAlignment="viewEnd"&ndash;&gt;-->
+<!--                </TableRow>-->
+
+<!--                <TableRow>-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="1dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:gravity="center"-->
+<!--                        android:padding="3dip"-->
+<!--                        android:singleLine="false"-->
+<!--                        android:text="2 שאלונים שמולאו"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="20dp" />-->
+
+<!--                    <TextView-->
+
+<!--                        android:layout_width="1dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginRight="10dp"-->
+<!--                        android:layout_marginBottom="10dp"-->
+<!--                        android:gravity="start"-->
+<!--                        android:singleLine="false"-->
+<!--                        android:text="עדי מלאכי מה קורה"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="20dp" />-->
+<!--                    &lt;!&ndash;                    android:textAlignment="viewEnd"&ndash;&gt;-->
+<!--                </TableRow>-->
+
+<!--                <TableRow>-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="1dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:gravity="center"-->
+<!--                        android:padding="3dip"-->
+<!--                        android:text="3 שאלונים שמולאו"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="20dp" />-->
+
+<!--                    <TextView-->
+
+<!--                        android:layout_width="1dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginRight="10dp"-->
+<!--                        android:layout_marginBottom="10dp"-->
+<!--                        android:gravity="start"-->
+<!--                        android:singleLine="false"-->
+<!--                        android:text="מה נשמע אילת ג'יבלי שלום לך"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="20dp" />-->
+<!--                    &lt;!&ndash;                    android:textAlignment="viewEnd"&ndash;&gt;-->
+<!--                </TableRow>-->
+
+
             </TableLayout>
+
+            <!--            <TableRow-->
+
+            <!--                android:baselineAligned="false">-->
+            <!--                <TextView-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:ems="10"-->
+            <!--                    android:layout_marginRight="5dp"-->
+            <!--                    android:gravity="center"-->
+            <!--                    android:padding="3dip"-->
+            <!--                    android:text="מולאו 3 טפסים"-->
+            <!--                    android:textColor="@color/black"-->
+            <!--                    android:textSize="20sp" />-->
+
+
+            <!--                <TextView-->
+
+            <!--                    android:gravity="center"-->
+            <!--                    android:padding="3dip"-->
+            <!--                    android:singleLine="false"-->
+            <!--                    android:orientation="vertical"-->
+            <!--                    android:text="עדי מלא"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:textColor="@color/black"-->
+            <!--                    android:textSize="20sp" />-->
+            <!--                />-->
+            <!--            </TableRow>-->
+
 
             <TextView
                 android:id="@+id/avg_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="98 percent"
+                android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
+
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -105,15 +105,16 @@ public class GuideReportsActivity extends AppCompatActivity implements View.OnCl
 //            TableRow.LayoutParams txtParams = new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 //            name.setLayoutParams(txtParams);
             name.setText(voluName);
-            name.setGravity(Gravity.RIGHT);
+            name.setGravity(Gravity.START);
             name.setTextColor(getColor(R.color.black));
+            name.setSingleLine(false);
             name.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
 
             // create num of forms text
 //            TableRow.LayoutParams txtParams = new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 //            name.setLayoutParams(txtParams);
             formsNum.setText(numOfForms.get(voluName)+"");
-            formsNum.setGravity(Gravity.RIGHT);
+            formsNum.setGravity(Gravity.CENTER);
             formsNum.setTextColor(getColor(R.color.black));
             formsNum.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
 
@@ -134,7 +135,7 @@ public class GuideReportsActivity extends AppCompatActivity implements View.OnCl
         }
         Log.d("calculateAvg", " "+ allFormsSum+" "+ voluNum);
         double avgFormsPerVolu = (double)allFormsSum / (double)voluNum;
-        avgText.setText("ממוצע טפסים לחניך:" + avgFormsPerVolu);
+        avgText.setText("ממוצע טפסים לחניך: " + avgFormsPerVolu);
 
     }
     private int convertFromDpToPixels(int toConvert){
