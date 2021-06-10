@@ -33,6 +33,7 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
     private GridLayout formsLayout;
     private Volunteer volu;
     private FloatingActionButton openFormBtn;
+    private TextView openFormTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +44,16 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
         helloVolu = findViewById(R.id.HelloVolu);
         formsLayout = findViewById(R.id.finishedFormsLayout);
         openFormBtn = findViewById(R.id.openFormBtn);
+        openFormTxt = findViewById(R.id.openFormTxt);
 
         //init volu object
         Global globalInstance = Global.getGlobalInstance();
         volu = globalInstance.getVoluInstance();
 
         if (!volu.getHasOpenForm()){
-            openFormBtn.setVisibility(View.GONE);
+            openFormTxt.setText("לא קיים\nשאלון פתוח");
+            openFormBtn.setClickable(false);
+            openFormBtn.setEnabled(false);
         }
 
         openFormBtn.setOnClickListener(this);
