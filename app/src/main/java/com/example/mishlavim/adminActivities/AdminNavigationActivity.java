@@ -4,7 +4,6 @@ import com.example.mishlavim.UserSettingActivity;
 import com.example.mishlavim.login.LoginActivity;
 import com.example.mishlavim.model.Firebase.AuthenticationMethods;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
-import com.example.mishlavim.model.Firebase.FirestoreMethods;
 import com.example.mishlavim.model.Global;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -72,10 +71,6 @@ public class AdminNavigationActivity extends AppCompatActivity implements Bottom
         assert selectedFragment != null;
         getSupportFragmentManager().beginTransaction().
                 setCustomAnimations(R.anim.fragment_fade_in,R.anim.fragment_fade_out
-//                R.anim.fragment_slide_right_to_left,
-//                R.anim.fragment_exit_right_to_left,
-//                        R.anim.fragment_slide_left_to_right,
-//                        R.anim.fragment_exit_left_to_right
                 )
                 .replace(R.id.admin_fragment_container, selectedFragment)
                 .commit();
