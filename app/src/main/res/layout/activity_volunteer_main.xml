@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/Theme.MishlavimPink.NoActionBar"
-    android:background="@drawable/background_green"
+    android:background="@drawable/background_rectangles3"
     tools:context=".volunteerActivities.VolunteerMainActivity">
 
 
@@ -63,7 +63,7 @@
             android:layout_centerInParent="true"
             android:text="שאלונים שמורים:"
             android:textAlignment="center"
-            android:textColor="@color/green"
+            android:textColor="#303030"
             android:textSize="40sp" />
 
         <ScrollView
