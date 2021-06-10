@@ -44,13 +44,13 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/openFormBtn"
-            android:layout_width="300dp"
+            android:layout_width="600dp"
             android:layout_height="150dp"
             android:layout_marginTop="5dp"
             android:backgroundTint="@color/orange"
             android:gravity="center"
             android:outlineSpotShadowColor="@color/black"
-            android:theme="@style/FloatingActionButtonStyle" />
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlayExtended" />
 
     </FrameLayout>
 
