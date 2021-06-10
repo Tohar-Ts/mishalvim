@@ -16,7 +16,7 @@
         android:fontFamily="@font/alef"
         android:layout_alignParentTop="true"
         android:text="@string/guides"
-        android:layout_margin="35dp"
+        android:layout_margin="40dp"
         android:textColor="@color/black"
         android:textSize="30sp" />
     <LinearLayout
