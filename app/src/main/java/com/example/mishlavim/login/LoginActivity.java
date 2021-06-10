@@ -116,7 +116,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void redirectUserByType(DocumentSnapshot document) {
-        String type = Objects.requireNonNull(document.get(FirebaseStrings.typeStr())).toString();
+        String type = document.get(FirebaseStrings.typeStr()).toString();
         globalInstance.setType(type);
 
         //init admin and go to admin main screen
