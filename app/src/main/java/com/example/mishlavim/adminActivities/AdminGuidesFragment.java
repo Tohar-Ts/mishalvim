@@ -78,7 +78,7 @@ public class AdminGuidesFragment extends Fragment implements PopupMenu.OnMenuIte
         guidesView = view.findViewById(R.id.guides_recycler_view);
         recyclerAdapter = new RecyclerAdapter(guidesNames, this, R.menu.guide_options_menu);
         guidesView.setAdapter(recyclerAdapter);
-        searchView = (SearchView)view.findViewById(R.id.search_barA);
+        searchView = view.findViewById(R.id.search_barA);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

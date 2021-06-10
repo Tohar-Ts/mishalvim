@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
-
+import androidx.appcompat.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -34,7 +34,7 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class AdminFormsFragment extends Fragment implements PopupMenu.OnMenuItemClickListener {
-
+    SearchView searchView;
     RecyclerView templateView;
     RecyclerAdapter recyclerAdapter;
     List<FormTemplate> templates;
@@ -62,6 +62,20 @@ public class AdminFormsFragment extends Fragment implements PopupMenu.OnMenuItem
         super.onViewCreated(view, savedInstanceState);
         //init xml views
         templateView = view.findViewById(R.id.templates_recycler_view);
+
+        searchView = view.findViewById(R.id.search_barB);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                recyclerAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
 
         //getting all the templates
         FirestoreMethods.getCollection(FirebaseStrings.formsTemplatesStr(), this::onGetTemplateSuccess, this::showError);
