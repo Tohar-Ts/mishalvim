@@ -1,4 +1,4 @@
-package com.example.mishlavim.model;
+package com.example.mishlavim;
 import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
