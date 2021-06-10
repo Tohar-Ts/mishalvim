@@ -6,6 +6,7 @@ import com.example.mishlavim.guideActivities.GuideNavigationActivity;
 import com.example.mishlavim.login.Validation;
 import com.example.mishlavim.model.Firebase.AuthenticationMethods;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
+import com.example.mishlavim.model.Firebase.FirestoreMethods;
 import com.example.mishlavim.model.Global;
 import com.example.mishlavim.model.User;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -67,15 +68,16 @@ public class UserSettingActivity extends AppCompatActivity implements View.OnCli
                 , progressBar, getResources());
         global = Global.getGlobalInstance();
         userUpdatingType = global.getType();
+
         initUserDataByType();
 
-//        showing the login again screen
+        //showing the login again screen
         if(showLoginAgain)
             initLoginAgain();
         else
             initSetting();
 
-//        init listeners
+        //init listeners
         loginBtn.setOnClickListener(this);
         updateBtn.setOnClickListener(this);
         homeBtn.setOnClickListener(this);
@@ -84,9 +86,6 @@ public class UserSettingActivity extends AppCompatActivity implements View.OnCli
     @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
-        //        validate input - if the input is invalid, don't continue.
-        if (validation.validateInput())
-            return;
         switch (v.getId()){
             case R.id.SettingLogin:
                parseLoginInput();
@@ -120,8 +119,15 @@ public class UserSettingActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void parseSettingInput() {
-        //TODO - add validation
-        //TODO - update firebase
+        // validate input - if the input is invalid, don't continue.
+        if (validation.validateInput())
+            return;
+        String email = newEmail.getText().toString().trim();
+        String password = newPassword.getText().toString().trim();
+
+        AuthenticationMethods.updateAuthEmail(email);
+        AuthenticationMethods.updateAuthPassword(password);
+//        updateEmail(null);
         switchToHomeByUser();
     }
 
@@ -179,5 +185,29 @@ public class UserSettingActivity extends AppCompatActivity implements View.OnCli
         finish();
         overridePendingTransition(0, 0);
     }
+
+
+//    //Update email on firestore.
+//    private Void updateEmail(Void unused){
+//        FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(),userToUpdateUid , FirebaseStrings.emailStr(),newEmail,
+//                this::onSucceesUpdateEmail, this::showError);
+//        return null;
+//    }
+//
+//    //Update password on firestore.
+//    private Void updatePassword(Void unused){
+//        FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(), voluId, FirebaseStrings.p(),newPassword,
+//                this::updatePassword, this::showError);
+//        return null;
+//    }
+
+//    private Void onSucceesUpdateEmail(Void unused) {
+//        Toast.makeText(UserSettingActivity.this, "האמייל עודכן בהצלחה", Toast.LENGTH_SHORT).show();
+//        return null;
+//    }
+//    private Void onSucceesUpdatePassword(Void unused) {
+//        Toast.makeText(UserSettingActivity.this, "האמייל עודכן בהצלחה", Toast.LENGTH_SHORT).show();
+//        return null;
+//    }
 
 }
