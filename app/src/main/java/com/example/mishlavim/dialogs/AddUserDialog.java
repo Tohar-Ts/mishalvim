@@ -8,7 +8,7 @@ import android.util.Log;
 
 import androidx.fragment.app.DialogFragment;
 
-import com.example.mishlavim.model.CustomApplicationBase;
+import com.example.mishlavim.CustomApplicationBase;
 
 
 public class AddUserDialog extends DialogFragment {
