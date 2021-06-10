@@ -186,8 +186,9 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
         int padding = convertFromDpToPixels(16);
 
         //styling
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, height);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.setMargins(margin,margin,margin,margin);
+        aTextView.setBackgroundResource(R.drawable.white_text_background);
         aTextView.setLayoutParams(params);
         aTextView.setGravity(Gravity.CENTER | Gravity.START);
         aTextView.setPadding(padding,padding,padding,padding);
@@ -209,7 +210,7 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
         int padding = convertFromDpToPixels(16);
 
         //styling
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, height);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.setMargins(margin,margin,margin,margin);
         aEditText.setLayoutParams(params);
         aEditText.setPadding(padding,padding,padding,padding);

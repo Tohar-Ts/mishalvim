@@ -85,6 +85,17 @@
 
 
         </ScrollView>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/voluMainHomeFloating"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="30dp"
+        android:backgroundTint="@color/green"
+        android:src="@drawable/ic_home"
+        app:fabCustomSize="60dp"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"/>
 
 
 

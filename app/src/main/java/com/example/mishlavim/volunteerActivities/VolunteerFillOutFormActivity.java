@@ -36,7 +36,7 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
     private HashMap<String, String> savedAnswers;
     private HashMap<String, String> currentAnswers;
     private Volunteer volunteer;
-
+    private TextView openFormTxt;
 
 
     @Override
