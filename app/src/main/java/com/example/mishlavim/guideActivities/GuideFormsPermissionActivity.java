@@ -3,7 +3,7 @@ package com.example.mishlavim.guideActivities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.RecyclerView;
-
+import androidx.appcompat.widget.SearchView;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -59,7 +59,7 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
     private RecyclerAdapter recyclerAdapter;
     HashMap<String, String> templates;
     List<String> templatesNames;
-
+    SearchView searchView;
     private String clickedFormId; // the clicked form id
     private String clickedFormName;
     private boolean newCanEdit, flag;
@@ -70,7 +70,7 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
         setContentView(R.layout.activity_guide_forms_permission);
 
         voluName = getIntent().getStringExtra("CLICKED_VOLU_KEY");
-        voluId =  getIntent().getStringExtra("CLICKED_VOLU_ID");
+        voluId = getIntent().getStringExtra("CLICKED_VOLU_ID");
         voluData = Global.getGlobalInstance().getVoluInstance();
 
         //init xml views
@@ -80,7 +80,19 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
         //getting all the templates
         FirestoreMethods.getCollection(FirebaseStrings.formsTemplatesStr(), this::onGetTemplateSuccess, this::showError);
         loadingProgressBar.setVisibility(View.VISIBLE);
+        searchView = findViewById(R.id.search_bar_permissions);
+        searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
 
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                recyclerAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
         homeButton.setOnClickListener(this);
     }
 
@@ -104,17 +116,17 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
         return null;
     }
 
-    private Void onGetTemplateSuccess(QuerySnapshot result){
+    private Void onGetTemplateSuccess(QuerySnapshot result) {
         //init a list of FormTemplates object from the collection
         String formNameField = FirebaseStrings.formNameStr();
 
         templates = new HashMap<>();
-        for (DocumentSnapshot snapshot:result) {
-            if(result == null) {
+        for (DocumentSnapshot snapshot : result) {
+            if (result == null) {
                 showError(null);
                 return null;
             }
-            templates.put((String)snapshot.get(formNameField), snapshot.getId());
+            templates.put((String) snapshot.get(formNameField), snapshot.getId());
         }
 
         //init a list of Form Templates names
@@ -134,17 +146,17 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
         clickedFormName = recyclerAdapter.getClickedText();
         clickedFormId = templates.get(clickedFormName);
 
-        switch(item.getItemId() ){
+        switch (item.getItemId()) {
             case R.id.open_curr_form:
-                Log.d("onMenuItemClick", "open form to "+ voluName+" form id "+ clickedFormId);
+                Log.d("onMenuItemClick", "open form to " + voluName + " form id " + clickedFormId);
                 openForm();
                 break;
             case R.id.allow_edit:
-                Log.d("onMenuItemClick", "allow edit form to "+ voluName+" form id "+ clickedFormId);
+                Log.d("onMenuItemClick", "allow edit form to " + voluName + " form id " + clickedFormId);
                 allowEdit();
                 break;
             case R.id.disable_edit:
-                Log.d("onMenuItemClick", "disable edit form to "+ voluName+" form id "+ clickedFormId);
+                Log.d("onMenuItemClick", "disable edit form to " + voluName + " form id " + clickedFormId);
                 disableEdit();
                 break;
         }
@@ -153,8 +165,8 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
 
     private void openForm() {
         //checking if the volunteer already has an open form
-        if(voluData.getHasOpenForm()){
-            if(voluData.getOpenFormName().equals(clickedFormName)){
+        if (voluData.getHasOpenForm()) {
+            if (voluData.getOpenFormName().equals(clickedFormName)) {
                 Toast.makeText(GuideFormsPermissionActivity.this, "שאלון זה כבר פתוח לחניך", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -163,40 +175,40 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
             return;
         }
         //ok - continue
-        Function<DocumentReference, Void> creatingAnswersDocSuccess = (document)->{
+        Function<DocumentReference, Void> creatingAnswersDocSuccess = (document) -> {
             //updating the openForm field in the volunteer document
             Volunteer.addOpenForm(voluId, clickedFormName, document.getId());
             return onSuccess(null);
-            };
+        };
 
         //creating new empty answered form document
         AnsweredForm ansForm = new AnsweredForm(false, true, clickedFormName, clickedFormId, new HashMap<>());
-        FirestoreMethods.createNewDocumentRandomId(FirebaseStrings.answeredFormsStr(),ansForm,creatingAnswersDocSuccess, this::showError);
+        FirestoreMethods.createNewDocumentRandomId(FirebaseStrings.answeredFormsStr(), ansForm, creatingAnswersDocSuccess, this::showError);
     }
 
 
     private void allowEdit() {
         String answersUid = voluData.getFinishedForms().get(clickedFormName);
         //checking if the volunteer has this form in his open forms
-        if(answersUid == null){
+        if (answersUid == null) {
             Toast.makeText(GuideFormsPermissionActivity.this, "לא ניתן לשנות הגדרות עריכה לשאלון שלא הושלם בעבר", Toast.LENGTH_SHORT).show();
             return;
         }
         //updating the answers can edit to true
         FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), answersUid, FirebaseStrings.finishedCanEditStr()
-                            ,true, this::onSuccess, this::showError);
+                , true, this::onSuccess, this::showError);
     }
 
     private void disableEdit() {
         String answersUid = voluData.getFinishedForms().get(clickedFormName);
         //checking if the volunteer has this form in his open forms
-        if(answersUid == null){
+        if (answersUid == null) {
             Toast.makeText(GuideFormsPermissionActivity.this, "לא ניתן לשנות הגדרות עריכה לשאלון שלא הושלם בעבר", Toast.LENGTH_SHORT).show();
             return;
         }
         //updating the answers can edit to false
         FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), answersUid, FirebaseStrings.finishedCanEditStr()
-                ,false, this::onSuccess, this::showError);
+                , false, this::onSuccess, this::showError);
     }
 
 }

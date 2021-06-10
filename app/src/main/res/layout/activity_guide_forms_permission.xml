@@ -14,6 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:layout_margin="40dp"
         android:fontFamily="@font/alef"
         android:layout_alignParentTop="true"
         android:text="שאלונים"
@@ -41,6 +42,17 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
     </LinearLayout>
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search_bar_permissions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:defaultQueryHint="@string/searchHintForm"
+        android:layout_alignParentTop="true"
+        android:layoutDirection="rtl"
+        >
+    </androidx.appcompat.widget.SearchView>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/guideHomeFloating"
         android:layout_width="100dp"
