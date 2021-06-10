@@ -19,6 +19,13 @@
         android:text="שאלונים"
         android:textColor="@color/black"
         android:textSize="30sp" />
+    <ProgressBar
+        android:id="@+id/guideFormsLoading"
+        android:layout_width="120dp"
+        android:layout_height="112dp"
+        android:layout_centerInParent="true"
+        android:theme="@style/GreenProgressBarTheme"
+        android:visibility="gone" />
 
     <LinearLayout
         android:layout_width="match_parent"

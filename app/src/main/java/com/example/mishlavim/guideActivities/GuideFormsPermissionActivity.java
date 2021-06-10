@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.ProgressBar;
 import android.widget.Space;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -32,6 +33,7 @@ import com.example.mishlavim.model.AnsweredForm;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
 import com.example.mishlavim.model.Firebase.FirestoreMethods;
 import com.example.mishlavim.model.FormTemplate;
+import com.example.mishlavim.model.Global;
 import com.example.mishlavim.model.Volunteer;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentReference;
@@ -42,13 +44,16 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.function.Function;
 
 public class GuideFormsPermissionActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener {
 
     private String voluName; //the clicked volunteer name
     private String voluId;//the clicked volunteer id
+    private Volunteer voluData; //volu current data from the firestore
 
     private FloatingActionButton homeButton;
+    private ProgressBar loadingProgressBar;
 
     private RecyclerView templateView;
     private RecyclerAdapter recyclerAdapter;
@@ -66,11 +71,16 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
 
         voluName = getIntent().getStringExtra("CLICKED_VOLU_KEY");
         voluId =  getIntent().getStringExtra("CLICKED_VOLU_ID");
+        voluData = Global.getGlobalInstance().getVoluInstance();
+
         //init xml views
         templateView = findViewById(R.id.guide_templates_recycler_view);
         homeButton = findViewById(R.id.guideHomeFloating);
+        loadingProgressBar = findViewById(R.id.guideFormsLoading);
         //getting all the templates
         FirestoreMethods.getCollection(FirebaseStrings.formsTemplatesStr(), this::onGetTemplateSuccess, this::showError);
+        loadingProgressBar.setVisibility(View.VISIBLE);
+
         homeButton.setOnClickListener(this);
     }
 
@@ -80,6 +90,13 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
         startActivity(new Intent(getApplicationContext(), GuideNavigationActivity.class));
         finish();
         overridePendingTransition(0, 0);
+    }
+
+    private Void onSuccess(Void unused) {
+        Toast.makeText(getApplicationContext(),
+                "הפעולה הושלמה בהצלחה",
+                Toast.LENGTH_SHORT).show();
+        return null;
     }
 
     private Void showError(Void unused) {
@@ -104,8 +121,9 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
         templatesNames = new ArrayList<>(templates.keySet());
 
         //init the recycle view
-        recyclerAdapter = new RecyclerAdapter(templatesNames, this, R.menu.templates_options_menu);
+        recyclerAdapter = new RecyclerAdapter(templatesNames, this, R.menu.guide_forms_option);
         templateView.setAdapter(recyclerAdapter);
+        loadingProgressBar.setVisibility(View.GONE);
         return null;
     }
 
@@ -126,96 +144,61 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
                 allowEdit();
                 break;
             case R.id.disable_edit:
-                disableEdit();
                 Log.d("onMenuItemClick", "disable edit form to "+ voluName+" form id "+ clickedFormId);
+                disableEdit();
                 break;
         }
         return true;
     }
 
     private void openForm() {
+        //checking if the volunteer already has an open form
+        if(voluData.getHasOpenForm()){
+            if(voluData.getOpenFormName().equals(clickedFormName)){
+                Toast.makeText(GuideFormsPermissionActivity.this, "שאלון זה כבר פתוח לחניך", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            //TODO - show dialog, are you sure you want to override current open form?
+            Toast.makeText(GuideFormsPermissionActivity.this, "שימו לב שכבר יש שאלון פתוח שילך לאיבוד", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        //ok - continue
+        Function<DocumentReference, Void> creatingAnswersDocSuccess = (document)->{
+            //updating the openForm field in the volunteer document
+            Volunteer.addOpenForm(voluId, clickedFormName, document.getId());
+            return onSuccess(null);
+            };
+
+        //creating new empty answered form document
+        AnsweredForm ansForm = new AnsweredForm(false, true, clickedFormName, clickedFormId, new HashMap<>());
+        FirestoreMethods.createNewDocumentRandomId(FirebaseStrings.answeredFormsStr(),ansForm,creatingAnswersDocSuccess, this::showError);
     }
 
+
     private void allowEdit() {
+        String answersUid = voluData.getFinishedForms().get(clickedFormName);
+        //checking if the volunteer has this form in his open forms
+        if(answersUid == null){
+            Toast.makeText(GuideFormsPermissionActivity.this, "לא ניתן לשנות הגדרות עריכה לשאלון שלא הושלם בעבר", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        //updating the answers can edit to true
+        FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), answersUid, FirebaseStrings.finishedCanEditStr()
+                            ,true, this::onSuccess, this::showError);
     }
 
     private void disableEdit() {
+        String answersUid = voluData.getFinishedForms().get(clickedFormName);
+        //checking if the volunteer has this form in his open forms
+        if(answersUid == null){
+            Toast.makeText(GuideFormsPermissionActivity.this, "לא ניתן לשנות הגדרות עריכה לשאלון שלא הושלם בעבר", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        //updating the answers can edit to false
+        FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), answersUid, FirebaseStrings.finishedCanEditStr()
+                ,false, this::onSuccess, this::showError);
     }
 
-
 }
-//    @Override
-//    public boolean onMenuItemClick(MenuItem item) {
-//        if (item.getItemId() == R.id.open_curr_form) {
-//            Log.d("onMenuItemClick", "open form to "+ voluName+" form id "+ clickedFormId);
-//            // TODO: 07/06/2021  add "are you sure" pop up text: "לפתוח שאלון זה לחניך? שים לב, פעולה זאת תחליף את השאלון הפתוח אצל החניך לשאלון זה"
-////            HashMap<String, String> answers = new HashMap<>();
-////            AnsweredForm ansForm = new AnsweredForm(true, true, clickedFormId, answers);
-////            FirestoreMethods.createNewDocumentRandomId(FirebaseStrings.answeredFormsStr(),ansForm,this::updateOpenForm, this::showError);
-////            Log.d("onMenuItemClick","ansForm "+ ansForm.getTemplateId());
-//            return true;
-//        }
-//        else if (item.getItemId() == R.id.allow_edit) {
-//            Log.d("onMenuItemClick", "allow edit form to "+ voluName+" form id "+ clickedFormId);
-//            newCanEdit = true;
-//            FirestoreMethods.getDocument(FirebaseStrings.usersStr(), voluId, this::updateCanEdit, this::showError);
-//            return true;
-//        }
-//        else if (item.getItemId() == R.id.disable_edit) {
-//            Log.d("onMenuItemClick", "disable edit form to "+ voluName+" form id "+ clickedFormId);
-//            newCanEdit = false;
-//            FirestoreMethods.getDocument(FirebaseStrings.usersStr(), voluId, this::updateCanEdit, this::showError);
-//            return true;
-//        }
-//        return false;
-//    }
-//
-//    private Void updateCanEdit(DocumentSnapshot doc) {
-////        Volunteer volu = doc.toObject(Volunteer.class);
-////        assert volu != null;
-////        HashMap<String, String> voluFinishedForms = volu.getFinishedForms();
-////        HashMap<String, String> voluTemplate = volu.getMyFinishedTemplate();
-////        int i = 0;
-////        Log.d("findFormToEdit", "clicked template id "+ clickedFormId);
-////        for (String voluTemplateName : voluTemplate.keySet()) {
-////            Log.d("findFormToEdit", "finishedTempId "+ voluTemplateName);
-////            i++;
-////            if (voluTemplate.get(voluTemplateName).compareTo(clickedFormId) == 0) {//if we found form template in the volunteer's finished templates with the same id
-////                // the volu does have this form in his finished forms map
-////                for (String voluFinishedFormName : voluFinishedForms.keySet()) {
-////                    Log.d("findFormToEdit", "voluFinishedFormName "+ voluFinishedFormName);
-////                    if (voluFinishedFormName.compareTo(templateMap.get(clickedFormId)) == 0) {
-////                        //found the needed form
-////                        Log.d("findFormToEdit", "now update ");
-////                        FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), voluFinishedForms.get(voluFinishedFormName), FirebaseStrings.canEdit(), newCanEdit, this::onSuccess, this::showError);
-////                    }
-////                }
-////            }
-//        }
-//        if (i == voluTemplate.size()) {
-//            //TODO change to popup dialog with "OK" button
-//            Log.e("GuideFormsPermissionActivity", "something went wrong");
-//            Toast toast = Toast.makeText(getApplicationContext(),
-//                    "לא ניתן לשנות הגדרות עריכה לשאלון שלא הושלם בעבר",
-//                    Toast.LENGTH_SHORT);
-//            toast.show();
-//        }
-//            return null;
-//    }
-//
-//
-//    private Void updateOpenForm(DocumentReference doc) {
-////        String newId = doc.getId();
-////        String formName = templateMap.get(clickedFormId);
-////        FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(),voluId, FirebaseStrings.openFormStr(),newId,this::onSuccess, this::showError);
-////        FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(),voluId, FirebaseStrings.openFormNameStr(),formName,this::onSuccess, this::showError);
-////        Log.d("updateOpenForm"," ");
-//        return null;
-//    }
-//    private Void onSuccess(Void unused) {
-//        Toast toast = Toast.makeText(getApplicationContext(),
-//                "הפעולה הושלמה בהצלחה",
-//                Toast.LENGTH_SHORT);
-//        toast.show();
-//        return null;
-//    }
+
+

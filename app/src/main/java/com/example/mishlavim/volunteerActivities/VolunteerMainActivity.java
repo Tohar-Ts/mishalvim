@@ -49,7 +49,7 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
         Global globalInstance = Global.getGlobalInstance();
         volu = globalInstance.getVoluInstance();
 
-        if (!volu.isHasOpenForm()){
+        if (!volu.getHasOpenForm()){
             openFormBtn.setVisibility(View.GONE);
         }
 

@@ -87,18 +87,14 @@ public class GuideVolunteerListFragment extends Fragment implements PopupMenu.On
         switch(item.getItemId() ){
             case R.id.view_volunteer:
                 //getting the volunteer data and moving to volunteer main
-                FirestoreMethods.getDocument(FirebaseStrings.usersStr(), clickedRowUid , this::getUserDocSuccess, this::getUserDocFailed);
+                FirestoreMethods.getDocument(FirebaseStrings.usersStr(), clickedRowUid , this::viewGetUserDocSuccess, this::getUserDocFailed);
                 break;
             case R.id.edit_volunteer:
                 //TODO - show what is the volunteer name?.
                 break;
             case R.id.open_form_to_volunteer:
-                //moving to the activity, passing the clicked volunteer details
-                Intent intent = new Intent(getActivity().getBaseContext(),
-                        GuideFormsPermissionActivity.class);
-                intent.putExtra("CLICKED_VOLU_KEY", clickedRowText);
-                intent.putExtra("CLICKED_VOLU_ID", clickedRowUid);
-                getActivity().startActivity(intent);
+                //moving to the activity, passing the clicked volunteer details, getting the volunteer data into global
+                FirestoreMethods.getDocument(FirebaseStrings.usersStr(), clickedRowUid , this::OpenGetUserDocSuccess, this::getUserDocFailed);
                 break;
             case R.id.remove_volunteer:
                //TODO - show yes/no dialog.
@@ -128,7 +124,7 @@ public class GuideVolunteerListFragment extends Fragment implements PopupMenu.On
     }
 
     //go to watch volunteer as a guide
-    private Void getUserDocSuccess(DocumentSnapshot doc){
+    private Void viewGetUserDocSuccess(DocumentSnapshot doc){
         assert doc != null;
         Volunteer volu = doc.toObject(Volunteer.class);
         global.setVoluInstance(volu);
@@ -138,6 +134,18 @@ public class GuideVolunteerListFragment extends Fragment implements PopupMenu.On
         return null;
     }
 
+    //go to open a form to the volunteer
+    private Void OpenGetUserDocSuccess(DocumentSnapshot doc){
+        assert doc != null;
+        Volunteer volu = doc.toObject(Volunteer.class);
+        global.setVoluInstance(volu);
+        Intent intent = new Intent(getActivity().getBaseContext(),
+                GuideFormsPermissionActivity.class);
+        intent.putExtra("CLICKED_VOLU_KEY", clickedRowText);
+        intent.putExtra("CLICKED_VOLU_ID", clickedRowUid);
+        getActivity().startActivity(intent);
+        return null;
+    }
     private Void getUserDocFailed(Void unused){
         Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT).show();
         return null;

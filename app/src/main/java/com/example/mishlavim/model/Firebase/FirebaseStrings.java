@@ -42,7 +42,7 @@ public class FirebaseStrings {
 
     public static String finishedTemplatesStr(){ return "myFinishedTemplate";}
     public static String openFormUidStr() {
-        return "openForm";
+        return "openFormId";
     }
 
     public static String hasOpenFormStr() {
