@@ -57,12 +57,11 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
 
     private RecyclerView templateView;
     private RecyclerAdapter recyclerAdapter;
-    HashMap<String, String> templates;
-    List<String> templatesNames;
-    SearchView searchView;
+    private HashMap<String, String> templates;
+    private List<String> templatesNames;
+    private SearchView searchView;
     private String clickedFormId; // the clicked form id
     private String clickedFormName;
-    private boolean newCanEdit, flag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

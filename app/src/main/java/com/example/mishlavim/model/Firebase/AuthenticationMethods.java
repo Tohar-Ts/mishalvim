@@ -1,8 +1,13 @@
 package com.example.mishlavim.model.Firebase;
 
 import android.util.Log;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import com.example.mishlavim.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -74,5 +79,38 @@ public class AuthenticationMethods {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         return currentUser.getUid();
     }
+
+    public static void updateAuthEmail(String email){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        user.updateEmail(email)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d("Authentication Methods:", "User email address updated.");
+                        }
+                        else{
+                            Log.d("Authentication Methods:", "User email updated is failed.");
+                        }
+                    }
+                });
+    }
+
+    public static void updateAuthPassword(String password) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        user.updatePassword(password)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d("Authentication Methods:", "User password updated.");
+                        } else {
+                            Log.d("Authentication Methods:", "User password updated is failed.");
+                        }
+                    }
+                });
+
+    }
+
 
 }
