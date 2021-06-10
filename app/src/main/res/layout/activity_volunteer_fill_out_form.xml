@@ -84,9 +84,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:ems="10"
+                        android:padding="20dp"
                         android:hint="@string/put_answer_here"
                         android:inputType="textMultiLine"
                         android:lines="7"
+                        android:background="@drawable/custom_input"
                         android:gravity="top|right"
                         android:textColor="@color/black" />
 
