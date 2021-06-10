@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GuideVolunteerListFragment extends Fragment implements PopupMenu.OnMenuItemClickListener{
-
+    SearchView searchView;
     RecyclerView guidesView;
     RecyclerAdapter recyclerAdapter;
     List<String> guidesNames;
@@ -73,6 +73,21 @@ public class GuideVolunteerListFragment extends Fragment implements PopupMenu.On
         guidesView = view.findViewById(R.id.volunteers_recycler_view);
         recyclerAdapter = new RecyclerAdapter(guidesNames, this, R.menu.volunteer_options_menu);
         guidesView.setAdapter(recyclerAdapter);
+
+        searchView = view.findViewById(R.id.search_bar);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                recyclerAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
     }
 
 

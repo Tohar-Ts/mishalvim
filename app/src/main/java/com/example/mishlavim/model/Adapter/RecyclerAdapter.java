@@ -15,12 +15,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mishlavim.R;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> implements Filterable {
 
 
     List<String> showList;
+    List<String> showListAll;
     PopupMenu.OnMenuItemClickListener fragment;
     String clickedText;
     Integer popMenuSrc;
@@ -29,6 +32,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         this.showList = showList;
         this.fragment = fragment;
         this.popMenuSrc = popMenuSrc;
+        this.showListAll = new ArrayList<>(showList);
     }
 
     @NonNull
@@ -61,9 +65,37 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     @NonNull
     @Override
     public Filter getFilter() {
-            return getFilter();
-    }
 
+            return filter;
+    }
+    //this runs on a backround thread
+    Filter filter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<String> filteredList = new ArrayList<>();
+            if (constraint.toString().isEmpty()){
+                filteredList.addAll(showListAll);
+            }
+            else{
+                for (String name :showListAll){
+                    if (name.toLowerCase().contains(constraint.toString().toLowerCase())){
+                        filteredList.add(name);
+                    }
+                }
+            }
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = filteredList;
+
+            return filterResults;
+        }
+        //run on a UI thread
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+        showList.clear();
+        showList.addAll((Collection<? extends String>) results.values);
+        notifyDataSetChanged();
+        }
+    };
     //one row rules
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
