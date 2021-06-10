@@ -23,10 +23,9 @@
         android:textColor="@color/black"
         android:textSize="30sp" />
 
-    <EditText
+    <TextView
         android:id="@+id/SettingEmail"
         android:focusable="true"
-        android:cursorVisible="true"
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
@@ -38,7 +37,6 @@
         android:drawablePadding="12dp"
         android:gravity="center|right"
         android:hint="@string/prompt_email"
-        android:inputType="textEmailAddress"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
         android:selectAllOnFocus="true"
@@ -98,6 +96,7 @@
         android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/gray_background"
         android:padding="30dp">
 
         <TextView

@@ -1,7 +1,11 @@
 package com.example.mishlavim.adminActivities;
 import com.example.mishlavim.R;
+import com.example.mishlavim.UserSettingActivity;
 import com.example.mishlavim.login.LoginActivity;
 import com.example.mishlavim.model.Firebase.AuthenticationMethods;
+import com.example.mishlavim.model.Firebase.FirebaseStrings;
+import com.example.mishlavim.model.Firebase.FirestoreMethods;
+import com.example.mishlavim.model.Global;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
@@ -93,7 +97,12 @@ public class AdminNavigationActivity extends AppCompatActivity implements Bottom
         int id = item.getItemId();
         switch (id){
             case R.id.setting:
-                //TODO navigate to setting
+                Intent intent = new Intent(AdminNavigationActivity.this,
+                        UserSettingActivity.class);
+                intent.putExtra("CLICKED_USER_TYPE", FirebaseStrings.adminStr());
+                intent.putExtra("CLICKED_USER_ID", Global.getGlobalInstance().getUid());
+                intent.putExtra("SHOW_LOGIN", false);
+                startActivity(intent);
                 Toast.makeText(AdminNavigationActivity.this, item.getTitle().toString(), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.exit:

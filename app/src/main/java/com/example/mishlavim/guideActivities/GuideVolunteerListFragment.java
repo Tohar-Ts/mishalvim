@@ -75,6 +75,7 @@ public class GuideVolunteerListFragment extends Fragment implements PopupMenu.On
         recyclerAdapter = new RecyclerAdapter(guidesNames, this, R.menu.volunteer_options_menu);
         guidesView.setAdapter(recyclerAdapter);
 
+        //init search
         searchView = view.findViewById(R.id.search_bar);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -118,10 +119,6 @@ public class GuideVolunteerListFragment extends Fragment implements PopupMenu.On
         }
         return true;
     }
-
-
-    //search functions
-    //TODO - fixing search to recycle view
 
     //delete dialog functions
     public void onDeletePositiveClick(DialogFragment dialog) {

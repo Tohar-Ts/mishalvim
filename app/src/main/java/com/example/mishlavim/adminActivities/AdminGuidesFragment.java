@@ -102,9 +102,6 @@ public class AdminGuidesFragment extends Fragment implements PopupMenu.OnMenuIte
             case R.id.view_guide_volunteers:
                 Log.d("onMenuItemClick: ", "view volunteer:" + recyclerAdapter.getClickedText() );
                 break;
-            case R.id.edit_guide:
-                Log.d("onMenuItemClick: ", "edit guide:" + recyclerAdapter.getClickedText() );
-                break;
             case R.id.remove_guide:
                 Log.d("onMenuItemClick: ", "remove guide:" + recyclerAdapter.getClickedText() );
                 break;

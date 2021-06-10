@@ -3,6 +3,7 @@ package com.example.mishlavim;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.mishlavim.adminActivities.AdminNavigationActivity;
 import com.example.mishlavim.guideActivities.GuideNavigationActivity;
+import com.example.mishlavim.model.Firebase.AuthenticationMethods;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
 import com.example.mishlavim.model.Global;
 import com.example.mishlavim.model.User;
@@ -13,8 +14,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 /**
  * Before using the class you have to pass the activity: "CLICKED_USER_TYPE" and"CLICKED_USER_ID".
@@ -28,7 +34,9 @@ public class UserSettingActivity extends AppCompatActivity implements View.OnCli
     private ProgressBar progressBar;
     private Global global;
     private String userUpdatingType ,userToUpdateType, userToUpdateUid;
+    private boolean showLoginAgain;
     private User userData;
+    EditText newEmail, newUserName, newPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,18 +49,24 @@ public class UserSettingActivity extends AppCompatActivity implements View.OnCli
         updateBtn = findViewById(R.id.settingUpdateBtn);
         homeBtn = findViewById(R.id.settingHomeFloating);
         progressBar = findViewById(R.id.settingLoading);
-
-        //showing the login again screen
-        loginLayout.setVisibility(View.VISIBLE);
-        settingLayout.setVisibility(View.GONE);
-        progressBar.setVisibility(View.GONE);
+        newEmail = findViewById(R.id.settingNewEmail);
+        newUserName = findViewById(R.id.settingNewUserName);
+        newPassword = findViewById(R.id.settingNewPassword);
 
         //init user data
         userToUpdateType = getIntent().getStringExtra("CLICKED_USER_TYPE");
         userToUpdateUid =  getIntent().getStringExtra("CLICKED_USER_ID");
+        showLoginAgain = getIntent().getBooleanExtra("SHOW_LOGIN", true);
+
         global = Global.getGlobalInstance();
         userUpdatingType = global.getType();
         initUserDataByType();
+
+        //showing the login again screen
+        if(showLoginAgain)
+            initLoginAgain();
+        else
+            initSetting();
 
         //init listeners
         loginBtn.setOnClickListener(this);
@@ -77,7 +91,6 @@ public class UserSettingActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
-
     private void initUserDataByType() {
         if(userToUpdateType.equals(FirebaseStrings.adminStr())){
             userData = global.getAdminInstance();
@@ -90,21 +103,56 @@ public class UserSettingActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
+    private Void showError(Void unused) {
+        Toast.makeText(UserSettingActivity.this, "עדכון נכשל", Toast.LENGTH_SHORT).show();
+        return null;
+    }
+
     private void parseSettingInput() {
-        //TODO
+        //TODO - add validation
+        //TODO - update firebase
         switchToHomeByUser();
     }
 
     private void parseLoginInput() {
-        //showing setting screen
         progressBar.setVisibility(View.VISIBLE);
-        loginLayout.setVisibility(View.GONE);
-        settingLayout.setVisibility(View.VISIBLE);
-        showCurrentData();
-        progressBar.setVisibility(View.GONE);
+        EditText passwordText = findViewById(R.id.SettingPassword);
+
+        String email = userData.getEmail();
+        String password = passwordText.getText().toString().trim();
+
+        if(password.isEmpty()){
+            passwordText.setError("יש להזין סיסמה");
+            passwordText.requestFocus();
+            progressBar.setVisibility(View.GONE);
+            return;
+        }
+
+        AuthenticationMethods.signIn(email,password, this::signInSuccess, this::showError);
     }
 
-    private void showCurrentData() {
+
+
+    private Void signInSuccess(String s) {
+        initSetting();
+        return null;
+    }
+
+    private void initLoginAgain() {
+        loginLayout.setVisibility(View.VISIBLE);
+        settingLayout.setVisibility(View.GONE);
+        progressBar.setVisibility(View.GONE);
+        TextView emailText = findViewById(R.id.SettingEmail);
+        emailText.setText(userData.getEmail());
+    }
+
+    private void initSetting() {
+        loginLayout.setVisibility(View.GONE);
+        settingLayout.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.GONE);
+
+        newEmail.setText(userData.getEmail());
+        newUserName.setText(userData.getName());
     }
 
     private void switchToHomeByUser() {
