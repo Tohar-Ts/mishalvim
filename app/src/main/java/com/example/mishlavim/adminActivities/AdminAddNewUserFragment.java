@@ -221,7 +221,8 @@ public class AdminAddNewUserFragment extends Fragment  implements View.OnClickLi
         Toast.makeText(getActivity(), newUserType + " was added successfully", Toast.LENGTH_SHORT).show();
         loadingProgressBar.setVisibility(View.GONE);
         //TODO - add new user dialog
-        reload();
+        //updating global to see changes
+        Global.updateGlobalData(this::updateGlobalFinished);
         return null;
     }
 
@@ -230,9 +231,14 @@ public class AdminAddNewUserFragment extends Fragment  implements View.OnClickLi
         loadingProgressBar.setVisibility(View.GONE);
         return null;
     }
-
-    private void reload(){
-        getActivity().recreate();
+    private Void updateGlobalFinished(Boolean status){
+        if(status)
+            Toast.makeText(getActivity(), "המידע עודכן בהצלחה", Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(getActivity(), "תקלה בעדכון המידע, יש לסגור ולפתוח את האפליקציה מחדש", Toast.LENGTH_SHORT).show();
+        loadingProgressBar.setVisibility(View.GONE);
+        return null;
     }
+
 
 }

@@ -134,7 +134,8 @@ public class GuideAddVolunteerFragment extends Fragment implements View.OnClickL
     private Void updateDbSuccess(Void unused){
         Toast.makeText(getActivity(), "volunteer was added successfully", Toast.LENGTH_SHORT).show();
         loadingProgressBar.setVisibility(View.GONE);
-        reload();
+        //updating global to see changes
+        Global.updateGlobalData(this::updateGlobalFinished);
         return null;
     }
 
@@ -143,9 +144,12 @@ public class GuideAddVolunteerFragment extends Fragment implements View.OnClickL
         loadingProgressBar.setVisibility(View.GONE);
         return null;
     }
-
-    private void reload(){
-        getActivity().recreate();
+    private Void updateGlobalFinished(Boolean status){
+        if(status)
+            Toast.makeText(getActivity(), "המידע עודכן בהצלחה", Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(getActivity(), "תקלה בעדכון המידע, יש לסגור ולפתוח את האפליקציה מחדש", Toast.LENGTH_SHORT).show();
+        loadingProgressBar.setVisibility(View.GONE);
+        return null;
     }
-
 }

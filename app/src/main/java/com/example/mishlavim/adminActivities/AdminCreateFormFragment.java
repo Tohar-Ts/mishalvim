@@ -24,6 +24,7 @@ import com.example.mishlavim.R;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
 import com.example.mishlavim.model.Firebase.FirestoreMethods;
 import com.example.mishlavim.model.FormTemplate;
+import com.example.mishlavim.model.Global;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentReference;
@@ -153,8 +154,17 @@ public class AdminCreateFormFragment extends Fragment implements View.OnClickLis
     private Void onAddingSuccess(DocumentReference documentReference) {
         Toast.makeText(getContext(), R.string.firebase_success, Toast.LENGTH_SHORT).show();
         loadingProgressBar.setVisibility(View.GONE);
+        //updating global to see changes
+        Global.updateGlobalData(this::updateGlobalFinished);
         return null;
     }
-
+    private Void updateGlobalFinished(Boolean status){
+        if(status)
+            Toast.makeText(getActivity(), "המידע עודכן בהצלחה", Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(getActivity(), "תקלה בעדכון המידע, יש לסגור ולפתוח את האפליקציה מחדש", Toast.LENGTH_SHORT).show();
+        loadingProgressBar.setVisibility(View.GONE);
+        return null;
+    }
 
 }

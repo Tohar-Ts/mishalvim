@@ -1,5 +1,13 @@
 package com.example.mishlavim.model;
 
+import android.util.Log;
+
+import com.example.mishlavim.model.Firebase.FirebaseStrings;
+import com.example.mishlavim.model.Firebase.FirestoreMethods;
+import com.google.firebase.firestore.DocumentSnapshot;
+
+import java.util.function.Function;
+
 /**
  * Global class represents global variables that can be used anywhere in the app.
  * Global consists of the currently logged in user data from the database.
@@ -28,6 +36,31 @@ public class Global {
     private String uid;
 
     private Global() {
+    }
+
+    public static void updateGlobalData(Function<Boolean, Void> onUpdateFinished){
+        Function<DocumentSnapshot, Void> onSuccess = document -> {
+            if(getGlobalInstance().getType().equals(FirebaseStrings.adminStr())) {
+                Admin admin = document.toObject(Admin.class);
+                getGlobalInstance().setAdminInstance(admin);
+            }
+            else if(getGlobalInstance().getType().equals(FirebaseStrings.guideStr())) {
+                Guide guide = document.toObject(Guide.class);
+                getGlobalInstance().setGuideInstance(guide);
+            }
+            else if(getGlobalInstance().getType().equals(FirebaseStrings.volunteerStr())) {
+                Volunteer volu = document.toObject(Volunteer.class);
+                getGlobalInstance().setVoluInstance(volu);
+            }
+            onUpdateFinished.apply(true);
+            return null;
+        };
+        Function<Void, Void> onFailure = unused ->  {
+                Log.d("Global class", "Error - global user data update failed.");
+            onUpdateFinished.apply(false);
+            return null;
+        };
+        FirestoreMethods.getDocument(FirebaseStrings.usersStr(), getGlobalInstance().getUid(), onSuccess, onFailure);
     }
 
     public static Global getGlobalInstance() {
