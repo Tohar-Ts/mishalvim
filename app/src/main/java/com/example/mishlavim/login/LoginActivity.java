@@ -10,7 +10,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.mishlavim.R;
-import com.example.mishlavim.forgotPassword;
 import com.example.mishlavim.adminActivities.AdminNavigationActivity;
 import com.example.mishlavim.guideActivities.GuideNavigationActivity;
 import com.example.mishlavim.model.Admin;

@@ -42,13 +42,10 @@
 
     <style name="Theme.MishlavimPink.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="FloatingActionButtonStyle" parent="Widget.Design.FloatingActionButton">
-        <item name="shapeAppearanceOverlay">@style/pentagonShape</item>
-    </style>
 
-    <style name="pentagonShape" parent="ShapeAppearance.MaterialComponents.SmallComponent">
-        <item name="cornerSize">40%</item>
+    <style name="ShapeAppearanceOverlayExtended" parent="">
         <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">30%</item>
     </style>
 
 <!--    <style name="ActionButton" parent="@android:style/Widget.ActionButton">-->

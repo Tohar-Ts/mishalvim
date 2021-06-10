@@ -58,6 +58,7 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
         Global globalInstance = Global.getGlobalInstance();
         volunteer = globalInstance.getVoluInstance();
         voluName = volunteer.getName();
+        //TODO - if is a guide, change!
         formId = volunteer.getOpenFormId();
 
         //user is guide
@@ -197,7 +198,15 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
         //sending the updated answers to firestore
         FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), formId, FirebaseStrings.answersStr(), currentAnswers,
                                                         this::goToMain, this::showError);
+    }
 
+    private Void goToMain(Void unused) {
+        progressBar.setVisibility(View.GONE);
+        Toast.makeText(getApplicationContext(), R.string.firebase_success, Toast.LENGTH_SHORT).show();
+        finish();
+        Intent intent = new Intent(VolunteerFillOutFormActivity.this, VolunteerMainActivity.class);
+        startActivity(intent);
+        return null;
     }
 
     private void sendBtnOn() {
@@ -214,9 +223,6 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
         //sending the updated answers to firestore
         FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), formId, FirebaseStrings.answersStr(), currentAnswers,
                 this::updateOpenFormId, this::showError);
-
-        
-       
     }
 
     //Update document fields and maps.
@@ -260,29 +266,28 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
     }
 
     private Void notifyGuide(Void unused){
-        // TODO: 6/8/2021 notify guide 
-        showFinishedForm(unused);
+        // TODO: 6/8/2021 notify guide
+        Global.updateGlobalData(this::updateGlobalFinished);
+        return null;
+    }
+
+    private Void updateGlobalFinished(Boolean status) {
+        showFinishedForm();
+        if(status)
+            Toast.makeText(VolunteerFillOutFormActivity.this, "המידע עודכן בהצלחה", Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(VolunteerFillOutFormActivity.this, "תקלה בעדכון המידע, יש לסגור ולפתוח את האפליקציה מחדש", Toast.LENGTH_SHORT).show();
         return null;
     }
 
 
-    private Void showFinishedForm(Void unused) {
+    private void showFinishedForm() {
         progressBar.setVisibility(View.GONE);
-        Toast.makeText(getApplicationContext(), R.string.firebase_success, Toast.LENGTH_SHORT).show();
-        finish();
         Intent intent = new Intent(VolunteerFillOutFormActivity.this, VolunteerFinishedFormActivity.class);
         startActivity(intent);
-        return null;
+        finish();
     }
 
-    private Void goToMain(Void unused) {
-        progressBar.setVisibility(View.GONE);
-        Toast.makeText(getApplicationContext(), R.string.firebase_success, Toast.LENGTH_SHORT).show();
-        finish();
-        Intent intent = new Intent(VolunteerFillOutFormActivity.this, VolunteerMainActivity.class);
-        startActivity(intent);
-        return null;
-    }
 
 
 }
