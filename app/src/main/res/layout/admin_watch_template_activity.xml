@@ -25,7 +25,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="600dp"
         android:layout_marginTop="40dp"
         android:fadeScrollbars="false"
         android:scrollbarStyle="outsideOverlay"
@@ -37,19 +37,17 @@
         app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
-            android:id="@+id/SavedAnswersLayout"
+            android:id="@+id/questionsTemplateLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:orientation="vertical"
-            android:padding="16sp"
-            android:layout_marginRight="20dp">
+            android:padding="16sp">
 
         </LinearLayout>
     </ScrollView>
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/answersEditFloating"
+        android:id="@+id/questionsEditFloating"
         android:layout_width="65dp"
         android:layout_height="74dp"
         android:layout_margin="16dp"
@@ -57,21 +55,10 @@
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/pink"
         android:src="@drawable/ic_edit"
-        android:visibility="gone"
         app:fabCustomSize="70dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/answersSaveFloating"
-        android:layout_width="65dp"
-        android:layout_height="74dp"
-        android:layout_margin="16dp"
-        android:backgroundTint="@color/pink"
-        android:src="@drawable/ic_black_check"
-        app:fabCustomSize="70dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
