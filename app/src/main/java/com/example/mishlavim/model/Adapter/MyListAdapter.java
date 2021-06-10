@@ -1,8 +1,6 @@
 package com.example.mishlavim.model.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,17 +13,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.DialogFragment;
 
 import com.example.mishlavim.R;
-import com.example.mishlavim.dialogs.DeleteUserDialog;
-import com.example.mishlavim.guideActivities.GuideFormsPermissionActivity;
-import com.example.mishlavim.guideActivities.GuideMainActivity;
-import com.example.mishlavim.model.Firebase.FirebaseStrings;
-import com.example.mishlavim.model.Firebase.FirestoreMethods;
 
 import java.util.List;
 

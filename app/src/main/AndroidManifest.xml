@@ -10,21 +10,12 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".guideActivities.GuideNavigationActivity"></activity>
+        <activity android:name=".guideActivities.GuideNavigationActivity"
+            android:windowSoftInputMode="adjustNothing"/>
         <activity android:name=".adminActivities.AdminNavigationActivity"
             android:windowSoftInputMode="adjustNothing"/>
         <activity android:name=".forgotPassword" />
-        <activity android:name=".guideActivities.GuideReportsActivity" />
         <activity android:name=".guideActivities.GuideFormsPermissionActivity" />
-        <activity android:name=".guideActivities.GuideMainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
-            <meta-data
-                android:name="android.app.searchable"
-                android:resource="@xml/searchable" />
-        </activity>
-        <activity android:name=".guideActivities.GuideAddVolunteerActivity" />
         <activity android:name=".volunteerActivities.VolunteerFinishedFormActivity" />
         <activity android:name=".volunteerActivities.VolunteerMainActivity" />
         <activity android:name=".volunteerActivities.VolunteerViewOldFormActivity" />
@@ -36,7 +27,6 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
     </application>
 

@@ -10,23 +10,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.mishlavim.R;
-import com.example.mishlavim.dialogs.AddUserDialog;
-import com.example.mishlavim.dialogs.DeleteUserDialog;
 import com.example.mishlavim.dialogs.userExistDialog;
+import com.example.mishlavim.model.Admin;
 import com.example.mishlavim.model.User;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import android.content.Intent;
-import android.os.Bundle;
+
 import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import com.example.mishlavim.login.Validation;
 import com.example.mishlavim.model.Firebase.AuthenticationMethods;
@@ -35,34 +31,22 @@ import com.example.mishlavim.model.Firebase.FirestoreMethods;
 import com.example.mishlavim.model.Global;
 import com.example.mishlavim.model.Guide;
 import com.example.mishlavim.model.Volunteer;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestore;
 
-import org.jetbrains.annotations.NotNull;
-
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class GuideAddVolunteerFragment extends Fragment implements View.OnClickListener, userExistDialog.userExistDialogListener
-        ,AddUserDialog.addUserDialogListener, DeleteUserDialog.deleteUserListener{
+public class GuideAddVolunteerFragment extends Fragment implements View.OnClickListener {
 
-    private EditText emailEditText;
-    private EditText userNameEditText;
-    private EditText passwordEditText;
+    private EditText emailEditText, userNameEditText, passwordEditText, verifyPasswordEditText;
+    private Button addButton;
     private ProgressBar loadingProgressBar;
-    private FirebaseAuth mAuth;
-    private FirebaseFirestore db;
     private Validation validation;
-    private FirebaseUser fbUser;
-    private Volunteer volunteer;
-    BottomNavigationView navBarButtons;
-    private Global globalInstance = Global.getGlobalInstance();
-    private Guide guide = globalInstance.getGuideInstance();
-    private String guideID, myGuide = guide.getName();
-    private View view;
-
+    private String voluName, voluID;
+    Global globalInstance;
+    String thisGuideUid;
+    String thisGuideName;
+    Volunteer newVolu;
 
     public GuideAddVolunteerFragment() {
         // Required empty public constructor
@@ -78,157 +62,90 @@ public class GuideAddVolunteerFragment extends Fragment implements View.OnClickL
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        this.view = view;
         //init xml views
+        emailEditText = view.findViewById(R.id.voluNewEmail);
+        userNameEditText = view.findViewById(R.id.voluNewUserName);
+        passwordEditText = view.findViewById(R.id.voluNewPassword);
+        verifyPasswordEditText = view.findViewById(R.id.voluVerifyPassword);
+        addButton = view.findViewById(R.id.addNewVolu);
+        loadingProgressBar = view.findViewById(R.id.voluRegisterLoading);
 
-        //init a the navbar selector variable
+        globalInstance = Global.getGlobalInstance(); //init the global instance
+        thisGuideUid = globalInstance.getUid(); //getting guide id
+        if(thisGuideUid == null){
+            Toast.makeText(getActivity(), "תקלה בהצגת המידע, יש לסגור ולפתוח את האפליקציה מחדש", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        thisGuideName = globalInstance.getGuideInstance().getName(); //getting guide name
 
-        emailEditText = view.findViewById(R.id.newEmail);
-        userNameEditText = view.findViewById(R.id.newUserName);
-        passwordEditText = view.findViewById(R.id.newPassword);
-        EditText verifyPasswordEditText = view.findViewById(R.id.verifyPassword);
-        Button addButton = view.findViewById(R.id.addNewUser);
-        loadingProgressBar = view.findViewById(R.id.registerLoading);
-
-        mAuth = FirebaseAuth.getInstance();
-        guideID = mAuth.getUid();
-        db = FirebaseFirestore.getInstance();
-
-        validation = new Validation(emailEditText,userNameEditText, passwordEditText, verifyPasswordEditText
+        //init validation class
+        validation = new Validation(emailEditText, userNameEditText, passwordEditText, verifyPasswordEditText
                 , loadingProgressBar, getResources());
-        addButton.setOnClickListener(this);
+        newVolu = new Volunteer(); //init new volunteer data
+
+        loadingProgressBar.setVisibility(View.GONE); //progress bar gone
+
+        addButton.setOnClickListener(this); //buttons listeners
     }
 
 
     @Override
     public void onClick(View v) {
-        registerUser();
+        registerVolunteer();
     }
 
-    private void registerUser() {
+    private void showRegisterFailed(Integer msg) {
+        loadingProgressBar.setVisibility(View.GONE);
+        Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+    }
 
+    private void registerVolunteer() {
+        //validate input - if the input is invalid, don't continue.
         if (validation.validateInput())
             return;
+        //parse input
         String email = emailEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
         String userName = userNameEditText.getText().toString().trim();
 
+        newVolu = new Volunteer(userName, FirebaseStrings.volunteerStr(), email, thisGuideName, thisGuideUid, new HashMap<>(),"", false, new HashMap<>(), "");
+
         loadingProgressBar.setVisibility(View.VISIBLE);
-        registerToFirebase(userName, email, password);
+        //register
+        AuthenticationMethods.addNewUser(email,password,this::addAuthSuccess,this::addAuthFailed);
     }
 
-    private void showRegisterFailed() {
+    private Void addAuthFailed(Void unused) {
+        showRegisterFailed(R.string.register_auth_failed);
+        return null;
+    }
+
+    private Void addAuthSuccess(String newUserUid) {
+        createNewUser(newUserUid);
+        return null;
+    }
+
+    private void createNewUser(String newUserUid) {
+        Guide.addVolunteer(thisGuideUid, newUserUid, newVolu.getName());
+        //init a new user data in firestore
+        FirestoreMethods.createNewDocument(FirebaseStrings.usersStr(),newUserUid, newVolu, this::updateDbSuccess,this::updateDbFailed);
+    }
+
+    private Void updateDbSuccess(Void unused){
+        Toast.makeText(getActivity(), "volunteer was added successfully", Toast.LENGTH_SHORT).show();
         loadingProgressBar.setVisibility(View.GONE);
-        Toast.makeText(getActivity(), R.string.register_failed, Toast.LENGTH_SHORT).show();
+        reload();
+        return null;
     }
 
-    private void registerToFirebase(String userName, String email, String password){
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        fbUser = mAuth.getCurrentUser(); // this is the new user we just added.
-                        volunteer = new Volunteer(userName, FirebaseStrings.volunteerStr(), email, myGuide, guideID, new HashMap<>(), "",false, new HashMap<>(), "");
-                        // TODO: 6/5/2021 FIX THIS CONS.
-                        createNewUser(fbUser, volunteer);
-                    } else{
-                        DialogFragment newFragment = new userExistDialog();
-                        newFragment.show(getParentFragmentManager(), "userExist");
-                        showRegisterFailed();
-                    }
-
-                });
-    }
-
-    //Add user to guide's list, and builde new document for the volunteer.
-    private void createNewUser(FirebaseUser fbUser, Volunteer volunteer) {
-        Guide.addVolunteer(guideID,fbUser.getUid(), volunteer.getName());
-        addUserToDb(fbUser, volunteer);
-    }
-
-    private void addUserToDb(FirebaseUser fbUser, Volunteer volunteer) {
-        String usersCollection = FirebaseStrings.usersStr();
-        String userId = fbUser.getUid();
-        db.collection(usersCollection)
-                .document(userId)
-                .set(volunteer)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(getActivity(), "המשתמש נוצר בהצלחה!", Toast.LENGTH_SHORT).show();
-                        userHasAdd();
-                        loadingProgressBar.setVisibility(View.GONE);
-
-                    } else {
-                        showRegisterFailed();
-                    }
-                });
-    }
-    private void userHasAdd() {
-        DialogFragment newFragment = new AddUserDialog();
-        newFragment.show(getParentFragmentManager(), "addUser");
-    }
-    @Override
-    public void onAddPositiveClick(DialogFragment dialog) {
-        Log.d("guide", "onDialogPositiveClick: after dialog closed");
-//        finish();
-        // TODO: 6/9/2021 reset the fragment
-//        startActivity(new Intent(getActivity(), GuideAddVolunteerActivity.class));
-    }
-
-    @Override
-    public void onAddNegativeClick(DialogFragment dialog) {
-        Log.d("guide", "onDialogNegativeClick: after dialog closed");
-        //Show dialog to confirm delete user.
-        DialogFragment newFragment = new DeleteUserDialog();
-        newFragment.show(getParentFragmentManager(), "deleteUser");
-//        finish();
-        // TODO: 5/23/2021 undo operations and delete the user from FB.
-    }
-    @Override
-    public void onAddNeutralClick(DialogFragment dialog) {
-        // User touched the dialog's Neutral button
-        Log.d("guide", "onDialogNeutralClick:  after dialog closed");
-//        finish();
-//        startActivity(new Intent(GuideAddVolunteerActivity.this, GuideMainActivity.class));
-
-    }
-
-    @Override
-    public void onDeletePositiveClick(DialogFragment dialog) {
-        loadingProgressBar.setVisibility(View.VISIBLE);
-        FirestoreMethods.deleteDocument(FirebaseStrings.usersStr(),guide.getMyVolunteers().get(userNameEditText.getText().toString().trim()),this::onDocumentDeleteSuccess, this::onDeleteFailed);
+    private Void updateDbFailed(Void unused){
+        showRegisterFailed(R.string.register_failed);
         loadingProgressBar.setVisibility(View.GONE);
-//        finish();
-    }
-
-    @Override
-    public void onExistNeutralClick(DialogFragment dialog){
-        return; }
-
-    @Override
-    public void onDeleteNegativeClick(DialogFragment dialog) {
-        DialogFragment newFragment = new AddUserDialog();
-        newFragment.show(getParentFragmentManager(), "addUser");
-    }
-
-
-    public Void onDocumentDeleteSuccess(Void noUse){
-        FirestoreMethods.deleteMapKey(FirebaseStrings.usersStr(), AuthenticationMethods.getCurrentUserID(),FirebaseStrings.myVolunteerStr(),userNameEditText.getText().toString().trim(),this::onKeyDeleteSuccess,this::onDeleteFailed);
         return null;
     }
 
-    public Void onDeleteFailed(Void noUse){
-        Toast.makeText(getActivity(), "המחיקה נכשלה! באסה!", Toast.LENGTH_SHORT).show();
-        return null;
-    }
-    public Void onKeyDeleteSuccess(Void noUse){
-        Toast.makeText(getActivity(), "המשתמש נמחק בהצלחה! אהוי!", Toast.LENGTH_SHORT).show();
-        reloadScreen();
-        return null;
-    }
-
-    private void reloadScreen() {
-//        finish();
-//        startActivity(getIntent());
+    private void reload(){
+        getActivity().recreate();
     }
 
 }

@@ -37,7 +37,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class AdminAddNewUserFragment extends Fragment  implements View.OnClickListener,
-        RadioGroup.OnCheckedChangeListener ,AdapterView.OnItemSelectedListener,userExistDialog.userExistDialogListener
+        RadioGroup.OnCheckedChangeListener ,AdapterView.OnItemSelectedListener
 {
 
     private EditText emailEditText, userNameEditText, passwordEditText, verifyPasswordEditText;
@@ -87,7 +87,7 @@ public class AdminAddNewUserFragment extends Fragment  implements View.OnClickLi
         }
 
         //init guides list
-        //setSpinner();
+        setSpinner();
 
         //init validation class
         validation = new Validation(emailEditText, userNameEditText, passwordEditText, verifyPasswordEditText
@@ -187,11 +187,10 @@ public class AdminAddNewUserFragment extends Fragment  implements View.OnClickLi
     }
 
     private Void addAuthFailed(Void unused) {
-        DialogFragment newFragment = new userExistDialog();
-        newFragment.show(getParentFragmentManager(), "userExist");
         showRegisterFailed(R.string.register_auth_failed);
         return null;
     }
+
     private Void addAuthSuccess(String newUserUid) {
         createNewUser(newUserUid);
         return null;
@@ -221,6 +220,7 @@ public class AdminAddNewUserFragment extends Fragment  implements View.OnClickLi
     private Void updateDbSuccess(Void unused){
         Toast.makeText(getActivity(), newUserType + " was added successfully", Toast.LENGTH_SHORT).show();
         loadingProgressBar.setVisibility(View.GONE);
+        //TODO - add new user dialog
         reload();
         return null;
     }
@@ -235,7 +235,4 @@ public class AdminAddNewUserFragment extends Fragment  implements View.OnClickLi
         getActivity().recreate();
     }
 
-    @Override
-    public void onExistNeutralClick(DialogFragment dialog) {
-        return; }
 }
