@@ -111,6 +111,14 @@ public class FirebaseStrings {
         return "answeredForms";
     }
 
+    public static String isOpenFormStr() {
+        return "isOpenForm";
+    }
+
+    public static String finishedButCanEditStr() {
+        return "finishedButCanEdit";
+    }
+
     //??
     public static String emptyString(){return  "";}
 
