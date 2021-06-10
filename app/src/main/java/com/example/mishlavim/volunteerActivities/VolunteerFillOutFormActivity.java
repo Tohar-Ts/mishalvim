@@ -29,13 +29,14 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
     private TextView fireBaseQuestion, questionNumTextView;
     private EditText volunteerAnswer;
 
-    private String formId,formName ,voluId, voluName;
+    private String formId,formName ,voluId, voluName, templateId;
     private int numOfQuestions;
     private int numOfCurrentQuestion;
     private HashMap<String, String> questions;
     private HashMap<String, String> savedAnswers;
     private HashMap<String, String> currentAnswers;
     private Volunteer volunteer;
+
 
 
     @Override
@@ -57,6 +58,7 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
         Global globalInstance = Global.getGlobalInstance();
         volunteer = globalInstance.getVoluInstance();
         voluName = volunteer.getName();
+        //TODO - if is a guide, change!
         formId = volunteer.getOpenFormId();
 
         //user is guide
@@ -108,6 +110,7 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
     private Void getTemplateObjSuccess(DocumentSnapshot doc) {
         assert doc != null;
         FormTemplate templateObj = doc.toObject(FormTemplate.class);
+        templateId = doc.getId();
 
         assert templateObj != null;
         questions = templateObj.getQuestionsMap();
@@ -119,9 +122,7 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
 
     private void initScreen() {
         progressBar.setMax(numOfQuestions);
-
         showQuestion();
-
         nextBtn.setOnClickListener(this);
         backBtn.setOnClickListener(this);
         saveBtn.setOnClickListener(this);
@@ -172,7 +173,7 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
 
         questionNumTextView.setText("שאלה " + numOfCurrentQuestion);
 
-        fireBaseQuestion.setText(questions.get(numOfCurrentQuestion + ""));
+        fireBaseQuestion.setText(questions.get(numOfCurrentQuestion-1 + ""));
 
         if (currentAnswers.get(numOfCurrentQuestion + "") != null)
             volunteerAnswer.setText(currentAnswers.get(numOfCurrentQuestion + ""));
@@ -197,7 +198,15 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
         //sending the updated answers to firestore
         FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), formId, FirebaseStrings.answersStr(), currentAnswers,
                                                         this::goToMain, this::showError);
+    }
 
+    private Void goToMain(Void unused) {
+        progressBar.setVisibility(View.GONE);
+        Toast.makeText(getApplicationContext(), R.string.firebase_success, Toast.LENGTH_SHORT).show();
+        finish();
+        Intent intent = new Intent(VolunteerFillOutFormActivity.this, VolunteerMainActivity.class);
+        startActivity(intent);
+        return null;
     }
 
     private void sendBtnOn() {
@@ -213,63 +222,72 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
 
         //sending the updated answers to firestore
         FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), formId, FirebaseStrings.answersStr(), currentAnswers,
-                this::updateOpenForm, this::showError);
-
-        
-       
+                this::updateOpenFormId, this::showError);
     }
+
     //Update document fields and maps.
-    private Void updateOpenForm(Void unused){
-        FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(), voluId, FirebaseStrings.openFormNameStr(),FirebaseStrings.emptyString(),
+    private Void updateOpenFormId(Void unused){
+        FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(), voluId, FirebaseStrings.openFormUidStr(),FirebaseStrings.emptyString(),
                 this::updateOpenFormName, this::showError);
         return null;
     }
+
     private Void updateOpenFormName(Void unused){
         FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(), voluId, FirebaseStrings.openFormNameStr(),FirebaseStrings.emptyString(),
                 this::updateFinishedForms, this::showError);
         return null;
     }
+
     private Void updateFinishedForms(Void unused){
         FirestoreMethods.updateMapKey(FirebaseStrings.usersStr(),voluId,FirebaseStrings.finishedFormsStr(),formName,formId,
+                this::updateMyFinishedTemplate,this::showError);
+        return null;
+    }
+    private Void updateMyFinishedTemplate(Void unused){
+        FirestoreMethods.updateMapKey(FirebaseStrings.usersStr(),voluId,FirebaseStrings.finishedTemplatesStr(),formName,templateId,
                 this::updateOnWork,this::showError);
         return null;
     }
 
     private Void updateOnWork(Void unused){
-//        FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), formId, FirebaseStrings.onWorkStr(),false,
-//                this::updateCanEdit, this::showError);
+        FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), formId, FirebaseStrings.isOpenFormStr(),false,
+                this::updateCanEdit, this::showError);
         return null;
     }
     private Void updateCanEdit(Void unused){
-//        FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), formId, FirebaseStrings.canEdit(),false,
-//                this::notifyGuide, this::showError);
+        FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), formId, FirebaseStrings.finishedButCanEditStr(),false,
+                this::updateHasOpenForm, this::showError);
+        return null;
+    }
+    private Void updateHasOpenForm(Void unused){
+        FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(), voluId, FirebaseStrings.hasOpenFormStr(),false,
+                this::notifyGuide, this::showError);
         return null;
     }
 
     private Void notifyGuide(Void unused){
-        // TODO: 6/8/2021 notify guide 
-        showFinishedForm(unused);
+        // TODO: 6/8/2021 notify guide
+        Global.updateGlobalData(this::updateGlobalFinished);
+        return null;
+    }
+
+    private Void updateGlobalFinished(Boolean status) {
+        showFinishedForm();
+        if(status)
+            Toast.makeText(VolunteerFillOutFormActivity.this, "המידע עודכן בהצלחה", Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(VolunteerFillOutFormActivity.this, "תקלה בעדכון המידע, יש לסגור ולפתוח את האפליקציה מחדש", Toast.LENGTH_SHORT).show();
         return null;
     }
 
 
-    private Void showFinishedForm(Void unused) {
+    private void showFinishedForm() {
         progressBar.setVisibility(View.GONE);
-        Toast.makeText(getApplicationContext(), R.string.firebase_success, Toast.LENGTH_SHORT).show();
-        finish();
         Intent intent = new Intent(VolunteerFillOutFormActivity.this, VolunteerFinishedFormActivity.class);
         startActivity(intent);
-        return null;
+        finish();
     }
 
-    private Void goToMain(Void unused) {
-        progressBar.setVisibility(View.GONE);
-        Toast.makeText(getApplicationContext(), R.string.firebase_success, Toast.LENGTH_SHORT).show();
-        finish();
-        Intent intent = new Intent(VolunteerFillOutFormActivity.this, VolunteerMainActivity.class);
-        startActivity(intent);
-        return null;
-    }
 
 
 }

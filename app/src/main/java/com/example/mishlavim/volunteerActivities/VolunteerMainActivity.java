@@ -27,13 +27,13 @@ import java.util.HashMap;
 //TODO - in the xml file replace plain text with strings
 
 
-public class VolunteerMainActivity extends AppCompatActivity implements View.OnClickListener, BottomNavigationView.OnNavigationItemSelectedListener{
+public class VolunteerMainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private TextView helloVolu;
     private GridLayout formsLayout;
     private Volunteer volu;
-    BottomNavigationView navBarButtons;
     private FloatingActionButton openFormBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,8 +43,7 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
         helloVolu = findViewById(R.id.HelloVolu);
         formsLayout = findViewById(R.id.finishedFormsLayout);
         openFormBtn = findViewById(R.id.openFormBtn);
-        navBarButtons = findViewById(R.id.bottom_navigation);
-        navBarButtons.getMenu().getItem(0).setCheckable(false);
+
         //init volu object
         Global globalInstance = Global.getGlobalInstance();
         volu = globalInstance.getVoluInstance();
@@ -54,12 +53,10 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
         }
 
         openFormBtn.setOnClickListener(this);
+
         setHelloMsg();
         setAnsweredForms();
-        showMenu();
-        navBarButtons.setOnNavigationItemSelectedListener(this);
-
-
+        showGuideHomeBtn();
     }
 
     @Override
@@ -79,34 +76,18 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
             startActivity(intent);
         }
     }
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.go_home){
-            finish();
-//            startActivity(new Intent(getApplicationContext(), GuideMainActivity.class));
-            return true;
-        }
-        else if (item.getItemId() == R.id.add_user) {
-            overridePendingTransition(0, 0);
-            return true;
-        } else if (item.getItemId() == R.id.forms) {
-            overridePendingTransition(0, 0);
-            return true;
-        }
-        return false;
-    }
 
-    private void showMenu() { // a function that shows the menu to the guides
+    private void showGuideHomeBtn() { // a function that shows an home button to a guide
         Global globalInstance = Global.getGlobalInstance();
         //guide enter to volunteer screen
+        //TODO - replace with floating
         if(globalInstance.getType().equals(FirebaseStrings.guideStr())) {
-            navBarButtons.setVisibility(View.VISIBLE);
-            String voluIdFromGuide = globalInstance.getGuideInstance().getMyVolunteers().get(volu.getName());
+//            navBarButtons.setVisibility(View.VISIBLE);
+//            String voluIdFromGuide = globalInstance.getGuideInstance().getMyVolunteers().get(volu.getName());
         }
         else{
-            navBarButtons.setVisibility(View.GONE);
-            String voluIdFromGuide = AuthenticationMethods.getCurrentUserID();
-
+//            navBarButtons.setVisibility(View.GONE);
+//            String voluIdFromGuide = AuthenticationMethods.getCurrentUserID();
         }
 
 

@@ -65,10 +65,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     @NonNull
     @Override
     public Filter getFilter() {
-
             return filter;
     }
-    //this runs on a backround thread
+    //this runs on a background thread
     Filter filter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {

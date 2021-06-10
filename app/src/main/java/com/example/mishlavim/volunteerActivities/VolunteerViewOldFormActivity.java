@@ -26,10 +26,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class VolunteerViewOldFormActivity extends AppCompatActivity implements View.OnClickListener {
+
     private TextView formName;
     private FloatingActionButton editButton, saveButton;
     private LinearLayout savedAnswersLayout;
-
     private boolean canEdit = false;
     private String clickedFormKey;
     private String clickedFormId;
@@ -42,6 +42,7 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
         setContentView(R.layout.activity_volunteer_view_old_form);
 
         //TODO: add a progress bar
+        //TODO: add home floating
         formName = findViewById(R.id.finishedFormName);
         editButton = findViewById(R.id.answersEditFloating);
         saveButton = findViewById(R.id.answersSaveFloating);
@@ -52,6 +53,7 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
         Global globalInstance = Global.getGlobalInstance();
         HashMap<String, String> answeredForms = globalInstance.getVoluInstance().getFinishedForms();
         clickedFormId = answeredForms.get(clickedFormKey);
+        Log.d("VolunteerViewOldFormActivity: ",clickedFormKey+", "+ clickedFormId);
 
         displayFormName();
         getAnswersFromFirebase();
@@ -115,8 +117,9 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
         assert answersObj != null;
         answers = answersObj.getAnswers();
         canEdit = answersObj.getFinishedButCanEdit();
-        // TODO: 6/9/2021 CHANGE THIS FUNCTION CUZ DOCUMENT ID IS WRONG!!!
-        FirestoreMethods.getDocument(FirebaseStrings.formsTemplatesStr(), "Cfxrc4aUw5lnTOsNFk5B",
+        String templateUid = answersObj.getTemplateId();
+
+        FirestoreMethods.getDocument(FirebaseStrings.formsTemplatesStr(), templateUid,
                 this::onGettingQuestionsSuccess, this::showError);
         return null;
     }
@@ -124,7 +127,6 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
     private Void onGettingQuestionsSuccess(DocumentSnapshot document) {
         assert document != null;
         FormTemplate questionsObj = document.toObject(FormTemplate.class);
-
         assert questionsObj != null;
         questions = questionsObj.getQuestionsMap();
 
@@ -154,7 +156,6 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
         TextView qTextView = new TextView(this);
 
         //calculate height
-        int height = convertFromDpToPixels(64);
         int width = convertFromDpToPixels(330);
         int margin =  convertFromDpToPixels(16);
         int padding = convertFromDpToPixels(16);

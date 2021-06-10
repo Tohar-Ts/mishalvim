@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.appcompat.widget.SearchView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,22 +13,13 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.PopupMenu;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.mishlavim.R;
-import com.example.mishlavim.login.Validation;
 import com.example.mishlavim.model.Adapter.RecyclerAdapter;
 import com.example.mishlavim.model.Admin;
-import com.example.mishlavim.model.Firebase.AuthenticationMethods;
-import com.example.mishlavim.model.Firebase.DeleteUser;
-import com.example.mishlavim.model.Firebase.FirebaseStrings;
-import com.example.mishlavim.model.Firebase.FirestoreMethods;
 import com.example.mishlavim.model.Global;
-import com.example.mishlavim.model.Guide;
-import com.example.mishlavim.model.User;
 
 import java.util.ArrayList;
 import java.util.List;

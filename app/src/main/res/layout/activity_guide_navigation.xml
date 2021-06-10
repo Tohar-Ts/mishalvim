@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layoutDirection="rtl"
         android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
         app:menu="@menu/setting_menu"/>
 
     <FrameLayout
