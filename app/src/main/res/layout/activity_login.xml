@@ -42,7 +42,7 @@
         android:id="@+id/email"
         android:focusable="true"
         android:cursorVisible="true"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="68dp"
@@ -63,7 +63,7 @@
     <com.google.android.material.textfield.TextInputLayout
 
         android:id="@+id/textInputLayout"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="10dp"
@@ -72,6 +72,7 @@
         android:layout_below="@id/email"
         android:drawableRight="@drawable/ic_lock"
         android:drawablePadding="12dp"
+        app:hintEnabled="false"
         android:layout_centerInParent="true">
 
         <EditText
@@ -94,7 +95,7 @@
 
     <Button
         android:id="@+id/login"
-        android:layout_width="295dp"
+        android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_gravity="center"
         android:background="@drawable/pink_button"
