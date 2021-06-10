@@ -1,14 +1,17 @@
 package com.example.mishlavim.adminActivities;
 import com.example.mishlavim.R;
+import com.example.mishlavim.UserSettingActivity;
 import com.example.mishlavim.login.LoginActivity;
 import com.example.mishlavim.model.Firebase.AuthenticationMethods;
+import com.example.mishlavim.model.Firebase.FirebaseStrings;
+import com.example.mishlavim.model.Firebase.FirestoreMethods;
+import com.example.mishlavim.model.Global;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -68,12 +71,11 @@ public class AdminNavigationActivity extends AppCompatActivity implements Bottom
         //Transaction
         assert selectedFragment != null;
         getSupportFragmentManager().beginTransaction().
-                setCustomAnimations(
-
-                R.anim.fragment_slide_right_to_left,
-                R.anim.fragment_exit_right_to_left,
-                        R.anim.fragment_slide_left_to_right,
-                        R.anim.fragment_exit_left_to_right
+                setCustomAnimations(R.anim.fragment_fade_in,R.anim.fragment_fade_out
+//                R.anim.fragment_slide_right_to_left,
+//                R.anim.fragment_exit_right_to_left,
+//                        R.anim.fragment_slide_left_to_right,
+//                        R.anim.fragment_exit_left_to_right
                 )
                 .replace(R.id.admin_fragment_container, selectedFragment)
                 .commit();
@@ -94,7 +96,12 @@ public class AdminNavigationActivity extends AppCompatActivity implements Bottom
         int id = item.getItemId();
         switch (id){
             case R.id.setting:
-                //TODO navigate to setting
+                Intent intent = new Intent(AdminNavigationActivity.this,
+                        UserSettingActivity.class);
+                intent.putExtra("CLICKED_USER_TYPE", FirebaseStrings.adminStr());
+                intent.putExtra("CLICKED_USER_ID", Global.getGlobalInstance().getUid());
+                intent.putExtra("SHOW_LOGIN", false);
+                startActivity(intent);
                 Toast.makeText(AdminNavigationActivity.this, item.getTitle().toString(), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.exit:

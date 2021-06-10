@@ -178,7 +178,7 @@ public class Volunteer extends User {
         this.openFormName = openFormName;
     }
 
-    public boolean isHasOpenForm() {
+    public boolean getHasOpenForm() {
         return hasOpenForm;
     }
 

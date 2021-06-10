@@ -12,10 +12,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.mishlavim.R;
+import com.example.mishlavim.UserSettingActivity;
 import com.example.mishlavim.adminActivities.AdminAddNewUserFragment;
 import com.example.mishlavim.adminActivities.AdminNavigationActivity;
 import com.example.mishlavim.login.LoginActivity;
 import com.example.mishlavim.model.Firebase.AuthenticationMethods;
+import com.example.mishlavim.model.Firebase.FirebaseStrings;
+import com.example.mishlavim.model.Global;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.jetbrains.annotations.NotNull;
@@ -76,13 +79,7 @@ public class GuideNavigationActivity extends AppCompatActivity implements Bottom
         assert selectedFragment != null;
 
         getSupportFragmentManager().beginTransaction().setCustomAnimations(
-
                 R.anim.fragment_fade_in,R.anim.fragment_fade_out
-
-//                R.anim.fragment_slide_right_to_left,
-//                R.anim.fragment_exit_right_to_left,
-//                R.anim.fragment_slide_left_to_right,
-//                R.anim.fragment_exit_left_to_right
         )
                 .replace(R.id.guide_fragment_container, selectedFragment)
                 .commit();
@@ -102,8 +99,12 @@ public class GuideNavigationActivity extends AppCompatActivity implements Bottom
         int id = item.getItemId();
         switch (id){
             case R.id.setting:
-                //TODO navigate to setting
-                Toast.makeText(GuideNavigationActivity.this, item.getTitle().toString(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(GuideNavigationActivity.this,
+                        UserSettingActivity.class);
+                intent.putExtra("CLICKED_USER_TYPE", FirebaseStrings.guideStr());
+                intent.putExtra("CLICKED_USER_ID", Global.getGlobalInstance().getUid());
+                intent.putExtra("SHOW_LOGIN", false);
+                startActivity(intent);
                 break;
             case R.id.exit:
                 AuthenticationMethods.signOut();

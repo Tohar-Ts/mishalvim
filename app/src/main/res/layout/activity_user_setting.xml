@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserSettingActivity">
+    <RelativeLayout
+        android:id="@+id/SettingLoginLayout"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/login_background">
+    <TextView
+        android:id="@+id/SettingPrompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/alef"
+        android:layout_alignParentTop="true"
+        android:text="הכנס את הסיסמה של החניך"
+        android:layout_marginTop="160dp"
+        android:textColor="@color/black"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/SettingEmail"
+        android:focusable="true"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="8dp"
+        android:autofillHints="@string/prompt_email"
+        android:background="@drawable/custom_input"
+        android:drawableEnd="@drawable/ic_email"
+        android:drawablePadding="12dp"
+        android:gravity="center|right"
+        android:hint="@string/prompt_email"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:selectAllOnFocus="true"
+        android:layout_below="@id/SettingPrompt"
+        android:layout_centerInParent="true"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+
+        android:id="@+id/textInputLayout2"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        app:passwordToggleEnabled="true"
+        android:layout_below="@id/SettingEmail"
+        app:passwordToggleDrawable="@drawable/eye_selector"
+        android:drawablePadding="12dp"
+        app:hintEnabled="false"
+        android:layout_centerInParent="true">
+
+        <EditText
+            android:id="@+id/SettingPassword"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:focusable="true"
+            android:cursorVisible="true"
+            android:autofillHints="@string/prompt_password"
+            android:background="@drawable/custom_input"
+            android:hint="@string/prompt_password"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:gravity="center|right"
+            android:selectAllOnFocus="true"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <Button
+        android:id="@+id/SettingLogin"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:background="@drawable/pink_button"
+        android:text="@string/action_sign_in"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/textInputLayout2"
+        android:layout_centerInParent="true"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/SettingLayout"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray_background"
+        android:padding="30dp">
+
+        <TextView
+            android:id="@+id/edit_user_prompt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/alef"
+            android:layout_alignParentTop="true"
+            android:text="שנה את השדה שברצונך לעדכן:"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:textStyle="bold"/>
+
+
+        <EditText
+            android:id="@+id/settingNewEmail"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="50dp"
+            android:autofillHints="@string/title_email"
+            android:background="@drawable/custom_input"
+            android:drawableRight="@drawable/ic_email"
+            android:drawablePadding="12dp"
+            android:gravity="center|right"
+            android:hint="@string/title_email"
+            android:inputType="textEmailAddress"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:layout_centerInParent="true"
+            android:layout_below="@id/edit_user_prompt"
+            android:selectAllOnFocus="true" />
+
+        <EditText
+            android:id="@+id/settingNewUserName"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="24dp"
+            android:autofillHints="@string/title_user_name"
+            android:background="@drawable/custom_input"
+            android:drawableRight="@drawable/ic_person"
+            android:drawablePadding="12dp"
+            android:gravity="center|right"
+            android:hint="@string/title_user_name"
+            android:inputType="textPersonName"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:layout_centerInParent="true"
+            android:layout_below="@id/settingNewEmail"
+            android:selectAllOnFocus="true" />
+
+
+        <EditText
+            android:id="@+id/settingNewPassword"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="24dp"
+            android:autofillHints="@string/title_user_password"
+            android:background="@drawable/custom_input"
+            android:drawableRight="@drawable/ic_lock"
+            android:drawablePadding="12dp"
+            android:gravity="center|right"
+            android:hint="@string/title_user_password"
+            android:inputType="textPassword"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:layout_centerInParent="true"
+            android:layout_below="@id/settingNewUserName"
+            android:selectAllOnFocus="true" />
+
+        <EditText
+            android:id="@+id/settingVerifyPassword"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="24dp"
+            android:autofillHints="@string/title_verify_password"
+            android:background="@drawable/custom_input"
+            android:drawableRight="@drawable/ic_lock"
+            android:drawablePadding="12dp"
+            android:gravity="center|right"
+            android:hint="@string/title_verify_password"
+            android:inputType="textPassword"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:layout_centerInParent="true"
+            android:layout_below="@id/settingNewPassword"
+            android:selectAllOnFocus="true" />
+
+
+        <Button
+            android:id="@+id/settingUpdateBtn"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="150dp"
+            android:layout_gravity="center"
+            android:background="@drawable/blue_button_normal2"
+            android:textColor="@drawable/blue_text_pressed"
+            android:text="עדכן פרטים" />
+    </RelativeLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/settingHomeFloating"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="30dp"
+        android:backgroundTint="@color/green"
+        android:src="@drawable/ic_home"
+        app:fabCustomSize="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"/>
+
+    <ProgressBar
+        android:id="@+id/settingLoading"
+        android:layout_width="120dp"
+        android:layout_height="112dp"
+        android:theme="@style/GreenProgressBarTheme"
+        android:visibility="gone"
+        android:layout_centerInParent="true"/>
+
+</RelativeLayout>

@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
@@ -14,59 +13,26 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
-
 import com.example.mishlavim.R;
-import com.example.mishlavim.dialogs.DeleteUserDialog;
 import com.example.mishlavim.model.Adapter.RecyclerAdapter;
-import com.example.mishlavim.model.Admin;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import org.jetbrains.annotations.NotNull;
-
-import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.util.TypedValue;
-import android.view.ContextThemeWrapper;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.PopupMenu;
-import android.widget.TableLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.DialogFragment;
+import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.mishlavim.R;
-import com.example.mishlavim.dialogs.DeleteUserDialog;
-import com.example.mishlavim.login.LoginActivity;
-import com.example.mishlavim.model.Adapter.MyListAdapter;
-import com.example.mishlavim.model.Firebase.AuthenticationMethods;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
 import com.example.mishlavim.model.Firebase.FirestoreMethods;
 import com.example.mishlavim.model.Global;
 import com.example.mishlavim.model.Guide;
 import com.example.mishlavim.model.Volunteer;
 import com.example.mishlavim.volunteerActivities.VolunteerMainActivity;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.mishlavim.UserSettingActivity;
 import com.google.firebase.firestore.DocumentSnapshot;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-public class GuideVolunteerListFragment extends Fragment implements PopupMenu.OnMenuItemClickListener, DeleteUserDialog.deleteUserListener, SearchView.OnQueryTextListener {
-
+public class GuideVolunteerListFragment extends Fragment implements PopupMenu.OnMenuItemClickListener{
+    SearchView searchView;
     RecyclerView guidesView;
     RecyclerAdapter recyclerAdapter;
     List<String> guidesNames;
@@ -108,6 +74,22 @@ public class GuideVolunteerListFragment extends Fragment implements PopupMenu.On
         guidesView = view.findViewById(R.id.volunteers_recycler_view);
         recyclerAdapter = new RecyclerAdapter(guidesNames, this, R.menu.volunteer_options_menu);
         guidesView.setAdapter(recyclerAdapter);
+
+        //init search
+        searchView = view.findViewById(R.id.search_bar);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                recyclerAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
     }
 
 
@@ -120,53 +102,29 @@ public class GuideVolunteerListFragment extends Fragment implements PopupMenu.On
 
         switch(item.getItemId() ){
             case R.id.view_volunteer:
-                FirestoreMethods.getDocument(FirebaseStrings.usersStr(), clickedRowUid , this::getUserDocSuccess, this::getUserDocFailed);
+                //getting the volunteer data and moving to volunteer main
+                FirestoreMethods.getDocument(FirebaseStrings.usersStr(), clickedRowUid , this::viewGetUserDocSuccess, this::getUserDocFailed);
                 break;
             case R.id.edit_volunteer:
-                //TODO
+                //moving to setting activity
+                FirestoreMethods.getDocument(FirebaseStrings.usersStr(), clickedRowUid , this::settingGetUserDocSuccess, this::getUserDocFailed);
                 break;
             case R.id.open_form_to_volunteer:
-                Intent intent = new Intent(getActivity().getBaseContext(),
-                        GuideFormsPermissionActivity.class);
-                intent.putExtra("CLICKED_VOLU_KEY", clickedRowText);
-                intent.putExtra("CLICKED_VOLU_ID", clickedRowUid);
-                getActivity().startActivity(intent);
+                //moving to the activity, passing the clicked volunteer details, getting the volunteer data into global
+                FirestoreMethods.getDocument(FirebaseStrings.usersStr(), clickedRowUid , this::OpenGetUserDocSuccess, this::getUserDocFailed);
                 break;
             case R.id.remove_volunteer:
-                DialogFragment newFragment = new DeleteUserDialog();
-                newFragment.show(getActivity().getSupportFragmentManager(), "deleteUser");
+               //TODO - show yes/no dialog.
                 break;
         }
         return true;
     }
 
-    //search functions
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        Context context = getContext();
-        //here im checking to see if the search is working upon submit
-        Toast.makeText(context,"Our word : "+query,Toast.LENGTH_SHORT).show();
-        return false;
-    }
-
-
-    @Override
-    //when user type in searchview get string as newText parameter
-    public boolean onQueryTextChange(String newText) {
-//        recyclerAdapter.getFilter().filter(newText);
-        return false;
-    }
     //delete dialog functions
-    @Override
     public void onDeletePositiveClick(DialogFragment dialog) {
         Guide.deleteVolunteer(global.getUid(), clickedRowUid);
         FirestoreMethods.deleteDocument(FirebaseStrings.usersStr(), clickedRowUid, this::onDocumentDeleteSuccess, this::onDeleteFailed);
     }
-
-    @Override
-    public void onDeleteNegativeClick(DialogFragment dialog) {
-    }
-
 
     public Void onDocumentDeleteSuccess(Void noUse){
         Toast.makeText(getActivity(), "המחיקה הסתיימה בהצלחה", Toast.LENGTH_SHORT).show();
@@ -178,14 +136,39 @@ public class GuideVolunteerListFragment extends Fragment implements PopupMenu.On
         Toast.makeText(getActivity(), "מחיקה נכשלה", Toast.LENGTH_SHORT).show();
         return null;
     }
-    //go to watch volunteer as a guide
 
-    private Void getUserDocSuccess(DocumentSnapshot doc){
+    //go to watch volunteer as a guide
+    private Void viewGetUserDocSuccess(DocumentSnapshot doc){
         assert doc != null;
         Volunteer volu = doc.toObject(Volunteer.class);
         global.setVoluInstance(volu);
         Intent intent = new Intent(getActivity().getBaseContext(),
                 VolunteerMainActivity.class);
+        getActivity().startActivity(intent);
+        return null;
+    }
+
+    //go to open a form to the volunteer
+    private Void OpenGetUserDocSuccess(DocumentSnapshot doc){
+        assert doc != null;
+        Volunteer volu = doc.toObject(Volunteer.class);
+        global.setVoluInstance(volu);
+        Intent intent = new Intent(getActivity().getBaseContext(),
+                GuideFormsPermissionActivity.class);
+        intent.putExtra("CLICKED_VOLU_KEY", clickedRowText);
+        intent.putExtra("CLICKED_VOLU_ID", clickedRowUid);
+        getActivity().startActivity(intent);
+        return null;
+    }
+
+    private Void settingGetUserDocSuccess(DocumentSnapshot doc) {
+        assert doc != null;
+        Volunteer volu = doc.toObject(Volunteer.class);
+        global.setVoluInstance(volu);
+        Intent intent = new Intent(getActivity().getBaseContext(),
+                UserSettingActivity.class);
+        intent.putExtra("CLICKED_USER_TYPE", FirebaseStrings.volunteerStr());
+        intent.putExtra("CLICKED_USER_ID", clickedRowUid);
         getActivity().startActivity(intent);
         return null;
     }

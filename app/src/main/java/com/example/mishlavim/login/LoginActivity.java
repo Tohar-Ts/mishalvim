@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.mishlavim.R;
 import com.example.mishlavim.forgotPassword;
 import com.example.mishlavim.adminActivities.AdminNavigationActivity;
-import com.example.mishlavim.guideActivities.GuideMainActivity;
 import com.example.mishlavim.guideActivities.GuideNavigationActivity;
 import com.example.mishlavim.model.Admin;
 import com.example.mishlavim.model.Firebase.AuthenticationMethods;
@@ -23,7 +22,6 @@ import com.example.mishlavim.model.Guide;
 import com.example.mishlavim.model.Volunteer;
 import com.example.mishlavim.volunteerActivities.VolunteerMainActivity;
 import com.google.firebase.firestore.DocumentSnapshot;
-import java.util.Objects;
 
 //TODO - forgot password function on click
 //TODO - check if user is signed in. if yes - skip the login, init and redirect .
@@ -116,7 +114,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void redirectUserByType(DocumentSnapshot document) {
-        String type = Objects.requireNonNull(document.get(FirebaseStrings.typeStr())).toString();
+        String type = document.get(FirebaseStrings.typeStr()).toString();
         globalInstance.setType(type);
 
         //init admin and go to admin main screen

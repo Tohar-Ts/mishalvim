@@ -8,6 +8,8 @@ import android.util.Log;
 
 import androidx.fragment.app.DialogFragment;
 
+import com.example.mishlavim.model.CustomApplicationBase;
+
 
 public class AddUserDialog extends DialogFragment {
 
@@ -38,7 +40,7 @@ public class AddUserDialog extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(CustomApplicationBase.getCurrentActivity());
 
         builder.setMessage("משתמש נוצר בהצלחה!")
 

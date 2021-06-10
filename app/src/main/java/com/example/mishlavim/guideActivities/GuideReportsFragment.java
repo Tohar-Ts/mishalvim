@@ -77,7 +77,7 @@ public class GuideReportsFragment extends Fragment implements View.OnClickListen
         myVolunteersMap = guide.getMyVolunteers();
         volunteersTbl = view.findViewById(R.id.volunteers_tbl);
         avgText = view.findViewById(R.id.avg_text);
-        startTbl();
+//        startTbl();
     }
 
 

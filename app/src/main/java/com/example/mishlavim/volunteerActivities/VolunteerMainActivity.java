@@ -15,9 +15,6 @@ import com.example.mishlavim.R;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.mishlavim.guideActivities.GuideAddVolunteerActivity;
-import com.example.mishlavim.guideActivities.GuideMainActivity;
-import com.example.mishlavim.guideActivities.GuideReportsActivity;
 import com.example.mishlavim.model.Firebase.AuthenticationMethods;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
 import com.example.mishlavim.model.Global;
@@ -52,7 +49,7 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
         Global globalInstance = Global.getGlobalInstance();
         volu = globalInstance.getVoluInstance();
 
-        if (!volu.isHasOpenForm()){
+        if (!volu.getHasOpenForm()){
             openFormBtn.setVisibility(View.GONE);
         }
 
@@ -86,15 +83,13 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.go_home){
             finish();
-            startActivity(new Intent(getApplicationContext(), GuideMainActivity.class));
+//            startActivity(new Intent(getApplicationContext(), GuideMainActivity.class));
             return true;
         }
         else if (item.getItemId() == R.id.add_user) {
-            startActivity(new Intent(getApplicationContext(), GuideAddVolunteerActivity.class));
             overridePendingTransition(0, 0);
             return true;
         } else if (item.getItemId() == R.id.forms) {
-            startActivity(new Intent(getApplicationContext(), GuideReportsActivity.class));
             overridePendingTransition(0, 0);
             return true;
         }

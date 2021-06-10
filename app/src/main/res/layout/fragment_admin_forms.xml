@@ -17,6 +17,7 @@
         android:fontFamily="@font/alef"
         android:layout_alignParentTop="true"
         android:text="שאלונים"
+        android:layout_margin="40dp"
         android:textColor="@color/black"
         android:textSize="30sp" />
 
@@ -34,5 +35,15 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
     </LinearLayout>
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search_barB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:defaultQueryHint="@string/searchHintForm"
+        android:layout_alignParentTop="true"
+        android:layoutDirection="rtl"
+        >
+    </androidx.appcompat.widget.SearchView>
+
 
 </RelativeLayout>

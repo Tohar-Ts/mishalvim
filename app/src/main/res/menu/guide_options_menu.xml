@@ -5,9 +5,6 @@
         android:id="@+id/view_guide_volunteers"
         android:title="צפייה בחניכים" />
     <item
-        android:id="@+id/edit_guide"
-        android:title="ערוך מדריך" />
-    <item
         android:id="@+id/remove_guide"
         android:title="מחק מדריך" />
 
