@@ -15,6 +15,8 @@ import com.example.mishlavim.R;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.mishlavim.adminActivities.AdminNavigationActivity;
+import com.example.mishlavim.guideActivities.GuideNavigationActivity;
 import com.example.mishlavim.model.Firebase.AuthenticationMethods;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
 import com.example.mishlavim.model.Global;
@@ -33,6 +35,10 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
     private GridLayout formsLayout;
     private Volunteer volu;
     private FloatingActionButton openFormBtn;
+    private TextView openFormTxt;
+    private FloatingActionButton homeBtn;
+    private String userUpdatingType;
+    private Global global;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,17 +49,25 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
         helloVolu = findViewById(R.id.HelloVolu);
         formsLayout = findViewById(R.id.finishedFormsLayout);
         openFormBtn = findViewById(R.id.openFormBtn);
-
+        openFormTxt = findViewById(R.id.openFormTxt);
+        homeBtn = findViewById(R.id.voluMainHomeFloating);
         //init volu object
         Global globalInstance = Global.getGlobalInstance();
         volu = globalInstance.getVoluInstance();
 
         if (!volu.getHasOpenForm()){
-            openFormBtn.setVisibility(View.GONE);
+            openFormTxt.setText("לא קיים\nשאלון פתוח");
+            openFormBtn.setClickable(false);
+            openFormBtn.setEnabled(false);
         }
 
         openFormBtn.setOnClickListener(this);
-
+        homeBtn.setOnClickListener(this);
+        global = Global.getGlobalInstance();
+        userUpdatingType = global.getType();
+        if(userUpdatingType.compareTo(FirebaseStrings.volunteerStr()) != 0){
+            homeBtn.setVisibility(View.VISIBLE);
+        }
         setHelloMsg();
         setAnsweredForms();
         showGuideHomeBtn();
@@ -66,7 +80,10 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
             Intent intent = new Intent(VolunteerMainActivity.this, VolunteerFillOutFormActivity.class);
             startActivity(intent);
         }
-
+        else if(v.getId() ==  R.id.voluMainHomeFloating){
+            //clicking on go back home button - switch activities
+            switchToHomeByUser();
+        }
         //clicked on an old form button
         else {
             Button clicked = (Button)v;
@@ -134,6 +151,18 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
 
     private int convertFromDpToPixels(int toConvert){
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, toConvert, getResources().getDisplayMetrics());
+    }
+    private void switchToHomeByUser() {
+        //admin is in the setting screen
+        if(userUpdatingType.equals(FirebaseStrings.adminStr())){
+            startActivity(new Intent(getApplicationContext(), AdminNavigationActivity.class));
+        }
+        //guide is in the setting screen
+        else{
+            startActivity(new Intent(getApplicationContext(), GuideNavigationActivity.class));
+        }
+        finish();
+        overridePendingTransition(0, 0);
     }
 
 }

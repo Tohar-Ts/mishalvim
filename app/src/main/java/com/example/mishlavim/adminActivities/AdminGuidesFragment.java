@@ -1,6 +1,7 @@
 package com.example.mishlavim.adminActivities;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.widget.SearchView;
 import androidx.annotation.NonNull;
@@ -17,9 +18,15 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.example.mishlavim.R;
+import com.example.mishlavim.guideActivities.GuideFormsPermissionActivity;
 import com.example.mishlavim.model.Adapter.RecyclerAdapter;
 import com.example.mishlavim.model.Admin;
+import com.example.mishlavim.model.Firebase.FirebaseStrings;
+import com.example.mishlavim.model.Firebase.FirestoreMethods;
 import com.example.mishlavim.model.Global;
+import com.example.mishlavim.model.Guide;
+import com.example.mishlavim.model.Volunteer;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,11 +36,13 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class AdminGuidesFragment extends Fragment implements PopupMenu.OnMenuItemClickListener{
-    SearchView searchView;
-    RecyclerView guidesView;
-    RecyclerAdapter recyclerAdapter;
-    List<String> guidesNames;
-    Admin admin;
+    private SearchView searchView;
+    private RecyclerView guidesView;
+    private RecyclerAdapter recyclerAdapter;
+    private List<String> guidesNames;
+    private Admin admin;
+    private String clickedGuideId; // the clicked guide id
+    private String clickedGuideName;
 
     public AdminGuidesFragment() {
         // Required empty public constructor
@@ -87,17 +96,38 @@ public class AdminGuidesFragment extends Fragment implements PopupMenu.OnMenuIte
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         //getting clicked text
+        //getting clicked text
+        clickedGuideName = recyclerAdapter.getClickedText();
+        clickedGuideId = admin.getGuideList().get(clickedGuideName);
 
         switch(item.getItemId() ){
             case R.id.view_guide_volunteers:
-                Log.d("onMenuItemClick: ", "view volunteer:" + recyclerAdapter.getClickedText() );
+                FirestoreMethods.getDocument(FirebaseStrings.usersStr(), clickedGuideId , this::getGuideDocSuccess, this::getGuideDocFailed);
                 break;
             case R.id.remove_guide:
+                //TODO - remove user
                 Log.d("onMenuItemClick: ", "remove guide:" + recyclerAdapter.getClickedText() );
                 break;
         }
             return true;
         }
+
+    private Void getGuideDocFailed(Void unused) {
+        Toast.makeText(getActivity(), "טעינת מידע על המדריך נכשלה", Toast.LENGTH_SHORT).show();
+        return null;
+    }
+
+    private Void getGuideDocSuccess(DocumentSnapshot doc) {
+        assert doc != null;
+        Guide guide = doc.toObject(Guide.class);
+        Global.getGlobalInstance().setGuideInstance(guide);
+        Intent intent = new Intent(getActivity().getBaseContext(),
+                AdminViewGuideVoluActivity.class);
+        intent.putExtra("CLICKED_GUIDE_KEY", clickedGuideName);
+        intent.putExtra("CLICKED_GUIDE_ID", clickedGuideId);
+        getActivity().startActivity(intent);
+        return null;
+    }
 
 
 }

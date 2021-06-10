@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:padding="30dp"
+android:background="@color/gray_background"
+tools:context=".adminActivities.AdminViewGuideVoluActivity">
+
+<TextView
+    android:id="@+id/adminVoluListPrompt"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:layout_margin="5dp"
+    android:fontFamily="@font/alef"
+    android:layout_alignParentTop="true"
+    android:text="רשימת מתנדבים"
+    android:textColor="@color/black"
+    android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/adminGuideName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="5dp"
+        android:fontFamily="@font/alef"
+        android:text="מדריך 5"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:layout_below="@id/adminVoluListPrompt"/>
+
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/admin_volu_search_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:defaultQueryHint="@string/searchHintVolunteer"
+        android:layout_marginTop="10dp"
+        android:layoutDirection="rtl"
+        android:layout_below="@id/adminGuideName">
+    </androidx.appcompat.widget.SearchView>
+
+<LinearLayout
+    android:id="@+id/adminVoluListLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerInParent="true"
+    android:layout_above="@+id/passAllVolusBtn"
+
+    android:layout_below="@id/admin_volu_search_bar">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/volunteers_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+</LinearLayout>
+
+    <Button
+        android:id="@+id/passAllVolusBtn"
+        android:layout_width="200dp"
+        android:padding="5dp"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/blue_button2"
+        android:text="העבר את כל החניכים למדריך אחר"
+        android:textColor="@drawable/blue_text_pressed"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/adminHomeFloating"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="@color/green"
+        android:src="@drawable/ic_home"
+        app:fabCustomSize="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"/>
+
+</RelativeLayout>

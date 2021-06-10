@@ -22,6 +22,9 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 
 public class GuideReportsFragment extends Fragment implements View.OnClickListener{
@@ -32,6 +35,8 @@ public class GuideReportsFragment extends Fragment implements View.OnClickListen
     private HashMap<String, Integer> numOfForms = new HashMap<>();
     private TextView avgText;
     private View view;
+    private static DecimalFormat df2 = new DecimalFormat("#.##");
+
 
     public GuideReportsFragment() {
         // Required empty public constructor
@@ -150,7 +155,7 @@ public class GuideReportsFragment extends Fragment implements View.OnClickListen
         }
         Log.d("calculateAvg", " "+ allFormsSum+" "+ voluNum);
         double avgFormsPerVolu = (double)allFormsSum / (double)voluNum;
-        avgText.setText("ממוצע טפסים לחניך:" + avgFormsPerVolu);
+        avgText.setText("ממוצע טפסים לחניך: " + df2.format(avgFormsPerVolu));
 
     }
 

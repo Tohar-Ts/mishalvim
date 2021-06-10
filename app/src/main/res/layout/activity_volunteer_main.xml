@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/Theme.MishlavimPink.NoActionBar"
-    android:background="@drawable/background_green"
+    android:background="@drawable/background_rectangles3"
     tools:context=".volunteerActivities.VolunteerMainActivity">
 
 
@@ -34,6 +34,7 @@
 
 
         <TextView
+            android:id="@+id/openFormTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -63,7 +64,7 @@
             android:layout_centerInParent="true"
             android:text="שאלונים שמורים:"
             android:textAlignment="center"
-            android:textColor="@color/green"
+            android:textColor="#303030"
             android:textSize="40sp" />
 
         <ScrollView
@@ -84,6 +85,17 @@
 
 
         </ScrollView>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/voluMainHomeFloating"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="30dp"
+        android:backgroundTint="@color/green"
+        android:src="@drawable/ic_home"
+        app:fabCustomSize="60dp"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"/>
 
 
 

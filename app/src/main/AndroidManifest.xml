@@ -10,14 +10,17 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".UserSettingActivity"></activity>
+        <activity android:name=".deleteUserActivity"></activity>
+        <activity android:name=".adminActivities.AdminViewGuideVoluActivity" />
+        <activity android:name=".UserSettingActivity" />
         <activity
             android:name=".guideActivities.GuideNavigationActivity"
             android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".adminActivities.AdminNavigationActivity"
             android:windowSoftInputMode="adjustNothing" />
-        <activity android:name=".login.forgotPassword" />
+        <activity android:name=".forgotPassword" />
+        <activity android:name=".adminActivities.AdminWatchTemplate" />
         <activity android:name=".guideActivities.GuideFormsPermissionActivity" />
         <activity android:name=".volunteerActivities.VolunteerFinishedFormActivity" />
         <activity android:name=".volunteerActivities.VolunteerMainActivity" />
