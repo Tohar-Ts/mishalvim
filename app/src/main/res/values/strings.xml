@@ -1,7 +1,6 @@
 <resources>
 
     <string name="app_name">משלבים</string>
-    <string name="hint">סיסמא</string>
     <string name="buttonName">טופס 1</string>
     <string name="fillform"> מלא טופס נוכחי</string>
     <string name="add_new_form">הוסף טופס חדש</string>
@@ -28,10 +27,10 @@
     <string name="textOff">מדריכים</string>
     <string name="textOn">טפסים</string>
     <string name="action_register">רשום משתמש</string>
-    <string name="title_email">אימייל:</string>
-    <string name="title_user_name">שם מלא:</string>
-    <string name="title_user_password">:סיסמה</string>
-    <string name="title_verify_password">:אימות סיסמה</string>
+    <string name="title_email">אימייל</string>
+    <string name="title_user_name">שם מלא</string>
+    <string name="title_user_password">סיסמה</string>
+    <string name="title_verify_password">אימות סיסמה</string>
     <string name="prompt_add_user">נא הכנס את פרטי המשתמש:</string>
     <string name="prompt_admin">מנהל</string>
     <string name="prompt_guide">מדריך</string>

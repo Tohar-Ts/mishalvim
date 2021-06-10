@@ -142,10 +142,10 @@
     <Spinner
         android:id="@+id/guides_spinner"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="45dp"
         android:layout_below="@+id/typesRg"
         android:layout_centerVertical="true"
-        android:layout_marginTop="9dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/custom_input"
         android:visibility="gone" />
 

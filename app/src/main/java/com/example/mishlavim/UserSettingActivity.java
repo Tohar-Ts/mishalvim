@@ -3,11 +3,14 @@ package com.example.mishlavim;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.mishlavim.adminActivities.AdminNavigationActivity;
 import com.example.mishlavim.guideActivities.GuideNavigationActivity;
+import com.example.mishlavim.login.Validation;
 import com.example.mishlavim.model.Firebase.AuthenticationMethods;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
 import com.example.mishlavim.model.Global;
 import com.example.mishlavim.model.User;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -36,7 +39,8 @@ public class UserSettingActivity extends AppCompatActivity implements View.OnCli
     private String userUpdatingType ,userToUpdateType, userToUpdateUid;
     private boolean showLoginAgain;
     private User userData;
-    EditText newEmail, newUserName, newPassword;
+    private Validation validation;
+    EditText newEmail, newUserName, newPassword, newVerifyPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,23 +56,26 @@ public class UserSettingActivity extends AppCompatActivity implements View.OnCli
         newEmail = findViewById(R.id.settingNewEmail);
         newUserName = findViewById(R.id.settingNewUserName);
         newPassword = findViewById(R.id.settingNewPassword);
-
+        newVerifyPassword = findViewById(R.id.settingVerifyPassword);
         //init user data
         userToUpdateType = getIntent().getStringExtra("CLICKED_USER_TYPE");
         userToUpdateUid =  getIntent().getStringExtra("CLICKED_USER_ID");
         showLoginAgain = getIntent().getBooleanExtra("SHOW_LOGIN", true);
 
+        //init validation class
+        validation = new Validation(newEmail, newUserName, newPassword, newVerifyPassword
+                , progressBar, getResources());
         global = Global.getGlobalInstance();
         userUpdatingType = global.getType();
         initUserDataByType();
 
-        //showing the login again screen
+//        showing the login again screen
         if(showLoginAgain)
             initLoginAgain();
         else
             initSetting();
 
-        //init listeners
+//        init listeners
         loginBtn.setOnClickListener(this);
         updateBtn.setOnClickListener(this);
         homeBtn.setOnClickListener(this);
@@ -77,6 +84,9 @@ public class UserSettingActivity extends AppCompatActivity implements View.OnCli
     @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
+        //        validate input - if the input is invalid, don't continue.
+        if (validation.validateInput())
+            return;
         switch (v.getId()){
             case R.id.SettingLogin:
                parseLoginInput();
@@ -89,6 +99,7 @@ public class UserSettingActivity extends AppCompatActivity implements View.OnCli
                 switchToHomeByUser();
                 break;
         }
+
     }
 
     private void initUserDataByType() {
@@ -115,6 +126,7 @@ public class UserSettingActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void parseLoginInput() {
+
         progressBar.setVisibility(View.VISIBLE);
         EditText passwordText = findViewById(R.id.SettingPassword);
 
@@ -167,4 +179,5 @@ public class UserSettingActivity extends AppCompatActivity implements View.OnCli
         finish();
         overridePendingTransition(0, 0);
     }
+
 }

@@ -106,7 +106,8 @@
             android:layout_centerHorizontal="true"
             android:fontFamily="@font/alef"
             android:layout_alignParentTop="true"
-            android:text="שנה את השדה שברצונך לעדכן:"
+            android:text="בבקשה תשנה את השדה       שברצונך לעדכן:"
+            android:gravity="center"
             android:textColor="@color/black"
             android:textSize="25sp"
             android:textStyle="bold"/>
