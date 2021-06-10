@@ -29,7 +29,6 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
     private TextView formName;
     private FloatingActionButton editButton, saveButton;
     private LinearLayout savedAnswersLayout;
-
     private boolean canEdit = false;
     private String clickedFormKey;
     private String clickedFormId;
@@ -116,7 +115,7 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
         answers = answersObj.getAnswers();
         canEdit = answersObj.getFinishedButCanEdit();
         // TODO: 6/9/2021 CHANGE THIS FUNCTION CUZ DOCUMENT ID IS WRONG!!!
-        FirestoreMethods.getDocument(FirebaseStrings.formsTemplatesStr(), "Cfxrc4aUw5lnTOsNFk5B",
+        FirestoreMethods.getDocument(FirebaseStrings.formsTemplatesStr(), "clickedFormId",
                 this::onGettingQuestionsSuccess, this::showError);
         return null;
     }
@@ -124,7 +123,6 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
     private Void onGettingQuestionsSuccess(DocumentSnapshot document) {
         assert document != null;
         FormTemplate questionsObj = document.toObject(FormTemplate.class);
-
         assert questionsObj != null;
         questions = questionsObj.getQuestionsMap();
 

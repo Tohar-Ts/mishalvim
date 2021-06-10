@@ -32,6 +32,4 @@
         android:textSize="20sp"
         android:padding="10dp"
         android:textStyle="bold" />
-
-
 </RelativeLayout>

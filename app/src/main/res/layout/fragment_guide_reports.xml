@@ -4,7 +4,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:theme="@style/Theme.MishlavimPink"
-        android:padding="30dp"
+        android:padding="10dp"
         android:background="@color/gray_background"
         tools:context=".guideActivities.GuideReportsFragment">
 
@@ -13,8 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="59dp"
+        android:background="@drawable/white_text_background"
         android:gravity="center"
         android:text="@string/reports"
         android:textSize="30sp" />
@@ -26,44 +26,68 @@
         android:layout_centerInParent="true"
         android:layout_below="@+id/textView"
         android:layout_marginBottom="10dp"
-        android:layout_height="match_parent"
-           >
+        android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="vertical">
 
                 <TableLayout
+                    android:background="@drawable/white_text_background"
                     android:id="@+id/volunteers_tbl"
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:stretchColumns="1"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="30dp"
-                    >
+                    android:stretchColumns="0,1"
+                    android:layout_gravity="center">
 
-                    <TableRow>
-                        <TextView
-                            android:padding="3dip"
-                            android:text="@string/num_of_filled_forms"
-                            android:textSize="25sp"
-                            android:background="@drawable/borders"/>
-                        <TextView
-                            android:padding="3dip"
-                            android:text="@string/volu_name"
-                            android:textSize="25sp"
-                            android:background="@drawable/borders"/>
-                        />
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <LinearLayout
+                            android:background="@drawable/table"
+                            android:paddingBottom="17dp"
+                            android:padding="20dp"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:padding="3dip"
+                                android:text="@string/num_of_filled_forms"
+                                android:id="@+id/numOfFormsHead"
+                                android:layout_width="180dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="20dp"
+                                android:layout_centerInParent="true"
+                                android:fontFamily="@font/alef"
+                                android:textColor="@drawable/blue_text_pressed"
+                                android:textSize="20sp"
+                                android:textStyle="bold"
+                                android:layout_column="0"/>
+
+                            <TextView
+                                android:id="@+id/VoluNameHead"
+                                android:layout_width="120dp"
+                                android:layout_height="32dp"
+                                android:layout_column="1"
+                                android:layout_centerInParent="true"
+                                android:layout_marginRight="20dp"
+                                android:fontFamily="@font/alef"
+                                android:padding="3dip"
+                                android:text="@string/volu_name"
+                                android:textColor="@drawable/blue_text_pressed"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
                     </TableRow>
                 </TableLayout>
 
                 <TextView
+                    android:layout_marginTop="30dp"
                     android:id="@+id/avg_text"
-                    android:layout_width="wrap_content"
+                    android:background="@drawable/white_text_background"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
