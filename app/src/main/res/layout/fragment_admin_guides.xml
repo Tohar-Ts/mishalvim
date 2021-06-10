@@ -16,6 +16,7 @@
         android:fontFamily="@font/alef"
         android:layout_alignParentTop="true"
         android:text="@string/guides"
+        android:layout_margin="35dp"
         android:textColor="@color/black"
         android:textSize="30sp" />
     <LinearLayout
@@ -32,4 +33,13 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
     </LinearLayout>
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search_barA"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:defaultQueryHint="@string/searchHintGuide"
+        android:layout_alignParentTop="true"
+        android:layoutDirection="rtl"
+        >
+    </androidx.appcompat.widget.SearchView>
 </RelativeLayout>
