@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
@@ -15,10 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
 import com.example.mishlavim.R;
-import com.example.mishlavim.dialogs.DeleteUserDialog;
 import com.example.mishlavim.model.Adapter.RecyclerAdapter;
-import android.content.Context;
+
 import android.content.Intent;
+import android.widget.SearchView;
 import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
@@ -27,6 +26,7 @@ import com.example.mishlavim.model.Global;
 import com.example.mishlavim.model.Guide;
 import com.example.mishlavim.model.Volunteer;
 import com.example.mishlavim.volunteerActivities.VolunteerMainActivity;
+import com.example.mishlavim.UserSettingActivity;
 import com.google.firebase.firestore.DocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
@@ -105,7 +105,8 @@ public class GuideVolunteerListFragment extends Fragment implements PopupMenu.On
                 FirestoreMethods.getDocument(FirebaseStrings.usersStr(), clickedRowUid , this::viewGetUserDocSuccess, this::getUserDocFailed);
                 break;
             case R.id.edit_volunteer:
-                //TODO - show what is the volunteer name?.
+                //moving to setting activity
+                FirestoreMethods.getDocument(FirebaseStrings.usersStr(), clickedRowUid , this::settingGetUserDocSuccess, this::getUserDocFailed);
                 break;
             case R.id.open_form_to_volunteer:
                 //moving to the activity, passing the clicked volunteer details, getting the volunteer data into global
@@ -117,6 +118,7 @@ public class GuideVolunteerListFragment extends Fragment implements PopupMenu.On
         }
         return true;
     }
+
 
     //search functions
     //TODO - fixing search to recycle view
@@ -161,6 +163,19 @@ public class GuideVolunteerListFragment extends Fragment implements PopupMenu.On
         getActivity().startActivity(intent);
         return null;
     }
+
+    private Void settingGetUserDocSuccess(DocumentSnapshot doc) {
+        assert doc != null;
+        Volunteer volu = doc.toObject(Volunteer.class);
+        global.setVoluInstance(volu);
+        Intent intent = new Intent(getActivity().getBaseContext(),
+                UserSettingActivity.class);
+        intent.putExtra("CLICKED_USER_TYPE", FirebaseStrings.volunteerStr());
+        intent.putExtra("CLICKED_USER_ID", clickedRowUid);
+        getActivity().startActivity(intent);
+        return null;
+    }
+
     private Void getUserDocFailed(Void unused){
         Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT).show();
         return null;

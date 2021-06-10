@@ -10,10 +10,13 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".guideActivities.GuideNavigationActivity"
-            android:windowSoftInputMode="adjustNothing"/>
-        <activity android:name=".adminActivities.AdminNavigationActivity"
-            android:windowSoftInputMode="adjustNothing"/>
+        <activity android:name=".UserSettingActivity"></activity>
+        <activity
+            android:name=".guideActivities.GuideNavigationActivity"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name=".adminActivities.AdminNavigationActivity"
+            android:windowSoftInputMode="adjustNothing" />
         <activity android:name=".forgotPassword" />
         <activity android:name=".guideActivities.GuideFormsPermissionActivity" />
         <activity android:name=".volunteerActivities.VolunteerFinishedFormActivity" />
@@ -21,10 +24,10 @@
         <activity android:name=".volunteerActivities.VolunteerViewOldFormActivity" />
         <activity android:name=".volunteerActivities.VolunteerFillOutFormActivity" />
         <activity android:name=".login.LoginActivity" />
-        <activity
-            android:name=".login.SplashScreenActivity">
+        <activity android:name=".login.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
