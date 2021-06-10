@@ -43,15 +43,13 @@
     </LinearLayout>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/guideHomeFloating"
-        android:layout_width="65dp"
-        android:layout_height="74dp"
-        android:layout_margin="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="10dp"
         android:backgroundTint="@color/green"
         android:src="@drawable/ic_home"
-        app:fabCustomSize="70dp"
+        app:fabCustomSize="60dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"/>
+        android:layout_alignParentRight="true"/>
 
 </RelativeLayout>
