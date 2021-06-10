@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import com.example.mishlavim.R;
 import com.example.mishlavim.model.Adapter.RecyclerAdapter;
@@ -67,6 +68,7 @@ public class AdminFormsFragment extends Fragment implements PopupMenu.OnMenuItem
     }
 
     private Void showError(Void unused) {
+        Toast.makeText(getActivity(), "שגיאה בטעינת המידע", Toast.LENGTH_SHORT).show();
         return null;
     }
 
