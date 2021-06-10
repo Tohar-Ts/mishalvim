@@ -1,6 +1,7 @@
 package com.example.mishlavim.adminActivities;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,16 +18,19 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.example.mishlavim.R;
+import com.example.mishlavim.UserSettingActivity;
 import com.example.mishlavim.model.Adapter.RecyclerAdapter;
 import com.example.mishlavim.model.Admin;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
 import com.example.mishlavim.model.Firebase.FirestoreMethods;
 import com.example.mishlavim.model.FormTemplate;
 import com.example.mishlavim.model.Global;
+import com.example.mishlavim.volunteerActivities.VolunteerMainActivity;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -37,8 +41,10 @@ public class AdminFormsFragment extends Fragment implements PopupMenu.OnMenuItem
     SearchView searchView;
     RecyclerView templateView;
     RecyclerAdapter recyclerAdapter;
-    List<FormTemplate> templates;
+    HashMap<String,String> templates;
     List<String> templatesNames;
+    String clickedRowText;
+    String clickedRowUid;
 
     public AdminFormsFragment() {
         // Required empty public constructor
@@ -62,6 +68,8 @@ public class AdminFormsFragment extends Fragment implements PopupMenu.OnMenuItem
         super.onViewCreated(view, savedInstanceState);
         //init xml views
         templateView = view.findViewById(R.id.templates_recycler_view);
+        clickedRowText = ""; //default
+        clickedRowUid = ""; //default
 
         searchView = view.findViewById(R.id.search_barB);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -88,18 +96,32 @@ public class AdminFormsFragment extends Fragment implements PopupMenu.OnMenuItem
 
     private Void onGetTemplateSuccess(QuerySnapshot result){
         //init a list of FormTemplates object from the collection
-        templates = new ArrayList<>();
-        for (DocumentSnapshot snapshot:result) {
-            templates.add(snapshot.toObject(FormTemplate.class));
+
+        String formNameField = FirebaseStrings.formNameStr();
+        templates = new HashMap<>();
+        for (DocumentSnapshot snapshot : result) {
+            if (result == null) {
+                showError(null);
+                return null;
+            }
+            templates.put((String) snapshot.get(formNameField), snapshot.getId());
         }
 
         //init a list of Form Templates names
-        templatesNames = new ArrayList<>();
-        templates.forEach((f) -> templatesNames.add(f.getFormName()));
+        templatesNames = new ArrayList<>(templates.keySet());
+//        templates = new ArrayList<>();
+//        for (DocumentSnapshot snapshot:result) {
+//            templates.add(snapshot.toObject(FormTemplate.class));
+//        }
+//
+//        //init a list of Form Templates names
+//        templatesNames = new ArrayList<>();
+//        templates.forEach((f) -> templatesNames.add(f.getFormName()));
 
         //init the recycle view
         recyclerAdapter = new RecyclerAdapter(templatesNames, this, R.menu.templates_options_menu);
         templateView.setAdapter(recyclerAdapter);
+
         return null;
     }
 
@@ -107,10 +129,17 @@ public class AdminFormsFragment extends Fragment implements PopupMenu.OnMenuItem
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         //getting clicked text
+        clickedRowText = recyclerAdapter.getClickedText();
+        clickedRowUid = templates.get(clickedRowText);
 
         switch(item.getItemId() ){
             case R.id.view_template:
                 Log.d("onMenuItemClick: ", "view_template:" + recyclerAdapter.getClickedText() );
+                Intent intent = new Intent(getActivity().getBaseContext(),
+                        AdminWatchTemplate.class);
+                intent.putExtra("CLICKED_FORM_VALUE", clickedRowUid);
+                intent.putExtra("CLICKED_FORM_KEY", clickedRowText);
+                getActivity().startActivity(intent);
                 break;
             case R.id.edit_template:
                 Log.d("onMenuItemClick: ", "edit_template:" + recyclerAdapter.getClickedText() );
