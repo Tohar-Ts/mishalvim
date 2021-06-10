@@ -7,6 +7,7 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,21 +33,24 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AdminWatchTemplate extends AppCompatActivity implements View.OnClickListener,
-        openFormWarningDialog.openFormWarningListener, openFormCancelDialog.openFormCancelListener
+        openFormWarningDialog.openFormWarningListener
 {
     private TextView formName;
     private String clickedFormKey;
     private String clickedFormId;
     private HashMap <String, String> questions;
-    private FloatingActionButton editBTM;
+    private FloatingActionButton editBTM, saveButton;
     private LinearLayout questionsLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_volunteer_view_old_form);
+        setContentView(R.layout.admin_watch_template_activity);
 
         editBTM = findViewById(R.id.questionsEditFloating);
+        saveButton = findViewById(R.id.SaveFloating);
+        saveButton.setOnClickListener(this::onClick);
+        editBTM.setOnClickListener(this::onClick);
         questionsLayout = findViewById(R.id.questionsTemplateLayout);
         //TODO: add a progress bar
 
@@ -59,9 +63,22 @@ public class AdminWatchTemplate extends AppCompatActivity implements View.OnClic
         formName = findViewById(R.id.finishedFormName);
         formName.setText(clickedFormKey);
 
+
+
         getQuestionsFromFirebase();
+
     }
 
+    @Override
+    public void onClick(View v) {
+
+        if(v.getId() ==  R.id.questionsEditFloating)
+            showWarningDialog();
+
+        else if(v.getId() == R.id.SaveFloating)
+            saveEditedQuestions();
+
+    }
 
     private Void showError(Void v) {
         Toast.makeText(getApplicationContext(), R.string.firebase_failed, Toast.LENGTH_SHORT).show();
@@ -110,7 +127,7 @@ public class AdminWatchTemplate extends AppCompatActivity implements View.OnClic
         params.setMargins(margin,margin,margin,margin);
         qTextView.setLayoutParams(params);
         qTextView.setGravity(Gravity.CENTER | Gravity.START);
-        qTextView.setBackgroundResource(R.drawable.custom_orange_textview);
+        qTextView.setBackgroundResource(R.drawable.nav_blue_corners);
         qTextView.setPadding(padding,padding,padding,padding);
         qTextView.setText(question);
         qTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP,25);
@@ -124,45 +141,77 @@ public class AdminWatchTemplate extends AppCompatActivity implements View.OnClic
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, toConvert, getResources().getDisplayMetrics());
     }
 
-    @Override
-    public void onClick(View v) {
-        checkFreeFrom();
+    private void changeScreenToEditMode() {
+        questionsLayout.removeAllViews();
+        editBTM.setVisibility(View.GONE);
+        saveButton.setVisibility(View.VISIBLE);
 
+        for (Map.Entry<String, String> qEntry : questions.entrySet()) {
+            String question = qEntry.getValue();
+            addEditQuestion(question);
+        }
     }
-    // check if there are some open forms so don't touch it.
-    private void checkFreeFrom() {
-        FirebaseFirestore.getInstance().collectionGroup(FirebaseStrings.usersStr())
-                .whereEqualTo(FirebaseStrings.openFormUidStr(),clickedFormId)
-                .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
 
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                if (!queryDocumentSnapshots.isEmpty()){
-                    showCancelDialog();
-                    return;
-                }
-                showAlertDialog();
-                return;
+    private void addEditQuestion(String answer) {
+        //creating new editText
+        EditText aEditText = new EditText(this);
+
+        //calculate height
+        int height = convertFromDpToPixels(64);
+        int width = convertFromDpToPixels(330);
+        int margin =  convertFromDpToPixels(16);
+        int padding = convertFromDpToPixels(16);
+
+        //styling
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, height);
+        params.setMargins(margin,margin,margin,margin);
+        aEditText.setLayoutParams(params);
+        aEditText.setPadding(padding,padding,padding,padding);
+        aEditText.setGravity(Gravity.CENTER | Gravity.START);
+        aEditText.setText(answer);
+        aEditText.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
+
+        //adding the new text view to the linearlayout
+        questionsLayout.addView(aEditText);
+    }
+
+
+    private void saveEditedQuestions() {
+//        loadingProgressBar.setVisibility(View.VISIBLE);
+        ViewGroup group = findViewById(R.id.questionsTemplateLayout);
+
+        for (int i = 0, qNum = 1, count = group.getChildCount(); i < count; ++i) {
+            View view = group.getChildAt(i);
+            if (view instanceof EditText) {
+                String answer = ((EditText)view).getText().toString().trim();
+                questions.put(qNum +"" , answer);
+                qNum++;
+                Log.d("view Template form", "adding answer number: " + qNum);
             }
-        });
-
+        }
+        //update answers in firebase
+        FirestoreMethods.updateDocumentField(FirebaseStrings.formsTemplatesStr(), clickedFormId, FirebaseStrings.questionsMapStr(), questions,
+                this::reloadScreen, this::showError);
     }
 
-    private void showCancelDialog() {
-        DialogFragment dialogFragment = new openFormCancelDialog();
-        dialogFragment.show(getSupportFragmentManager(),"cancel");
+    private Void reloadScreen(Void unused) {
+        Toast.makeText(getApplicationContext(), R.string.firebase_success, Toast.LENGTH_SHORT).show();
+        finish();
+        startActivity(getIntent());
+        return null;
     }
 
-    private void showAlertDialog() {
-        DialogFragment dialogFragment = new alertOpenFormDialog();
+
+
+    private void showWarningDialog() {
+        DialogFragment dialogFragment = new openFormWarningDialog();
         dialogFragment.show(getSupportFragmentManager(),"warning");
     }
 
 
-
     @Override
     public void onOpenFormWarningPositiveClick(DialogFragment dialog) {
-        // TODO: 6/9/2021 go to edit form activity.
+        changeScreenToEditMode();
     }
 
     @Override
@@ -170,8 +219,5 @@ public class AdminWatchTemplate extends AppCompatActivity implements View.OnClic
         return;
     }
 
-    @Override
-    public void onOpenFormCancelNeutralClick(DialogFragment dialog) {
-        return;
-    }
+
 }
