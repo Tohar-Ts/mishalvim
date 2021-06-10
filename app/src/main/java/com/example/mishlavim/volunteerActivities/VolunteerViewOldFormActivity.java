@@ -162,13 +162,14 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
 
         //styling
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, ViewGroup.LayoutParams.WRAP_CONTENT);
-        params.setMargins(margin,margin,margin,margin);
+        params.setMargins(margin,margin,20,margin);
         qTextView.setLayoutParams(params);
         qTextView.setGravity(Gravity.CENTER | Gravity.START);
         qTextView.setBackgroundResource(R.drawable.custom_orange_textview);
         qTextView.setPadding(padding,padding,padding,padding);
         qTextView.setText(question);
         qTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP,25);
+
 
         //adding the new text view to the linearlayout
         savedAnswersLayout.addView( qTextView);
