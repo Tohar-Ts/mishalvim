@@ -17,7 +17,7 @@ import com.example.mishlavim.R;
 import com.example.mishlavim.model.Adapter.RecyclerAdapter;
 
 import android.content.Intent;
-import android.widget.SearchView;
+import androidx.appcompat.widget.SearchView;
 import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
