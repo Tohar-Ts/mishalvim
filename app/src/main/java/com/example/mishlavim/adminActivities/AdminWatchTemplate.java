@@ -55,6 +55,7 @@ public class AdminWatchTemplate extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_watch_template_activity);
 
+        //set the xml views for elements:
         addQuestionButton = findViewById(R.id.addNewWatchQuestion);
         addQuestionButton.setOnClickListener(this::onClick);
 
@@ -87,6 +88,8 @@ public class AdminWatchTemplate extends AppCompatActivity implements View.OnClic
     }
 
     @Override
+    //this function sets the click for the various options on the screen
+    //either edit questions, save, add new question or view guide.
     public void onClick(View v) {
 
         if(v.getId() ==  R.id.questionsEditFloating)
@@ -99,25 +102,25 @@ public class AdminWatchTemplate extends AppCompatActivity implements View.OnClic
             goToHome();
 
     }
-
+    //this is an error message shown if the data is not available from firebase
     private Void showError(Void v) {
         Toast.makeText(getApplicationContext(), R.string.firebase_failed, Toast.LENGTH_SHORT).show();
         return null;
     }
-
+    //this initiates a go-home intent
     private void goToHome(){
         startActivity(new Intent(getApplicationContext(), AdminNavigationActivity.class));
         finish();
         overridePendingTransition(0, 0);
     }
-
+    //this gets the selected questions from the firebase database
     private void getQuestionsFromFirebase() {
         FirestoreMethods.getDocument(FirebaseStrings.formsTemplatesStr(), clickedFormId,
                 this::onGettingQuestionsSuccess, this::showError);
     }
 
 
-
+    //displays the selected form on screen, if failure appropriate message is displayed
     private Void onGettingQuestionsSuccess(DocumentSnapshot document) {
         assert document != null;
         FormTemplate questionsObj = document.toObject(FormTemplate.class);
@@ -128,7 +131,8 @@ public class AdminWatchTemplate extends AppCompatActivity implements View.OnClic
         displayFormOnScreen();
         return null;
     }
-
+    //this displays the various questions on screen from the hashmap of questions for the selected
+    //volunteer
     private void displayFormOnScreen() {
         for (Map.Entry<String, String> qEntry : questions.entrySet()) {
             numOfQuestions++;
@@ -136,7 +140,7 @@ public class AdminWatchTemplate extends AppCompatActivity implements View.OnClic
             addQuestion(question);
         }
     }
-
+    //this function allows the addition of a question
     private void addQuestion(String question) {
         //creating new editText
         TextView qTextView = new TextView(this);
@@ -168,6 +172,7 @@ public class AdminWatchTemplate extends AppCompatActivity implements View.OnClic
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, toConvert, getResources().getDisplayMetrics());
     }
 
+    //this allows the selected form to be edited
     private void changeScreenToEditMode() {
         questionsLayout.removeAllViews();
         editBTM.setVisibility(View.GONE);
@@ -179,7 +184,7 @@ public class AdminWatchTemplate extends AppCompatActivity implements View.OnClic
             addEditQuestion(question);
         }
     }
-
+    //this adds a new question to the form that has been edited
     private void addEditQuestion(String question) {
         //creating new editText
         EditText aEditText = new EditText(this);
@@ -205,7 +210,7 @@ public class AdminWatchTemplate extends AppCompatActivity implements View.OnClic
         questionsLayout.addView(aEditText);
     }
 
-
+    //this function saves the edited question in the firebase so it will not be lost upon the app closing
     private void saveEditedQuestions() {
 //        loadingProgressBar.setVisibility(View.VISIBLE);
         ViewGroup group = findViewById(R.id.questionsTemplateLayout);
@@ -226,7 +231,7 @@ public class AdminWatchTemplate extends AppCompatActivity implements View.OnClic
                 this::reloadScreen, this::showError);
     }
 
-
+    //this adds the question on the screen so admin can then enter text and save it
     private void addQuestionOnScreen() {
         //creating new editText
         EditText question = new EditText(this);
@@ -256,6 +261,7 @@ public class AdminWatchTemplate extends AppCompatActivity implements View.OnClic
         questionsScroll.post(() -> questionsScroll.scrollTo(0, questionsScroll.getBottom()));
     }
 
+    //screen reloaded once the question is finished
     private Void reloadScreen(Void unused) {
         Toast.makeText(getApplicationContext(), R.string.firebase_success, Toast.LENGTH_SHORT).show();
         finish();
@@ -264,7 +270,7 @@ public class AdminWatchTemplate extends AppCompatActivity implements View.OnClic
     }
 
 
-
+    //this is a warning dialog displayed once the condition for the warning is met
     private void showWarningDialog() {
         DialogFragment dialogFragment = new openFormWarningDialog();
         dialogFragment.show(getSupportFragmentManager(),"warning");

@@ -93,12 +93,13 @@ public class GuideAddVolunteerFragment extends Fragment implements View.OnClickL
     public void onClick(View v) {
         registerVolunteer();
     }
-
+    //set the progressbar to the correct visibility
+    //and send an error message if required
     private void showRegisterFailed(Integer msg) {
         loadingProgressBar.setVisibility(View.GONE);
         Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
     }
-
+    //registers the volunteer
     private void registerVolunteer() {
         //validate input - if the input is invalid, don't continue.
         if (validation.validateInput())

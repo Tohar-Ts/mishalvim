@@ -53,7 +53,6 @@ public class AdminFormsFragment extends Fragment implements PopupMenu.OnMenuItem
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -71,7 +70,10 @@ public class AdminFormsFragment extends Fragment implements PopupMenu.OnMenuItem
         clickedRowText = ""; //default
         clickedRowUid = ""; //default
 
+        //here we designate the search view and the search function used for searching
         searchView = view.findViewById(R.id.search_barB);
+        //this function allows the searchview to detect the text upon input and perform the search
+        //with the selected filter in the recycleview adapter:
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -89,11 +91,14 @@ public class AdminFormsFragment extends Fragment implements PopupMenu.OnMenuItem
         FirestoreMethods.getCollection(FirebaseStrings.formsTemplatesStr(), this::onGetTemplateSuccess, this::showError);
     }
 
+    //this function displays an error if the data isn't available in the firebase database
     private Void showError(Void unused) {
         Toast.makeText(getActivity(), "שגיאה בטעינת המידע", Toast.LENGTH_SHORT).show();
         return null;
     }
 
+    //this function sends a message once the correct template is located in the template collection
+    //from the firebase. if the template isnt found an error message is sent.
     private Void onGetTemplateSuccess(QuerySnapshot result){
         //init a list of FormTemplates object from the collection
 
@@ -127,6 +132,7 @@ public class AdminFormsFragment extends Fragment implements PopupMenu.OnMenuItem
 
     @SuppressLint("NonConstantResourceId")
     @Override
+    //this function allows the navigation to the correct template with a new activity.
     public boolean onMenuItemClick(MenuItem item) {
         //getting clicked text
         clickedRowText = recyclerAdapter.getClickedText();

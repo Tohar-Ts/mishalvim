@@ -81,6 +81,7 @@ public class AdminAddNewUserFragment extends Fragment  implements View.OnClickLi
 
         globalInstance = Global.getGlobalInstance(); //init the global instance
         thisAdminUid = globalInstance.getUid(); //getting admin id
+        //if admin is null:
         if(thisAdminUid == null){
             Toast.makeText(getActivity(), "תקלה בהצגת המידע, יש לסגור ולפתוח את האפליקציה מחדש", Toast.LENGTH_SHORT).show();
             return;
@@ -109,6 +110,9 @@ public class AdminAddNewUserFragment extends Fragment  implements View.OnClickLi
 
     @SuppressLint("NonConstantResourceId")
     @Override
+    /*This function check the selection on the user when he creates a new User from the selection
+    screen and shows the correct screen for his selection (he can choose either to create a new admin, guide or volunteer)
+     */
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         switch (checkedId) {
             case R.id.adminRb:

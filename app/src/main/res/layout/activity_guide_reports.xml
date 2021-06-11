@@ -44,6 +44,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="30dp"
+                android:layout_margin="10dp"
                 android:divider="@drawable/border_new_row"
                 android:gravity="center"
                 android:showDividers="middle"
@@ -58,7 +59,7 @@
                         android:layout_marginBottom="10dp"
                         android:background="@drawable/borders"
                         android:gravity="center"
-                        android:padding="3dip"
+                        android:padding="3dp"
                         android:text="@string/num_of_filled_forms"
                         android:textColor="@color/black"
                         android:textSize="25sp" />

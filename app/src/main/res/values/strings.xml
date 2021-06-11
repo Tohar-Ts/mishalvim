@@ -79,8 +79,6 @@
     <string name="empty_answer">נא לענות על כל השאלות</string>
     <string name="back_to_login">חזור למסך כניסה</string>
     <string name="forgot_password">שכחת סיסמה?</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="user_config">הגדרות משתמש</string>
     <string name="guide_name">שם המדריך</string>

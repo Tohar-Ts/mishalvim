@@ -61,6 +61,7 @@ public class AdminGuidesFragment extends Fragment implements PopupMenu.OnMenuIte
         //getting the guide list
         Global global = Global.getGlobalInstance();
         admin = global.getAdminInstance();
+        //this line checks to make sure that admin isnt null and that there is an active admin
         if(admin == null){
             Toast.makeText(getActivity(), "תקלה בהצגת המידע, יש לסגור ולפתוח את האפליקציה מחדש", Toast.LENGTH_SHORT).show();
             return;
@@ -75,9 +76,12 @@ public class AdminGuidesFragment extends Fragment implements PopupMenu.OnMenuIte
 
         //init xml views
         guidesView = view.findViewById(R.id.guides_recycler_view);
+        //init the recycle view adapter which is the list of the guides that are displayed to the admin
         recyclerAdapter = new RecyclerAdapter(guidesNames, this, R.menu.guide_options_menu);
         guidesView.setAdapter(recyclerAdapter);
         searchView = view.findViewById(R.id.search_barA);
+        //this function allows the searchview to detect the text upon input and perform the search
+        //with the selected filter in the recycleview adapter:
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -94,8 +98,9 @@ public class AdminGuidesFragment extends Fragment implements PopupMenu.OnMenuIte
 
     @SuppressLint("NonConstantResourceId")
     @Override
+    //this function detects the clicks on the menu bar, and it goes to the
+    //correct activity based on the selection
     public boolean onMenuItemClick(MenuItem item) {
-        //getting clicked text
         //getting clicked text
         clickedGuideName = recyclerAdapter.getClickedText();
         clickedGuideId = admin.getGuideList().get(clickedGuideName);
@@ -111,12 +116,12 @@ public class AdminGuidesFragment extends Fragment implements PopupMenu.OnMenuIte
         }
             return true;
         }
-
+    //this is a function that sends a failure message of the guide data fetching fails
     private Void getGuideDocFailed(Void unused) {
         Toast.makeText(getActivity(), "טעינת מידע על המדריך נכשלה", Toast.LENGTH_SHORT).show();
         return null;
     }
-
+    //this is a function that returns the correct document selected
     private Void getGuideDocSuccess(DocumentSnapshot doc) {
         assert doc != null;
         Guide guide = doc.toObject(Guide.class);

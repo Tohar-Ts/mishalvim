@@ -68,6 +68,7 @@ public class AdminViewGuideVoluActivity extends AppCompatActivity implements Vie
 
         global = Global.getGlobalInstance();
         guide = global.getGuideInstance();
+        //check to make sure non null element is given
         if (guide == null) {
             Toast.makeText(AdminViewGuideVoluActivity.this, "תקלה בהצגת המידע, יש לסגור ולפתוח את האפליקציה מחדש", Toast.LENGTH_SHORT).show();
             return;
@@ -107,6 +108,7 @@ public class AdminViewGuideVoluActivity extends AppCompatActivity implements Vie
         
         //init search
         searchView = findViewById(R.id.admin_volu_search_bar);
+        //search function searches based on user input and displays the results
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -124,6 +126,7 @@ public class AdminViewGuideVoluActivity extends AppCompatActivity implements Vie
 
     @SuppressLint("NonConstantResourceId")
     @Override
+    //this function does the selected action based on the user selection
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.adminHomeFloating:
@@ -140,6 +143,7 @@ public class AdminViewGuideVoluActivity extends AppCompatActivity implements Vie
 
     @SuppressLint("NonConstantResourceId")
     @Override
+    //this function does the selected action from the menu bar
     public boolean onMenuItemClick(MenuItem item) {
         //getting clicked text
         clickedVoluText = recyclerAdapter.getClickedText();
@@ -176,7 +180,7 @@ public class AdminViewGuideVoluActivity extends AppCompatActivity implements Vie
         startActivity(new Intent(AdminViewGuideVoluActivity.this, VolunteerMainActivity.class));
         return null;
     }
-
+    //this function returns the correct user setting based on the user info
     private Void settingGetUserDocSuccess(DocumentSnapshot doc) {
         assert doc != null;
         Volunteer volu = doc.toObject(Volunteer.class);
@@ -195,6 +199,7 @@ public class AdminViewGuideVoluActivity extends AppCompatActivity implements Vie
     }
 
     @Override
+    //spinne visibility diaglog
     public void passAllVolunteersPositiveClick(DialogFragment dialog) {
         flag = true;
         guide_spinner.setVisibility(View.VISIBLE);

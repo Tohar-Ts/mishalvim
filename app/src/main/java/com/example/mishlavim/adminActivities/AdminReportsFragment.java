@@ -49,6 +49,7 @@ public class AdminReportsFragment extends Fragment {
         FirestoreMethods.getCollection(FirebaseStrings.answeredFormsStr(), this::showNumOfAnsweredForms,this::showErrors);
     }
 
+    //shows the number of the answered forms for every guide
     private Void showNumOfAnsweredForms(QuerySnapshot doc) {
         int answeredFormsNum = doc.size();
         allAnsweredFormsTxt.setText("מספר השאלונים שמולאו עד כה: " + answeredFormsNum);

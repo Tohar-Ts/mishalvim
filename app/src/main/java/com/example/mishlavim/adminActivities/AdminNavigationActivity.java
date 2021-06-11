@@ -87,6 +87,8 @@ public class AdminNavigationActivity extends AppCompatActivity implements Bottom
 
     @SuppressLint("NonConstantResourceId")
     @Override
+    //this function listens to the buttons clicked on the menu option (either exit or settings) and
+    //acts according to the user selection
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         switch (id){

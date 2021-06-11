@@ -57,6 +57,7 @@ public class AdminCreateFormFragment extends Fragment implements View.OnClickLis
     }
 
     @Override
+    //init the Xml views and various variables needed for the view to run:
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         this.view = view;
@@ -77,6 +78,7 @@ public class AdminCreateFormFragment extends Fragment implements View.OnClickLis
 
     @SuppressLint("NonConstantResourceId")
     @Override
+    //this functions cycles between adding an additional question on screen or a new form depending on the button selected
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.addNewQuestion:
@@ -121,6 +123,8 @@ public class AdminCreateFormFragment extends Fragment implements View.OnClickLis
         questionsScroll.post(() -> questionsScroll.scrollTo(0, questionsScroll.getBottom()));
     }
 
+    //this function adds a new form to the firebase and displays it on-screen
+    //additional checks are performed to make sure it is non-null
     private void processNewForm() {
 
         loadingProgressBar.setVisibility(View.VISIBLE);
@@ -145,13 +149,13 @@ public class AdminCreateFormFragment extends Fragment implements View.OnClickLis
         FirestoreMethods.createNewDocumentRandomId(FirebaseStrings.formsTemplatesStr(),newForm,
                                                 this::onAddingSuccess, this::onAddingFailed);
     }
-
+    //this function displays an error if the form is not added successfully for some reason
     private Void onAddingFailed(Void unused) {
         Toast.makeText(getContext(), R.string.update_failed, Toast.LENGTH_SHORT).show();
         loadingProgressBar.setVisibility(View.GONE);
         return null;
     }
-
+    //this function displays a success message upon the successful addition of a form
     private Void onAddingSuccess(DocumentReference documentReference) {
         Toast.makeText(getContext(), R.string.firebase_success, Toast.LENGTH_SHORT).show();
         loadingProgressBar.setVisibility(View.GONE);
@@ -159,6 +163,7 @@ public class AdminCreateFormFragment extends Fragment implements View.OnClickLis
         Global.updateGlobalData(this::updateGlobalFinished);
         return null;
     }
+    //this function displays either an error or success message depending on the outcome of the update to the firebase database
     private Void updateGlobalFinished(Boolean status){
         if(status)
             Toast.makeText(getActivity(), "המידע עודכן בהצלחה", Toast.LENGTH_SHORT).show();
