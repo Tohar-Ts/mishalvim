@@ -127,14 +127,15 @@ public class AdminCreateFormFragment extends Fragment implements View.OnClickLis
 
         HashMap<String, String> questionsMap = new HashMap<>();
         ViewGroup group = view.findViewById(R.id.questionsLayout);
-
+        int qIndex = 1;
         for (int i = 0, count = group.getChildCount(); i < count; ++i) {
             View view = group.getChildAt(i);
             if (view instanceof EditText) {
                 String question = ((EditText)view).getText().toString().trim();
                 if(question.isEmpty())
                     continue;
-                questionsMap.put(i+"", question);
+                questionsMap.put(qIndex+"", question);
+                qIndex++;
             }
         }
 

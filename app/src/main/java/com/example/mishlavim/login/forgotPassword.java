@@ -50,9 +50,7 @@ public class forgotPassword extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@NonNull Task task) {
                                         if (task.isSuccessful()) { //succeed
-//                                            return;
                                             Toast.makeText(forgotPassword.this, "הכנס לכתובת המייל שלך על מנת לאפס את הסיסמה", Toast.LENGTH_SHORT).show();
-//                                            startActivity(new Intent(forgotPassword.this, LoginActivity.class));
                                         } else { //error because the email isn't valid
                                             emailForgotEditText.setError("אימייל אינו תקין");
                                         }

@@ -115,7 +115,8 @@ public class AdminViewGuideVoluActivity extends AppCompatActivity implements Vie
                 break;
             case R.id.passAllVolusBtn:
                 //TODO - passing all volunteers from one guide to another
-                break;
+                //TODO - show "are you sure ou want to move all volunteers?" dialog
+                 break;
         }
     }
 

@@ -283,5 +283,5 @@ public class FirestoreMethods {
                     }
                 });
     }
-
+    //TODO - remove user
 }

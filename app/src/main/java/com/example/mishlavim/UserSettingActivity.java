@@ -127,6 +127,9 @@ public class UserSettingActivity extends AppCompatActivity implements View.OnCli
 
         AuthenticationMethods.updateAuthEmail(email);
         AuthenticationMethods.updateAuthPassword(password);
+
+        //TODO - update firestore
+        //TODO - send email with updated user details
 //        updateEmail(null);
         switchToHomeByUser();
     }
@@ -165,6 +168,7 @@ public class UserSettingActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void initSetting() {
+        //TODO - login again
         loginLayout.setVisibility(View.GONE);
         settingLayout.setVisibility(View.VISIBLE);
         progressBar.setVisibility(View.GONE);

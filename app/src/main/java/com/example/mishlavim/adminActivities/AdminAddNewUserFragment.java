@@ -218,9 +218,7 @@ public class AdminAddNewUserFragment extends Fragment  implements View.OnClickLi
     }
 
     private Void updateDbSuccess(Void unused){
-        Toast.makeText(getActivity(), newUserType + " was added successfully", Toast.LENGTH_SHORT).show();
         loadingProgressBar.setVisibility(View.GONE);
-        //TODO - add new user dialog
         //updating global to see changes
         Global.updateGlobalData(this::updateGlobalFinished);
         return null;

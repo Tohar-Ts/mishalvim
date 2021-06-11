@@ -58,7 +58,6 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
         Global globalInstance = Global.getGlobalInstance();
         volunteer = globalInstance.getVoluInstance();
         voluName = volunteer.getName();
-        //TODO - if is a guide, change!
         formId = volunteer.getOpenFormId();
 
         //user is guide
@@ -66,7 +65,7 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
           voluId = globalInstance.getGuideInstance().getMyVolunteers().get(voluName);
         }
         else{//user is volunteer
-            voluId = AuthenticationMethods.getCurrentUserID();
+            voluId = globalInstance.getUid();
         }
         //getting answers object from firestore
         FirestoreMethods.getDocument(FirebaseStrings.answeredFormsStr(), formId, this::getAnswersObjSuccess, this::showError);
@@ -266,7 +265,7 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
     }
 
     private Void notifyGuide(Void unused){
-        // TODO: 6/8/2021 notify guide
+        // TODO: 6/8/2021 send mail to guide
         Global.updateGlobalData(this::updateGlobalFinished);
         return null;
     }

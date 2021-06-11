@@ -114,17 +114,17 @@ public class GuideVolunteerListFragment extends Fragment implements PopupMenu.On
                 FirestoreMethods.getDocument(FirebaseStrings.usersStr(), clickedRowUid , this::OpenGetUserDocSuccess, this::getUserDocFailed);
                 break;
             case R.id.remove_volunteer:
-               //TODO - show yes/no dialog.
+                //TODO - remove user
                 break;
         }
         return true;
     }
 
-    //delete dialog functions
-    public void onDeletePositiveClick(DialogFragment dialog) {
-        Guide.deleteVolunteer(global.getUid(), clickedRowUid);
-        FirestoreMethods.deleteDocument(FirebaseStrings.usersStr(), clickedRowUid, this::onDocumentDeleteSuccess, this::onDeleteFailed);
-    }
+//    //delete dialog functions
+//    public void onDeletePositiveClick(DialogFragment dialog) {
+//        Guide.deleteVolunteer(global.getUid(), clickedRowUid);
+//        FirestoreMethods.deleteDocument(FirebaseStrings.usersStr(), clickedRowUid, this::onDocumentDeleteSuccess, this::onDeleteFailed);
+//    }
 
     public Void onDocumentDeleteSuccess(Void noUse){
         Toast.makeText(getActivity(), "המחיקה הסתיימה בהצלחה", Toast.LENGTH_SHORT).show();
@@ -174,7 +174,7 @@ public class GuideVolunteerListFragment extends Fragment implements PopupMenu.On
     }
 
     private Void getUserDocFailed(Void unused){
-        Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "שגיאה בהבאת המידע", Toast.LENGTH_SHORT).show();
         return null;
     }
 

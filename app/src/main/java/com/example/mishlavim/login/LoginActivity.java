@@ -38,8 +38,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        //check if user is logged in
-        //TODO
         //init xml views
         emailEditText = findViewById(R.id.email);
         passwordEditText = findViewById(R.id.password);

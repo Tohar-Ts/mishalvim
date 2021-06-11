@@ -132,8 +132,8 @@ public class GuideAddVolunteerFragment extends Fragment implements View.OnClickL
     }
 
     private Void updateDbSuccess(Void unused){
-        Toast.makeText(getActivity(), "volunteer was added successfully", Toast.LENGTH_SHORT).show();
         loadingProgressBar.setVisibility(View.GONE);
+        //TODO - send mail welcome to the volunteer with his user name and password
         //updating global to see changes
         Global.updateGlobalData(this::updateGlobalFinished);
         return null;

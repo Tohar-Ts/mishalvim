@@ -67,65 +67,6 @@ public class Volunteer extends User {
                 true,onSuccess,onFailure);
     }
 
-
-    /**
-     * For the given volunteer, deletes a open form from 'openForms' map.
-     * Updating the change in the database.
-     */
-    public static void deleteOpenForm(String voluUid) {
-        Function<Void, Void> onSuccess = unused -> { Log.d("Volunteer class", "openForm successfully deleted");return null;};
-        Function<Void, Void> onFailure = unused ->  {Log.d("Volunteer class", "Error - openForm delete failed.");return null;};
-
-        FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(), voluUid, FirebaseStrings.openFormNameStr(),
-                FirebaseStrings.emptyString(),onSuccess,onFailure);
-        FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(), voluUid, FirebaseStrings.openFormUidStr(),
-                FirebaseStrings.emptyString(),onSuccess,onFailure);
-        FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(), voluUid, FirebaseStrings.hasOpenFormStr(),
-                false,onSuccess,onFailure);
-    }
-
-    /**
-     * For the given volunteer, adding a form to the 'finishedForms' map.
-     * Updating the change in the database.
-     */
-    public static void addFinishedForm(String voluId, String formName, String formUid, String templateUid) {
-        Function<Void, Void> onSuccess = unused -> { Log.d("Volunteer class", "finishedForm successfully deleted");return null;};
-        Function<Void, Void> onFailure = unused ->  {Log.d("Volunteer class", "Error - finishedForm delete failed.");return null;};
-
-        FirestoreMethods.updateMapKey(FirebaseStrings.usersStr(),voluId,FirebaseStrings.finishedFormsStr(),formName,formUid
-                                        ,onSuccess,onFailure);
-        FirestoreMethods.updateMapKey(FirebaseStrings.usersStr(),voluId,FirebaseStrings.finishedTemplatesStr(),formName,templateUid
-                ,onSuccess,onFailure);
-    }
-
-    /**
-     * For the given volunteer,deletes a form to the 'finishedForms' map.
-     * Updating the change in the database.
-     */
-    public static void deleteFinishedForm(String voluId, String formName) {
-        Function<Void, Void> onSuccess = unused -> { Log.d("Volunteer class", "finishedForm successfully deleted");return null;};
-        Function<Void, Void> onFailure = unused ->  {Log.d("Volunteer class", "Error - finishedForm delete failed.");return null;};
-
-        FirestoreMethods.deleteMapKey(FirebaseStrings.usersStr(),voluId,FirebaseStrings.finishedFormsStr(),formName
-                ,onSuccess,onFailure);
-        FirestoreMethods.deleteMapKey(FirebaseStrings.usersStr(),voluId,FirebaseStrings.finishedTemplatesStr(),formName
-                ,onSuccess,onFailure);
-    }
-
-    /**
-     * For the given volunteer, updating his guide fields.
-     * Updating the change in the database.
-     */
-    public static void updateGuide(String voluUid, String guideName, String guideUid) {
-        Function<Void, Void> onSuccess = unused -> { Log.d("Volunteer class", "Guide successfully deleted");return null;};
-        Function<Void, Void> onFailure = unused ->  {Log.d("Volunteer class", "Error - guide delete failed.");return null;};
-
-        FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(), voluUid, FirebaseStrings.myGuideIdStr(),
-                guideUid,onSuccess,onFailure);
-        FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(), voluUid, FirebaseStrings.myGuideNameStr(),
-                guideName,onSuccess,onFailure);
-    }
-
     /*
      * Getters and setters.
      */
