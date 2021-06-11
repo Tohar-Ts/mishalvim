@@ -40,12 +40,12 @@ public class GuideAddVolunteerFragment extends Fragment implements View.OnClickL
 
     private EditText emailEditText, userNameEditText, passwordEditText, verifyPasswordEditText;
     private Button addButton;
-    private ProgressBar loadingProgressBar;
-    private Validation validation;
+    private ProgressBar loadingProgressBar; //loading progress bar
+    private Validation validation; //validation variable
     private String voluName, voluID;
     Global globalInstance;
-    String thisGuideUid;
-    String thisGuideName;
+    String thisGuideUid; //guide id
+    String thisGuideName; //guide name
     Volunteer newVolu;
 
     public GuideAddVolunteerFragment() {
@@ -115,23 +115,23 @@ public class GuideAddVolunteerFragment extends Fragment implements View.OnClickL
         //register
         AuthenticationMethods.addNewUser(email,password,this::addAuthSuccess,this::addAuthFailed);
     }
-
+    //this function shows an error if the authentication has failed
     private Void addAuthFailed(Void unused) {
         showRegisterFailed(R.string.register_auth_failed);
         return null;
     }
-
+    //this function shows a success message if authentication was successful
     private Void addAuthSuccess(String newUserUid) {
         createNewUser(newUserUid);
         return null;
     }
-
+    //this creates a new volunteer under the selected guide
     private void createNewUser(String newUserUid) {
         Guide.addVolunteer(thisGuideUid, newUserUid, newVolu.getName());
         //init a new user data in firestore
         FirestoreMethods.createNewDocument(FirebaseStrings.usersStr(),newUserUid, newVolu, this::updateDbSuccess,this::updateDbFailed);
     }
-
+    //this function updates the database upon a successful addition
     private Void updateDbSuccess(Void unused){
         loadingProgressBar.setVisibility(View.GONE);
         //TODO - send mail welcome to the volunteer with his user name and password
@@ -139,12 +139,14 @@ public class GuideAddVolunteerFragment extends Fragment implements View.OnClickL
         Global.updateGlobalData(this::updateGlobalFinished);
         return null;
     }
-
+    //this function sends an error if the updating of the database fails
     private Void updateDbFailed(Void unused){
         showRegisterFailed(R.string.register_failed);
         loadingProgressBar.setVisibility(View.GONE);
         return null;
     }
+    //this function checks to see the update was successful and notifies the user. if there was a
+    //problem the function will display an appropriate error message
     private Void updateGlobalFinished(Boolean status){
         if(status)
             Toast.makeText(getActivity(), "המידע עודכן בהצלחה", Toast.LENGTH_SHORT).show();

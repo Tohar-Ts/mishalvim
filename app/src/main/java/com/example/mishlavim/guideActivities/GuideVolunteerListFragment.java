@@ -32,11 +32,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GuideVolunteerListFragment extends Fragment implements PopupMenu.OnMenuItemClickListener{
-    SearchView searchView;
-    RecyclerView guidesView;
-    RecyclerAdapter recyclerAdapter;
-    List<String> guidesNames;
-    Guide guide;
+    SearchView searchView; //search bar
+    RecyclerView guidesView; //recycle list view
+    RecyclerAdapter recyclerAdapter; //custom recycle adapter
+    List<String> guidesNames; //list of guides names
+    Guide guide; //a single guide
     Global global;
     String clickedRowText;
     String clickedRowUid;

@@ -54,16 +54,16 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
     private String voluId;//the clicked volunteer id
     private Volunteer voluData; //volu current data from the firestore
 
-    private FloatingActionButton homeButton;
-    private ProgressBar loadingProgressBar;
+    private FloatingActionButton homeButton; //home button
+    private ProgressBar loadingProgressBar; //progress bar
 
-    private RecyclerView templateView;
-    private RecyclerAdapter recyclerAdapter;
-    private HashMap<String, String> templates;
-    private List<String> templatesNames;
-    private SearchView searchView;
+    private RecyclerView templateView; //recycle view list
+    private RecyclerAdapter recyclerAdapter; //custom adapter for the view
+    private HashMap<String, String> templates; //template hashmap
+    private List<String> templatesNames; //template names
+    private SearchView searchView;  //search bar
     private String clickedFormId; // the clicked form id
-    private String clickedFormName;
+    private String clickedFormName; //the clicked form name
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,12 +112,12 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
                 Toast.LENGTH_SHORT).show();
         return null;
     }
-
+    //this function sends an error if unable to get the correct data from firebase
     private Void showError(Void unused) {
         Toast.makeText(GuideFormsPermissionActivity.this, "שגיאה בטעינת המידע", Toast.LENGTH_SHORT).show();
         return null;
     }
-
+    //this function returns the data selected from the form and if fails sends appropriate message
     private Void onGetTemplateSuccess(QuerySnapshot result) {
         //init a list of FormTemplates object from the collection
         String formNameField = FirebaseStrings.formNameStr();
@@ -143,6 +143,7 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
 
     @SuppressLint("NonConstantResourceId")
     @Override
+    //this function determines what to do depending on the user selection on the menu
     public boolean onMenuItemClick(MenuItem item) {
         //getting clicked text
         clickedFormName = recyclerAdapter.getClickedText();
@@ -164,7 +165,7 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
         }
         return true;
     }
-
+    //this function opens the correct form
     private void openForm() {
         //checking if the volunteer already has an open form
         if (voluData.getHasOpenForm()) {
@@ -190,7 +191,7 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
         FirestoreMethods.createNewDocumentRandomId(FirebaseStrings.answeredFormsStr(), ansForm, creatingAnswersDocSuccess, this::showError);
     }
 
-
+    //this function allows the form for the specific volunteer to be editable
     private void allowEdit() {
         String answersUid = voluData.getFinishedForms().get(clickedFormName);
         //checking if the volunteer has this form in his open forms
@@ -202,7 +203,7 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
         FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), answersUid, FirebaseStrings.finishedCanEditStr()
                 , true, this::onSuccess, this::showError);
     }
-
+    //this function disables the ability to edit a specific form for a volunteer
     private void disableEdit() {
         String answersUid = voluData.getFinishedForms().get(clickedFormName);
         //checking if the volunteer has this form in his open forms

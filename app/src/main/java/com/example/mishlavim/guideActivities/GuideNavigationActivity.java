@@ -60,6 +60,7 @@ public class GuideNavigationActivity extends AppCompatActivity implements Bottom
 
     @SuppressLint("NonConstantResourceId")
     @Override
+    //this function determines what fragment to go to based on the user clicking the bottom nav bar
     public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
         Fragment selectedFragment = null;
 
@@ -95,6 +96,8 @@ public class GuideNavigationActivity extends AppCompatActivity implements Bottom
 
     @SuppressLint("NonConstantResourceId")
     @Override
+    //this function determines what the user selects after clicking the 3 dots on top of screen and
+    //does the required action (either exit or settings)
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         switch (id){

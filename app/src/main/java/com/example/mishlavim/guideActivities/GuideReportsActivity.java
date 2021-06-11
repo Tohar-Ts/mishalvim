@@ -55,6 +55,7 @@ public class GuideReportsActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View v) {
     }
+    //this function determines how to start the table and how big it should be based on the database
     private void startTbl(){
         int count = 0;
         for(String voluName : myVolunteersMap.keySet()) {
@@ -68,7 +69,7 @@ public class GuideReportsActivity extends AppCompatActivity implements View.OnCl
             }
         }
     }
-
+    //adds all of the finished forms in the correct table
     private Void pushAndGotoCreateTbl(DocumentSnapshot doc) {
         assert doc != null;
         Volunteer volu = doc.toObject(Volunteer.class);
