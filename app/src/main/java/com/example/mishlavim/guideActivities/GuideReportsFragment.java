@@ -37,11 +37,9 @@ public class GuideReportsFragment extends Fragment implements View.OnClickListen
     private View view;
     private static DecimalFormat df2 = new DecimalFormat("#.##");
 
-
     public GuideReportsFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

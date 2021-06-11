@@ -17,7 +17,8 @@
         android:background="@drawable/white_text_background"
         android:gravity="center"
         android:text="@string/reports"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:textColor="@color/dark_grey"/>
 
     <ScrollView
 

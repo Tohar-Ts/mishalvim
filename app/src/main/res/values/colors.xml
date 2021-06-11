@@ -31,7 +31,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="more_light_green">#1bdece</color>
     <color name="red">#FF0000</color>
-    //final color palate
+
     <color name="purple">#892389</color>
     <color name="pink">#E848A0</color>
     <color name="orange">#F79520</color>
@@ -44,7 +44,6 @@
     <color name="black">#FF000000</color>
     <color name="gray_background">#F5F5F5</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="dark_gray">#505050</color>
     <color name="dark_grey">#505050</color>
 
 </resources>

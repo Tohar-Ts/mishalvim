@@ -34,7 +34,7 @@
         android:fontFamily="@font/alef"
         android:gravity="center"
         android:text="השאלון נשלח לרכז/ת"
-        android:textColor="@color/dark_gray"
+        android:textColor="@color/dark_grey"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

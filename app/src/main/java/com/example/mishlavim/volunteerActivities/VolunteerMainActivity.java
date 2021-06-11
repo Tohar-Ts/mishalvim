@@ -144,6 +144,7 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
         formBtn.setText(formName);
         formBtn.setTextColor(getResources().getColor(R.color.white));
         formBtn.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
+   
 
         //adding the new button view to the linearlayout
         formsLayout.addView(formBtn);
