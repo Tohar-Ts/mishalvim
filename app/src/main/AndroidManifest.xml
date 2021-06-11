@@ -19,7 +19,7 @@
         <activity
             android:name=".adminActivities.AdminNavigationActivity"
             android:windowSoftInputMode="adjustNothing" />
-        <activity android:name=".forgotPassword" />
+        <activity android:name=".login.forgotPassword" />
         <activity android:name=".adminActivities.AdminWatchTemplate" />
         <activity android:name=".guideActivities.GuideFormsPermissionActivity" />
         <activity android:name=".volunteerActivities.VolunteerFinishedFormActivity" />
