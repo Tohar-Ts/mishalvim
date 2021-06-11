@@ -38,7 +38,10 @@
                 android:paddingEnd="12dp"
                 android:layout_centerInParent="true"
                 android:layout_below="@id/guide_add_user_prompt"
-                android:selectAllOnFocus="true" />
+                android:selectAllOnFocus="true"
+                android:textColorHint="@color/dark_grey"
+                android:drawableTint="@color/dark_grey"
+                />
 
             <EditText
                 android:id="@+id/voluNewUserName"
@@ -56,7 +59,9 @@
                 android:paddingEnd="12dp"
                 android:layout_centerInParent="true"
                 android:layout_below="@id/voluNewEmail"
-                android:selectAllOnFocus="true" />
+                android:selectAllOnFocus="true"
+                android:textColorHint="@color/dark_grey"
+                android:drawableTint="@color/dark_grey"/>
 
 
             <EditText
@@ -75,7 +80,9 @@
                 android:paddingEnd="12dp"
                 android:layout_centerInParent="true"
                 android:layout_below="@id/voluNewUserName"
-                android:selectAllOnFocus="true" />
+                android:selectAllOnFocus="true"
+                android:textColorHint="@color/dark_grey"
+                android:drawableTint="@color/dark_grey"/>
 
             <EditText
                 android:id="@+id/voluVerifyPassword"
@@ -93,7 +100,9 @@
                 android:paddingEnd="12dp"
                 android:layout_centerInParent="true"
                 android:layout_below="@id/voluNewPassword"
-                android:selectAllOnFocus="true" />
+                android:selectAllOnFocus="true"
+                android:textColorHint="@color/dark_grey"
+                android:drawableTint="@color/dark_grey"/>
 
 
             <ProgressBar

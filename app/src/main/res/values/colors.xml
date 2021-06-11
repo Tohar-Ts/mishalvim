@@ -24,7 +24,6 @@
     <color name="greeny_yellow">#D0DE18</color>
     <color name="very_light_blue">#7BC4DD</color>
     <color name="lighter_pink">#ED88C7</color>
-    <color name="dark_gray">#A9A9A9</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -45,4 +44,6 @@
     <color name="black">#FF000000</color>
     <color name="gray_background">#F5F5F5</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="dark_grey">#505050</color>
+
 </resources>
