@@ -24,8 +24,9 @@
 
 
     <ScrollView
-        android:layout_width="408dp"
-        android:layout_height="480dp"
+        android:id="@+id/questionsTemplateScroll"
+        android:layout_width="415dp"
+        android:layout_height="446dp"
         android:layout_marginTop="40dp"
         android:fadeScrollbars="false"
         android:scrollbarSize="10dp"
@@ -46,18 +47,19 @@
 
         </LinearLayout>
     </ScrollView>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/questionsEditFloating"
         android:layout_width="65dp"
         android:layout_height="74dp"
         android:layout_margin="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
         android:backgroundTint="@color/bar_blue"
         android:src="@drawable/ic_edit"
-        app:fabCustomSize="70dp"
+        app:fabCustomSize="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/questionsTemplateScroll"
+        app:layout_constraintVertical_bias="0.0" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/SaveFloating"
@@ -71,6 +73,36 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
+    <Button
+        android:id="@+id/addNewWatchQuestion"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/blue_button2"
+        android:gravity="center"
+        android:text="@string/add_new_question"
+        android:textColor="@drawable/blue_text_pressed"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideTemplateHomeFloating"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toEndOf="@+id/questionsEditFloating"
+        app:layout_constraintTop_toBottomOf="@+id/questionsTemplateScroll"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/guideTemplateHomeFloating"
+        android:layout_width="67dp"
+        android:layout_height="63dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/green"
+        android:src="@drawable/ic_home"
+        app:fabCustomSize="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/questionsTemplateScroll" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
