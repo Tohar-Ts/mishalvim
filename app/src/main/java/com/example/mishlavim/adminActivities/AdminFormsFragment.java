@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
@@ -72,6 +73,12 @@ public class AdminFormsFragment extends Fragment implements PopupMenu.OnMenuItem
 
         //here we designate the search view and the search function used for searching
         searchView = view.findViewById(R.id.search_barB);
+        // change close icon color
+        ImageView iconClose = searchView.findViewById(R.id.search_close_btn);
+        iconClose.setColorFilter(getResources().getColor(R.color.button_blue));
+        //change search icon color
+        ImageView iconSearch = searchView.findViewById(R.id.search_button);
+        iconSearch.setColorFilter(getResources().getColor(R.color.button_blue));
         //this function allows the searchview to detect the text upon input and perform the search
         //with the selected filter in the recycleview adapter:
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

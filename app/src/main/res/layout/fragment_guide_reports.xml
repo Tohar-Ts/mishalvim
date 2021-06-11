@@ -4,95 +4,101 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:theme="@style/Theme.MishlavimPink"
-        android:padding="10dp"
+        android:paddingRight="30dp"
+        android:paddingLeft="30dp"
+        android:paddingBottom="30dp"
+        android:paddingTop="20dp"
         android:background="@color/gray_background"
         tools:context=".guideActivities.GuideReportsFragment">
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="59dp"
-        android:background="@drawable/white_text_background"
-        android:gravity="center"
+        android:fontFamily="@font/alef"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/black"
         android:text="@string/reports"
-        android:textSize="30sp"
-        android:textColor="@color/dark_grey"/>
+        android:textSize="40sp" />
 
     <ScrollView
-
-        android:layout_marginTop="30dp"
-        android:layout_width="match_parent"
-        android:layout_centerInParent="true"
+        android:id="@+id/guideReportsScroll"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@+id/textView"
-        android:layout_marginBottom="10dp"
-        android:layout_height="wrap_content">
+        android:layout_above="@id/avg_text"
+        android:layout_centerInParent="true">
 
-            <LinearLayout
+        <TableLayout
+            android:id="@+id/volunteers_tbl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:background="@drawable/white_text_background"
+            android:stretchColumns="*">
+
+            <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:background="@drawable/table">
 
-                <TableLayout
-                    android:background="@drawable/white_text_background"
-                    android:id="@+id/volunteers_tbl"
-                    android:layout_width="fill_parent"
+                <RelativeLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:stretchColumns="0,1"
-                    android:layout_gravity="center">
+                    android:paddingLeft="25dp"
+                    android:paddingRight="15dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
 
 
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-                        <LinearLayout
-                            android:background="@drawable/table"
-                            android:paddingBottom="17dp"
-                            android:padding="20dp"
-                            android:orientation="horizontal">
-                            <TextView
-                                android:padding="3dip"
-                                android:text="@string/num_of_filled_forms"
-                                android:id="@+id/numOfFormsHead"
-                                android:layout_width="180dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="20dp"
-                                android:layout_centerInParent="true"
-                                android:fontFamily="@font/alef"
-                                android:textColor="@drawable/blue_text_pressed"
-                                android:textSize="20sp"
-                                android:textStyle="bold"
-                                android:layout_column="0"/>
+                    <TextView
+                        android:id="@+id/VoluNameHead"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/alef"
+                        android:text="@string/volu_name"
+                        android:textColor="@color/button_blue2"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
-                            <TextView
-                                android:id="@+id/VoluNameHead"
-                                android:layout_width="120dp"
-                                android:layout_height="32dp"
-                                android:layout_column="1"
-                                android:layout_centerInParent="true"
-                                android:layout_marginRight="20dp"
-                                android:fontFamily="@font/alef"
-                                android:padding="3dip"
-                                android:text="@string/volu_name"
-                                android:textColor="@drawable/blue_text_pressed"
-                                android:textSize="20sp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
+                    <TextView
+                        android:id="@+id/numOfFormsHead"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/alef"
+                        android:text="@string/num_of_filled_forms"
+                        android:textColor="@color/button_blue2"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+            </TableRow>
+        </TableLayout>
+    </ScrollView>
 
-                    </TableRow>
-                </TableLayout>
+    <TextView
+        android:layout_marginTop="30dp"
+        android:id="@+id/avg_text"
+        android:layout_marginBottom="40dp"
+        android:padding="15dp"
+        android:background="@drawable/white_text_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/button_blue2"
+        android:layout_alignParentBottom="true"
+        android:textSize="20sp" />
 
-                <TextView
-                    android:layout_marginTop="30dp"
-                    android:id="@+id/avg_text"
-                    android:gravity="center"
-                    android:background="@drawable/white_text_background"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-            </LinearLayout>
-        </ScrollView>
-    </RelativeLayout>
+    <ProgressBar
+        android:id="@+id/guideReportsLoading"
+        android:layout_width="120dp"
+        android:layout_height="112dp"
+        android:theme="@style/BlueProgressBarTheme"
+        android:visibility="gone"
+        android:layout_centerInParent="true"/>
+
+</RelativeLayout>

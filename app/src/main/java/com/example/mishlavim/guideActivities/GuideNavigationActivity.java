@@ -19,6 +19,7 @@ import com.example.mishlavim.login.LoginActivity;
 import com.example.mishlavim.model.Firebase.AuthenticationMethods;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
 import com.example.mishlavim.model.Global;
+import com.example.mishlavim.model.Guide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.jetbrains.annotations.NotNull;
@@ -31,6 +32,7 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.jetbrains.annotations.NotNull;
@@ -43,6 +45,12 @@ public class GuideNavigationActivity extends AppCompatActivity implements Bottom
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide_navigation);
+        //checking if global was updated correctly
+        Guide guide = Global.getGlobalInstance().getGuideInstance();
+        if(guide == null){
+            Toast.makeText(GuideNavigationActivity.this, "אירעה שגיאה בהבאת המידע", Toast.LENGTH_SHORT).show();
+            return;
+        }
         //setting bar
         Toolbar settingBar = findViewById(R.id.guide_setting_button);
         setSupportActionBar(settingBar);
@@ -56,6 +64,10 @@ public class GuideNavigationActivity extends AppCompatActivity implements Bottom
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.guide_fragment_container, new GuideVolunteerListFragment())
                 .commit();
+        //showing hello user
+        TextView helloGuide = findViewById(R.id.helloGuide);
+        helloGuide.setText( "שלום "+ guide.getName());
+
     }
 
     @SuppressLint("NonConstantResourceId")

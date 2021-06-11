@@ -18,6 +18,7 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -35,6 +36,7 @@ public class GuideReportsFragment extends Fragment implements View.OnClickListen
     private HashMap<String, Integer> numOfForms = new HashMap<>();
     private TextView avgText;
     private View view;
+    ProgressBar progressBar;
     private static DecimalFormat df2 = new DecimalFormat("#.##");
 
     public GuideReportsFragment() {
@@ -53,7 +55,8 @@ public class GuideReportsFragment extends Fragment implements View.OnClickListen
         guide = globalInstance.getGuideInstance();
         myVolunteersMap = guide.getMyVolunteers();
         volunteersTbl = view.findViewById(R.id.volunteers_tbl);
-
+        progressBar = view.findViewById(R.id.guideReportsLoading);
+       progressBar.setVisibility(View.VISIBLE);
         startTbl();
     }
 
@@ -153,7 +156,8 @@ public class GuideReportsFragment extends Fragment implements View.OnClickListen
         }
         Log.d("calculateAvg", " "+ allFormsSum+" "+ voluNum);
         double avgFormsPerVolu = (double)allFormsSum / (double)voluNum;
-        avgText.setText("ממוצע טפסים לחניך: " + df2.format(avgFormsPerVolu));
+        avgText.setText("ממוצע טפסים למתנדב: " + df2.format(avgFormsPerVolu));
+        progressBar.setVisibility(View.GONE);
 
     }
 
@@ -163,6 +167,7 @@ public class GuideReportsFragment extends Fragment implements View.OnClickListen
     }
 
     private Void showError(Void unused) {
+        progressBar.setVisibility(View.GONE);
         Log.e("err","failed to load from dataBase");
         Toast.makeText(getActivity(), "Something went wrong (dataBase)", Toast.LENGTH_SHORT).show();
         return null;

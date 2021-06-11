@@ -18,7 +18,7 @@
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/alef"
         android:layout_alignParentTop="true"
-        android:text="הכנס את הסיסמה של החניך"
+        android:text="הכנס את הסיסמה של המתנדב"
         android:layout_marginTop="160dp"
         android:textColor="@color/black"
         android:textSize="30sp" />

@@ -7,21 +7,42 @@
     android:background="@color/gray_background"
     tools:context=".adminActivities.AdminNavigationActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/admin_setting_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layoutDirection="rtl"
+    <RelativeLayout
+        android:id="@+id/adminAppBarLayout"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        app:menu="@menu/setting_menu"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/admin_setting_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:menu="@menu/setting_menu"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"/>
+
+        <TextView
+            android:id="@+id/helloAdmin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="שלום "
+            android:textSize="30sp"
+            android:fontFamily="@font/alef"
+            android:textColor="@color/button_blue"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="30dp"/>
+
+
+    </RelativeLayout>
+
 
     <FrameLayout
         android:id="@+id/admin_fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        android:layout_below="@+id/admin_setting_button"
+        android:layout_below="@+id/adminAppBarLayout"
         android:layout_above ="@+id/admin_bottom_navigation"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

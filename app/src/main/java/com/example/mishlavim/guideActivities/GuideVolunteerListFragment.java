@@ -10,8 +10,10 @@ import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import com.example.mishlavim.R;
 import com.example.mishlavim.model.Adapter.RecyclerAdapter;
@@ -77,6 +79,12 @@ public class GuideVolunteerListFragment extends Fragment implements PopupMenu.On
 
         //init search
         searchView = view.findViewById(R.id.search_bar);
+        // change close icon color
+        ImageView iconClose = searchView.findViewById(R.id.search_close_btn);
+        iconClose.setColorFilter(getResources().getColor(R.color.light_blue2));
+        //change search icon color
+        ImageView iconSearch = searchView.findViewById(R.id.search_button);
+        iconSearch.setColorFilter(getResources().getColor(R.color.light_blue2));
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

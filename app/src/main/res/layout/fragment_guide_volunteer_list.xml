@@ -3,7 +3,10 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="30dp"
+        android:paddingRight="30dp"
+        android:paddingLeft="30dp"
+        android:paddingBottom="30dp"
+        android:paddingTop="20dp"
         android:background="@color/gray_background"
         tools:context=".guideActivities.GuideVolunteerListFragment">
 
@@ -12,12 +15,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_margin="20dp"
+        android:layout_marginBottom="20dp"
         android:fontFamily="@font/alef"
         android:layout_alignParentTop="true"
         android:text="מתנדבים"
         android:textColor="@color/black"
-        android:textSize="30sp" />
+        android:textSize="40sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,12 +40,16 @@
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/search_bar"
+            android:clickable="true"
+            android:focusableInTouchMode="true"
+            app:iconifiedByDefault="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:defaultQueryHint="@string/searchHintVolunteer"
             android:layoutDirection="rtl"
+            android:background="@drawable/search_blue_borders"
             android:layout_below="@id/voluListPrompt"
-            >
+            android:focusable="true">
         </androidx.appcompat.widget.SearchView>
 
 </RelativeLayout>

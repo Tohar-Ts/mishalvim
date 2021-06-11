@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
@@ -72,7 +73,12 @@ public class AdminGuidesFragment extends Fragment implements PopupMenu.OnMenuIte
         }
 
         guidesNames = new ArrayList<>(admin.getGuideList().keySet());
-
+        // change close icon color
+        ImageView iconClose = searchView.findViewById(R.id.search_close_btn);
+        iconClose.setColorFilter(getResources().getColor(R.color.button_blue));
+        //change search icon color
+        ImageView iconSearch = searchView.findViewById(R.id.search_button);
+        iconSearch.setColorFilter(getResources().getColor(R.color.button_blue));
 
         //init xml views
         guidesView = view.findViewById(R.id.guides_recycler_view);
@@ -80,6 +86,7 @@ public class AdminGuidesFragment extends Fragment implements PopupMenu.OnMenuIte
         recyclerAdapter = new RecyclerAdapter(guidesNames, this, R.menu.guide_options_menu);
         guidesView.setAdapter(recyclerAdapter);
         searchView = view.findViewById(R.id.search_barA);
+
         //this function allows the searchview to detect the text upon input and perform the search
         //with the selected filter in the recycleview adapter:
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

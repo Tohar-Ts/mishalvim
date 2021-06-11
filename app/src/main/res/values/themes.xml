@@ -28,7 +28,7 @@
     </style>
 
     <style name="BlueProgressBarTheme" parent="ThemeOverlay.AppCompat.Light">
-        <item name="colorAccent">@color/pretty_blue</item>
+        <item name="colorAccent">@color/button_blue2</item>
     </style>
 
     <style name="Theme.MishlavimPink.NoActionBar">
@@ -48,6 +48,10 @@
         <item name="cornerSize">30%</item>
     </style>
 
+    <style name="HomeButtonStyle" parent="">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">10%</item>
+    </style>
 <!--    <style name="ActionButton" parent="@android:style/Widget.ActionButton">-->
 <!--        <item name="android:paddingStart">0dp</item>-->
 <!--        <item name="android:paddingEnd">0dp</item>-->

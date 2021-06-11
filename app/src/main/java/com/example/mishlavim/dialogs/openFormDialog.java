@@ -38,7 +38,7 @@ public class openFormDialog extends DialogFragment {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        builder.setMessage("לחניך זה קיים שאלון פתוח, והפעולה תמחק כל מידע שקשור לשאלון הפתוח. להמשיך?")
+        builder.setMessage("למתנדב זה קיים שאלון פתוח, והפעולה תמחק כל מידע שקשור לשאלון הפתוח. להמשיך?")
 
                 .setPositiveButton("כן", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {

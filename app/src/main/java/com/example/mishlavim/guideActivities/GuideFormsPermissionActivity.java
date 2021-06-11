@@ -54,7 +54,9 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
     private String voluId;//the clicked volunteer id
     private Volunteer voluData; //volu current data from the firestore
 
-    private FloatingActionButton homeButton; //home button
+//    private FloatingActionButton homeButton; //home button
+private TextView homeButton; //home button
+
     private ProgressBar loadingProgressBar; //progress bar
 
     private RecyclerView templateView; //recycle view list
@@ -83,6 +85,12 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
         FirestoreMethods.getCollection(FirebaseStrings.formsTemplatesStr(), this::onGetTemplateSuccess, this::showError);
         loadingProgressBar.setVisibility(View.VISIBLE);
         searchView = findViewById(R.id.search_bar_permissions);
+        // change close icon color
+        ImageView iconClose = searchView.findViewById(R.id.search_close_btn);
+        iconClose.setColorFilter(getResources().getColor(R.color.light_blue2));
+        //change search icon color
+        ImageView iconSearch = searchView.findViewById(R.id.search_button);
+        iconSearch.setColorFilter(getResources().getColor(R.color.light_blue2));
         searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -110,11 +118,13 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
         Toast.makeText(getApplicationContext(),
                 "הפעולה הושלמה בהצלחה",
                 Toast.LENGTH_SHORT).show();
+        loadingProgressBar.setVisibility(View.GONE);
         return null;
     }
     //this function sends an error if unable to get the correct data from firebase
     private Void showError(Void unused) {
         Toast.makeText(GuideFormsPermissionActivity.this, "שגיאה בטעינת המידע", Toast.LENGTH_SHORT).show();
+        loadingProgressBar.setVisibility(View.GONE);
         return null;
     }
     //this function returns the data selected from the form and if fails sends appropriate message
@@ -146,6 +156,7 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
     //this function determines what to do depending on the user selection on the menu
     public boolean onMenuItemClick(MenuItem item) {
         //getting clicked text
+        loadingProgressBar.setVisibility(View.GONE);
         clickedFormName = recyclerAdapter.getClickedText();
         clickedFormId = templates.get(clickedFormName);
 
@@ -167,18 +178,24 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
     }
     //this function opens the correct form
     private void openForm() {
-        //checking if the volunteer already has an open form
+        //checking if the volunteer already has this form as an open form
         if (voluData.getHasOpenForm()) {
             if (voluData.getOpenFormName().equals(clickedFormName)) {
-                Toast.makeText(GuideFormsPermissionActivity.this, "שאלון זה כבר פתוח לחניך", Toast.LENGTH_SHORT).show();
+                Toast.makeText(GuideFormsPermissionActivity.this, "שאלון זה כבר פתוח למתנדב", Toast.LENGTH_SHORT).show();
                 return;
             }
+            //else - showing do you want to override ?
             DialogFragment dialogFragment = new openFormDialog();
             dialogFragment.show(getSupportFragmentManager(), "openForm");
-
-//            Toast.makeText(GuideFormsPermissionActivity.this, "שימו לב שכבר יש שאלון פתוח שילך לאיבוד", Toast.LENGTH_SHORT).show();
             return;
         }
+
+        //checking if the volunteer has this form in his answered forms
+        if (voluData.getFinishedForms().get(clickedFormName)!=null) {
+            Toast.makeText(GuideFormsPermissionActivity.this, "המתנדב כבר ענה על שאלון זה", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         //ok - continue
         Function<DocumentReference, Void> creatingAnswersDocSuccess = (document) -> {
             //updating the openForm field in the volunteer document
@@ -194,19 +211,33 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
     //this function allows the form for the specific volunteer to be editable
     private void allowEdit() {
         String answersUid = voluData.getFinishedForms().get(clickedFormName);
-        //checking if the volunteer has this form in his open forms
+        //checking if the volunteer has this form as an open form
+        if (voluData.getOpenFormName().equals(clickedFormName)) {
+            Toast.makeText(GuideFormsPermissionActivity.this, "זהו השאלון שכרגע פתוח למתנדב", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        //checking if the volunteer has this form in his answered
         if (answersUid == null) {
             Toast.makeText(GuideFormsPermissionActivity.this, "לא ניתן לשנות הגדרות עריכה לשאלון שלא הושלם בעבר", Toast.LENGTH_SHORT).show();
             return;
         }
+
         //updating the answers can edit to true
         FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), answersUid, FirebaseStrings.finishedCanEditStr()
                 , true, this::onSuccess, this::showError);
     }
+
+
     //this function disables the ability to edit a specific form for a volunteer
     private void disableEdit() {
         String answersUid = voluData.getFinishedForms().get(clickedFormName);
-        //checking if the volunteer has this form in his open forms
+        //checking if the volunteer has this form as an open form
+        if (voluData.getOpenFormName().equals(clickedFormName)) {
+            Toast.makeText(GuideFormsPermissionActivity.this, "זהו השאלון שכרגע פתוח למתנדב", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        //checking if the volunteer has this form in his answered forms
         if (answersUid == null) {
             Toast.makeText(GuideFormsPermissionActivity.this, "לא ניתן לשנות הגדרות עריכה לשאלון שלא הושלם בעבר", Toast.LENGTH_SHORT).show();
             return;
@@ -218,8 +249,21 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
 
     @Override
     public void onOpenFormPositiveClick(DialogFragment dialog) {
-    // TODO: 6/11/2021 implement this method.
+        //3. updating the openForm fields in the volunteer document
+        Function<DocumentReference, Void> creatingAnswersDocSuccess = (document) -> {
+            Volunteer.addOpenForm(voluId, clickedFormName, document.getId());
+            return onSuccess(null);
+        };
 
+        //2. creating new empty answered form document
+        Function<Void, Void> deleteOpenFormSuccess = (unused) -> {
+            AnsweredForm ansForm = new AnsweredForm(false, true, clickedFormName, clickedFormId, new HashMap<>());
+            FirestoreMethods.createNewDocumentRandomId(FirebaseStrings.answeredFormsStr(), ansForm, creatingAnswersDocSuccess, this::showError);
+            return null;
+        };
+
+        //1. delete the old openForm from answered collection
+        FirestoreMethods.deleteDocument(FirebaseStrings.answeredFormsStr(),voluData.getOpenFormId(), deleteOpenFormSuccess,  this::showError);
     }
 
     @Override

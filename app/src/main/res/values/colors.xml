@@ -6,7 +6,6 @@
     <color name="most_light_pink">#ffc4e9</color>
     <color name="main_green">#307672</color>
     <color name="dark_green">#14302f</color>
-    <color name="light_green">#a4dad7</color>
     <color name="most_light_green">#dcf1f0</color>
     <color name="pretty_blue">#69D2E7</color>
     <color name="light_pretty_blue">#6EC1E4</color>
@@ -39,11 +38,13 @@
     <color name="bar_blue">#0291A3</color>
     <color name="button_blue">#00C6DF</color>
     <color name="button_dark_blue">#005E6A</color>
-    <color name="button_blue2">#56C0CD</color>
+    <color name="button_blue2">#2F7D95</color>
     <color name="button_dark_blue2">#34666C</color>
     <color name="black">#FF000000</color>
     <color name="gray_background">#F5F5F5</color>
     <color name="white">#FFFFFFFF</color>
     <color name="dark_grey">#505050</color>
+    <color name="light_green">#BAB3BC9D</color>
+    <color name="light_blue2">#7AB5B8</color>
 
 </resources>

@@ -7,21 +7,45 @@
     android:background="@color/gray_background"
     tools:context=".guideActivities.GuideNavigationActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/guide_setting_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layoutDirection="rtl"
+        <RelativeLayout
+        android:id="@+id/appBarLayout"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        app:menu="@menu/setting_menu"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+            android:id="@+id/guide_setting_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:menu="@menu/setting_menu"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"/>
+
+            <TextView
+                android:id="@+id/helloGuide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="שלום "
+                android:clickable="true"
+                android:padding="10dp"
+                android:background="@drawable/nav_orange_up"
+                android:textSize="20sp"
+                android:fontFamily="@font/alef"
+                android:textColor="@color/white"
+               android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_centerInParent="true"
+                android:focusable="true" />
+
+
+        </RelativeLayout>
 
     <FrameLayout
         android:id="@+id/guide_fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        android:layout_below="@+id/guide_setting_button"
+        android:layout_below="@+id/appBarLayout"
         android:layout_above ="@+id/guide_bottom_navigation"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
