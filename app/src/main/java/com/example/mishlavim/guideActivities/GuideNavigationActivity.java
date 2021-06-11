@@ -109,6 +109,7 @@ public class GuideNavigationActivity extends AppCompatActivity implements Bottom
             case R.id.exit:
                 AuthenticationMethods.signOut();
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                finish();
                 overridePendingTransition(0, 0);
                 break;
 

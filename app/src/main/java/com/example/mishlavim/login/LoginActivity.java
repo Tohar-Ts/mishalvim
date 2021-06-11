@@ -78,6 +78,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String email = emailEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
 
+
         //visible progress bar
         loadingProgressBar.setVisibility(View.VISIBLE);
 
@@ -114,6 +115,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String type = document.get(FirebaseStrings.typeStr()).toString();
         globalInstance.setType(type);
 
+        //clear inputs from login screen. DELETE IF YOU WANT
+//        emailEditText.setText(FirebaseStrings.emptyString());
+//        passwordEditText.setText(FirebaseStrings.emptyString());
+
         //init admin and go to admin main screen
         if (type.equals(FirebaseStrings.adminStr())) {
             Admin admin = document.toObject(Admin.class);
@@ -126,6 +131,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             Guide guide = document.toObject(Guide.class);
             globalInstance.setGuideInstance(guide);
             startActivity(new Intent(LoginActivity.this, GuideNavigationActivity.class));
+
         }
 
         //volunteer and go to volunteer main screen

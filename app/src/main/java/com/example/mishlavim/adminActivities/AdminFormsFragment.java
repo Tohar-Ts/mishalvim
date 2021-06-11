@@ -132,22 +132,13 @@ public class AdminFormsFragment extends Fragment implements PopupMenu.OnMenuItem
         clickedRowText = recyclerAdapter.getClickedText();
         clickedRowUid = templates.get(clickedRowText);
 
-        switch(item.getItemId() ){
-            case R.id.view_template:
                 Log.d("onMenuItemClick: ", "view_template:" + recyclerAdapter.getClickedText() );
                 Intent intent = new Intent(getActivity().getBaseContext(),
                         AdminWatchTemplate.class);
                 intent.putExtra("CLICKED_FORM_VALUE", clickedRowUid);
                 intent.putExtra("CLICKED_FORM_KEY", clickedRowText);
                 getActivity().startActivity(intent);
-                break;
-            case R.id.edit_template:
-                Log.d("onMenuItemClick: ", "edit_template:" + recyclerAdapter.getClickedText() );
-                break;
-            case R.id.remove_template:
-                Log.d("onMenuItemClick: ", "remove_template:" + recyclerAdapter.getClickedText() );
-                break;
-        }
+
         return true;
     }
 }
