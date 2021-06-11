@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 import android.widget.Space;
+import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -46,7 +47,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.function.Function;
 
-public class GuideFormsPermissionActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener {
+public class GuideFormsPermissionActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener,
+        openFormDialog.openFormListener{
 
     private String voluName; //the clicked volunteer name
     private String voluId;//the clicked volunteer id
@@ -76,6 +78,7 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
         templateView = findViewById(R.id.guide_templates_recycler_view);
         homeButton = findViewById(R.id.guideHomeFloating);
         loadingProgressBar = findViewById(R.id.guideFormsLoading);
+
         //getting all the templates
         FirestoreMethods.getCollection(FirebaseStrings.formsTemplatesStr(), this::onGetTemplateSuccess, this::showError);
         loadingProgressBar.setVisibility(View.VISIBLE);
@@ -169,8 +172,10 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
                 Toast.makeText(GuideFormsPermissionActivity.this, "שאלון זה כבר פתוח לחניך", Toast.LENGTH_SHORT).show();
                 return;
             }
-            //TODO - show dialog, are you sure you want to override current open form?
-            Toast.makeText(GuideFormsPermissionActivity.this, "שימו לב שכבר יש שאלון פתוח שילך לאיבוד", Toast.LENGTH_SHORT).show();
+            DialogFragment dialogFragment = new openFormDialog();
+            dialogFragment.show(getSupportFragmentManager(), "openForm");
+
+//            Toast.makeText(GuideFormsPermissionActivity.this, "שימו לב שכבר יש שאלון פתוח שילך לאיבוד", Toast.LENGTH_SHORT).show();
             return;
         }
         //ok - continue
@@ -210,6 +215,14 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
                 , false, this::onSuccess, this::showError);
     }
 
+    @Override
+    public void onOpenFormPositiveClick(DialogFragment dialog) {
+    // TODO: 6/11/2021 implement this method.
+
+    }
+
+    @Override
+    public void onOpenFormNegativeClick(DialogFragment dialog) {return;}
 }
 
 

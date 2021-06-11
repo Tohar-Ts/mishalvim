@@ -87,4 +87,13 @@ tools:context=".adminActivities.AdminViewGuideVoluActivity">
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"/>
 
+    <Spinner
+        android:id="@+id/view_guides_volunteers_spinner"
+        android:layout_width="233dp"
+        android:layout_height="52dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="6dp"
+        android:background="@drawable/custom_input"
+        android:visibility="gone" />
+
 </RelativeLayout>

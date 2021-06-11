@@ -9,8 +9,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mishlavim.R;
 import com.example.mishlavim.UserSettingActivity;
+import com.example.mishlavim.dialogs.DeleteUserDialog;
+import com.example.mishlavim.dialogs.passAllVolunteersDialog;
 import com.example.mishlavim.guideActivities.GuideFormsPermissionActivity;
 import com.example.mishlavim.model.Adapter.RecyclerAdapter;
+import com.example.mishlavim.model.Admin;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
 import com.example.mishlavim.model.Firebase.FirestoreMethods;
 import com.example.mishlavim.model.Global;
@@ -26,8 +29,11 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.PopupMenu;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,20 +41,25 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class AdminViewGuideVoluActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener {
+public class AdminViewGuideVoluActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener,
+        passAllVolunteersDialog.passAllVolunteersListener, DeleteUserDialog.deleteUserListener, AdapterView.OnItemSelectedListener
+{
     TextView guideNameTextView;
     SearchView searchView;
     Button passAllBtn;
     FloatingActionButton homeBtn;
     RecyclerView volunteersView;
     RecyclerAdapter recyclerAdapter;
-
+    private Spinner guide_spinner;
     HashMap<String, String> volunteers;
     List<String> volunteersNames;
     Guide guide;
     Global global;
     String clickedGuideText, clickedGuideUid; //init guide data from the calling activity
     String clickedVoluText, clickedVoluUid;
+    private ArrayList<String> listOfGuidesName,  listOfGuidesID;
+    private boolean flag = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,16 +89,22 @@ public class AdminViewGuideVoluActivity extends AppCompatActivity implements Vie
         guideNameTextView = findViewById(R.id.adminGuideName);
         passAllBtn = findViewById(R.id.passAllVolusBtn);
         homeBtn = findViewById(R.id.adminHomeFloating);
+        guide_spinner = findViewById(R.id.view_guides_volunteers_spinner);
 
         //init guide name
         guideNameTextView.setText(clickedGuideText);
+        
         //init volu list
         recyclerAdapter = new RecyclerAdapter(volunteersNames, this, R.menu.admin_volunteers_menu);
         volunteersView.setAdapter(recyclerAdapter);
+        
         //init buttons listener
         passAllBtn.setOnClickListener(this);
         homeBtn.setOnClickListener(this);
 
+        //init spinner
+        setSpinner();
+        
         //init search
         searchView = findViewById(R.id.admin_volu_search_bar);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -114,9 +131,9 @@ public class AdminViewGuideVoluActivity extends AppCompatActivity implements Vie
                         AdminNavigationActivity.class));
                 break;
             case R.id.passAllVolusBtn:
-                //TODO - passing all volunteers from one guide to another
-                //TODO - show "are you sure ou want to move all volunteers?" dialog
-                 break;
+                DialogFragment dialogFragment = new passAllVolunteersDialog();
+                dialogFragment.show(getSupportFragmentManager(), "passAll");
+                break;
         }
     }
 
@@ -139,10 +156,12 @@ public class AdminViewGuideVoluActivity extends AppCompatActivity implements Vie
                 break;
             case R.id.change_guide:
                 //moving to the activity, passing the clicked volunteer details, getting the volunteer data into global
-                //TODO - show guide spinner or something
+                guide_spinner.setVisibility(View.VISIBLE);
+                flag = false;
                 break;
             case R.id.admin_remove_volunteer:
-                //TODO - show yes/no dialog.
+                DialogFragment dialogFragment = new DeleteUserDialog();
+                dialogFragment.show(getSupportFragmentManager(), "deleteUser");
                 break;
         }
         return true;
@@ -174,4 +193,68 @@ public class AdminViewGuideVoluActivity extends AppCompatActivity implements Vie
         Toast.makeText(AdminViewGuideVoluActivity.this, "תקלה בהבאת המידע נסה שנית מאוחר יותר", Toast.LENGTH_SHORT).show();
         return null;
     }
+
+    @Override
+    public void passAllVolunteersPositiveClick(DialogFragment dialog) {
+        flag = true;
+        guide_spinner.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void passAllVolunteersNegativeClick(DialogFragment dialog) { return; }
+
+    @Override
+    public void onDeletePositiveClick(DialogFragment dialog) {
+        // TODO: 6/11/2021 implement this method - delete user.
+    }
+
+    @Override
+    public void onDeleteNegativeClick(DialogFragment dialog) { return; }
+
+
+    public void setSpinner(){
+        //SPINNER SETUP
+        //get the guides list.
+        Global globalInstance = Global.getGlobalInstance();
+        Admin admin = globalInstance.getAdminInstance();
+        if(admin == null){
+            Toast.makeText(AdminViewGuideVoluActivity.this, "תקלה בהצגת המידע, יש לסגור ולפתוח את האפליקציה מחדש", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        HashMap<String,String> guideList = admin.getGuideList();
+        guideList.remove(clickedGuideUid); // remove current guide from list.
+        //if guide list is empty show a msg
+        if(guideList.isEmpty()){
+            Toast.makeText(AdminViewGuideVoluActivity.this, "רשימת המדריכים ריקה", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        listOfGuidesName = new ArrayList<>(guideList.keySet());
+        listOfGuidesID = new ArrayList<>(guideList.values());
+
+        //Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, listOfGuidesName);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        guide_spinner.setAdapter(adapter);
+        guide_spinner.setOnItemSelectedListener(this);
+    }
+
+    //SPINNER METHOD
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        // TODO: 6/11/2021 implement or delete this spinner. NOTE TO DESIGN BETTER THE SPINNER ON THE XML FILE
+        //when user choose one item from the spinner you got the values so you can use them.
+        String key = listOfGuidesName.get(position);
+        String value = listOfGuidesID.get(position);
+
+        if (flag){
+            //this case move ALL volunteer
+        }
+        else{
+            //move only 1 volunteer. use clickedVoluUid
+        }
+    }
+
+    //SPINNER METHOD
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) { return;}
 }
