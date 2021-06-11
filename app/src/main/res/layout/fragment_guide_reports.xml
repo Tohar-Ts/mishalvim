@@ -87,6 +87,7 @@
                 <TextView
                     android:layout_marginTop="30dp"
                     android:id="@+id/avg_text"
+                    android:gravity="center"
                     android:background="@drawable/white_text_background"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

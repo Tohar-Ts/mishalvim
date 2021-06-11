@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_margin="40dp"
+        android:layout_margin="20dp"
         android:fontFamily="@font/alef"
         android:layout_alignParentTop="true"
         android:text="שאלונים"
@@ -32,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        android:layout_below="@+id/guideFormsPrompt">
+        android:layout_below="@id/search_bar_permissions">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/guide_templates_recycler_view"
@@ -43,13 +43,14 @@
 
     </LinearLayout>
 
+
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_bar_permissions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:defaultQueryHint="@string/searchHintForm"
-        android:layout_alignParentTop="true"
         android:layoutDirection="rtl"
+        android:layout_below="@+id/guideFormsPrompt"
         >
     </androidx.appcompat.widget.SearchView>
 

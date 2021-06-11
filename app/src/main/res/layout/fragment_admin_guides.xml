@@ -16,14 +16,14 @@
         android:fontFamily="@font/alef"
         android:layout_alignParentTop="true"
         android:text="@string/guides"
-        android:layout_margin="40dp"
+        android:layout_margin="20dp"
         android:textColor="@color/black"
         android:textSize="30sp" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        android:layout_below="@id/guidesPrompt">
+        android:layout_below="@id/search_barA">
 
         <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/guides_recycler_view"
@@ -38,8 +38,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:defaultQueryHint="@string/searchHintGuide"
-        android:layout_alignParentTop="true"
         android:layoutDirection="rtl"
+        android:layout_below="@+id/guidesPrompt"
         >
     </androidx.appcompat.widget.SearchView>
 </RelativeLayout>

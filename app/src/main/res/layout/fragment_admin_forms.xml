@@ -17,7 +17,7 @@
         android:fontFamily="@font/alef"
         android:layout_alignParentTop="true"
         android:text="שאלונים"
-        android:layout_margin="40dp"
+        android:layout_margin="20dp"
         android:textColor="@color/black"
         android:textSize="30sp" />
 
@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        android:layout_below="@+id/formsPrompt">
+        android:layout_below="@id/search_barB">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/templates_recycler_view"
@@ -40,8 +40,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:defaultQueryHint="@string/searchHintForm"
-        android:layout_alignParentTop="true"
         android:layoutDirection="rtl"
+        android:layout_below="@id/formsPrompt"
         >
     </androidx.appcompat.widget.SearchView>
 
