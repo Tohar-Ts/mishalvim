@@ -51,7 +51,7 @@ public class Admin extends User {
     /**
      * Deletes a guide from 'guideList' map.
      */
-    public void deleteGuide(String adminUid, String guideName) {
+    public static void deleteGuide(String adminUid, String guideName) {
         Function<Void, Void> onSuccess = unused -> {Log.d("Admin class", "Guide successfully deleted from the map.");return null;};
         Function<Void, Void> onFailure = unused ->  {Log.d("Admin class", "Error - Guide delete from the map failed.");return null;};
         FirestoreMethods.deleteMapKey(FirebaseStrings.usersStr(), adminUid, FirebaseStrings.guideListStr(), guideName ,onSuccess,onFailure);

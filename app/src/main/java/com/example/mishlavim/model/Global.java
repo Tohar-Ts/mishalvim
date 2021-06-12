@@ -52,6 +52,7 @@ public class Global {
                 Volunteer volu = document.toObject(Volunteer.class);
                 getGlobalInstance().setVoluInstance(volu);
             }
+            Log.d("Global class", "update global user data ended successfully.");
             onUpdateFinished.apply(true);
             return null;
         };

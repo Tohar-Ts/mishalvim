@@ -50,6 +50,8 @@ public class Guide extends User {
      * For the given guide, deletes the volunteer from 'myVolunteer' map.
      */
     public static void deleteVolunteer(String guideUid, String voluName) {
+        Log.d("Guide class", "trying to delete a volunteer named "+voluName + "from this guide map: "+guideUid);
+
         Function<Void, Void> onSuccess = unused -> {Log.d("Guide class", "Volunteer successfully deleted from the map.");return null;};
         Function<Void, Void> onFailure = unused ->  {Log.d("Guide class", "Error - Volunteer delete from the map failed.");return null;};
 

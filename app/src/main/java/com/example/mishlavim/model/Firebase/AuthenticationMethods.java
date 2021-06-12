@@ -111,6 +111,22 @@ public class AuthenticationMethods {
                 });
 
     }
-    //TODO - delete user
+
+    public static void deleteAuthUser(){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        assert user != null;
+        user.delete()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d("Authentication Methods:", "User account deleted.");
+                        }
+                        else {
+                            Log.d("Authentication Methods:", "User account delete failed.");
+                        }
+                    }
+                });
+    }
 
 }

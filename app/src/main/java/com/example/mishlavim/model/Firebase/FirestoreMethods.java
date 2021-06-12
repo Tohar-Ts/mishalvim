@@ -163,6 +163,7 @@ public class FirestoreMethods {
 
     public static void deleteDocument(String collection, String documentId,
                                       Function<Void, Void> successFunc,  Function<Void, Void> failedFunc){
+        Log.d("FirestoreMethods:", "Starting to delete this doc:" + documentId);
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -171,8 +172,8 @@ public class FirestoreMethods {
                 .delete()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
+                        Log.d("FirestoreMethods:", "Delete document ended successfully.");
                         successFunc.apply(null);
-                        Log.d("FirestoreMethods:", "Delete document ended successfully");
                     }
                     else {
                         Log.d("FirestoreMethods:", "Delete document failed" + task.getException());

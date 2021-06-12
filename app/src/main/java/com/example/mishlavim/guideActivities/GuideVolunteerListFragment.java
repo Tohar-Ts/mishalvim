@@ -1,6 +1,7 @@
 package com.example.mishlavim.guideActivities;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import com.example.mishlavim.R;
+import com.example.mishlavim.deleteUserActivity;
 import com.example.mishlavim.model.Adapter.RecyclerAdapter;
 
 import android.content.Intent;
@@ -122,17 +124,12 @@ public class GuideVolunteerListFragment extends Fragment implements PopupMenu.On
                 FirestoreMethods.getDocument(FirebaseStrings.usersStr(), clickedRowUid , this::OpenGetUserDocSuccess, this::getUserDocFailed);
                 break;
             case R.id.remove_volunteer:
-                //TODO - remove user
+                //moving to delete activity
+                FirestoreMethods.getDocument(FirebaseStrings.usersStr(), clickedRowUid , this::deleteGetUserDocSuccess, this::getUserDocFailed);
                 break;
         }
         return true;
     }
-
-//    //delete dialog functions
-//    public void onDeletePositiveClick(DialogFragment dialog) {
-//        Guide.deleteVolunteer(global.getUid(), clickedRowUid);
-//        FirestoreMethods.deleteDocument(FirebaseStrings.usersStr(), clickedRowUid, this::onDocumentDeleteSuccess, this::onDeleteFailed);
-//    }
 
     public Void onDocumentDeleteSuccess(Void noUse){
         Toast.makeText(getActivity(), "המחיקה הסתיימה בהצלחה", Toast.LENGTH_SHORT).show();
@@ -153,6 +150,7 @@ public class GuideVolunteerListFragment extends Fragment implements PopupMenu.On
         Intent intent = new Intent(getActivity().getBaseContext(),
                 VolunteerMainActivity.class);
         getActivity().startActivity(intent);
+        ((Activity) getActivity()).overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
         return null;
     }
 
@@ -166,9 +164,10 @@ public class GuideVolunteerListFragment extends Fragment implements PopupMenu.On
         intent.putExtra("CLICKED_VOLU_KEY", clickedRowText);
         intent.putExtra("CLICKED_VOLU_ID", clickedRowUid);
         getActivity().startActivity(intent);
+        ((Activity) getActivity()).overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
         return null;
     }
-
+    //go to volu setting
     private Void settingGetUserDocSuccess(DocumentSnapshot doc) {
         assert doc != null;
         Volunteer volu = doc.toObject(Volunteer.class);
@@ -178,9 +177,21 @@ public class GuideVolunteerListFragment extends Fragment implements PopupMenu.On
         intent.putExtra("CLICKED_USER_TYPE", FirebaseStrings.volunteerStr());
         intent.putExtra("CLICKED_USER_ID", clickedRowUid);
         getActivity().startActivity(intent);
+        ((Activity) getActivity()).overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
         return null;
     }
-
+    //go to volu delete
+    private Void deleteGetUserDocSuccess(DocumentSnapshot doc) {
+        assert doc != null;
+        Volunteer volu = doc.toObject(Volunteer.class);
+        global.setVoluInstance(volu);
+        Intent intent = new Intent(getActivity().getBaseContext(), deleteUserActivity.class);
+        intent.putExtra("CLICKED_USER_TYPE", FirebaseStrings.volunteerStr());
+        intent.putExtra("CLICKED_USER_ID", clickedRowUid);
+        getActivity().startActivity(intent);
+        ((Activity) getActivity()).overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
+        return null;
+    }
     private Void getUserDocFailed(Void unused){
         Toast.makeText(getActivity(), "שגיאה בהבאת המידע", Toast.LENGTH_SHORT).show();
         return null;

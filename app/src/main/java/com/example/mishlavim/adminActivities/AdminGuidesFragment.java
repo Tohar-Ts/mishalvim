@@ -1,6 +1,7 @@
 package com.example.mishlavim.adminActivities;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.widget.SearchView;
@@ -19,6 +20,7 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.example.mishlavim.R;
+import com.example.mishlavim.deleteUserActivity;
 import com.example.mishlavim.guideActivities.GuideFormsPermissionActivity;
 import com.example.mishlavim.model.Adapter.RecyclerAdapter;
 import com.example.mishlavim.model.Admin;
@@ -73,12 +75,6 @@ public class AdminGuidesFragment extends Fragment implements PopupMenu.OnMenuIte
         }
 
         guidesNames = new ArrayList<>(admin.getGuideList().keySet());
-        // change close icon color
-        ImageView iconClose = searchView.findViewById(R.id.search_close_btn);
-        iconClose.setColorFilter(getResources().getColor(R.color.button_blue));
-        //change search icon color
-        ImageView iconSearch = searchView.findViewById(R.id.search_button);
-        iconSearch.setColorFilter(getResources().getColor(R.color.button_blue));
 
         //init xml views
         guidesView = view.findViewById(R.id.guides_recycler_view);
@@ -86,6 +82,12 @@ public class AdminGuidesFragment extends Fragment implements PopupMenu.OnMenuIte
         recyclerAdapter = new RecyclerAdapter(guidesNames, this, R.menu.guide_options_menu);
         guidesView.setAdapter(recyclerAdapter);
         searchView = view.findViewById(R.id.search_barA);
+        // change close icon color
+        ImageView iconClose = searchView.findViewById(R.id.search_close_btn);
+        iconClose.setColorFilter(getResources().getColor(R.color.button_blue));
+        //change search icon color
+        ImageView iconSearch = searchView.findViewById(R.id.search_button);
+        iconSearch.setColorFilter(getResources().getColor(R.color.button_blue));
 
         //this function allows the searchview to detect the text upon input and perform the search
         //with the selected filter in the recycleview adapter:
@@ -117,8 +119,7 @@ public class AdminGuidesFragment extends Fragment implements PopupMenu.OnMenuIte
                 FirestoreMethods.getDocument(FirebaseStrings.usersStr(), clickedGuideId , this::getGuideDocSuccess, this::getGuideDocFailed);
                 break;
             case R.id.remove_guide:
-                //TODO - remove user
-                Log.d("onMenuItemClick: ", "remove guide:" + recyclerAdapter.getClickedText() );
+                FirestoreMethods.getDocument(FirebaseStrings.usersStr(), clickedGuideId , this::deleteGetUserDocSuccess, this::getGuideDocFailed);
                 break;
         }
             return true;
@@ -140,7 +141,26 @@ public class AdminGuidesFragment extends Fragment implements PopupMenu.OnMenuIte
         getActivity().startActivity(intent);
         return null;
     }
-
+    //go to volu delete
+    private Void deleteGetUserDocSuccess(DocumentSnapshot doc) {
+        assert doc != null;
+        Guide guide = doc.toObject(Guide.class);
+        Global.getGlobalInstance().setGuideInstance(guide);
+        //checking if guide has volunteers under him
+        assert guide != null;
+        if(guide.getMyVolunteers().isEmpty()) {
+            Intent intent = new Intent(getActivity().getBaseContext(), deleteUserActivity.class);
+            intent.putExtra("CLICKED_USER_TYPE", FirebaseStrings.guideStr());
+            intent.putExtra("CLICKED_USER_ID", clickedGuideId);
+            getActivity().startActivity(intent);
+            ((Activity) getActivity()).overridePendingTransition(R.anim.fragment_fade_in, R.anim.fragment_fade_out);
+        }
+        //you cant delete guide that has volunteers
+        else{
+            Toast.makeText(getActivity(), "לא ניתן למחוק מדריך שיש לו מתנדבים", Toast.LENGTH_SHORT).show();
+        }
+        return null;
+    }
 
 }
 
