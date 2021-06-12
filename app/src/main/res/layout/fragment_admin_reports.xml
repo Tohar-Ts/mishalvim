@@ -58,7 +58,7 @@
                     android:layout_margin="1dp"
                     android:background="#FFFFFF"
                     android:gravity="center"
-                    android:text="מספר הטפסים\nשמילאו החניכים "
+                    android:text="מספר הטפסים\nשמילאו המתנדבים "
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textStyle="bold" />
             </TableRow>

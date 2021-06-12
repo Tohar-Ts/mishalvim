@@ -20,6 +20,7 @@ import java.util.function.Function;
 public class Guide extends User {
 
     private HashMap<String, String> myVolunteers;
+    private String myAdminId;
 
     /**
      * Empty constructor.
@@ -30,9 +31,10 @@ public class Guide extends User {
     /**
      * Parameterized constructor.
      */
-    public Guide(String name, String type, String email, HashMap<String, String> myVolunteers) {
+    public Guide(String name, String type, String email, HashMap<String, String> myVolunteers, String myAdminId) {
         super(name, type, email);
         this.myVolunteers = myVolunteers;
+        this.myAdminId = myAdminId;
     }
 
     /**
@@ -67,5 +69,11 @@ public class Guide extends User {
         this.myVolunteers = myVolunteers;
     }
 
+    public String getMyAdminId() {
+        return myAdminId;
+    }
 
+    public void setMyAdminId(String myAdminId) {
+        this.myAdminId = myAdminId;
+    }
 }

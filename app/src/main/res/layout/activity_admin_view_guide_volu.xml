@@ -78,7 +78,7 @@ tools:context=".adminActivities.AdminViewGuideVoluActivity">
         android:layout_marginBottom="30dp"
         android:background="@drawable/blue_button2"
         android:padding="5dp"
-        android:text="העבר את כל החניכים למדריך אחר"
+        android:text="העבר את כל המתנדבים למדריך אחר"
         android:textColor="@drawable/blue_text_pressed" />
 
   <TextView

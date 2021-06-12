@@ -49,10 +49,6 @@ public class FirebaseStrings {
         return "hasOpenForm";
     }
 
-    public static String myGuideNameStr() {
-        return "myGuide";
-    }
-
     public static String myGuideIdStr() {
         return "myGuideID";
     }
@@ -69,6 +65,10 @@ public class FirebaseStrings {
     //admin fields
     public static String guideListStr() {
         return "guideList";
+    }
+
+    public static String myAdminIdStr() {
+        return "myAdminId";
     }
 
     //form template fields

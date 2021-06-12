@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/view_guide_volunteers"
-        android:title="צפייה בחניכים" />
+        android:title="צפייה במתנדבים" />
     <item
         android:id="@+id/remove_guide"
         android:title="מחק מדריך" />

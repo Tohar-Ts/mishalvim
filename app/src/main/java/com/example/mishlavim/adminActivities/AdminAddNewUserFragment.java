@@ -209,7 +209,7 @@ public class AdminAddNewUserFragment extends Fragment  implements View.OnClickLi
 
         //guide
         else if (newUserType.equals(FirebaseStrings.guideStr())) {
-            fsUser = new Guide(newAuthUser.getName(), newUserType, newAuthUser.getEmail(), new HashMap<>());
+            fsUser = new Guide(newAuthUser.getName(), newUserType, newAuthUser.getEmail(), new HashMap<>(), globalInstance.getUid());
             Admin.addGuide(thisAdminUid, newAuthUser.getName(), newUserUid);
         }
 

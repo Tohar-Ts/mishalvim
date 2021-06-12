@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingRight="30dp"
+    android:paddingLeft="30dp"
+    android:paddingBottom="30dp"
+    android:paddingTop="20dp"
+    android:background="@color/gray_background"
+    tools:context=".adminActivities.AdminChooseVoluGuideActivity">
+
+    <TextView
+        android:id="@+id/chooseGuidePrompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/alef"
+        android:gravity="center"
+        android:layout_alignParentTop="true"
+        android:text="בחר מדריך שברצונך להעביר אליו "
+        android:textColor="@color/black"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/chooseGuideVoluName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/alef"
+        android:gravity="center"
+        android:layout_below="@+id/chooseGuidePrompt"
+        android:text="את כל המתנדבים של מדריך "
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:layout_marginBottom="25dp"
+        />
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search_barG"
+        android:clickable="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:defaultQueryHint="@string/searchHintGuide"
+        android:layoutDirection="rtl"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        app:iconifiedByDefault="false"
+        android:background="@drawable/search_blue_borders"
+        android:layout_below="@id/chooseGuideVoluName"
+        >
+    </androidx.appcompat.widget.SearchView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/search_barG">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/choose_guide_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+    </LinearLayout>
+</RelativeLayout>

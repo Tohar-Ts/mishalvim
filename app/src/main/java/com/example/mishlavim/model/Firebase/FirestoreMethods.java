@@ -241,30 +241,6 @@ public class FirestoreMethods {
                 });
     }
 
-    // TODO: 6/6/2021 CHANGE THIS so admin can move few volunteers at once.
-    public static void moveVolunteer(String voluToUpdateId, String pastGuideId, String newGuideName, String newGuideId){
-        try {
-            FirestoreMethods.deleteMapKey(FirebaseStrings.usersStr(),pastGuideId,FirebaseStrings.myVolunteerStr(),voluToUpdateId, task->{//delete volunteer from last guide's list
-                FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(), voluToUpdateId, FirebaseStrings.myGuideNameStr(), newGuideName, task1->{//update volunteer's guide name
-                    FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(), voluToUpdateId, FirebaseStrings.myGuideIdStr(), newGuideId, task2->{//update volunteer's guide id
-                        FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(), newGuideId, FirebaseStrings.myVolunteerStr(), voluToUpdateId, task3->{//update guide's list
-                            Log.d("move", "moveVolunteer: move success!");
-                         return null;}, onMoveFailed());
-                        return null;}, onMoveFailed());
-                    return null;}, onMoveFailed());
-                return null;},onMoveFailed());
-        }
-        catch (Exception e){
-            Log.d("moveVolunteer", "moveVolunteer: " + e.getMessage());
-        }
-
-    }
-
-
-    public static Function<Void, Void> onMoveFailed(){ return null; }
-
-
-
     public static void getCollection(String collection, Function<QuerySnapshot, Void> successFunc,  Function<Void, Void> failedFunc){
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();

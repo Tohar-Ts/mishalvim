@@ -205,11 +205,24 @@ public class UserSettingActivity extends AppCompatActivity implements View.OnCli
 
     private Void updateFirestoreSuccess(Void unused) {
         //update maps!
-        if(userToUpdateType.equals(FirebaseStrings.volunteerStr())){ //volunteer is stored in his guide map
+        if(userToUpdateType.equals(FirebaseStrings.volunteerStr()))//volunteer is stored in his guide map
             updateGuideVoluMap();
-        }
-        else  //admin and guide details are not stored in outside maps
+        else if(userToUpdateType.equals(FirebaseStrings.guideStr()))//guide is stored in his admin map
+            updateAdminGuideMap();
+        else  //admin details are not stored in outside maps
             Global.updateGlobalData(this::updateGlobalFinished);
+        return null;
+    }
+
+    private void updateAdminGuideMap() {
+        FirestoreMethods.deleteMapKey(FirebaseStrings.usersStr(), global.getGuideInstance().getMyAdminId(), FirebaseStrings.guideListStr(), userData.getName()
+                , this::onDeleteGuideMapKey, this::showError);
+    }
+
+    private Void onDeleteGuideMapKey(Void unused) {
+        FirestoreMethods.updateMapKey(FirebaseStrings.usersStr(), global.getGuideInstance().getMyAdminId(), FirebaseStrings.guideListStr(),
+                newUserName, userToUpdateUid
+                , this::onUpdateMapKey, this::showError);
         return null;
     }
 
