@@ -115,7 +115,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             if(noMenu) {
                 textView = itemView.findViewById(R.id.row_name);
                 row_layout = itemView.findViewById(R.id.row_layout);
-                row_layout.setOnClickListener(fragmentNoMenu);
+                row_layout.setOnClickListener(this);
             }
             else {
                 textView = itemView.findViewById(R.id.row_name);
@@ -130,10 +130,16 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         @Override
         public void onClick(View v) {
             clickedText = showList.get(getAdapterPosition());
-            PopupMenu popup = new PopupMenu(v.getContext(), v);
-            popup.setOnMenuItemClickListener(fragment);
-            popup.inflate(popMenuSrc);
-            popup.show();
+            if(noMenu) {
+                fragmentNoMenu.onClick(v);
+            }
+            else {
+                PopupMenu popup = new PopupMenu(v.getContext(), v);
+                popup.setOnMenuItemClickListener(fragment);
+                popup.inflate(popMenuSrc);
+                popup.show();
+            }
+
         }
     }
 }
