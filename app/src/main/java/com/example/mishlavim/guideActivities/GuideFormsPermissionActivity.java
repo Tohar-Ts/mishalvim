@@ -53,18 +53,17 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
     private String voluName; //the clicked volunteer name
     private String voluId;//the clicked volunteer id
     private Volunteer voluData; //volu current data from the firestore
-
-private TextView homeButton; //home button
-
+    private TextView homeButton; //home button
     private ProgressBar loadingProgressBar; //progress bar
-
     private RecyclerView templateView; //recycle view list
     private RecyclerAdapter recyclerAdapter; //custom adapter for the view
     private HashMap<String, String> templates; //template hashmap
     private List<String> templatesNames; //template names
+    private TextView voluNameTxtView;
     private SearchView searchView;  //search bar
     private String clickedFormId; // the clicked form id
     private String clickedFormName; //the clicked form name
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +78,8 @@ private TextView homeButton; //home button
         templateView = findViewById(R.id.guide_templates_recycler_view);
         homeButton = findViewById(R.id.guideHomeFloating);
         loadingProgressBar = findViewById(R.id.guideFormsLoading);
-
+        voluNameTxtView = findViewById(R.id.guideFormsVoloName);
+        voluNameTxtView.setText(voluName);
         //getting all the templates
         FirestoreMethods.getCollection(FirebaseStrings.formsTemplatesStr(), this::onGetTemplateSuccess, this::showError);
         loadingProgressBar.setVisibility(View.VISIBLE);
