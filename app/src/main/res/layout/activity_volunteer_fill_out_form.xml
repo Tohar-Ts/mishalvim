@@ -76,20 +76,24 @@
 
             <Button
                 android:id="@+id/next_btn"
-                android:layout_width="110dp"
+                android:layout_width="100dp"
                 android:layout_height="90dp"
                 android:layout_alignParentLeft="true"
                 android:background="@drawable/custom_green_button"
                 android:text="@string/next_question"
                 android:textSize="14sp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
                 android:textColor="@color/nav_blue_item"
                 android:drawableLeft="@drawable/ic_arrowforward" />
 
 
             <Button
                 android:id="@+id/back_btn"
-                android:layout_width="110dp"
+                android:layout_width="100dp"
                 android:layout_height="90dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
                 android:visibility="gone"
                 android:background="@drawable/custom_green_button"
                 android:text="@string/previous_question"
@@ -104,6 +108,8 @@
                 android:layout_height="90dp"
                 android:background="@drawable/pink_button"
                 android:text="@string/save_form"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
                 android:textColor="@color/white"
                 android:padding="10dp"
                 android:textSize="14sp"
@@ -116,6 +122,8 @@
                 android:layout_marginEnd="160dp"
                 android:background="@drawable/pink_button"
                 android:text="שמור ושלח"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
                 android:textColor="@color/white"
                 android:padding="10dp"
                 android:textSize="20sp"
