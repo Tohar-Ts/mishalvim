@@ -29,6 +29,8 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/textView"
         android:layout_above="@id/avg_text"
+        android:background="@drawable/white_text_background"
+            android:padding="10dp"
         android:layout_centerInParent="true">
 
         <TableLayout
@@ -36,7 +38,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
-            android:background="@drawable/white_text_background"
             android:stretchColumns="*">
 
             <TableRow

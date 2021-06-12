@@ -77,9 +77,7 @@ public class AdminNavigationActivity extends AppCompatActivity implements Bottom
             case R.id.add_forms:
                 selectedFragment = new AdminCreateFormFragment();
             break;
-            case R.id.reports:
-                selectedFragment = new AdminReportsFragment();
-            break;
+
         }
         //Transaction
         assert selectedFragment != null;

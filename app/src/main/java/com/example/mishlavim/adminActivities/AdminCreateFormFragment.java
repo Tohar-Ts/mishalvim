@@ -128,6 +128,13 @@ public class AdminCreateFormFragment extends Fragment implements View.OnClickLis
     private void processNewForm() {
 
         loadingProgressBar.setVisibility(View.VISIBLE);
+        String formName = formNameEditText.getText().toString().trim();
+        //validation form name
+        if (formName.isEmpty()) {
+            formNameEditText.setError("שם שאלון הינו שדה חובה");
+            loadingProgressBar.setVisibility(View.GONE);
+            return;
+        }
 
         HashMap<String, String> questionsMap = new HashMap<>();
         ViewGroup group = view.findViewById(R.id.questionsLayout);
@@ -143,7 +150,7 @@ public class AdminCreateFormFragment extends Fragment implements View.OnClickLis
             }
         }
 
-        String formName = formNameEditText.getText().toString().trim();
+
         //adding the form to firestore
         FormTemplate newForm = new FormTemplate(questionsMap, formName);
         FirestoreMethods.createNewDocumentRandomId(FirebaseStrings.formsTemplatesStr(),newForm,
