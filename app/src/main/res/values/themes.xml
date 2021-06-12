@@ -7,7 +7,7 @@
         <!--   color for the app bar and other primary UI elements -->
         <item name="colorPrimary">@color/pink</item>
         <item name="colorPrimaryVariant">@color/pink</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnPrimary">@color/black</item>
         <!--   a secondary color for controls like checkboxes and text fields -->
         <item name="colorAccent">@color/orange</item>
         <!-- Secondary brand color. -->
