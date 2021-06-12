@@ -28,10 +28,4 @@
         android:icon="@drawable/ic_forms_add"
         android:title="הוסף טופס" />
 
-    <item
-        android:id="@+id/reports"
-        android:enabled="true"
-        android:icon="@drawable/ic_report"
-        android:title="דוחות"
-     />
 </menu>
