@@ -12,6 +12,7 @@ import com.example.mishlavim.UserSettingActivity;
 import com.example.mishlavim.deleteUserActivity;
 import com.example.mishlavim.dialogs.passAllVolunteersDialog;
 import com.example.mishlavim.guideActivities.GuideFormsPermissionActivity;
+import com.example.mishlavim.adminActivities.AdminNavigationActivity;
 import com.example.mishlavim.model.Adapter.RecyclerAdapter;
 import com.example.mishlavim.model.Admin;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
@@ -69,6 +70,17 @@ public class AdminViewGuideVoluActivity extends AppCompatActivity implements Vie
 
         global = Global.getGlobalInstance();
         guide = global.getGuideInstance();
+
+        //init xml views
+        volunteersView = findViewById(R.id.volunteers_recycler_view);
+        guideNameTextView = findViewById(R.id.adminGuideName);
+        passAllBtn = findViewById(R.id.passAllVolusBtn);
+        homeBtn = findViewById(R.id.adminHomeFloating);
+
+        //init buttons listener
+        passAllBtn.setOnClickListener(this);
+        homeBtn.setOnClickListener(this);
+
         //check to make sure non null element is given
         if (guide == null) {
             Toast.makeText(AdminViewGuideVoluActivity.this, "תקלה בהצגת המידע, יש לסגור ולפתוח את האפליקציה מחדש", Toast.LENGTH_SHORT).show();
@@ -86,11 +98,6 @@ public class AdminViewGuideVoluActivity extends AppCompatActivity implements Vie
         clickedVoluText = ""; //default
         clickedVoluUid = ""; //default
 
-        //init xml views
-        volunteersView = findViewById(R.id.volunteers_recycler_view);
-        guideNameTextView = findViewById(R.id.adminGuideName);
-        passAllBtn = findViewById(R.id.passAllVolusBtn);
-        homeBtn = findViewById(R.id.adminHomeFloating);
 
         //init guide name
         guideNameTextView.setText(clickedGuideText);
@@ -99,9 +106,6 @@ public class AdminViewGuideVoluActivity extends AppCompatActivity implements Vie
         recyclerAdapter = new RecyclerAdapter(volunteersNames, this, R.menu.admin_volunteers_menu, false, null);
         volunteersView.setAdapter(recyclerAdapter);
         
-        //init buttons listener
-        passAllBtn.setOnClickListener(this);
-        homeBtn.setOnClickListener(this);
 
 
         //init search
@@ -134,7 +138,7 @@ public class AdminViewGuideVoluActivity extends AppCompatActivity implements Vie
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.adminHomeFloating:
-                startActivity(new Intent(AdminViewGuideVoluActivity.this,
+                startActivity(new Intent(getApplicationContext(),
                         AdminNavigationActivity.class));
                 overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
                 finish();

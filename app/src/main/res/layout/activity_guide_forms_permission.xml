@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/alef"
-        android:text="טהר צביטמן"
+        android:text=""
         android:layout_below="@id/guideFormsPrompt"
         android:textColor="@color/black"
         android:textSize="30sp" />
