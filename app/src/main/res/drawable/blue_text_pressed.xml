@@ -3,17 +3,17 @@
     <!-- Focused and not pressed -->
     <item android:state_focused="true"
         android:state_pressed="false"
-        android:color="@color/white" />
+        android:color="@color/light_blue2" />
 
     <!-- Focused and pressed -->
     <item android:state_focused="true"
         android:state_pressed="true"
-        android:color="@color/white" />
+        android:color="@color/light_blue2" />
 
     <!-- Unfocused and pressed -->
     <item android:state_focused="false"
         android:state_pressed="true"
-        android:color="@color/white" />
+        android:color="@color/light_blue2" />
 
     <!-- Default color -->
     <item android:color="@color/button_blue2" />

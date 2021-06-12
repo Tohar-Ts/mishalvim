@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:paddingRight="30dp"
     android:paddingLeft="30dp"
-    android:paddingBottom="30dp"
     android:paddingTop="20dp"
     android:background="@color/gray_background"
     tools:context=".adminActivities.AdminChooseVoluGuideActivity">
@@ -66,4 +65,26 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/adminHomeChooseFloating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="חזור למסך הבית"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:textSize="20sp"
+        android:clickable="true"
+        android:padding="10dp"
+        android:background="@drawable/nav_blue_corners"
+        android:textColor="@color/nav_blue_item"
+        android:focusable="true" />
+    <ProgressBar
+        android:id="@+id/chooseVoluLoading"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:visibility="gone"
+        android:theme="@style/BlueProgressBarTheme"
+        android:alpha="0.8"
+        android:layout_centerInParent="true"/>
 </RelativeLayout>

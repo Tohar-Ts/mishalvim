@@ -167,14 +167,13 @@ public class AdminViewGuideVoluActivity extends AppCompatActivity implements Vie
                 break;
             case R.id.change_guide:
                 //moving to the activity, passing the clicked volunteer details, getting the volunteer data into global
-                Intent intent = new Intent(AdminViewGuideVoluActivity.this,
-                        AdminChooseVoluGuideActivity.class);
+                Intent intent = new Intent(AdminViewGuideVoluActivity.this, AdminChooseVoluGuideActivity.class);
                 intent.putExtra("CLICKED_VOLU_NAME", clickedVoluText);
                 intent.putExtra("CLICKED_VOLU_ID", clickedVoluUid);
-                intent.putExtra("PASS_ALL", false);
+                intent.putExtra("CLICKED_OLD_GUIDE_ID", clickedGuideUid);
+                intent.putExtra("PASS_ALL", true);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
-                finish();
                 break;
             case R.id.admin_remove_volunteer:
                 //moving to delete activity
@@ -231,8 +230,9 @@ public class AdminViewGuideVoluActivity extends AppCompatActivity implements Vie
     public void passAllVolunteersPositiveClick(DialogFragment dialog) {
         Intent intent = new Intent(AdminViewGuideVoluActivity.this,
                     AdminChooseVoluGuideActivity.class);
-        intent.putExtra("CLICKED_VOLU_NAME", "");
-        intent.putExtra("CLICKED_VOLU_ID", "");
+        intent.putExtra("CLICKED_VOLU_NAME", clickedVoluText);
+        intent.putExtra("CLICKED_VOLU_ID", clickedVoluUid);
+        intent.putExtra("CLICKED_OLD_GUIDE_ID", clickedGuideUid);
         intent.putExtra("PASS_ALL", true);
         startActivity(intent);
         overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);

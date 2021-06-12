@@ -137,7 +137,7 @@ public class AdminFormsFragment extends Fragment implements View.OnClickListener
         clickedRowUid = templates.get(clickedRowText);
 
         Log.d("onMenuItemClick: ", "view_template:" + recyclerAdapter.getClickedText() );
-        Intent intent = new Intent(getActivity().getBaseContext(),
+        Intent intent = new Intent(getActivity(),
                 AdminWatchTemplate.class);
         intent.putExtra("CLICKED_FORM_VALUE", clickedRowUid);
         intent.putExtra("CLICKED_FORM_KEY", clickedRowText);

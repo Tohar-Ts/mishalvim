@@ -134,7 +134,6 @@ public class GuideAddVolunteerFragment extends Fragment implements View.OnClickL
     //this function updates the database upon a successful addition
     private Void updateDbSuccess(Void unused){
         loadingProgressBar.setVisibility(View.GONE);
-        //TODO - send mail welcome to the volunteer with his user name and password
         //updating global to see changes
         Global.updateGlobalData(this::updateGlobalFinished);
         return null;
