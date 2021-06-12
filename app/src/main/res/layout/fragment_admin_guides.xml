@@ -38,8 +38,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:defaultQueryHint="@string/searchHintGuide"
-        android:layoutDirection="rtl"
         android:layout_below="@+id/guidesPrompt"
+        android:layoutDirection="rtl"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        app:iconifiedByDefault="false"
+        android:background="@drawable/search_blue_borders"
         >
     </androidx.appcompat.widget.SearchView>
 </RelativeLayout>

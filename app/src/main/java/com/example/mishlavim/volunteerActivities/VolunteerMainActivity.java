@@ -1,5 +1,6 @@
 package com.example.mishlavim.volunteerActivities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import androidx.core.content.res.ResourcesCompat;
 
 import com.example.mishlavim.adminActivities.AdminNavigationActivity;
 import com.example.mishlavim.guideActivities.GuideNavigationActivity;
+import com.example.mishlavim.login.LoginActivity;
 import com.example.mishlavim.model.Firebase.AuthenticationMethods;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
 import com.example.mishlavim.model.Global;
@@ -37,7 +39,7 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
     private TextView helloVolu, homeButton;
     private GridLayout formsLayout;
     private Volunteer volu;
-    private Button openFormBtn;
+    private Button openFormBtn, logOut;
     private String userUpdatingType;
     private Global global;
     private Guide myGuide;
@@ -52,6 +54,7 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
         formsLayout = findViewById(R.id.finishedFormsLayout);
         openFormBtn = findViewById(R.id.openFormBtn);
         homeButton = findViewById(R.id.guideVoluHomeFloating);
+        logOut = findViewById(R.id.voluLogOut);
         TextView myGuidePrompt = findViewById(R.id.myGuidePrompt);
 
         //init volu object
@@ -68,40 +71,49 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
             openFormBtn.setEnabled(false);
         }
 
-        initHomeButton();
 
         openFormBtn.setOnClickListener(this);
         homeButton.setOnClickListener(this);
-
+        logOut.setOnClickListener(this);
+        
         global = Global.getGlobalInstance();
         userUpdatingType = global.getType();
-        if(userUpdatingType.compareTo(FirebaseStrings.volunteerStr()) != 0){
+        if(userUpdatingType.compareTo(FirebaseStrings.volunteerStr()) != 0)
             homeButton.setVisibility(View.VISIBLE);
-        }
+        else
+            homeButton.setVisibility(View.GONE);
+
+        initHomeButton();
         setHelloMsg();
         setAnsweredForms();
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
-        //clicked the open form button
-        if(v.getId() ==  R.id.openFormBtn) {
-            Intent intent = new Intent(VolunteerMainActivity.this, VolunteerFillOutFormActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
-        }
-        else if(v.getId() == R.id.guideVoluHomeFloating){
-            //clicking on go back home button - switch activities
-            switchToHomeByUser();
-        }
-        //clicked on an old form button
-        else {
-            Button clicked = (Button)v;
-            String formKey = clicked.getText().toString();
-            Intent intent = new Intent(VolunteerMainActivity.this, VolunteerViewOldFormActivity.class);
-            intent.putExtra("CLICKED_FORM_KEY", formKey);
-            startActivity(intent);
-            overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
+        switch (v.getId()){
+            case R.id.openFormBtn:
+                Intent intent = new Intent(VolunteerMainActivity.this, VolunteerFillOutFormActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
+                break;
+            case R.id.guideVoluHomeFloating:
+                switchToHomeByUser();
+                break;
+            case R.id.voluLogOut:
+                AuthenticationMethods.signOut();
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
+                break;
+            default:
+                //clicked on an old form button
+                Button clicked = (Button)v;
+                String formKey = clicked.getText().toString();
+                Intent intent2 = new Intent(VolunteerMainActivity.this, VolunteerViewOldFormActivity.class);
+                intent2.putExtra("CLICKED_FORM_KEY", formKey);
+                startActivity(intent2);
+                overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
+                break;
         }
     }
 

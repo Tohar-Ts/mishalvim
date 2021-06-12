@@ -32,6 +32,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -47,7 +48,7 @@ public class AdminViewGuideVoluActivity extends AppCompatActivity implements Vie
     TextView guideNameTextView;
     SearchView searchView;
     Button passAllBtn;
-    FloatingActionButton homeBtn;
+    TextView homeBtn;
     RecyclerView volunteersView;
     RecyclerAdapter recyclerAdapter;
     private Spinner guide_spinner;
@@ -108,6 +109,12 @@ public class AdminViewGuideVoluActivity extends AppCompatActivity implements Vie
         
         //init search
         searchView = findViewById(R.id.admin_volu_search_bar);
+        // change close icon color
+        ImageView iconClose = searchView.findViewById(R.id.search_close_btn);
+        iconClose.setColorFilter(getResources().getColor(R.color.light_blue2));
+        //change search icon color
+        ImageView iconSearch = searchView.findViewById(R.id.search_button);
+        iconSearch.setColorFilter(getResources().getColor(R.color.light_blue2));
         //search function searches based on user input and displays the results
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

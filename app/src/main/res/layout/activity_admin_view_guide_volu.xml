@@ -4,8 +4,10 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-android:padding="30dp"
-android:background="@color/gray_background"
+    android:paddingTop="30dp"
+    android:paddingRight="30dp"
+    android:paddingLeft="30dp"
+    android:background="@color/gray_background"
 tools:context=".adminActivities.AdminViewGuideVoluActivity">
 
 <TextView
@@ -40,6 +42,10 @@ tools:context=".adminActivities.AdminViewGuideVoluActivity">
         app:defaultQueryHint="@string/searchHintVolunteer"
         android:layout_marginTop="10dp"
         android:layoutDirection="rtl"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        app:iconifiedByDefault="false"
+        android:background="@drawable/search_blue_borders"
         android:layout_below="@id/adminGuideName">
     </androidx.appcompat.widget.SearchView>
 
@@ -63,29 +69,42 @@ tools:context=".adminActivities.AdminViewGuideVoluActivity">
 
     <Button
         android:id="@+id/passAllVolusBtn"
-        android:layout_width="200dp"
-        android:padding="5dp"
-        android:layout_height="70dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="30dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_above="@id/adminHomeFloating"
+        android:layout_centerHorizontal="true"
         android:layout_marginLeft="10dp"
-        android:background="@drawable/blue_button2"
-        android:text="העבר את כל החניכים למדריך אחר"
-        android:textColor="@drawable/blue_text_pressed"/>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/adminHomeFloating"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="30dp"
-        android:backgroundTint="@color/green"
-        android:src="@drawable/ic_home"
-        app:fabCustomSize="60dp"
+        android:background="@drawable/blue_button2"
+        android:padding="5dp"
+        android:text="העבר את כל החניכים למדריך אחר"
+        android:textColor="@drawable/blue_text_pressed" />
+
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/adminHomeFloating"-->
+<!--        android:layout_width="100dp"-->
+<!--        android:layout_height="100dp"-->
+<!--        android:layout_marginRight="10dp"-->
+<!--        android:layout_marginBottom="30dp"-->
+<!--        android:backgroundTint="@color/green"-->
+<!--        android:src="@drawable/ic_home"-->
+<!--        app:fabCustomSize="60dp"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_alignParentRight="true"/>-->
+    <TextView
+        android:id="@+id/adminHomeFloating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="חזור למסך הבית"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"/>
+        android:layout_centerInParent="true"
+        android:textSize="20sp"
+        android:clickable="true"
+        android:padding="10dp"
+        android:background="@drawable/nav_blue_corners"
+        android:textColor="@color/nav_blue_item"
+        android:focusable="true" />
 
     <Spinner
         android:id="@+id/view_guides_volunteers_spinner"

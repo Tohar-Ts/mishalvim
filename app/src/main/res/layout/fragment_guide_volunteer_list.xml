@@ -41,15 +41,16 @@
         <androidx.appcompat.widget.SearchView
             android:id="@+id/search_bar"
             android:clickable="true"
-            android:focusableInTouchMode="true"
-            app:iconifiedByDefault="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:defaultQueryHint="@string/searchHintVolunteer"
             android:layoutDirection="rtl"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            app:iconifiedByDefault="false"
             android:background="@drawable/search_blue_borders"
             android:layout_below="@id/voluListPrompt"
-            android:focusable="true">
+            >
         </androidx.appcompat.widget.SearchView>
 
 </RelativeLayout>
