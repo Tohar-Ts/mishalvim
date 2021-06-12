@@ -21,11 +21,11 @@
         android:id="@+id/forms"
         android:enabled="true"
         android:icon="@drawable/ic_subject"
-        android:title="טפסים" />
+        android:title="שאלונים" />
     <item
         android:id="@+id/add_forms"
         android:enabled="true"
         android:icon="@drawable/ic_forms_add"
-        android:title="הוסף טופס" />
+        android:title="הוסף שאלון" />
 
 </menu>

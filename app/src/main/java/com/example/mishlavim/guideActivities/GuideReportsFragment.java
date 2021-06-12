@@ -75,7 +75,7 @@ public class GuideReportsFragment extends Fragment implements View.OnClickListen
         if(myVolunteersMap.isEmpty()){
             Toast.makeText(getActivity(), "אין מתנדבים", Toast.LENGTH_SHORT).show();
             progressBar.setVisibility(View.GONE);
-            avgText.setText("אין טפסים שמולאו ");
+            avgText.setText("אין שאלונים שמולאו ");
             return;
         }
 
@@ -184,7 +184,7 @@ public class GuideReportsFragment extends Fragment implements View.OnClickListen
         }
         Log.d("calculateAvg", " "+ allFormsSum+" "+ voluNum);
         double avgFormsPerVolu = (double)allFormsSum / (double)voluNum;
-        avgText.setText("ממוצע טפסים למתנדב: " + df2.format(avgFormsPerVolu));
+        avgText.setText("ממוצע שאלונים למתנדב: " + df2.format(avgFormsPerVolu));
         progressBar.setVisibility(View.GONE);
 
     }

@@ -1,14 +1,14 @@
 <resources>
 
     <string name="app_name">משלבים</string>
-    <string name="buttonName">טופס 1</string>
-    <string name="fillform"> מלא טופס נוכחי</string>
-    <string name="add_new_form">הוסף טופס חדש</string>
+    <string name="buttonName">שאלון 1</string>
+    <string name="fillform"> מלא שאלון נוכחי</string>
+    <string name="add_new_form">הוסף שאלון חדש</string>
     <string name="add_new_user">הוסף משתמש חדש</string>
-    <string name="currentForm"> טופס **</string>
-    <string name="existing_forms">טפסים קיימים:</string>
+    <string name="currentForm"> שאלון **</string>
+    <string name="existing_forms">שאלונים קיימים:</string>
     <string name="existing_guides">מדריכים קיימים:</string>
-    <string name="forms">טפסים</string>
+    <string name="forms">שאלונים</string>
     <string name="guides">מדריכים</string>
     <string name="searchHintGuide">חפש שם מדריך</string>
     <string name="searchHintVolunteer">חפש שם מתנדב</string>
@@ -22,10 +22,10 @@
     <string name="buttonThree">בינוני</string>
     <string name="buttonTwo">מעט</string>
     <string name="buttonSave">שמור</string>
-    <string name="buttonSend">שלח טופס</string>
+    <string name="buttonSend">שלח שאלון</string>
     <string name="userHasAdd">המשתמש נוסף בהצלחה!</string>
     <string name="textOff">מדריכים</string>
-    <string name="textOn">טפסים</string>
+    <string name="textOn">שאלונים</string>
     <string name="action_register">רשום משתמש</string>
     <string name="title_email">אימייל</string>
     <string name="title_user_name">שם מלא</string>
@@ -38,7 +38,7 @@
     <string name="title_my_guide">:המדריך שלי</string>
     <string name="invalid_userName">שם מלא אינו תקין</string>
     <string name="update_failed">"העדכון נכשל"</string>
-    <string name="creat_new_form">טופס חדש</string>
+    <string name="creat_new_form">שאלון חדש</string>
     <string name="welcome_admin">ברוך הבא ADMIN</string>
     <string name="title_activity_login">מסך כניסה</string>
     <string name="logo">לוגו</string>
@@ -72,10 +72,10 @@
     <string name="question">שאלה </string>
     <string name="put_answer_here">ענה תשובה פה: </string>
     <string name="reports">דוחות</string>
-    <string name="num_of_filled_forms">מספר טפסים שמולאו</string>
+    <string name="num_of_filled_forms">מספר שאלונים שמולאו</string>
     <string name="volu_name">שם המתנדב</string>
     <string name="forms_list">רשימת השאלונים</string>
-    <string name="avg_forms_per_volu">ממוצע טפסים למתנדב</string>
+    <string name="avg_forms_per_volu">ממוצע שאלונים למתנדב</string>
     <string name="empty_answer">נא לענות על כל השאלות</string>
     <string name="back_to_login">חזור למסך כניסה</string>
     <string name="forgot_password">שכחת סיסמה?</string>

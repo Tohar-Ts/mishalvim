@@ -38,7 +38,7 @@ public class openFormWarningDialog extends DialogFragment {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        builder.setMessage("אזהרה! ייתכן וטופס זה כבר מולא על ידי מתנדבים. עריכתו תגרום לשיבושים בתשובותיהם. להמשיך?")
+        builder.setMessage("אזהרה! ייתכן ושאלון זה כבר מולא על ידי מתנדבים. עריכתו תגרום לשיבושים בתשובותיהם. להמשיך?")
 
                 .setPositiveButton("כן", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
