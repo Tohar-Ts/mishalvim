@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle">
-    <corners android:radius="32dp" />
-    <solid android:color="@color/orange" />
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:state_pressed="true" android:drawable="@drawable/orange_button_on_select2"/>
+    <item android:state_focused="true" android:drawable="@drawable/orange_button_on_select2"/>
+    <item android:drawable="@drawable/orange_button_on_select"/>
+</selector>
 
-</shape>

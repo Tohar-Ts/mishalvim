@@ -26,11 +26,11 @@
             android:layout_height="36dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:background="@drawable/borders"
+            android:background="@drawable/pink_white_color"
             android:padding="5dp"
             android:text="התנתק"
             android:layout_marginTop="10dp"
-            android:textColor="@color/nav_blue_item"
+            android:textColor="@drawable/pink_text_pressed"
             android:textSize="10sp" />
         <TextView
             android:id="@+id/HelloVolu"
@@ -42,7 +42,7 @@
             android:layout_marginTop="10dp"
             android:textSize="25sp"
             android:fontFamily="@font/alef"
-            android:textColor="@color/green"
+            android:textColor="@color/pink"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_centerInParent="true"
@@ -91,7 +91,7 @@
             android:paddingRight="40dp"
             android:paddingBottom="30dp"
             android:text="מלא/י אותי!"
-            android:textColor="@color/white"
+            android:textColor="@drawable/orange_white_text_pressed"
             android:textSize="30sp" />
 
         <ScrollView

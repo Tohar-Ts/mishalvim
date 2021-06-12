@@ -196,7 +196,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="150dp"
             android:layout_gravity="center"
-            android:background="@drawable/blue_button_normal2"
+            android:background="@drawable/blue_button2"
             android:textColor="@drawable/blue_text_pressed"
             android:text="עדכן פרטים" />
     </RelativeLayout>
