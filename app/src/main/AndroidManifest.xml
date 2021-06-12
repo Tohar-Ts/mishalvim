@@ -10,7 +10,8 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".deleteUserActivity"></activity>
+        <activity android:name=".adminActivities.AdminChooseVoluGuideActivity"></activity>
+        <activity android:name=".deleteUserActivity" />
         <activity android:name=".adminActivities.AdminViewGuideVoluActivity" />
         <activity android:name=".UserSettingActivity" />
         <activity

@@ -79,7 +79,7 @@ public class AdminGuidesFragment extends Fragment implements PopupMenu.OnMenuIte
         //init xml views
         guidesView = view.findViewById(R.id.guides_recycler_view);
         //init the recycle view adapter which is the list of the guides that are displayed to the admin
-        recyclerAdapter = new RecyclerAdapter(guidesNames, this, R.menu.guide_options_menu);
+        recyclerAdapter = new RecyclerAdapter(guidesNames, this, R.menu.guide_options_menu, false, null);
         guidesView.setAdapter(recyclerAdapter);
         searchView = view.findViewById(R.id.search_barA);
         // change close icon color

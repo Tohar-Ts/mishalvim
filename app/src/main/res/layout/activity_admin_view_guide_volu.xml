@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:paddingTop="30dp"
     android:paddingRight="30dp"
     android:paddingLeft="30dp"
@@ -81,18 +81,7 @@ tools:context=".adminActivities.AdminViewGuideVoluActivity">
         android:text="העבר את כל החניכים למדריך אחר"
         android:textColor="@drawable/blue_text_pressed" />
 
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--        android:id="@+id/adminHomeFloating"-->
-<!--        android:layout_width="100dp"-->
-<!--        android:layout_height="100dp"-->
-<!--        android:layout_marginRight="10dp"-->
-<!--        android:layout_marginBottom="30dp"-->
-<!--        android:backgroundTint="@color/green"-->
-<!--        android:src="@drawable/ic_home"-->
-<!--        app:fabCustomSize="60dp"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:layout_alignParentRight="true"/>-->
-    <TextView
+  <TextView
         android:id="@+id/adminHomeFloating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -106,13 +95,5 @@ tools:context=".adminActivities.AdminViewGuideVoluActivity">
         android:textColor="@color/nav_blue_item"
         android:focusable="true" />
 
-    <Spinner
-        android:id="@+id/view_guides_volunteers_spinner"
-        android:layout_width="233dp"
-        android:layout_height="52dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="6dp"
-        android:background="@drawable/custom_input"
-        android:visibility="gone" />
 
 </RelativeLayout>

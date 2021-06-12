@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mishlavim.R;
 import com.example.mishlavim.UserSettingActivity;
+import com.example.mishlavim.deleteUserActivity;
 import com.example.mishlavim.dialogs.DeleteUserDialog;
 import com.example.mishlavim.dialogs.passAllVolunteersDialog;
 import com.example.mishlavim.guideActivities.GuideFormsPermissionActivity;
@@ -24,6 +25,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -43,21 +45,20 @@ import java.util.HashMap;
 import java.util.List;
 
 public class AdminViewGuideVoluActivity extends AppCompatActivity implements View.OnClickListener, PopupMenu.OnMenuItemClickListener,
-        passAllVolunteersDialog.passAllVolunteersListener, DeleteUserDialog.deleteUserListener, AdapterView.OnItemSelectedListener
+        passAllVolunteersDialog.passAllVolunteersListener
 {
-    TextView guideNameTextView;
-    SearchView searchView;
-    Button passAllBtn;
-    TextView homeBtn;
-    RecyclerView volunteersView;
-    RecyclerAdapter recyclerAdapter;
-    private Spinner guide_spinner;
-    HashMap<String, String> volunteers;
-    List<String> volunteersNames;
-    Guide guide;
-    Global global;
-    String clickedGuideText, clickedGuideUid; //init guide data from the calling activity
-    String clickedVoluText, clickedVoluUid;
+    private TextView guideNameTextView;
+    private SearchView searchView;
+    private Button passAllBtn;
+    private TextView homeBtn;
+    private RecyclerView volunteersView;
+    private RecyclerAdapter recyclerAdapter;
+    private HashMap<String, String> volunteers;
+    private List<String> volunteersNames;
+    private Guide guide;
+    private Global global;
+    private String clickedGuideText, clickedGuideUid; //init guide data from the calling activity
+    private String clickedVoluText, clickedVoluUid;
     private ArrayList<String> listOfGuidesName,  listOfGuidesID;
     private boolean flag = false;
 
@@ -91,22 +92,19 @@ public class AdminViewGuideVoluActivity extends AppCompatActivity implements Vie
         guideNameTextView = findViewById(R.id.adminGuideName);
         passAllBtn = findViewById(R.id.passAllVolusBtn);
         homeBtn = findViewById(R.id.adminHomeFloating);
-        guide_spinner = findViewById(R.id.view_guides_volunteers_spinner);
 
         //init guide name
         guideNameTextView.setText(clickedGuideText);
         
         //init volu list
-        recyclerAdapter = new RecyclerAdapter(volunteersNames, this, R.menu.admin_volunteers_menu);
+        recyclerAdapter = new RecyclerAdapter(volunteersNames, this, R.menu.admin_volunteers_menu, false, null);
         volunteersView.setAdapter(recyclerAdapter);
         
         //init buttons listener
         passAllBtn.setOnClickListener(this);
         homeBtn.setOnClickListener(this);
 
-        //init spinner
-        setSpinner();
-        
+
         //init search
         searchView = findViewById(R.id.admin_volu_search_bar);
         // change close icon color
@@ -169,12 +167,12 @@ public class AdminViewGuideVoluActivity extends AppCompatActivity implements Vie
                 break;
             case R.id.change_guide:
                 //moving to the activity, passing the clicked volunteer details, getting the volunteer data into global
-                guide_spinner.setVisibility(View.VISIBLE);
-                flag = false;
+//                guide_spinner.setVisibility(View.VISIBLE);
+//                flag = false;
                 break;
             case R.id.admin_remove_volunteer:
-                DialogFragment dialogFragment = new DeleteUserDialog();
-                dialogFragment.show(getSupportFragmentManager(), "deleteUser");
+                //moving to delete activity
+                FirestoreMethods.getDocument(FirebaseStrings.usersStr(),clickedVoluUid , this::deleteGetUserDocSuccess, this::getUserDocFailed);
                 break;
         }
         return true;
@@ -189,6 +187,7 @@ public class AdminViewGuideVoluActivity extends AppCompatActivity implements Vie
         startActivity(new Intent(AdminViewGuideVoluActivity.this, VolunteerMainActivity.class));
         return null;
     }
+
     //this function returns the correct user setting based on the user info
     private Void settingGetUserDocSuccess(DocumentSnapshot doc) {
         assert doc != null;
@@ -204,73 +203,32 @@ public class AdminViewGuideVoluActivity extends AppCompatActivity implements Vie
         return null;
     }
 
+    //go to volu delete
+    private Void deleteGetUserDocSuccess(DocumentSnapshot doc) {
+        assert doc != null;
+        Volunteer volu = doc.toObject(Volunteer.class);
+        global.setVoluInstance(volu);
+        Intent intent = new Intent(AdminViewGuideVoluActivity.this, deleteUserActivity.class);
+        intent.putExtra("CLICKED_USER_TYPE", FirebaseStrings.volunteerStr());
+        intent.putExtra("CLICKED_USER_ID", clickedVoluUid);
+        startActivity(intent);
+        overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
+        return null;
+    }
+
     private Void getUserDocFailed(Void unused){
-        Toast.makeText(AdminViewGuideVoluActivity.this, "תקלה בהבאת המידע נסה שנית מאוחר יותר", Toast.LENGTH_SHORT).show();
+        Toast.makeText(AdminViewGuideVoluActivity.this, "שגיאה בהבאת המידע", Toast.LENGTH_SHORT).show();
         return null;
     }
 
     @Override
-    //spinne visibility diaglog
     public void passAllVolunteersPositiveClick(DialogFragment dialog) {
-        flag = true;
-        guide_spinner.setVisibility(View.VISIBLE);
+//        flag = true;
+//        guide_spinner.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void passAllVolunteersNegativeClick(DialogFragment dialog) { return; }
 
-    @Override
-    public void onDeletePositiveClick(DialogFragment dialog) {
-        // TODO: 6/11/2021 implement this method - delete user.
-    }
 
-    @Override
-    public void onDeleteNegativeClick(DialogFragment dialog) { return; }
-
-
-    public void setSpinner(){
-        //SPINNER SETUP
-        //get the guides list.
-        Global globalInstance = Global.getGlobalInstance();
-        Admin admin = globalInstance.getAdminInstance();
-        if(admin == null){
-            Toast.makeText(AdminViewGuideVoluActivity.this, "תקלה בהצגת המידע, יש לסגור ולפתוח את האפליקציה מחדש", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        HashMap<String,String> guideList = admin.getGuideList();
-        guideList.remove(clickedGuideUid); // remove current guide from list.
-        //if guide list is empty show a msg
-        if(guideList.isEmpty()){
-            Toast.makeText(AdminViewGuideVoluActivity.this, "רשימת המדריכים ריקה", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        listOfGuidesName = new ArrayList<>(guideList.keySet());
-        listOfGuidesID = new ArrayList<>(guideList.values());
-
-        //Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, listOfGuidesName);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        guide_spinner.setAdapter(adapter);
-        guide_spinner.setOnItemSelectedListener(this);
-    }
-
-    //SPINNER METHOD
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        // TODO: 6/11/2021 implement or delete this spinner. NOTE TO DESIGN BETTER THE SPINNER ON THE XML FILE
-        //when user choose one item from the spinner you got the values so you can use them.
-        String key = listOfGuidesName.get(position);
-        String value = listOfGuidesID.get(position);
-
-        if (flag){
-            //this case move ALL volunteer
-        }
-        else{
-            //move only 1 volunteer. use clickedVoluUid
-        }
-    }
-
-    //SPINNER METHOD
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) { return;}
 }

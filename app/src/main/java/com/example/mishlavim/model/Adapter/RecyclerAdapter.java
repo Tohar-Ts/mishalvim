@@ -26,14 +26,18 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     List<String> showList;
     List<String> showListAll;
     PopupMenu.OnMenuItemClickListener fragment;
+    View.OnClickListener fragmentNoMenu;
     String clickedText;
     Integer popMenuSrc;
+    Boolean noMenu;
 
-    public RecyclerAdapter(List<String> showList, PopupMenu.OnMenuItemClickListener fragment, Integer popMenuSrc) {
+    public RecyclerAdapter(List<String> showList, PopupMenu.OnMenuItemClickListener fragment, Integer popMenuSrc, Boolean noMenu,View.OnClickListener fragmentNoMenu) {
         this.showList = showList;
         this.fragment = fragment;
         this.popMenuSrc = popMenuSrc;
         this.showListAll = new ArrayList<>(showList);
+        this.noMenu = noMenu;
+        this.fragmentNoMenu = fragmentNoMenu;
     }
 
     @NonNull
@@ -43,7 +47,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         //create the view
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.row_item, parent, false);
+        View view;
+        if(noMenu)
+            view = layoutInflater.inflate(R.layout.row_item_no_menu, parent, false);
+        else
+            view = layoutInflater.inflate(R.layout.row_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -104,11 +112,18 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.row_more_img);
-            textView = itemView.findViewById(R.id.row_name);
-            row_layout = itemView.findViewById(R.id.row_layout);
-            row_layout.setOnClickListener(this);
-            imageView.setOnClickListener(this);
+            if(noMenu) {
+                textView = itemView.findViewById(R.id.row_name);
+                row_layout = itemView.findViewById(R.id.row_layout);
+                row_layout.setOnClickListener(fragmentNoMenu);
+            }
+            else {
+                textView = itemView.findViewById(R.id.row_name);
+                imageView = itemView.findViewById(R.id.row_more_img);
+                imageView.setOnClickListener(this);
+                row_layout = itemView.findViewById(R.id.row_layout);
+                row_layout.setOnClickListener(this);
+            }
         }
 
 

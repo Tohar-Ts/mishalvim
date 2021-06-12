@@ -38,7 +38,7 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  * create an instance of this fragment.
  */
-public class AdminFormsFragment extends Fragment implements PopupMenu.OnMenuItemClickListener {
+public class AdminFormsFragment extends Fragment implements View.OnClickListener {
     SearchView searchView;
     RecyclerView templateView;
     RecyclerAdapter recyclerAdapter;
@@ -121,37 +121,26 @@ public class AdminFormsFragment extends Fragment implements PopupMenu.OnMenuItem
 
         //init a list of Form Templates names
         templatesNames = new ArrayList<>(templates.keySet());
-//        templates = new ArrayList<>();
-//        for (DocumentSnapshot snapshot:result) {
-//            templates.add(snapshot.toObject(FormTemplate.class));
-//        }
-//
-//        //init a list of Form Templates names
-//        templatesNames = new ArrayList<>();
-//        templates.forEach((f) -> templatesNames.add(f.getFormName()));
 
         //init the recycle view
-        recyclerAdapter = new RecyclerAdapter(templatesNames, this, R.menu.templates_options_menu);
+        recyclerAdapter = new RecyclerAdapter(templatesNames, null, R.menu.templates_options_menu, true, this);
         templateView.setAdapter(recyclerAdapter);
 
         return null;
     }
 
-    @SuppressLint("NonConstantResourceId")
+
     @Override
-    //this function allows the navigation to the correct template with a new activity.
-    public boolean onMenuItemClick(MenuItem item) {
+    public void onClick(View v) {
         //getting clicked text
         clickedRowText = recyclerAdapter.getClickedText();
         clickedRowUid = templates.get(clickedRowText);
 
-                Log.d("onMenuItemClick: ", "view_template:" + recyclerAdapter.getClickedText() );
-                Intent intent = new Intent(getActivity().getBaseContext(),
-                        AdminWatchTemplate.class);
-                intent.putExtra("CLICKED_FORM_VALUE", clickedRowUid);
-                intent.putExtra("CLICKED_FORM_KEY", clickedRowText);
-                getActivity().startActivity(intent);
-
-        return true;
+        Log.d("onMenuItemClick: ", "view_template:" + recyclerAdapter.getClickedText() );
+        Intent intent = new Intent(getActivity().getBaseContext(),
+                AdminWatchTemplate.class);
+        intent.putExtra("CLICKED_FORM_VALUE", clickedRowUid);
+        intent.putExtra("CLICKED_FORM_KEY", clickedRowText);
+        getActivity().startActivity(intent);
     }
 }

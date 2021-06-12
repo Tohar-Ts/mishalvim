@@ -76,7 +76,7 @@ public class GuideVolunteerListFragment extends Fragment implements PopupMenu.On
 
         //init xml views
         guidesView = view.findViewById(R.id.volunteers_recycler_view);
-        recyclerAdapter = new RecyclerAdapter(guidesNames, this, R.menu.volunteer_options_menu);
+        recyclerAdapter = new RecyclerAdapter(guidesNames, this, R.menu.volunteer_options_menu, false, null);
         guidesView.setAdapter(recyclerAdapter);
 
         //init search

@@ -144,7 +144,7 @@ private TextView homeButton; //home button
         templatesNames = new ArrayList<>(templates.keySet());
 
         //init the recycle view
-        recyclerAdapter = new RecyclerAdapter(templatesNames, this, R.menu.guide_forms_option);
+        recyclerAdapter = new RecyclerAdapter(templatesNames, this, R.menu.guide_forms_option, false, null);
         templateView.setAdapter(recyclerAdapter);
         loadingProgressBar.setVisibility(View.GONE);
         return null;
