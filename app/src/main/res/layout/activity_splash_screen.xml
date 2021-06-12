@@ -4,45 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_background"
+    android:background="@drawable/splash_background"
     tools:context=".login.SplashScreenActivity">
-
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="147dp"
-        android:layout_height="132dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerInParent="true"
-        android:layout_gravity="center"
-        android:layout_marginTop="150dp"
-        android:contentDescription="@string/logo"
-        android:transitionName="logoImg"
-        app:srcCompat="@drawable/bat_ami_logo" />
 
     <TextView
         android:id="@+id/splashText1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:alpha="0.5"
-        android:fontFamily="@font/alef"
-        android:text="תוכנית"
-        android:textColor="@color/green"
-        android:textSize="80sp"
         android:layout_centerInParent="true"
-        android:layout_below="@id/logo"
-        android:layout_marginTop="30dp"
+        android:fontFamily="@font/alef"
+        android:layout_above="@id/splashText2"
+        android:text="תוכנית"
+        android:alpha="0.3"
+        android:textColor="@color/black"
+        android:textSize="60sp"
         android:transitionName="logoTxt1" />
 
     <TextView
         android:id="@+id/splashText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:alpha="0.5"
+        android:layout_centerInParent="true"
         android:fontFamily="@font/alef"
         android:text="משלבים"
-        android:textColor="@color/green"
-        android:textSize="80sp"
-        android:transitionName="logoTxt2"
-        android:layout_centerInParent="true"
-       android:layout_below="@id/splashText1" />
+        android:alpha="0.3"
+        android:textColor="@color/black"
+        android:textSize="60sp"
+        android:transitionName="logoTxt2" />
 </RelativeLayout>

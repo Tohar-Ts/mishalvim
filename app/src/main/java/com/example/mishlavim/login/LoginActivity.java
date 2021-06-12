@@ -57,8 +57,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         if(v.getId() ==  R.id.forget_password_btn){
-            finish();
             startActivity(new Intent(getApplicationContext(), forgotPassword.class));
+            overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
+            finish();
         }
         if(v.getId() ==  R.id.login){
             userLogin();
@@ -144,8 +145,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //error
         else {
             showError(R.string.undefined_user);
+            loadingProgressBar.setVisibility(View.GONE);
+            return;
         }
-
+        overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
+        finish();
         loadingProgressBar.setVisibility(View.GONE);
     }
 

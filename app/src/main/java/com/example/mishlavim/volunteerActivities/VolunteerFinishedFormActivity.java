@@ -18,6 +18,7 @@ public class VolunteerFinishedFormActivity extends AppCompatActivity {
     public void VolunteerMainActivity(View v){
         Intent i = new Intent(this, VolunteerMainActivity.class);
         startActivity(i);
+        overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
         finish();
     }
 }

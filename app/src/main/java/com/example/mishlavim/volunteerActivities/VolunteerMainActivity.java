@@ -34,7 +34,7 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
     private TextView helloVolu;
     private GridLayout formsLayout;
     private Volunteer volu;
-    private FloatingActionButton openFormBtn;
+    private Button openFormBtn;
     private TextView openFormTxt;
     private FloatingActionButton homeBtn;
     private String userUpdatingType;
@@ -49,20 +49,20 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
         helloVolu = findViewById(R.id.HelloVolu);
         formsLayout = findViewById(R.id.finishedFormsLayout);
         openFormBtn = findViewById(R.id.openFormBtn);
-        openFormTxt = findViewById(R.id.openFormTxt);
         homeBtn = findViewById(R.id.voluMainHomeFloating);
         //init volu object
         Global globalInstance = Global.getGlobalInstance();
         volu = globalInstance.getVoluInstance();
 
         if (!volu.getHasOpenForm()){
-            openFormTxt.setText("לא קיים\nשאלון פתוח");
+            openFormBtn.setText("לא קיים\nשאלון פתוח");
             openFormBtn.setClickable(false);
             openFormBtn.setEnabled(false);
         }
 
         openFormBtn.setOnClickListener(this);
         homeBtn.setOnClickListener(this);
+
         global = Global.getGlobalInstance();
         userUpdatingType = global.getType();
         if(userUpdatingType.compareTo(FirebaseStrings.volunteerStr()) != 0){
@@ -79,6 +79,8 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
         if(v.getId() ==  R.id.openFormBtn) {
             Intent intent = new Intent(VolunteerMainActivity.this, VolunteerFillOutFormActivity.class);
             startActivity(intent);
+            overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
+            finish();
         }
         else if(v.getId() ==  R.id.voluMainHomeFloating){
             //clicking on go back home button - switch activities
@@ -91,6 +93,8 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
             Intent intent = new Intent(VolunteerMainActivity.this, VolunteerViewOldFormActivity.class);
             intent.putExtra("CLICKED_FORM_KEY", formKey);
             startActivity(intent);
+            overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
+            finish();
         }
     }
 
@@ -162,8 +166,8 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
         else{
             startActivity(new Intent(getApplicationContext(), GuideNavigationActivity.class));
         }
+        overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
         finish();
-        overridePendingTransition(0, 0);
     }
 
 }

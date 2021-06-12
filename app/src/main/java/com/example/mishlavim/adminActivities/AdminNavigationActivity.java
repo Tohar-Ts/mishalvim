@@ -50,6 +50,7 @@ public class AdminNavigationActivity extends AppCompatActivity implements Bottom
         //showing the main fragment
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.admin_fragment_container, new AdminGuidesFragment())
+                .setCustomAnimations(R.anim.fragment_fade_in,R.anim.fragment_fade_out)
                 .commit();
         //showing hello user
         TextView helloAdmin = findViewById(R.id.helloAdmin);
@@ -116,11 +117,10 @@ public class AdminNavigationActivity extends AppCompatActivity implements Bottom
             case R.id.exit:
                 AuthenticationMethods.signOut();
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                finish();
-                overridePendingTransition(0, 0);
                 break;
-
         }
+        overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
+        finish();
         return super.onOptionsItemSelected(item);
     }
 }

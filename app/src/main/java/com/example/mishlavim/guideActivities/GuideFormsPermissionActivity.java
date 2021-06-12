@@ -110,8 +110,8 @@ private TextView homeButton; //home button
     public void onClick(View v) {
         //clicking on go back home button - switch activities
         startActivity(new Intent(getApplicationContext(), GuideNavigationActivity.class));
+        overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
         finish();
-        overridePendingTransition(0, 0);
     }
 
     private Void onSuccess(Void unused) {

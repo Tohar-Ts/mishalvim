@@ -181,13 +181,14 @@ public class UserSettingActivity extends AppCompatActivity implements View.OnCli
         //admin is in the setting screen
         if(userUpdatingType.equals(FirebaseStrings.adminStr())){
             startActivity(new Intent(getApplicationContext(), AdminNavigationActivity.class));
+
         }
         //guide is in the setting screen
         else{
             startActivity(new Intent(getApplicationContext(), GuideNavigationActivity.class));
         }
+        overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
         finish();
-        overridePendingTransition(0, 0);
     }
 
 

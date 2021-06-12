@@ -132,6 +132,8 @@ public class AdminViewGuideVoluActivity extends AppCompatActivity implements Vie
             case R.id.adminHomeFloating:
                 startActivity(new Intent(AdminViewGuideVoluActivity.this,
                         AdminNavigationActivity.class));
+                overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
+                finish();
                 break;
             case R.id.passAllVolusBtn:
                 DialogFragment dialogFragment = new passAllVolunteersDialog();
@@ -190,6 +192,8 @@ public class AdminViewGuideVoluActivity extends AppCompatActivity implements Vie
         intent.putExtra("CLICKED_USER_TYPE", FirebaseStrings.volunteerStr());
         intent.putExtra("CLICKED_USER_ID", clickedVoluUid);
         startActivity(intent);
+        overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
+        finish();
         return null;
     }
 

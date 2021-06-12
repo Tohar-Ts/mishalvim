@@ -110,8 +110,8 @@ public class AdminWatchTemplate extends AppCompatActivity implements View.OnClic
     //this initiates a go-home intent
     private void goToHome(){
         startActivity(new Intent(getApplicationContext(), AdminNavigationActivity.class));
+        overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
         finish();
-        overridePendingTransition(0, 0);
     }
     //this gets the selected questions from the firebase database
     private void getQuestionsFromFirebase() {

@@ -205,6 +205,8 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
         finish();
         Intent intent = new Intent(VolunteerFillOutFormActivity.this, VolunteerMainActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
+        finish();
         return null;
     }
 
@@ -284,6 +286,7 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
         progressBar.setVisibility(View.GONE);
         Intent intent = new Intent(VolunteerFillOutFormActivity.this, VolunteerFinishedFormActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
         finish();
     }
 

@@ -63,6 +63,7 @@ public class GuideNavigationActivity extends AppCompatActivity implements Bottom
         //setting the main fragment
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.guide_fragment_container, new GuideVolunteerListFragment())
+                .setCustomAnimations(R.anim.fragment_fade_in,R.anim.fragment_fade_out)
                 .commit();
         //showing hello user
         TextView helloGuide = findViewById(R.id.helloGuide);
@@ -124,11 +125,9 @@ public class GuideNavigationActivity extends AppCompatActivity implements Bottom
             case R.id.exit:
                 AuthenticationMethods.signOut();
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                finish();
-                overridePendingTransition(0, 0);
                 break;
-
         }
+        overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
         return super.onOptionsItemSelected(item);
     }
 

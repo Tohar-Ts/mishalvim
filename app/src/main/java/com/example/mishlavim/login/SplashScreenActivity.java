@@ -14,9 +14,9 @@ import com.example.mishlavim.R;
 
 public class SplashScreenActivity extends AppCompatActivity {
     //variables:
-    private static int SPLASH_SCREEN = 3000;
+    private static int SPLASH_SCREEN = 2000;
     Animation topAnimation, bottomRightAnimation,bottomLeftAnimation;
-    ImageView image;
+//    ImageView image;
     TextView leftText, rightText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,12 +28,12 @@ public class SplashScreenActivity extends AppCompatActivity {
         bottomRightAnimation = AnimationUtils.loadAnimation(this, R.anim.bottom_right_animation);
         bottomLeftAnimation= AnimationUtils.loadAnimation(this, R.anim.bottom_left_animation);
         //find Views by id
-        image = findViewById(R.id.logo);
+//        image = findViewById(R.id.logo);
         leftText = findViewById(R.id.splashText2);
         rightText = findViewById(R.id.splashText1);
 
         //set animation
-        image.setAnimation(topAnimation);
+//        image.setAnimation(topAnimation);
         leftText.setAnimation(bottomLeftAnimation);
         rightText.setAnimation(bottomRightAnimation);
 
@@ -42,8 +42,10 @@ public class SplashScreenActivity extends AppCompatActivity {
             public void run() {
                 Intent intent = new Intent(SplashScreenActivity.this,LoginActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
                 finish();
             }
+
         }, SPLASH_SCREEN);
     }
 
