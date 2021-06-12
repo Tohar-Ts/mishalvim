@@ -1,11 +1,13 @@
 package com.example.mishlavim.volunteerActivities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -47,7 +49,8 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
         editButton = findViewById(R.id.answersEditFloating);
         saveButton = findViewById(R.id.answersSaveFloating);
         savedAnswersLayout = findViewById(R.id.SavedAnswersLayout);
-
+        Button backHome =findViewById(R.id.voluBackHome);
+        backHome.setOnClickListener(this);
         //Getting the clicked form id
         clickedFormKey =  getIntent().getStringExtra("CLICKED_FORM_KEY");
         Global globalInstance = Global.getGlobalInstance();
@@ -70,6 +73,12 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
             saveEditedAnswers();
             editButton.setVisibility(View.VISIBLE);
             saveButton.setVisibility(View.GONE);
+        }
+        else if(v.getId() == R.id.voluBackHome) {
+            Intent i = new Intent(this, VolunteerMainActivity.class);
+            startActivity(i);
+            overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
+            finish();
         }
     }
 

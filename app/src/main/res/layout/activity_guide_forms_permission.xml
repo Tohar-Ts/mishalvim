@@ -87,15 +87,5 @@
         android:background="@drawable/nav_orange_corners"
         android:textColor="@color/nav_blue_item"
         android:focusable="true" />
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--        android:id="@+id/guideHomeFloating"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:src="@drawable/ic_home"-->
-<!--        android:theme="@style/HomeButtonStyle"-->
-<!--        android:backgroundTint="@color/orange"-->
-<!--        app:fabCustomSize="60dp"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:layout_alignParentRight="true"/>-->
 
 </RelativeLayout>

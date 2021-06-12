@@ -34,12 +34,10 @@ import java.util.HashMap;
 
 public class VolunteerMainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private TextView helloVolu;
+    private TextView helloVolu, homeButton;
     private GridLayout formsLayout;
     private Volunteer volu;
     private Button openFormBtn;
-    private TextView openFormTxt;
-    private FloatingActionButton homeBtn;
     private String userUpdatingType;
     private Global global;
     private Guide myGuide;
@@ -53,7 +51,7 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
         helloVolu = findViewById(R.id.HelloVolu);
         formsLayout = findViewById(R.id.finishedFormsLayout);
         openFormBtn = findViewById(R.id.openFormBtn);
-        homeBtn = findViewById(R.id.voluMainHomeFloating);
+        homeButton = findViewById(R.id.guideVoluHomeFloating);
         TextView myGuidePrompt = findViewById(R.id.myGuidePrompt);
 
         //init volu object
@@ -70,17 +68,18 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
             openFormBtn.setEnabled(false);
         }
 
+        initHomeButton();
+
         openFormBtn.setOnClickListener(this);
-        homeBtn.setOnClickListener(this);
+        homeButton.setOnClickListener(this);
 
         global = Global.getGlobalInstance();
         userUpdatingType = global.getType();
         if(userUpdatingType.compareTo(FirebaseStrings.volunteerStr()) != 0){
-            homeBtn.setVisibility(View.VISIBLE);
+            homeButton.setVisibility(View.VISIBLE);
         }
         setHelloMsg();
         setAnsweredForms();
-        showGuideHomeBtn();
     }
 
     @Override
@@ -91,7 +90,7 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
             startActivity(intent);
             overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
         }
-        else if(v.getId() ==  R.id.voluMainHomeFloating){
+        else if(v.getId() == R.id.guideVoluHomeFloating){
             //clicking on go back home button - switch activities
             switchToHomeByUser();
         }
@@ -106,21 +105,28 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
         }
     }
 
-    private void showGuideHomeBtn() { // a function that shows an home button to a guide
-        Global globalInstance = Global.getGlobalInstance();
-        //guide enter to volunteer screen
-        //TODO - replace with floating
-        if(globalInstance.getType().equals(FirebaseStrings.guideStr())) {
-//            navBarButtons.setVisibility(View.VISIBLE);
-//            String voluIdFromGuide = globalInstance.getGuideInstance().getMyVolunteers().get(volu.getName());
-        }
-        else{
-//            navBarButtons.setVisibility(View.GONE);
-//            String voluIdFromGuide = AuthenticationMethods.getCurrentUserID();
-        }
 
-
+    private void initHomeButton() {
+        if(userUpdatingType.equals(FirebaseStrings.adminStr())) {
+            homeButton.setBackgroundResource(R.drawable.nav_blue_corners);
+        }
+        else {
+            homeButton.setBackgroundResource(R.drawable.nav_orange_corners);
+        }
     }
+
+    private void switchToHomeByUser() {
+        //admin is in the setting screen
+        if(userUpdatingType.equals(FirebaseStrings.adminStr())) {
+            startActivity(new Intent(getApplicationContext(), AdminNavigationActivity.class));
+        }
+        //guide is in the setting screen
+        else {
+            startActivity(new Intent(getApplicationContext(), GuideNavigationActivity.class));
+        }
+        overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
+    }
+
 
     private void setHelloMsg() {
         helloVolu.setText("שלום, " + volu.getName());
@@ -164,17 +170,6 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
 
     private int convertFromDpToPixels(int toConvert){
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, toConvert, getResources().getDisplayMetrics());
-    }
-    private void switchToHomeByUser() {
-        //admin is in the setting screen
-        if(userUpdatingType.equals(FirebaseStrings.adminStr())){
-            startActivity(new Intent(getApplicationContext(), AdminNavigationActivity.class));
-        }
-        //guide is in the setting screen
-        else{
-            startActivity(new Intent(getApplicationContext(), GuideNavigationActivity.class));
-        }
-        overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
     }
 
 }
