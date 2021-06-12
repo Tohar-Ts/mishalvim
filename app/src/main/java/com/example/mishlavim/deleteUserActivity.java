@@ -196,6 +196,7 @@ public class deleteUserActivity extends AppCompatActivity implements View.OnClic
         else
             Toast.makeText(deleteUserActivity.this, "תקלה בעדכון המידע, יש לסגור ולפתוח את האפליקציה מחדש", Toast.LENGTH_SHORT).show();
         progressBar.setVisibility(View.GONE);
+//        switchToHomeByUser();
         //delete from auth
         AuthenticationMethods.deleteAuthUser();
         return null;

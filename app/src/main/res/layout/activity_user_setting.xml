@@ -7,7 +7,7 @@
     tools:context=".UserSettingActivity">
     <RelativeLayout
         android:id="@+id/SettingLoginLayout"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/login_background">
@@ -18,7 +18,8 @@
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/alef"
         android:layout_alignParentTop="true"
-        android:text="הכנס את הסיסמה של המתנדב"
+        android:gravity="center"
+        android:text="על מנת לעבור למסך ההגדרות יש להכניס את הסיסמה בשנית"
         android:layout_marginTop="160dp"
         android:textColor="@color/black"
         android:textSize="30sp" />
@@ -93,7 +94,7 @@
 
     <RelativeLayout
         android:id="@+id/SettingLayout"
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/gray_background"

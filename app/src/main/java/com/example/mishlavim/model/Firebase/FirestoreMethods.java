@@ -213,7 +213,7 @@ public class FirestoreMethods {
                 });
     }
 
-    public static void getDocumentsByUserType(String documentId, String type,
+    public static void getDocumentsByUserType( String type,
                                               Function<QuerySnapshot, Void> successFunc, Function<Void, Void> failedFunc){
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
