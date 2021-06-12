@@ -72,7 +72,10 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
     }
 
 
-
+    /**
+     * This function controls the buttons of the volunteer, and assignes the various buttons to their respective selection
+     * @param v the view of the screen
+     */
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.next_btn)
@@ -85,12 +88,21 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
             sendBtnOn();
     }
 
-
+    /**
+     * this function will show an error if the database is unable to update
+     * @param unused
+     * @return a toast to the screen if updating the database failed
+     */
     private Void showError(Void unused) {
         Toast.makeText(getApplicationContext(), R.string.update_failed, Toast.LENGTH_SHORT).show();
         return null;
     }
 
+    /**
+     * This function gets the answers to a specific form from the firebase and updates the answers on screen
+     * @param doc the doc that the volunteer is currently working on
+     * @return updates the doc to the firebase and returns null to exit the function
+     */
     private Void getAnswersObjSuccess(DocumentSnapshot doc) {
         assert doc != null;
         AnsweredForm answersObj = doc.toObject(AnsweredForm.class);
@@ -106,6 +118,11 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
         return null;
     }
 
+    /**
+     * This function loads the correct template for the current volunteer based on his id fro the firebase
+     * @param doc the correct document for the user from the firebase
+     * @return
+     */
     private Void getTemplateObjSuccess(DocumentSnapshot doc) {
         assert doc != null;
         FormTemplate templateObj = doc.toObject(FormTemplate.class);
@@ -119,6 +136,9 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
         return null;
     }
 
+    /**
+     * this function inits the progressbar and the listeners for the various buttons on screen
+     */
     private void initScreen() {
         progressBar.setMax(numOfQuestions);
         showQuestion();
@@ -150,6 +170,12 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
         showQuestion();
     }
 
+    /**
+     * This function shows the various question to the screen
+     * if the volunteer gets to the last question - he can then send the question to the database
+     * otherwise he can save and move forward and back between the questions using the buttons
+     *
+     */
     private void showQuestion() {
         progressBar.setProgress(numOfCurrentQuestion);
 
@@ -180,6 +206,9 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
             volunteerAnswer.setText("");
     }
 
+    /**
+     * this function pareses the answer of the volunteer and saves it to a variable to be later uploaded to the firebase
+     */
     private void parseAnswer() {
         if (volunteerAnswer.getText() != null) {
             if(volunteerAnswer.getText().toString().isEmpty())
@@ -189,6 +218,9 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
         }
     }
 
+    /**
+     * this function parses the last answer and then sends the answers to the firebase
+     */
     private void saveBtnOn() {
 
         progressBar.setVisibility(View.VISIBLE);
@@ -199,6 +231,11 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
                                                         this::goToMain, this::showError);
     }
 
+    /**
+     * this function allows the volunteer to return to the main screen and saves his current progress
+     * @param unused
+     * @return move to the homescreen and saves the data to the firebase
+     */
     private Void goToMain(Void unused) {
         progressBar.setVisibility(View.GONE);
         Toast.makeText(getApplicationContext(), R.string.firebase_success, Toast.LENGTH_SHORT).show();
@@ -210,6 +247,9 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
         return null;
     }
 
+    /**
+     * this function saves the data once the send button is pressed
+     */
     private void sendBtnOn() {
         progressBar.setVisibility(View.VISIBLE);
         //parsing the last answer
@@ -232,45 +272,48 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
                 this::updateOpenFormName, this::showError);
         return null;
     }
-
+    //this function updates the form name
     private Void updateOpenFormName(Void unused){
         FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(), voluId, FirebaseStrings.openFormNameStr(),FirebaseStrings.emptyString(),
                 this::updateFinishedForms, this::showError);
         return null;
     }
-
+    //this function updates the form status to finished
     private Void updateFinishedForms(Void unused){
         FirestoreMethods.updateMapKey(FirebaseStrings.usersStr(),voluId,FirebaseStrings.finishedFormsStr(),formName,formId,
                 this::updateMyFinishedTemplate,this::showError);
         return null;
     }
+    //this function updates the finished template if it is opened to editing again
     private Void updateMyFinishedTemplate(Void unused){
         FirestoreMethods.updateMapKey(FirebaseStrings.usersStr(),voluId,FirebaseStrings.finishedTemplatesStr(),formName,templateId,
                 this::updateOnWork,this::showError);
         return null;
     }
-
+    //this function updates the onWork of the doc
     private Void updateOnWork(Void unused){
         FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), formId, FirebaseStrings.isOpenFormStr(),false,
                 this::updateCanEdit, this::showError);
         return null;
     }
+    //this function updates a form for a given volunteer to be open to editing
     private Void updateCanEdit(Void unused){
         FirestoreMethods.updateDocumentField(FirebaseStrings.answeredFormsStr(), formId, FirebaseStrings.finishedButCanEditStr(),false,
                 this::updateHasOpenForm, this::showError);
         return null;
     }
+    //this allows the guide to open a form for a given volunteer
     private Void updateHasOpenForm(Void unused){
         FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(), voluId, FirebaseStrings.hasOpenFormStr(),false,
                 this::notifyGuide, this::showError);
         return null;
     }
-
+    //this function notifies the guide that a form has been answered
     private Void notifyGuide(Void unused){
         Global.updateGlobalData(this::updateGlobalFinished);
         return null;
     }
-
+    //this function updates the guide or admin that the info has been updated successfully
     private Void updateGlobalFinished(Boolean status) {
         showFinishedForm();
         if(status)
@@ -280,7 +323,7 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
         return null;
     }
 
-
+    //this function is activated once the form has been filled and finished and it shows a finished form screen
     private void showFinishedForm() {
         progressBar.setVisibility(View.GONE);
         Intent intent = new Intent(VolunteerFillOutFormActivity.this, VolunteerFinishedFormActivity.class);

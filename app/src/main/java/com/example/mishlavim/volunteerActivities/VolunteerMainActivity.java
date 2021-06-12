@@ -71,7 +71,7 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
             openFormBtn.setEnabled(false);
         }
 
-
+        //set the button listeners
         openFormBtn.setOnClickListener(this);
         homeButton.setOnClickListener(this);
         logOut.setOnClickListener(this);
@@ -119,7 +119,7 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
         }
     }
 
-
+    //initialize the home button displayed on screen
     private void initHomeButton() {
         if(userUpdatingType.equals(FirebaseStrings.adminStr())) {
             homeButton.setBackgroundResource(R.drawable.nav_blue_corners);
@@ -128,7 +128,7 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
             homeButton.setBackgroundResource(R.drawable.nav_orange_corners);
         }
     }
-
+    //sets the button of the go home based on the user who is logged in
     private void switchToHomeByUser() {
         //admin is in the setting screen
         if(userUpdatingType.equals(FirebaseStrings.adminStr())) {
@@ -141,20 +141,20 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
         overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
     }
 
-
+    //sets a hello message dynamically on screen based on the user logged in
     private void setHelloMsg() {
         if(userUpdatingType.equals(FirebaseStrings.volunteerStr()))
             helloVolu.setText("שלום, " + volu.getName());
         else
             helloVolu.setText("צפייה בחניך: " + volu.getName());
     }
-
+    //sets the answered form to the map to be updated later
     private void setAnsweredForms() {
         HashMap<String, String> finishedForms = volu.getFinishedForms();
         for (String formName : finishedForms.keySet())
             addForm(formName);
     }
-
+    //this function allows the addition of a new form to the volunteer
     private void addForm(String formName) {
         //creating new button
         Button formBtn = new Button(this);
@@ -184,7 +184,7 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
         //adding the new button view to the linearlayout
         formsLayout.addView(formBtn);
     }
-
+    //private function to calculate the dp to pixels
     private int convertFromDpToPixels(int toConvert){
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, toConvert, getResources().getDisplayMetrics());
     }

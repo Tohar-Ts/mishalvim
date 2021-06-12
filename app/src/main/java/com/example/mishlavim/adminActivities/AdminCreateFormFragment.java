@@ -129,7 +129,12 @@ public class AdminCreateFormFragment extends Fragment implements View.OnClickLis
 
         loadingProgressBar.setVisibility(View.VISIBLE);
         String formName = formNameEditText.getText().toString().trim();
-        //here
+        //validation form name
+        if (formName.isEmpty()) {
+            formNameEditText.setError("שם שאלון הינו שדה חובה");
+            loadingProgressBar.setVisibility(View.GONE);
+            return;
+        }
 
         HashMap<String, String> questionsMap = new HashMap<>();
         ViewGroup group = view.findViewById(R.id.questionsLayout);

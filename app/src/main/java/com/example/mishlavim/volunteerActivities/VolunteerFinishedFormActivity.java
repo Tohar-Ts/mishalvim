@@ -15,6 +15,11 @@ public class VolunteerFinishedFormActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_volunteer_finished_form);
     }
+
+    /**
+     * this function displays a finished form activity
+     * @param v the view of the application
+     */
     public void VolunteerMainActivity(View v){
         Intent i = new Intent(this, VolunteerMainActivity.class);
         startActivity(i);
