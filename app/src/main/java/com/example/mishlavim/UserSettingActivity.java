@@ -34,11 +34,10 @@ public class UserSettingActivity extends AppCompatActivity implements View.OnCli
 
     private RelativeLayout loginLayout, settingLayout;
     private Button loginBtn, updateBtn;
-    private FloatingActionButton homeBtn;
+    private TextView homeButton; //home button
     private ProgressBar progressBar;
     private Global global;
     private String userUpdatingType ,userToUpdateType, userToUpdateUid;
-    private boolean showLoginAgain;
     private User userData;
     private Validation validation;
     EditText newEmailEditText, newUserNameEditText, newPasswordEditText, newVerifyPasswordEditText;
@@ -53,7 +52,7 @@ public class UserSettingActivity extends AppCompatActivity implements View.OnCli
         settingLayout = findViewById(R.id.SettingLayout);
         loginBtn = findViewById(R.id.SettingLogin);
         updateBtn = findViewById(R.id.settingUpdateBtn);
-        homeBtn = findViewById(R.id.settingHomeFloating);
+        homeButton = findViewById(R.id.settingHomeFloating);
         progressBar = findViewById(R.id.settingLoading);
         newEmailEditText = findViewById(R.id.settingNewEmail);
         newUserNameEditText = findViewById(R.id.settingNewUserName);
@@ -73,12 +72,12 @@ public class UserSettingActivity extends AppCompatActivity implements View.OnCli
 
         //showing the login again screen
         initLoginAgain();
-
+        initHomeButton();
 
         //init listeners
         loginBtn.setOnClickListener(this);
         updateBtn.setOnClickListener(this);
-        homeBtn.setOnClickListener(this);
+        homeButton.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -128,6 +127,14 @@ public class UserSettingActivity extends AppCompatActivity implements View.OnCli
         newUserNameEditText.setText(userData.getName());
     }
 
+    private void initHomeButton() {
+        if(userUpdatingType.equals(FirebaseStrings.adminStr())) {
+            homeButton.setBackgroundResource(R.drawable.nav_blue_corners);
+        }
+        else {
+            homeButton.setBackgroundResource(R.drawable.nav_orange_corners);
+        }
+    }
     private void switchToHomeByUser() {
         //admin is in the setting screen
         if(userUpdatingType.equals(FirebaseStrings.adminStr())) {

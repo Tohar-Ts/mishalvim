@@ -54,7 +54,6 @@ public class GuideFormsPermissionActivity extends AppCompatActivity implements V
     private String voluId;//the clicked volunteer id
     private Volunteer voluData; //volu current data from the firestore
 
-//    private FloatingActionButton homeButton; //home button
 private TextView homeButton; //home button
 
     private ProgressBar loadingProgressBar; //progress bar

@@ -3,6 +3,7 @@ package com.example.mishlavim;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,7 +13,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mishlavim.adminActivities.AdminNavigationActivity;
 import com.example.mishlavim.dialogs.passAllVolunteersDialog;
+import com.example.mishlavim.guideActivities.GuideNavigationActivity;
 import com.example.mishlavim.model.Admin;
 import com.example.mishlavim.model.Firebase.AuthenticationMethods;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
@@ -27,6 +30,7 @@ public class deleteUserActivity extends AppCompatActivity implements View.OnClic
 
     private Button deleteBtn;
     private TextView email;
+    private TextView homeButton; //home button
     private ProgressBar progressBar;
     private Global global;
     private User userData;
@@ -40,6 +44,8 @@ public class deleteUserActivity extends AppCompatActivity implements View.OnClic
         deleteBtn = findViewById(R.id.deleteBtn);
         progressBar = findViewById(R.id.deleteLoading);
         email = findViewById(R.id.deleteEmail);
+        homeButton = findViewById(R.id.deleteHomeFloating);
+
         //init user data
         userToDeleteType = getIntent().getStringExtra("CLICKED_USER_TYPE");
         userToDeleteUid =  getIntent().getStringExtra("CLICKED_USER_ID");
@@ -48,11 +54,14 @@ public class deleteUserActivity extends AppCompatActivity implements View.OnClic
         userUpdatingType = global.getType();
 
         initUserDataByType();
+        initHomeButton();
         email.setText(userData.getEmail());
 
         //init listeners
         deleteBtn.setOnClickListener(this);
+        homeButton.setOnClickListener(this);
     }
+
 
     @Override
     public void onClick(View v) {
@@ -60,11 +69,32 @@ public class deleteUserActivity extends AppCompatActivity implements View.OnClic
             case R.id.deleteBtn:
                 showDialog();
                 break;
-//            case R.id.settingHomeFloating:
-//                //clicking on go back home button - switch activities
-//                switchToHomeByUser();
-//                break;
+            case R.id.deleteHomeFloating:
+                //clicking on go back home button - switch activities
+                switchToHomeByUser();
+                break;
         }
+    }
+
+    private void initHomeButton() {
+        if(userUpdatingType.equals(FirebaseStrings.adminStr())) {
+            homeButton.setBackgroundResource(R.drawable.nav_blue_corners);
+        }
+        else {
+            homeButton.setBackgroundResource(R.drawable.nav_orange_corners);
+        }
+    }
+
+    private void switchToHomeByUser() {
+        //admin is in the setting screen
+        if(userUpdatingType.equals(FirebaseStrings.adminStr())) {
+            startActivity(new Intent(getApplicationContext(), AdminNavigationActivity.class));
+        }
+        //guide is in the setting screen
+        else {
+            startActivity(new Intent(getApplicationContext(), GuideNavigationActivity.class));
+        }
+        overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
     }
 
     private void initUserDataByType() {
@@ -196,7 +226,7 @@ public class deleteUserActivity extends AppCompatActivity implements View.OnClic
         else
             Toast.makeText(deleteUserActivity.this, "תקלה בעדכון המידע, יש לסגור ולפתוח את האפליקציה מחדש", Toast.LENGTH_SHORT).show();
         progressBar.setVisibility(View.GONE);
-//        switchToHomeByUser();
+        switchToHomeByUser();
         //delete from auth
         AuthenticationMethods.deleteAuthUser();
         return null;

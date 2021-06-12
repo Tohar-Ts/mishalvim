@@ -201,16 +201,18 @@
             android:text="עדכן פרטים" />
     </RelativeLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <TextView
         android:id="@+id/settingHomeFloating"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_margin="30dp"
-        android:backgroundTint="@color/green"
-        android:src="@drawable/ic_home"
-        app:fabCustomSize="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="חזור למסך הבית"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"/>
+        android:layout_centerInParent="true"
+        android:textSize="20sp"
+        android:clickable="true"
+        android:padding="10dp"
+        android:textColor="@color/nav_blue_item"
+        android:focusable="true" />
 
     <ProgressBar
         android:id="@+id/settingLoading"

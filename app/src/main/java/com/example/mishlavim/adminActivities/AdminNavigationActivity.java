@@ -120,7 +120,6 @@ public class AdminNavigationActivity extends AppCompatActivity implements Bottom
                 break;
         }
         overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
-        finish();
         return super.onOptionsItemSelected(item);
     }
 }
