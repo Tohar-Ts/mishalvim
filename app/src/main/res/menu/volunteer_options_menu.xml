@@ -5,7 +5,7 @@
             android:title="פתיחת שאלון" />
         <item
             android:id="@+id/view_volunteer"
-            android:title="צפייה בשאלונים" />
+            android:title="צפיה במתנדב" />
         <item
             android:id="@+id/edit_volunteer"
             android:title="הגדרות משתמש" />

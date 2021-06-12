@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.example.mishlavim.R;
 import com.example.mishlavim.deleteUserActivity;
 import com.example.mishlavim.guideActivities.GuideFormsPermissionActivity;
+import com.example.mishlavim.guideActivities.GuideReportsFragment;
 import com.example.mishlavim.model.Adapter.RecyclerAdapter;
 import com.example.mishlavim.model.Admin;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
@@ -118,12 +119,28 @@ public class AdminGuidesFragment extends Fragment implements PopupMenu.OnMenuIte
             case R.id.view_guide_volunteers:
                 FirestoreMethods.getDocument(FirebaseStrings.usersStr(), clickedGuideId , this::getGuideDocSuccess, this::getGuideDocFailed);
                 break;
+            case R.id.watch_guide:
+                FirestoreMethods.getDocument(FirebaseStrings.usersStr(), clickedGuideId , this::getReportsGuideDocSuccess, this::getGuideDocFailed);
+                break;
             case R.id.remove_guide:
                 FirestoreMethods.getDocument(FirebaseStrings.usersStr(), clickedGuideId , this::deleteGetUserDocSuccess, this::getGuideDocFailed);
                 break;
         }
             return true;
         }
+
+    private Void getReportsGuideDocSuccess(DocumentSnapshot doc) {
+        assert doc != null;
+        Guide guide = doc.toObject(Guide.class);
+        Global.getGlobalInstance().setGuideInstance(guide);
+        getActivity().getSupportFragmentManager().beginTransaction().
+                setCustomAnimations(R.anim.fragment_fade_in,R.anim.fragment_fade_out
+                )
+                .replace(R.id.admin_fragment_container,new GuideReportsFragment())
+                .commit();
+        return null;
+    }
+
     //this is a function that sends a failure message of the guide data fetching fails
     private Void getGuideDocFailed(Void unused) {
         Toast.makeText(getActivity(), "טעינת מידע על המדריך נכשלה", Toast.LENGTH_SHORT).show();

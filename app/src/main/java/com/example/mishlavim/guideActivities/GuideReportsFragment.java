@@ -19,6 +19,7 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -71,6 +72,13 @@ public class GuideReportsFragment extends Fragment implements View.OnClickListen
     }
 
     private void startTbl(){
+        if(myVolunteersMap.isEmpty()){
+            Toast.makeText(getActivity(), "אין מתנדבים", Toast.LENGTH_SHORT).show();
+            progressBar.setVisibility(View.GONE);
+            avgText.setText("אין טפסים שמולאו ");
+            return;
+        }
+
         int count = 0;
         for(String voluName : myVolunteersMap.keySet()) {
             count++;
@@ -94,6 +102,7 @@ public class GuideReportsFragment extends Fragment implements View.OnClickListen
             numOfForms.put(volu.getName(), volu.getFinishedForms().size());
         else
             numOfForms.put(volu.getName(), 0);
+        Log.d("pushAndGotoCreateTbl:", "pushAndGotoCreateTbl");
         createTblVoluForms();
         calculateAvg();
         return null;
@@ -113,30 +122,49 @@ public class GuideReportsFragment extends Fragment implements View.OnClickListen
 
     private void createTblVoluForms() {
         for(String voluName : myVolunteersMap.keySet()){
-            LinearLayout newLinerLayout = new LinearLayout(getActivity());
+            //new row
             TableRow newRow = new TableRow(getActivity());;
-            TextView name = new TextView(getActivity());
-            TextView formsNum = new TextView(getActivity());
+            TableRow.LayoutParams rowParams = new TableRow.LayoutParams(
+                    TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
+            newRow.setBackgroundResource(R.drawable.table);
+            newRow.setLayoutParams(rowParams);
 
-            newLinerLayout.setOrientation(LinearLayout.HORIZONTAL);
-            newLinerLayout.setBackgroundResource(R.drawable.table);
-            newLinerLayout.setPadding(20,0,20,20);
+            //new relative layout
+            RelativeLayout newLinerLayout = new RelativeLayout(getActivity());
+            RelativeLayout.LayoutParams relativeParams = new RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            int paddingTop = convertFromDpToPixels(10);
+            int paddingRight = convertFromDpToPixels(15);
+            int paddingLeft = convertFromDpToPixels(25);
+            int paddingBottom = convertFromDpToPixels(10);
+            newLinerLayout.setPadding(paddingLeft,paddingTop,paddingRight,paddingBottom);
+            newRow.setLayoutParams(relativeParams);
+
+            //name layout params
+            RelativeLayout.LayoutParams nameParams = new RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            nameParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            nameParams.addRule(RelativeLayout.CENTER_IN_PARENT);
+
+            //num layout params
+            RelativeLayout.LayoutParams numParams = new RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            numParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+            numParams.addRule(RelativeLayout.CENTER_IN_PARENT);
+            int marginLeft = convertFromDpToPixels(80);
+            numParams.setMargins(marginLeft,0,0,0);
+
             // create name text
+            TextView name = new TextView(getActivity());
             name.setText(voluName);
-            name.setGravity(Gravity.RIGHT);
-            name.setWidth(convertFromDpToPixels(140));
-            //name.setBackground();
-            //TODO fixthe get color function which doesnt work
             name.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
+            name.setLayoutParams(nameParams);
 
             // create num of forms text
-//            TableRow.LayoutParams txtParams = new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-//            name.setLayoutParams(txtParams);
+            TextView formsNum = new TextView(getActivity());
             formsNum.setText(numOfForms.get(voluName)+"");
-            formsNum.setGravity(Gravity.RIGHT);
-            formsNum.setWidth(convertFromDpToPixels(180));
-//            formsNum.setTextColor(getColor(R.color.black));
             formsNum.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
+            formsNum.setLayoutParams(numParams);
 
             //add to XML
             newLinerLayout.addView(formsNum);
