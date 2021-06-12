@@ -42,7 +42,7 @@
             android:layout_marginTop="10dp"
             android:textSize="25sp"
             android:fontFamily="@font/alef"
-            android:textColor="@color/pink"
+            android:textColor="@color/green"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_centerInParent="true"

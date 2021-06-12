@@ -172,7 +172,7 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
         params.setMargins(marginSides, marginTop,marginSides,marginBottom);
         params.setGravity(Gravity.CENTER);
         formBtn.setLayoutParams(params);
-        formBtn.setBackgroundResource(R.drawable.pink_button);
+        formBtn.setBackgroundResource(R.drawable.custom_green_button);
         formBtn.setGravity(Gravity.CENTER);
         formBtn.setOnClickListener(this);
         formBtn.setText(formName);
