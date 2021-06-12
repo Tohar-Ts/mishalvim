@@ -7,6 +7,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -97,7 +98,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     };
     //one row rules
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
+       RelativeLayout row_layout;
         ImageView imageView;
         TextView textView;
 
@@ -105,6 +106,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             super(itemView);
             imageView = itemView.findViewById(R.id.row_more_img);
             textView = itemView.findViewById(R.id.row_name);
+            row_layout = itemView.findViewById(R.id.row_layout);
+            row_layout.setOnClickListener(this);
             imageView.setOnClickListener(this);
         }
 
