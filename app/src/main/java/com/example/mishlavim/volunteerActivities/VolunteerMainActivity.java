@@ -80,7 +80,7 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
         userUpdatingType = global.getType();
         if(userUpdatingType.compareTo(FirebaseStrings.volunteerStr()) != 0){
             homeButton.setVisibility(View.VISIBLE);
-            myGuidePrompt.setText("צפייה בחניך: " + volu.getName());
+            myGuidePrompt.setText(FirebaseStrings.emptyString());
         }
         else
             homeButton.setVisibility(View.GONE);
@@ -146,7 +146,7 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
         if(userUpdatingType.equals(FirebaseStrings.volunteerStr()))
             helloVolu.setText("שלום, " + volu.getName());
         else
-            helloVolu.setText(FirebaseStrings.emptyString());
+            helloVolu.setText("צפייה בחניך: " + volu.getName());
     }
 
     private void setAnsweredForms() {
