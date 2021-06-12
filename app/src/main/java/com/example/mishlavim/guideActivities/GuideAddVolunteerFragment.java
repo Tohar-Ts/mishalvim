@@ -109,7 +109,7 @@ public class GuideAddVolunteerFragment extends Fragment implements View.OnClickL
         String password = passwordEditText.getText().toString().trim();
         String userName = userNameEditText.getText().toString().trim();
 
-        newVolu = new Volunteer(userName, FirebaseStrings.volunteerStr(), email, thisGuideName, thisGuideUid, new HashMap<>(),"", false, new HashMap<>(), "");
+        newVolu = new Volunteer(userName, FirebaseStrings.volunteerStr(), email, thisGuideUid, new HashMap<>(),"", false, new HashMap<>(), "");
 
         loadingProgressBar.setVisibility(View.VISIBLE);
         //register

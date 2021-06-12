@@ -20,7 +20,6 @@ import java.util.function.Function;
  */
 public class Volunteer extends User {
 
-    private String myGuide;
     private String myGuideId;
 
     private HashMap<String, String> finishedForms;
@@ -40,9 +39,8 @@ public class Volunteer extends User {
     /**
      * Parameterized constructor.
      */
-    public Volunteer(String name, String type, String email, String myGuide, String myGuideId, HashMap<String, String> finishedForms, String openFormId, boolean hasOpenForm, HashMap<String, String> myFinishedTemplate, String openFormName) {
+    public Volunteer(String name, String type, String email, String myGuideId, HashMap<String, String> finishedForms, String openFormId, boolean hasOpenForm, HashMap<String, String> myFinishedTemplate, String openFormName) {
         super(name, type, email);
-        this.myGuide = myGuide;
         this.myGuideId = myGuideId;
         this.finishedForms = finishedForms;
         this.openFormId = openFormId;
@@ -70,14 +68,6 @@ public class Volunteer extends User {
     /*
      * Getters and setters.
      */
-
-    public String getMyGuide() {
-        return myGuide;
-    }
-
-    public void setMyGuide(String myGuide) {
-        this.myGuide = myGuide;
-    }
 
     public String getMyGuideId() {
         return myGuideId;

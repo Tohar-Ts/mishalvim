@@ -4,40 +4,72 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:padding="20dp"
+    android:background="@drawable/background_rectangles3"
     tools:context=".volunteerActivities.VolunteerMainActivity">
-    <TextView
-        android:id="@+id/HelloVolu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="שלום "
-        android:clickable="true"
-        android:padding="15dp"
-        android:background="@drawable/hello_volu_background"
-        android:textSize="25sp"
-        android:fontFamily="@font/alef"
-        android:textColor="@color/white"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerInParent="true"
-        android:focusable="true" />
 
     <RelativeLayout
+        android:background="@drawable/transparent_white_background"
         android:paddingRight="30dp"
         android:paddingLeft="30dp"
         android:paddingBottom="30dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/HelloVolu">
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true">
 
+        <TextView
+            android:id="@+id/HelloVolu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="שלום "
+            android:clickable="true"
+            android:paddingBottom="8dp"
+            android:layout_marginTop="10dp"
+            android:textSize="25sp"
+            android:fontFamily="@font/alef"
+            android:textColor="@color/pink"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:textStyle="bold"
+            android:focusable="true" />
+
+        <TextView
+            android:id="@+id/myGuidePrompt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="המדריך שלך: מדריך 1"
+            android:clickable="true"
+            android:layout_below="@id/HelloVolu"
+            android:textSize="25sp"
+            android:fontFamily="@font/alef"
+            android:alpha="0.7"
+            android:textColor="@color/black"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:focusable="true" />
+
+<!--        <Button-->
+<!--            android:id="@+id/voluMailFloating"-->
+<!--            android:layout_width="56dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentLeft="true"-->
+<!--            android:layout_alignParentTop="true"-->
+<!--            android:layout_marginTop="29dp"-->
+<!--            android:background="@drawable/custom_input"-->
+<!--            android:drawableEnd="@drawable/ic_email"-->
+<!--            android:gravity="center|right"-->
+<!--            android:padding="15dp"-->
+<!--            app:fabCustomSize="60dp" />-->
 
         <Button
             android:id="@+id/openFormBtn"
-            android:layout_width="match_parent"
-            android:layout_height="113dp"
-            android:layout_alignParentTop="true"
+            android:layout_width="358dp"
+            android:layout_height="143dp"
+            android:layout_below="@id/myGuidePrompt"
             android:layout_centerVertical="true"
-            android:layout_marginTop="53dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/volu_open_form_background"
             android:fontFamily="@font/alef"
             android:paddingLeft="40dp"
@@ -55,7 +87,7 @@
             android:layout_below="@id/openFormBtn"
             android:layout_alignParentBottom="true"
             android:layout_centerVertical="true"
-            android:layout_marginTop="67dp"
+            android:layout_marginTop="30dp"
             android:layout_marginBottom="10dp"
             android:scrollIndicators="right">
 
@@ -67,32 +99,33 @@
                     android:id="@+id/finishedFormsLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@id/a_line"
+                    android:layout_below="@id/finishedFormsPrompt"
                     android:layout_marginHorizontal="10dp"
                     android:layout_marginTop="20dp"
                     android:columnCount="1">
 
                 </GridLayout>
 
-                <TextView
-                    android:id="@+id/a_line"
-                    android:layout_width="match_parent"
-                    android:layout_height="3dp"
-                    android:layout_below="@id/finishedFormsPrompt"
-                    android:background="@drawable/pink_button" />
+<!--                <TextView-->
+<!--                    android:id="@+id/a_line"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="3dp"-->
+<!--                    android:layout_below="@id/finishedFormsPrompt"-->
+<!--                    android:background="@drawable/pink_button" />-->
 
                 <TextView
                     android:id="@+id/finishedFormsPrompt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:layout_centerInParent="true"
+                    android:layout_alignParentRight="true"
                     android:fontFamily="@font/alef"
-                    android:padding="20dp"
                     android:text="שאלונים שמורים:"
                     android:textAlignment="center"
-                    android:textColor="@color/pink"
-                    android:textSize="30sp" />
+                    android:alpha="0.7"
+                    android:textColor="@color/black"
+                    android:textSize="25sp" />
+
             </RelativeLayout>
         </ScrollView>
 

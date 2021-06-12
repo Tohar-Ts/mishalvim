@@ -132,14 +132,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             Guide guide = document.toObject(Guide.class);
             globalInstance.setGuideInstance(guide);
             startActivity(new Intent(LoginActivity.this, GuideNavigationActivity.class));
-
         }
 
         //volunteer and go to volunteer main screen
         else if (type.equals(FirebaseStrings.volunteerStr())) {
             Volunteer volu = document.toObject(Volunteer.class);
             globalInstance.setVoluInstance(volu);
-            startActivity(new Intent(LoginActivity.this, VolunteerMainActivity.class));
+            FirestoreMethods.getDocument(FirebaseStrings.usersStr(), volu.getMyGuideId(), this::getGuideDocSuccess, this::getUserDocFailed);
+            return;
         }
 
         //error
@@ -148,9 +148,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             loadingProgressBar.setVisibility(View.GONE);
             return;
         }
+
         overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
         finish();
         loadingProgressBar.setVisibility(View.GONE);
+    }
+
+    private Void getGuideDocSuccess(DocumentSnapshot document) {
+        Guide guide = document.toObject(Guide.class);
+        globalInstance.setGuideInstance(guide);
+        startActivity(new Intent(LoginActivity.this, VolunteerMainActivity.class));
+        overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
+        finish();
+        loadingProgressBar.setVisibility(View.GONE);
+        return null;
     }
 
 }

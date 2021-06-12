@@ -1,6 +1,7 @@
 package com.example.mishlavim.volunteerActivities;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -14,12 +15,14 @@ import com.example.mishlavim.R;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import com.example.mishlavim.adminActivities.AdminNavigationActivity;
 import com.example.mishlavim.guideActivities.GuideNavigationActivity;
 import com.example.mishlavim.model.Firebase.AuthenticationMethods;
 import com.example.mishlavim.model.Firebase.FirebaseStrings;
 import com.example.mishlavim.model.Global;
+import com.example.mishlavim.model.Guide;
 import com.example.mishlavim.model.Volunteer;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -39,6 +42,7 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
     private FloatingActionButton homeBtn;
     private String userUpdatingType;
     private Global global;
+    private Guide myGuide;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +54,15 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
         formsLayout = findViewById(R.id.finishedFormsLayout);
         openFormBtn = findViewById(R.id.openFormBtn);
         homeBtn = findViewById(R.id.voluMainHomeFloating);
+        TextView myGuidePrompt = findViewById(R.id.myGuidePrompt);
+
         //init volu object
         Global globalInstance = Global.getGlobalInstance();
         volu = globalInstance.getVoluInstance();
+        myGuide = globalInstance.getGuideInstance();
+
+        //init my guide text
+        myGuidePrompt.setText("המדריך שלך: " + myGuide.getName());
 
         if (!volu.getHasOpenForm()){
             openFormBtn.setText("לא קיים\nשאלון פתוח");
@@ -80,7 +90,6 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
             Intent intent = new Intent(VolunteerMainActivity.this, VolunteerFillOutFormActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
-            finish();
         }
         else if(v.getId() ==  R.id.voluMainHomeFloating){
             //clicking on go back home button - switch activities
@@ -94,7 +103,6 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
             intent.putExtra("CLICKED_FORM_KEY", formKey);
             startActivity(intent);
             overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
-            finish();
         }
     }
 
@@ -130,15 +138,14 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
 
         //calculate height
         int height = convertFromDpToPixels(60);
-        int width = convertFromDpToPixels(300);
         int marginTop =  convertFromDpToPixels(15);
-        int marginSides =  convertFromDpToPixels(10);
+        int marginSides =  convertFromDpToPixels(0);
         int marginBottom =  convertFromDpToPixels(10);
 
         //styling
         GridLayout.LayoutParams params = new GridLayout.LayoutParams();
         params.height = height;
-        params.width = width;
+        params.width = GridLayout.LayoutParams.MATCH_PARENT;
         params.setMargins(marginSides, marginTop,marginSides,marginBottom);
         params.setGravity(Gravity.CENTER);
         formBtn.setLayoutParams(params);
@@ -148,7 +155,8 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
         formBtn.setText(formName);
         formBtn.setTextColor(getResources().getColor(R.color.white));
         formBtn.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
-   
+        Typeface typeface = ResourcesCompat.getFont(VolunteerMainActivity.this, R.font.alef);
+        formBtn.setTypeface(typeface);
 
         //adding the new button view to the linearlayout
         formsLayout.addView(formBtn);
@@ -167,7 +175,6 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
             startActivity(new Intent(getApplicationContext(), GuideNavigationActivity.class));
         }
         overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
-        finish();
     }
 
 }

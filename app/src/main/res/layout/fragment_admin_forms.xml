@@ -39,6 +39,7 @@
         android:id="@+id/search_barB"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/search_blue_borders"
         app:defaultQueryHint="@string/searchHintForm"
         android:layoutDirection="rtl"
         android:layout_below="@id/formsPrompt"

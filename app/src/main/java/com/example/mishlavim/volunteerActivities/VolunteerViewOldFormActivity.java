@@ -164,7 +164,7 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.setMargins(margin,margin,20,margin);
         qTextView.setLayoutParams(params);
-        qTextView.setGravity(Gravity.CENTER | Gravity.START);
+        qTextView.setGravity(Gravity.CENTER | Gravity.RIGHT);
         qTextView.setBackgroundResource(R.drawable.custom_orange_textview);
         qTextView.setPadding(padding,padding,padding,padding);
         qTextView.setText(question);
@@ -190,7 +190,7 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
         params.setMargins(margin,margin,margin,margin);
         aTextView.setBackgroundResource(R.drawable.white_text_background);
         aTextView.setLayoutParams(params);
-        aTextView.setGravity(Gravity.CENTER | Gravity.START);
+        aTextView.setGravity(Gravity.CENTER | Gravity.RIGHT);
         aTextView.setPadding(padding,padding,padding,padding);
         aTextView.setText(answer);
         aTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
@@ -214,7 +214,7 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
         params.setMargins(margin,margin,margin,margin);
         aEditText.setLayoutParams(params);
         aEditText.setPadding(padding,padding,padding,padding);
-        aEditText.setGravity(Gravity.CENTER | Gravity.START);
+        aEditText.setGravity(Gravity.CENTER | Gravity.RIGHT);
         aEditText.setText(answer);
         aEditText.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
 
@@ -242,8 +242,8 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
 
     private Void reloadScreen(Void unused) {
         Toast.makeText(getApplicationContext(), R.string.firebase_success, Toast.LENGTH_SHORT).show();
-        finish();
         startActivity(getIntent());
+        overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
         return null;
     }
 

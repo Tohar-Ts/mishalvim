@@ -172,7 +172,7 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
 
         questionNumTextView.setText("שאלה " + numOfCurrentQuestion);
 
-        fireBaseQuestion.setText(questions.get(numOfCurrentQuestion-1 + ""));
+        fireBaseQuestion.setText(questions.get(numOfCurrentQuestion + ""));
 
         if (currentAnswers.get(numOfCurrentQuestion + "") != null)
             volunteerAnswer.setText(currentAnswers.get(numOfCurrentQuestion + ""));
@@ -267,7 +267,6 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
     }
 
     private Void notifyGuide(Void unused){
-        // TODO: 6/8/2021 send mail to guide
         Global.updateGlobalData(this::updateGlobalFinished);
         return null;
     }
@@ -287,7 +286,6 @@ public class VolunteerFillOutFormActivity extends AppCompatActivity implements V
         Intent intent = new Intent(VolunteerFillOutFormActivity.this, VolunteerFinishedFormActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
-        finish();
     }
 
 

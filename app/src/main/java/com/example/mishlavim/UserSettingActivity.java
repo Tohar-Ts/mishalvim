@@ -185,13 +185,6 @@ public class UserSettingActivity extends AppCompatActivity implements View.OnCli
         newPassword = newPasswordEditText.getText().toString().trim();
         newUserName = newUserNameEditText.getText().toString().trim();
 
-        //GUIDE CANNOT CHANGE HIS NAME!
-        if(userToUpdateType.equals(FirebaseStrings.guideStr())){
-            if(!(newUserName.equals(userData.getName()))){
-                Toast.makeText(UserSettingActivity.this, "מדריך אינו יכול לשנות שם משתמש במסך זה.", Toast.LENGTH_SHORT).show();
-                return;
-            }
-        }
         progressBar.setVisibility(View.VISIBLE);
         updateFirestore();
     }
@@ -212,12 +205,11 @@ public class UserSettingActivity extends AppCompatActivity implements View.OnCli
 
     private Void updateFirestoreSuccess(Void unused) {
         //update maps!
-        if(userToUpdateType.equals(FirebaseStrings.adminStr())) //admin is not stored in any map
-            Global.updateGlobalData(this::updateGlobalFinished);
-
-        else if(userToUpdateType.equals(FirebaseStrings.volunteerStr())){ //volunteer is stored in his guide map
+        if(userToUpdateType.equals(FirebaseStrings.volunteerStr())){ //volunteer is stored in his guide map
             updateGuideVoluMap();
         }
+        else  //admin and guide details are not stored in outside maps
+            Global.updateGlobalData(this::updateGlobalFinished);
         return null;
     }
 

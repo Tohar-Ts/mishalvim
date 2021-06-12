@@ -214,7 +214,7 @@ public class AdminAddNewUserFragment extends Fragment  implements View.OnClickLi
         }
 
         else { //volunteer
-            fsUser = new Volunteer(newAuthUser.getName(), newUserType, newAuthUser.getEmail(), guideName, guideID, new HashMap<>(),"", false, new HashMap<>(), "");
+            fsUser = new Volunteer(newAuthUser.getName(), newUserType, newAuthUser.getEmail(), guideID, new HashMap<>(),"", false, new HashMap<>(), "");
             Guide.addVolunteer(guideID, newUserUid, newAuthUser.getName());
         }
         //init a new user data in firestore

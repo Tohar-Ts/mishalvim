@@ -113,6 +113,7 @@ public class GuideVolunteerListFragment extends Fragment implements PopupMenu.On
         switch(item.getItemId() ){
             case R.id.view_volunteer:
                 //getting the volunteer data and moving to volunteer main
+                Toast.makeText(getActivity(), "הנך מועבר למסך הראשי של המתנדב", Toast.LENGTH_SHORT).show();
                 FirestoreMethods.getDocument(FirebaseStrings.usersStr(), clickedRowUid , this::viewGetUserDocSuccess, this::getUserDocFailed);
                 break;
             case R.id.edit_volunteer:
