@@ -19,7 +19,8 @@
             android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".adminActivities.AdminNavigationActivity"
-            android:windowSoftInputMode="adjustNothing" />
+            android:windowSoftInputMode="adjustPan"
+            />
         <activity android:name=".login.forgotPassword" />
         <activity android:name=".adminActivities.AdminWatchTemplate" />
         <activity android:name=".guideActivities.GuideFormsPermissionActivity" />
