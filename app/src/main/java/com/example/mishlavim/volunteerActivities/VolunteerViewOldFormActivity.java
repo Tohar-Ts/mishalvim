@@ -81,12 +81,12 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
             finish();
         }
     }
-
+    //error function displayed when an error occurs
     private Void showError(Void v) {
         Toast.makeText(getApplicationContext(), R.string.firebase_failed, Toast.LENGTH_SHORT).show();
         return null;
     }
-
+    //displays the form name
     public void displayFormName(){
         formName.setText(clickedFormKey);
     }
@@ -104,7 +104,7 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
             addEditAnswer(answer);
         }
     }
-
+    //allows the form to be edited and updates the buttons accordingly
     private void updateEditMode() {
         if(canEdit)
             editButton.setVisibility(View.VISIBLE);
@@ -113,12 +113,12 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
 
         saveButton.setVisibility(View.GONE);
     }
-
+    //gets the answeres from firebase
     private void getAnswersFromFirebase() {
         FirestoreMethods.getDocument(FirebaseStrings.answeredFormsStr(), clickedFormId,
                 this::onGettingAnswersSuccess, this::showError);
     }
-
+    //succeeds if getting the answers
     private Void onGettingAnswersSuccess(DocumentSnapshot document){
         assert document != null;
         AnsweredForm answersObj = document.toObject(AnsweredForm.class);
