@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mishlavim.R;
 import com.example.mishlavim.UserSettingActivity;
 import com.example.mishlavim.deleteUserActivity;
-import com.example.mishlavim.dialogs.DeleteUserDialog;
 import com.example.mishlavim.dialogs.passAllVolunteersDialog;
 import com.example.mishlavim.guideActivities.GuideFormsPermissionActivity;
 import com.example.mishlavim.model.Adapter.RecyclerAdapter;

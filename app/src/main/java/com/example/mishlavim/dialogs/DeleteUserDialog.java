@@ -38,7 +38,7 @@ public class DeleteUserDialog extends DialogFragment {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        builder.setMessage("האם למחוק את המשתמש?")
+        builder.setMessage("פעולה זאת תמחק את כל המידע המקושר למשתמש. האם להמשיך?")
 
                 .setPositiveButton("כן", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {

@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mishlavim.adminActivities.AdminNavigationActivity;
+import com.example.mishlavim.dialogs.DeleteUserDialog;
 import com.example.mishlavim.dialogs.passAllVolunteersDialog;
 import com.example.mishlavim.guideActivities.GuideNavigationActivity;
 import com.example.mishlavim.model.Admin;
@@ -26,7 +27,7 @@ import com.example.mishlavim.model.User;
 
 import java.util.HashMap;
 
-public class deleteUserActivity extends AppCompatActivity implements View.OnClickListener, passAllVolunteersDialog.passAllVolunteersListener{
+public class deleteUserActivity extends AppCompatActivity implements View.OnClickListener, DeleteUserDialog.deleteUserListener{
 
     private Button deleteBtn;
     private TextView email;
@@ -108,9 +109,8 @@ public class deleteUserActivity extends AppCompatActivity implements View.OnClic
 
     private void showDialog() {
         //NOTICE!! you cannot delete guide of he still have volunteers!
-        //TODO - change dialog text to - "this action will delete all user relative data! are you sure?"
-        DialogFragment dialogFragment = new passAllVolunteersDialog();
-        dialogFragment.show(getSupportFragmentManager(), "passAll");
+        DialogFragment dialogFragment = new DeleteUserDialog();
+        dialogFragment.show(getSupportFragmentManager(), "delete");
     }
 
     private Void showError(Void unused) {
@@ -124,10 +124,7 @@ public class deleteUserActivity extends AppCompatActivity implements View.OnClic
         Toast.makeText(deleteUserActivity.this, "סיסמה לא נכונה", Toast.LENGTH_SHORT).show();
         return null;
     }
-    @Override
-    public void passAllVolunteersPositiveClick(DialogFragment dialog) {
-        parseInput();
-    }
+
 
     private void parseInput() {
 
@@ -232,8 +229,12 @@ public class deleteUserActivity extends AppCompatActivity implements View.OnClic
         return null;
     }
 
+
     @Override
-    public void passAllVolunteersNegativeClick(DialogFragment dialog) {
-    return;
+    public void onDeletePositiveClick(DialogFragment dialog) {
+        parseInput();
     }
+
+    @Override
+    public void onDeleteNegativeClick(DialogFragment dialog) { return; }
 }
