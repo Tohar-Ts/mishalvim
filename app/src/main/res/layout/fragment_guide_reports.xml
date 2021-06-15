@@ -1,15 +1,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:theme="@style/Theme.MishlavimPink"
-        android:paddingRight="30dp"
-        android:paddingLeft="30dp"
-        android:paddingBottom="30dp"
-        android:paddingTop="20dp"
-        android:background="@color/gray_background"
-        tools:context=".guideActivities.GuideReportsFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@style/Theme.MishlavimPink"
+    android:paddingRight="30dp"
+    android:paddingLeft="30dp"
+    android:paddingBottom="30dp"
+    android:paddingTop="20dp"
+    android:background="@color/gray_background"
+    tools:context=".guideActivities.GuideReportsFragment">
 
     <TextView
         android:id="@+id/textView"
@@ -25,61 +25,58 @@
 
     <ScrollView
         android:id="@+id/guideReportsScroll"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/textView"
         android:layout_above="@id/avg_text"
         android:background="@drawable/white_text_background"
-            android:padding="10dp"
         android:layout_centerInParent="true">
 
-        <TableLayout
+
+        <GridLayout
             android:id="@+id/volunteers_tbl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:stretchColumns="*">
+            android:useDefaultMargins="true"
+            android:columnCount="2"
+            android:padding="5dp"
+            android:layoutDirection="locale">
 
-            <TableRow
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_columnSpan="2"
                 android:background="@drawable/table">
 
-                <RelativeLayout
+                <TextView
+                    android:id="@+id/VoluNameHead"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="25dp"
-                    android:paddingRight="15dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp">
+                    android:fontFamily="@font/alef"
+                    android:gravity="start"
+                    android:layout_centerInParent="true"
+                    android:layout_alignParentRight="true"
+                    android:text="@string/volu_name"
+                    android:textColor="@color/button_blue2"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
+                <TextView
+                    android:id="@+id/numOfFormsHead"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/alef"
+                    android:gravity="right"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="60dp"
+                    android:layout_toLeftOf="@+id/VoluNameHead"
+                    android:text="@string/num_of_filled_forms"
+                    android:textColor="@color/button_blue2"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
 
-                    <TextView
-                        android:id="@+id/VoluNameHead"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerInParent="true"
-                        android:fontFamily="@font/alef"
-                        android:text="@string/volu_name"
-                        android:textColor="@color/button_blue2"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/numOfFormsHead"
-                        android:layout_width="130dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerInParent="true"
-                        android:fontFamily="@font/alef"
-                        android:text="@string/num_of_filled_forms"
-                        android:textColor="@color/button_blue2"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-                </RelativeLayout>
-            </TableRow>
-        </TableLayout>
+        </GridLayout>
     </ScrollView>
 
     <TextView

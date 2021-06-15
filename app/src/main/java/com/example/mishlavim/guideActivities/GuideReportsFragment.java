@@ -1,8 +1,10 @@
 package com.example.mishlavim.guideActivities;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,10 +15,12 @@ import com.example.mishlavim.model.Firebase.FirestoreMethods;
 import com.example.mishlavim.model.Global;
 import com.example.mishlavim.model.Guide;
 import com.example.mishlavim.model.Volunteer;
+import com.example.mishlavim.volunteerActivities.VolunteerMainActivity;
 import com.google.firebase.firestore.DocumentSnapshot;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -33,7 +37,7 @@ public class GuideReportsFragment extends Fragment implements View.OnClickListen
 
     private Guide guide;
     private HashMap<String, String> myVolunteersMap;
-    private TableLayout volunteersTbl;
+    private GridLayout volunteersTbl;
     private HashMap<String, Integer> numOfForms = new HashMap<>();
     private TextView avgText;
     private View view;
@@ -123,55 +127,76 @@ public class GuideReportsFragment extends Fragment implements View.OnClickListen
     private void createTblVoluForms() {
         for(String voluName : myVolunteersMap.keySet()){
             //new row
-            TableRow newRow = new TableRow(getActivity());;
-            TableRow.LayoutParams rowParams = new TableRow.LayoutParams(
-                    TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
-            newRow.setBackgroundResource(R.drawable.table);
-            newRow.setLayoutParams(rowParams);
+//            TableRow newRow = new TableRow(getActivity());;
+//            TableRow.LayoutParams rowParams = new TableRow.LayoutParams(
+//                    TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
+//            newRow.setBackgroundResource(R.drawable.table);
+//            newRow.setLayoutParams(rowParams);
+//
+//            //new relative layout
+//            RelativeLayout newLinerLayout = new RelativeLayout(getActivity());
+//            RelativeLayout.LayoutParams relativeParams = new RelativeLayout.LayoutParams(
+//                    RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+//            int paddingTop = convertFromDpToPixels(10);
+//            int paddingRight = convertFromDpToPixels(15);
+//            int paddingLeft = convertFromDpToPixels(25);
+//            int paddingBottom = convertFromDpToPixels(10);
+//            newLinerLayout.setPadding(paddingLeft,paddingTop,paddingRight,paddingBottom);
+//            newRow.setLayoutParams(relativeParams);
+//
+//            //name layout params
+//            RelativeLayout.LayoutParams nameParams = new RelativeLayout.LayoutParams(
+//                    RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+//            nameParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+//            nameParams.addRule(RelativeLayout.CENTER_IN_PARENT);
+//
+//            //num layout params
+//            RelativeLayout.LayoutParams numParams = new RelativeLayout.LayoutParams(
+//                    RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+//            numParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+//            numParams.addRule(RelativeLayout.CENTER_IN_PARENT);
+//            int marginLeft = convertFromDpToPixels(80);
+//            numParams.setMargins(marginLeft,0,0,0);
 
-            //new relative layout
-            RelativeLayout newLinerLayout = new RelativeLayout(getActivity());
-            RelativeLayout.LayoutParams relativeParams = new RelativeLayout.LayoutParams(
-                    RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-            int paddingTop = convertFromDpToPixels(10);
-            int paddingRight = convertFromDpToPixels(15);
-            int paddingLeft = convertFromDpToPixels(25);
-            int paddingBottom = convertFromDpToPixels(10);
-            newLinerLayout.setPadding(paddingLeft,paddingTop,paddingRight,paddingBottom);
-            newRow.setLayoutParams(relativeParams);
-
-            //name layout params
-            RelativeLayout.LayoutParams nameParams = new RelativeLayout.LayoutParams(
-                    RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-            nameParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-            nameParams.addRule(RelativeLayout.CENTER_IN_PARENT);
-
-            //num layout params
-            RelativeLayout.LayoutParams numParams = new RelativeLayout.LayoutParams(
-                    RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-            numParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-            numParams.addRule(RelativeLayout.CENTER_IN_PARENT);
-            int marginLeft = convertFromDpToPixels(80);
-            numParams.setMargins(marginLeft,0,0,0);
+            //getting the font
+            Typeface typeface = ResourcesCompat.getFont(getActivity(), R.font.alef);
 
             // create name text
+            GridLayout.LayoutParams nameParams = new GridLayout.LayoutParams();
             TextView name = new TextView(getActivity());
+            nameParams.width = GridLayout.LayoutParams.WRAP_CONTENT;
+            nameParams.height = GridLayout.LayoutParams.WRAP_CONTENT;
+            nameParams.setGravity(Gravity.FILL_HORIZONTAL);
+            int marginRight = convertFromDpToPixels(10);
+            int marginLeft = convertFromDpToPixels(60);
+            int marginTop = convertFromDpToPixels(10);
+            nameParams.setMargins(marginLeft,marginTop,marginRight,0);
             name.setText(voluName);
+            name.setTextColor(getResources().getColor(R.color.button_blue2));
             name.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
+            name.setGravity(Gravity.RIGHT);
+            name.setTypeface(typeface);
             name.setLayoutParams(nameParams);
 
+
             // create num of forms text
+            GridLayout.LayoutParams numParams = new GridLayout.LayoutParams();
+            numParams.width = GridLayout.LayoutParams.WRAP_CONTENT;
+            numParams.height = GridLayout.LayoutParams.WRAP_CONTENT;
+            numParams.setGravity(Gravity.FILL_HORIZONTAL);
+            numParams.setMargins(marginLeft,marginTop,marginRight,0);
+
             TextView formsNum = new TextView(getActivity());
             formsNum.setText(numOfForms.get(voluName)+"");
+            formsNum.setTextColor(getResources().getColor(R.color.button_blue2));
             formsNum.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
+            formsNum.setGravity(Gravity.RIGHT);
+            formsNum.setTypeface(typeface);
             formsNum.setLayoutParams(numParams);
 
             //add to XML
-            newLinerLayout.addView(formsNum);
-            newLinerLayout.addView(name);
-            newRow.addView(newLinerLayout);
-            volunteersTbl.addView(newRow);
-
+            volunteersTbl.addView(name);
+            volunteersTbl.addView(formsNum);
         }
     }
 
