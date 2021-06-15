@@ -25,6 +25,7 @@ import com.example.mishlavim.model.Global;
 import com.example.mishlavim.model.Guide;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class AdminChooseVoluGuideActivity extends AppCompatActivity implements
@@ -41,6 +42,8 @@ public class AdminChooseVoluGuideActivity extends AppCompatActivity implements
     private Boolean passAll;
     private String clickedVoluId, clickedVoluName, oldGuideId;
     private String clickedGuideId, clickedGuideName;
+    private int volCounter;
+    HashMap<String ,String> volunteers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +62,7 @@ public class AdminChooseVoluGuideActivity extends AppCompatActivity implements
         clickedVoluName = getIntent().getStringExtra("CLICKED_VOLU_NAME");
         clickedVoluId = getIntent().getStringExtra("CLICKED_VOLU_ID");
         passAll = getIntent().getBooleanExtra("PASS_ALL", false);
+        volunteers = guide.getMyVolunteers();
 
         //init xml views
         guidesView = findViewById(R.id.choose_guide_recycler_view);
@@ -115,11 +119,11 @@ public class AdminChooseVoluGuideActivity extends AppCompatActivity implements
             default:
                 chooseVoluLoading.setVisibility(View.VISIBLE);
                 clickedGuideName = recyclerAdapter.getClickedText();
-                clickedGuideId =  guide.getMyVolunteers().get(clickedVoluName);
+                clickedGuideId = admin.getGuideList().get(clickedGuideName);
+                Log.d("adminChooseGuide", "onMenuItemClick: volu- "+clickedVoluName+clickedVoluId+"old guide- "+oldGuideId +"new guide- "+clickedGuideId);
                 if(passAll)
                     moveAllVVolunteers();
                 else {
-                    //TODO - show dialog
                     moveVolunteer();
                 }
                 break;
@@ -137,7 +141,6 @@ public class AdminChooseVoluGuideActivity extends AppCompatActivity implements
         //update volu myGuideId
         FirestoreMethods.updateDocumentField(FirebaseStrings.usersStr(), clickedVoluId, FirebaseStrings.myGuideIdStr(), clickedGuideId,
         this::updateInNewGuide, this::showError);
-        //delete volu from old guide map
     }
 
     //update volu in the new guide map
@@ -151,14 +154,16 @@ public class AdminChooseVoluGuideActivity extends AppCompatActivity implements
 
     private Void deleteFromOldGuide(Void unused) {
         Log.d(" AdminChooseVoluGuideActivity:", "starting to delete from old guide map" + oldGuideId);
-        if(passAll)
+        if((passAll)&&((++volCounter)<volunteers.size())) {
             FirestoreMethods.deleteMapKey(FirebaseStrings.usersStr(), oldGuideId, FirebaseStrings.myVolunteerStr(),
                     clickedVoluName,
                     this::returnToLoop, this::showError);
-        else
+        }
+        else {
             FirestoreMethods.deleteMapKey(FirebaseStrings.usersStr(), oldGuideId, FirebaseStrings.myVolunteerStr(),
                     clickedVoluName,
                     this::onUpdateFinished, this::showError);
+        }
         return null;
     }
 
@@ -168,6 +173,15 @@ public class AdminChooseVoluGuideActivity extends AppCompatActivity implements
     }
 
     private void moveAllVVolunteers() {
+        volCounter = 0;
+        Log.d(" AdminChooseVoluGuideActivity:", "starting to move all volunteers.");
+        for(String voluName: volunteers.keySet()){
+            clickedVoluName = voluName;
+            clickedVoluId = volunteers.get(voluName);
+            Log.d(" AdminChooseVoluGuideActivity:", "moving volu " + clickedVoluName + "to guide " + clickedGuideName);
+            moveVolunteer();
+        }
+        Log.d(" AdminChooseVoluGuideActivity:", "finished moving all volunteers.");
     }
 
 

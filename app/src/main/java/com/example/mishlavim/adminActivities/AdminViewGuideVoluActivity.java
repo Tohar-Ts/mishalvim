@@ -28,6 +28,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +50,7 @@ public class AdminViewGuideVoluActivity extends AppCompatActivity implements Vie
 {
     private TextView guideNameTextView;
     private SearchView searchView;
-    private Button passAllBtn;
+//    private Button passAllBtn;
     private TextView homeBtn;
     private RecyclerView volunteersView;
     private RecyclerAdapter recyclerAdapter;
@@ -59,8 +60,6 @@ public class AdminViewGuideVoluActivity extends AppCompatActivity implements Vie
     private Global global;
     private String clickedGuideText, clickedGuideUid; //init guide data from the calling activity
     private String clickedVoluText, clickedVoluUid;
-    private ArrayList<String> listOfGuidesName,  listOfGuidesID;
-    private boolean flag = false;
 
 
     @Override
@@ -74,11 +73,11 @@ public class AdminViewGuideVoluActivity extends AppCompatActivity implements Vie
         //init xml views
         volunteersView = findViewById(R.id.volunteers_recycler_view);
         guideNameTextView = findViewById(R.id.adminGuideName);
-        passAllBtn = findViewById(R.id.passAllVolusBtn);
+//        passAllBtn = findViewById(R.id.passAllVolusBtn);
         homeBtn = findViewById(R.id.adminHomeFloating);
 
         //init buttons listener
-        passAllBtn.setOnClickListener(this);
+//        passAllBtn.setOnClickListener(this);
         homeBtn.setOnClickListener(this);
 
         //check to make sure non null element is given
@@ -143,10 +142,10 @@ public class AdminViewGuideVoluActivity extends AppCompatActivity implements Vie
                 overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
                 finish();
                 break;
-            case R.id.passAllVolusBtn:
-                DialogFragment dialogFragment = new passAllVolunteersDialog();
-                dialogFragment.show(getSupportFragmentManager(), "passAll");
-                break;
+//            case R.id.passAllVolusBtn:
+//                DialogFragment dialogFragment = new passAllVolunteersDialog();
+//                dialogFragment.show(getSupportFragmentManager(), "passAll");
+//                break;
         }
     }
 
@@ -174,9 +173,10 @@ public class AdminViewGuideVoluActivity extends AppCompatActivity implements Vie
                 intent.putExtra("CLICKED_VOLU_NAME", clickedVoluText);
                 intent.putExtra("CLICKED_VOLU_ID", clickedVoluUid);
                 intent.putExtra("CLICKED_OLD_GUIDE_ID", clickedGuideUid);
-                intent.putExtra("PASS_ALL", true);
+                intent.putExtra("PASS_ALL", false);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fragment_fade_in,R.anim.fragment_fade_out);
+                Log.d("adminVieGuide", "onMenuItemClick: volu- "+clickedVoluText+clickedVoluUid+"guide- "+ clickedGuideUid);
                 break;
             case R.id.admin_remove_volunteer:
                 //moving to delete activity
@@ -233,8 +233,8 @@ public class AdminViewGuideVoluActivity extends AppCompatActivity implements Vie
     public void passAllVolunteersPositiveClick(DialogFragment dialog) {
         Intent intent = new Intent(AdminViewGuideVoluActivity.this,
                     AdminChooseVoluGuideActivity.class);
-        intent.putExtra("CLICKED_VOLU_NAME", clickedVoluText);
-        intent.putExtra("CLICKED_VOLU_ID", clickedVoluUid);
+        intent.putExtra("CLICKED_VOLU_NAME", "");
+        intent.putExtra("CLICKED_VOLU_ID", "");
         intent.putExtra("CLICKED_OLD_GUIDE_ID", clickedGuideUid);
         intent.putExtra("PASS_ALL", true);
         startActivity(intent);

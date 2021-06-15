@@ -54,8 +54,7 @@ tools:context=".adminActivities.AdminViewGuideVoluActivity">
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_centerInParent="true"
-    android:layout_above="@+id/passAllVolusBtn"
-
+    android:layout_above="@+id/adminHomeFloating"
     android:layout_below="@id/admin_volu_search_bar">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -67,19 +66,19 @@ tools:context=".adminActivities.AdminViewGuideVoluActivity">
 
 </LinearLayout>
 
-    <Button
-        android:id="@+id/passAllVolusBtn"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_above="@id/adminHomeFloating"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="30dp"
-        android:background="@drawable/blue_button2"
-        android:padding="5dp"
-        android:text="העבר את כל המתנדבים למדריך אחר"
-        android:textColor="@drawable/blue_text_pressed" />
+<!--    <Button-->
+<!--        android:id="@+id/passAllVolusBtn"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:layout_above="@id/adminHomeFloating"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_marginLeft="10dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_marginBottom="30dp"-->
+<!--        android:background="@drawable/blue_button2"-->
+<!--        android:padding="5dp"-->
+<!--        android:text="העבר את כל המתנדבים למדריך אחר"-->
+<!--        android:textColor="@drawable/blue_text_pressed" />-->
 
   <TextView
         android:id="@+id/adminHomeFloating"

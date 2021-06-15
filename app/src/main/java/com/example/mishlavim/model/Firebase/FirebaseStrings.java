@@ -50,7 +50,7 @@ public class FirebaseStrings {
     }
 
     public static String myGuideIdStr() {
-        return "myGuideID";
+        return "myGuideId";
     }
 
     public static String openFormNameStr() {
