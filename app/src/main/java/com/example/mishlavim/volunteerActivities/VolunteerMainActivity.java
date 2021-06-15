@@ -69,6 +69,8 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
             openFormBtn.setText("לא קיים\nשאלון פתוח");
             openFormBtn.setClickable(false);
             openFormBtn.setEnabled(false);
+            openFormBtn.setBackgroundResource(R.drawable.orange_white_button);
+            openFormBtn.setTextColor(getResources().getColor(R.color.orange));
         }
 
         //set the button listeners

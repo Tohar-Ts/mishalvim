@@ -9,7 +9,6 @@
     tools:context=".volunteerActivities.VolunteerMainActivity">
 
 
-
     <RelativeLayout
         android:background="@drawable/transparent_white_background"
         android:paddingRight="30dp"
@@ -20,27 +19,31 @@
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true">
 
+
         <Button
             android:id="@+id/voluLogOut"
-            android:layout_width="56dp"
-            android:layout_height="36dp"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
             android:background="@drawable/pink_white_color"
             android:padding="5dp"
             android:text="התנתק"
-            android:layout_marginTop="10dp"
             android:textColor="@drawable/pink_text_pressed"
             android:textSize="10sp" />
+
+
         <TextView
             android:id="@+id/HelloVolu"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="שלום "
             android:clickable="true"
             android:paddingBottom="8dp"
             android:layout_marginTop="10dp"
             android:textSize="25sp"
+            android:layout_toRightOf="@+id/voluLogOut"
             android:fontFamily="@font/alef"
             android:textColor="@color/pink"
             android:layout_alignParentRight="true"
@@ -60,36 +63,24 @@
             android:fontFamily="@font/alef"
             android:alpha="0.7"
             android:textColor="@color/black"
+            android:layout_marginTop="8dp"
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true"
             android:focusable="true" />
-
-<!--        <Button-->
-<!--            android:id="@+id/voluMailFloating"-->
-<!--            android:layout_width="56dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_alignParentLeft="true"-->
-<!--            android:layout_alignParentTop="true"-->
-<!--            android:layout_marginTop="29dp"-->
-<!--            android:background="@drawable/custom_input"-->
-<!--            android:drawableEnd="@drawable/ic_email"-->
-<!--            android:gravity="center|right"-->
-<!--            android:padding="15dp"-->
-<!--            app:fabCustomSize="60dp" />-->
 
         <Button
             android:id="@+id/openFormBtn"
             android:layout_width="358dp"
             android:layout_height="143dp"
-            android:layout_below="@id/myGuidePrompt"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="30dp"
             android:background="@drawable/volu_open_form_background"
             android:fontFamily="@font/alef"
+            android:layout_below="@id/myGuidePrompt"
             android:paddingLeft="40dp"
             android:paddingTop="30dp"
             android:paddingRight="40dp"
-            android:paddingBottom="30dp"
+            android:paddingBottom="40dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="60dp"
             android:text="מלא/י אותי!"
             android:textColor="@drawable/orange_white_text_pressed"
             android:textSize="30sp" />
@@ -101,31 +92,12 @@
             android:layout_below="@id/openFormBtn"
             android:layout_alignParentBottom="true"
             android:layout_centerVertical="true"
-            android:layout_marginTop="30dp"
             android:layout_marginBottom="10dp"
             android:scrollIndicators="right">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-
-                <GridLayout
-                    android:id="@+id/finishedFormsLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@id/finishedFormsPrompt"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginTop="20dp"
-                    android:columnCount="1">
-
-                </GridLayout>
-
-<!--                <TextView-->
-<!--                    android:id="@+id/a_line"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="3dp"-->
-<!--                    android:layout_below="@id/finishedFormsPrompt"-->
-<!--                    android:background="@drawable/pink_button" />-->
 
                 <TextView
                     android:id="@+id/finishedFormsPrompt"
@@ -139,6 +111,16 @@
                     android:alpha="0.7"
                     android:textColor="@color/black"
                     android:textSize="25sp" />
+
+                <GridLayout
+                    android:id="@+id/finishedFormsLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/finishedFormsPrompt"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="20dp"
+                    android:columnCount="1">
+                </GridLayout>
 
             </RelativeLayout>
         </ScrollView>
