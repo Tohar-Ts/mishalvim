@@ -14,7 +14,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.myapplication.mishlavim"
+        applicationId "com.myapplications.mishlavim"
         minSdkVersion 24
         targetSdkVersion 30
         versionCode 1
