@@ -2,6 +2,7 @@
 package com.example.mishlavim.adminActivities;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -40,11 +41,11 @@ import java.util.Map;
 public class AdminWatchTemplate extends AppCompatActivity implements View.OnClickListener,
         openFormWarningDialog.openFormWarningListener
 {
-    private TextView formName;
+    private TextView formName, homeButton;
     private String clickedFormKey;
     private String clickedFormId;
     private HashMap <String, String> questions;
-    private FloatingActionButton editBTM, saveButton, homeButton;
+    private FloatingActionButton editBTM, saveButton;
     private Button addQuestionButton;
     private LinearLayout questionsLayout;
     private ScrollView questionsScroll;
@@ -157,11 +158,15 @@ public class AdminWatchTemplate extends AppCompatActivity implements View.OnClic
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.setMargins(margin,margin,margin,margin);
         qTextView.setLayoutParams(params);
-        qTextView.setGravity(Gravity.CENTER | Gravity.START);
-        qTextView.setBackgroundResource(R.color.bar_blue);
+        qTextView.setGravity(Gravity.CENTER);
+        qTextView.setBackgroundResource(R.drawable.white_text_background);
         qTextView.setPadding(padding,padding,padding,padding);
         qTextView.setText(question);
         qTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP,25);
+        
+//        Typeface face=Typeface.createFromAsset(getAssets(),"font/alef.ttf");
+//        qTextView.setTypeface(face);
+        //qTextView.setTypeface(Typeface.createFromAsset(getAssets(), "alef.ttf"));
 
         //adding the new text view to the linearlayout
         questionsLayout.addView(qTextView);
