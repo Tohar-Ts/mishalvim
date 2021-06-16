@@ -2,27 +2,36 @@
 ## Mishlavim App for Android
 
 PREREQUISITES:
+</br>
 JDK 1.8,
 Android SDK,
 Android NDK,
 Android Studio.
 
 Install prerequisites:
+</br>
 Clone the repo using git clone,
 Build it using Android Studio or gradle script.
 
 VIEW our app:
+</br>
 https://github.com/Tohar-Ts/mishalvim/wiki/Final-App
 
 DOWNLOAD our app:
+</br>
 
 Users for testers:
+</br>
 Tohar@gmail.com - 123456
+</br>
 Guide@gmail.com - 123456
+</br>
 Adi@gmail.com - 123456
+</br>
 !DO NOT CHANGE PASSWORDS!
 
 LICENSE
+</br>
 Copyright (C) 2021 by JCE and Our awesome team.
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
