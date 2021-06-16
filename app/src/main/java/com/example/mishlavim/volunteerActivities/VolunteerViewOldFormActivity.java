@@ -177,6 +177,7 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
         qTextView.setBackgroundResource(R.drawable.custom_orange_textview);
         qTextView.setPadding(padding,padding,padding,padding);
         qTextView.setText(question);
+        qTextView.setTextColor( getResources().getColor(R.color.black));
         qTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP,25);
 
 
@@ -202,6 +203,7 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
         aTextView.setGravity(Gravity.CENTER | Gravity.RIGHT);
         aTextView.setPadding(padding,padding,padding,padding);
         aTextView.setText(answer);
+        aTextView.setTextColor( getResources().getColor(R.color.black));
         aTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
 
         //adding the new text view to the linearlayout

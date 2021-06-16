@@ -55,7 +55,7 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
         openFormBtn = findViewById(R.id.openFormBtn);
         homeButton = findViewById(R.id.guideVoluHomeFloating);
         logOut = findViewById(R.id.voluLogOut);
-        TextView myGuidePrompt = findViewById(R.id.myGuidePrompt);
+//        TextView myGuidePrompt = findViewById(R.id.myGuidePrompt);
 
         //init volu object
         Global globalInstance = Global.getGlobalInstance();
@@ -63,7 +63,7 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
         myGuide = globalInstance.getGuideInstance();
 
         //init my guide text
-        myGuidePrompt.setText("המדריך שלך: " + myGuide.getName());
+//        myGuidePrompt.setText("המדריך שלך: " + myGuide.getName());
 
         if (!volu.getHasOpenForm()){
             openFormBtn.setText("לא קיים\nשאלון פתוח");
@@ -82,7 +82,7 @@ public class VolunteerMainActivity extends AppCompatActivity implements View.OnC
         userUpdatingType = global.getType();
         if(userUpdatingType.compareTo(FirebaseStrings.volunteerStr()) != 0){
             homeButton.setVisibility(View.VISIBLE);
-            myGuidePrompt.setText(FirebaseStrings.emptyString());
+//            myGuidePrompt.setText(FirebaseStrings.emptyString());
         }
         else
             homeButton.setVisibility(View.GONE);
