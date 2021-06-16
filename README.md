@@ -14,6 +14,14 @@ Build it using Android Studio or gradle script.
 VIEW our app:
 https://github.com/Tohar-Ts/mishalvim/wiki/Final-App
 
+DOWNLOAD our app:
+
+Users for testers:
+Tohar@gmail.com - 123456
+Guide@gmail.com - 123456
+Adi@gmail.com - 123456
+!DO NOT CHANGE PASSWORDS!
+
 LICENSE
 Copyright (C) 2021 by JCE and Our awesome team.
 
