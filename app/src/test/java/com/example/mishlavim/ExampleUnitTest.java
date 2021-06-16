@@ -1,4 +1,4 @@
-package com.example.mishlavim;
+package com.myapplication.mishlavim;
 
 import org.junit.Test;
 
