@@ -11,6 +11,9 @@ Install prerequisites:
 Clone the repo using git clone,
 Build it using Android Studio or gradle script.
 
+View our app:
+https://github.com/Tohar-Ts/mishalvim/wiki/Final-App
+
 LICENSE
 Copyright (C) 2021 by JCE and Our awesome team.
 
