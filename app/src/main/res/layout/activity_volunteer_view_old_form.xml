@@ -4,18 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
+    android:padding="10dp"
     android:background="@color/white"
     tools:context=".volunteerActivities.VolunteerFillOutFormActivity">
 
 
     <Button
         android:id="@+id/voluBackHome"
-        android:layout_width="49dp"
-        android:layout_height="49dp"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
         android:layout_marginTop="4dp"
+        android:text="למסך הבית"
+        android:padding="5dp"
         android:background="@drawable/custom_input"
-        android:drawableRight="@drawable/ic_arrowback"
      android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
       />
@@ -28,8 +29,8 @@
         android:fontFamily="@font/alef"
         android:gravity="center"
         android:text="שאלון 2"
-        android:textColor="@color/pink"
-        android:textSize="35sp"
+        android:textColor="@color/dark_grey"
+        android:textSize="25sp"
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,7 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="10dp"
+            android:padding="3dp"
             android:layout_gravity="right">
 
         </LinearLayout>

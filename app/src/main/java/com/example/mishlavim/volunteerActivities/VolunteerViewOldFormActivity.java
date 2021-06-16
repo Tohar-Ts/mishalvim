@@ -1,6 +1,7 @@
 package com.example.mishlavim.volunteerActivities;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import com.example.mishlavim.R;
 import com.example.mishlavim.model.AnsweredForm;
@@ -44,7 +46,6 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
         setContentView(R.layout.activity_volunteer_view_old_form);
 
         //TODO: add a progress bar
-        //TODO: add home floating
         formName = findViewById(R.id.finishedFormName);
         editButton = findViewById(R.id.answersEditFloating);
         saveButton = findViewById(R.id.answersSaveFloating);
@@ -165,13 +166,13 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
         TextView qTextView = new TextView(this);
 
         //calculate height
-        int width = convertFromDpToPixels(330);
-        int margin =  convertFromDpToPixels(16);
-        int padding = convertFromDpToPixels(16);
+        int width = convertFromDpToPixels(350);
+        int margin =  convertFromDpToPixels(8);
+        int padding = convertFromDpToPixels(14);
 
         //styling
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, ViewGroup.LayoutParams.WRAP_CONTENT);
-        params.setMargins(margin,margin,20,margin);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.setMargins(margin,margin,margin,margin);
         qTextView.setLayoutParams(params);
         qTextView.setGravity(Gravity.CENTER | Gravity.RIGHT);
         qTextView.setBackgroundResource(R.drawable.custom_orange_textview);
@@ -179,7 +180,8 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
         qTextView.setText(question);
         qTextView.setTextColor( getResources().getColor(R.color.black));
         qTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP,25);
-
+        Typeface typeface = ResourcesCompat.getFont(VolunteerViewOldFormActivity.this, R.font.alef);
+        qTextView.setTypeface(typeface);
 
         //adding the new text view to the linearlayout
         savedAnswersLayout.addView( qTextView);
@@ -191,12 +193,12 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
 
         //calculate height
         int height = convertFromDpToPixels(64);
-        int width = convertFromDpToPixels(330);
-        int margin =  convertFromDpToPixels(16);
-        int padding = convertFromDpToPixels(16);
+        int width = convertFromDpToPixels(350);
+        int margin =  convertFromDpToPixels(8);
+        int padding = convertFromDpToPixels(14);
 
         //styling
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, ViewGroup.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.setMargins(margin,margin,margin,margin);
         aTextView.setBackgroundResource(R.drawable.white_text_background);
         aTextView.setLayoutParams(params);
@@ -205,7 +207,8 @@ public class VolunteerViewOldFormActivity extends AppCompatActivity implements V
         aTextView.setText(answer);
         aTextView.setTextColor( getResources().getColor(R.color.black));
         aTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
-
+        Typeface typeface = ResourcesCompat.getFont(VolunteerViewOldFormActivity.this, R.font.alef);
+        aTextView.setTypeface(typeface);
         //adding the new text view to the linearlayout
         savedAnswersLayout.addView( aTextView);
     }
