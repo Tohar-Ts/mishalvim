@@ -15,6 +15,8 @@ VIEW our app:
 https://github.com/Tohar-Ts/mishalvim/wiki/Final-App
 
 DOWNLOAD our app:
+https://drive.google.com/file/d/1nKTIoTJ7bgvaD5CpeCv4tOUDA_FSG9tx/view
+
 
 Users for testers:
 </br>
