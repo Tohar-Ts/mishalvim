@@ -122,11 +122,10 @@
         android:id="@+id/addNewVolu"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_centerVertical="true"
         android:layout_below="@+id/voluVerifyPassword"
+        android:layout_centerVertical="true"
         android:layout_marginTop="90dp"
-        android:layout_gravity="center"
         android:background="@drawable/orange_white_button"
-        android:textColor="@drawable/orange_text_pressed"
-        android:text="@string/action_register" />
+        android:text="@string/action_register"
+        android:textColor="@drawable/orange_text_pressed" />
 </RelativeLayout>

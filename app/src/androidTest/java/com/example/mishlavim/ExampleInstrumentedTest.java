@@ -1,4 +1,4 @@
-package com.example.mishlavim;
+package com.myapplications.mishlavim;
 
 import android.content.Context;
 

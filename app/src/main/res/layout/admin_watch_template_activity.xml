@@ -39,6 +39,8 @@
 
         <LinearLayout
             android:id="@+id/questionsTemplateLayout"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
@@ -53,13 +55,14 @@
         android:layout_width="65dp"
         android:layout_height="74dp"
         android:layout_margin="16dp"
+        android:layout_marginStart="16dp"
         android:backgroundTint="@color/bar_blue"
         android:src="@drawable/ic_edit"
         app:fabCustomSize="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/questionsTemplateScroll"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.682" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/SaveFloating"
@@ -91,18 +94,35 @@
         app:layout_constraintTop_toBottomOf="@+id/questionsTemplateScroll"
         app:layout_constraintVertical_bias="0.0" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/guideTemplateHomeFloating"-->
+<!--        android:layout_width="67dp"-->
+<!--        android:layout_height="63dp"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_margin="16dp"-->
+<!--        android:backgroundTint="@color/green"-->
+<!--        android:src="@drawable/ic_home"-->
+<!--        app:fabCustomSize="60dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/questionsTemplateScroll" />-->
+    <TextView
         android:id="@+id/guideTemplateHomeFloating"
-        android:layout_width="67dp"
-        android:layout_height="63dp"
-        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_margin="16dp"
-        android:backgroundTint="@color/green"
-        android:src="@drawable/ic_home"
-        app:fabCustomSize="60dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/nav_blue_corners"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="10dp"
+        android:text="חזור למסך הבית"
+        android:textColor="@color/nav_blue_item"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/questionsTemplateScroll" />
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/questionsTemplateScroll"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
