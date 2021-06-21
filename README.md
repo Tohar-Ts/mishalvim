@@ -14,7 +14,11 @@ Build it using Android Studio or gradle script.
 VIEW our app:
 https://github.com/Tohar-Ts/mishalvim/wiki/Final-App
 
-DOWNLOAD our app:
+DOWNLOAD our app: 
+Google Play- 
+https://play.google.com/store/apps/details?id=com.myapplications.mishlavim
+
+Drive-
 https://drive.google.com/file/d/1nKTIoTJ7bgvaD5CpeCv4tOUDA_FSG9tx/view
 
 
